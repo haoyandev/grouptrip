@@ -1,0 +1,45 @@
+.home{
+  width: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.location{
+  width: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.note{
+  width: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.mypersonal{
+  width: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.search{
+  width: 15px;
+  height: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.iconmessage{
+  width: 20px;
+  height: 20px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.iconshaixuan{
+  width: 20px;
+  height: 20px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
