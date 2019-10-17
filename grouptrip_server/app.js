@@ -41,7 +41,8 @@ app.use((req, res, next) => {
   if (url !== '/api/v1/user/register' && 
     url !== '/api/v1/user/login' && 
     url.startsWith('/api/v1/user') ||
-    url.startsWith('/api/v1/order')) {
+    url !== '/api/vi/note/publish' &&
+    url.startsWith('/api/v1/note')) {
     // 获取用户传来的token值
     var token = req.headers.token
     if (!token) {

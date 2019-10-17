@@ -14,20 +14,20 @@ router.post('/register', (req, res) => {
   // 检验数据
   var { phone, upwd } = obj
   if (!phone) {
-    return res.send({ code: 401, msg: `手机为空` })
+    return res.send({ code: 4001, msg: `手机为空` })
   } 
   if (!upwd) {
-    return res.send({ code: 402, msg: `密码为空` })
+    return res.send({ code: 4002, msg: `密码为空` })
   }
   // 判断手机格式
   var phoneReg = /^1[3456789]\d{9}$/
   if (!phoneReg.test(phone)) {
-    return res.send({ code: 403, msg: `手机格式不正确` })
+    return res.send({ code: 4003, msg: `手机格式不正确` })
   }
   // 判断密码格式
   var pwdReg = /^[0-9a-z]{6,12}$/i
   if (!pwdReg.test(upwd)) {
-    return res.send({ code: 404, msg: `密码格式不正确`} )
+    return res.send({ code: 4004, msg: `密码格式不正确`} )
   }
   //  查询该手机号是否已注册
   var sql = `select uid from trip_user where phone=?`
@@ -36,7 +36,7 @@ router.post('/register', (req, res) => {
     if (result.length > 0) {
       // 该手机号已存在
       // 返回响应
-      res.send({ code: 405, msg: `该手机号已存在` })
+      res.send({ code: 4005, msg: `该手机号已存在` })
     } else {
       // 该手机号不存在 可以注册
       // 随机给用户分配一个昵称
@@ -53,7 +53,7 @@ router.post('/register', (req, res) => {
           res.send({ code: 200, msg: `注册成功` })
         } else {
           // 注册失败
-          res.send({ code: 406, msg: `注册失败` })
+          res.send({ code: 4006, msg: `注册失败` })
         }
       })
     }
@@ -68,10 +68,10 @@ router.post('/login', (req, res) => {
   var upwd = obj.upwd
   // 检验数据
   if (!phone) {
-    return res.send({ code: 401, msg: `请填写用户名` })
+    return res.send({ code: 4001, msg: `请填写用户名` })
   }
   if (!upwd) {
-    return res.send({ code: 402, msg: `请填写密码` })
+    return res.send({ code: 4002, msg: `请填写密码` })
   }
   // 查询数据库 检验用户信息的合法性
   var sql = `select uid, uname from trip_user where phone=? and upwd=md5(?)`
@@ -89,14 +89,14 @@ router.post('/login', (req, res) => {
       // 返回应答
       res.send({ code: 200, msg: `登陆成功`, token: token })
     } else {
-      res.send({ code: 403, msg: `登陆失败` })
+      res.send({ code: 4003, msg: `登陆失败` })
     }
   })
 })
 
 // 3. 注销
 router.get('/logout', (req, res) => {
-  res.send({ code: 1, msg: `注销成功` })
+  res.send({ code: 200, msg: `注销成功` })
 })
  
 // 4. 个人信息
@@ -112,7 +112,7 @@ router.get('/detail', (req, res) => {
       console.log(result)
       res.send({ code: 200, msg: `查询成功`, data: result[0] })
     } else {
-      res.send({ code: 401, msg: `查询失败` })
+      res.send({ code: 4001, msg: `查询失败` })
     }
   })
 })
@@ -123,12 +123,12 @@ router.put('/updatename', (req, res) => {
   var uname = req.body.uname
   // 检验名字是否为空
   if (!uname) {
-    return res.send({ code: 401, msg: `用户名为空` })
+    return res.send({ code: 4001, msg: `用户名为空` })
   }
   // 检验名字格式
   var uReg = /^\w{1,16}&/
   if (uReg.test(uname)) {
-    return res.send({ code: 402, msg: `名字格式不规范` })
+    return res.send({ code: 4002, msg: `名字格式不规范` })
   }
   // 获取用户信息
   var user = req.user
@@ -169,7 +169,7 @@ router.put('/updatename', (req, res) => {
           if (err) throw err
           if (result.length > 0) {
             // 该用户名已存在
-            res.send({ code: 403, msg: `该用户名已存在` })
+            res.send({ code: 4003, msg: `该用户名已存在` })
           } else {
             // 该用户名不存在 可以修改
             // 执行sql
@@ -178,16 +178,16 @@ router.put('/updatename', (req, res) => {
             pool.query(sql, [user.uname, user.uid], (err, result) => {
               if (err) throw err
               if (result.affectedRows > 0) {
-                res.send({ code: 1, msg: `修改成功` })
+                res.send({ code: 200, msg: `修改成功` })
               } else {
-                res.send({ code: -1, msg: `修改失败` })
+                res.send({ code: 4004, msg: `修改失败` })
               }
             })
           } 
         }) 
       } else {
         // 不可以修改
-        res.send({ code: 404, msg: `一个月内只可修改一次`})
+        res.send({ code: 4005, msg: `一个月内只可修改一次`})
       }
     }
   })
