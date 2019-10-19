@@ -10,7 +10,8 @@ import Personal from '@/views/Personal.vue'
 import Strategy from '@/views/Strategy.vue'
 // 游记
 import Note from '@/views/Note.vue'
-
+// 设置个人信息
+import Settings from '@/components/settings'
 
 Vue.use(Router)
 
@@ -22,5 +23,6 @@ export default new Router({
     { path: '/Personal', component: Personal },
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
+    { path: '/Settings', component: Settings },
   ]
 })

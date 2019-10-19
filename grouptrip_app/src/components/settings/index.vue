@@ -8,7 +8,7 @@
     <div class="mt-cell1">
     
         <mt-cell to="usermanage" class="mt-cell" title="账号绑定与设置" is-link>
-          <span style="color: green"><img slot="icon" src="../../assets/logo.png" width="24" height="24"></span>
+          <span style="color: green"><img slot="icon" src="../../assets/iconfont/girl.png" width="24" height="24"></span>
         </mt-cell>
       
       
