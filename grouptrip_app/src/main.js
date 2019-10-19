@@ -2,9 +2,13 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+//引入iconfont文件
+import './assets/iconfont/iconfont'
+import './assets/iconfont/travelicon.css'
 // 引入初始化样式文件
 import 'normalize.css'
 Vue.config.productionTip = false
+
 
 // 引入mint-ui
 import MintUI from 'mint-ui'
@@ -12,6 +16,7 @@ import MintUI from 'mint-ui'
 import 'mint-ui/lib/style.css'
 // 将mint-ui注册vue实例
 Vue.use(MintUI)
+
 
 // 引入axios
 import axios from 'axios'
