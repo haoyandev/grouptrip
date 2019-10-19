@@ -1,42 +1,123 @@
-.home{
+.user,.upwd{
+  width: 22px;
+  height: 30px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+  position:absolute;
+  bottom:0;
+}
+
+.taobao,
+.weixin,
+.weibo,
+.qq {
+  width: 25%;
+  height: 45px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.shoucangjia,
+.youhuiquan,
+.qianbao,
+.ban,
+.dingdan,
+.wenda {
+  width: 30px;
+  height: 30px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.message {
+  width: 22px;
+  height: 50px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.erweima {
+  width: 22px;
+  height: 50px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.chilun {
+  width: 22px;
+  height: 50px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.boyhead {
+  width: 80px;
+  vertical-align: -0.15em;
+  height: 80px;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.zuojiantou {
+  width: 50px;
+  height: 50px;
+  margin: 60px 0 40px -10px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+
+.home {
   width: 15px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-.location{
+
+.location {
   width: 15px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-.note{
+
+.note {
   width: 15px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-.mypersonal{
+
+.mypersonal {
   width: 15px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-.search{
+
+.search {
   width: 15px;
   height: 15px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-.iconmessage{
+
+.iconmessage {
   width: 20px;
   height: 20px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
 }
-.iconshaixuan{
+
+.iconshaixuan {
   width: 20px;
   height: 20px;
   vertical-align: -0.15em;
