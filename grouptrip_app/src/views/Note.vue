@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <main id="note-page">
+    <div class="tabbar-top">
+      <div class="tabbar-search">
+          <input type="text" class="form-text">
+          <svg class="search" aria-hidden="true">
+            <use xlink:href="#iconsearch-copy"></use>
+          </svg>
+      </div>
+      <router-link to="javascript;" class="start-group">发布</router-link>
+    </div>
     <div>
       <div class="carousel">
         <div
@@ -24,14 +33,19 @@
         </li>
       </ul>
     </div>
-  </div>
+    <main-tab-bar></main-tab-bar>
+  </main>
 </template>
 <script>
+import MainTabBar from '../components/mainTabBar'
 export default {
   created() {
     this.a = setInterval(() => {
       this.i++;
     }, 3000);
+  },
+  components:{
+    MainTabBar,
   },
   data() {
     return {
@@ -45,10 +59,10 @@ export default {
       leftstart: 0,
       innerWidth: window.innerWidth,
       imgs: [
-        require("../assets/1.jpg"),
-        require("../assets/2.jpg"),
-        require("../assets/3.jpg"),
-        require("../assets/4.jpg")
+        require("../assets/citypics/img1957.jpg"),
+        require("../assets/citypics/img1996.jpg"),
+        require("../assets/citypics/img1998.jpg"),
+        require("../assets/citypics/img1996.jpg")
       ]
     };
   },
@@ -118,6 +132,24 @@ export default {
 };
 </script>
 <style scoped>
+#note-page .tabbar-top{
+  width: 100%;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+#note-page .tabbar-top .tabbar-search{
+  width: 70%;
+}
+#note-page .tabbar-top .tabbar-search .search{
+  position: absolute;
+  left: 20px;
+  top: 28px;
+} 
+#note-page .tabbar-top .start-group{
+  margin-top: 0px;
+}
 .li-border{
   border:1px solid red;
 }

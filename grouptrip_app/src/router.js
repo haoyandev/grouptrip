@@ -11,13 +11,14 @@ import Strategy from '@/views/Strategy.vue'
 // 游记
 import Note from '@/views/Note.vue'
 
+
 Vue.use(Router)
 
 export default new Router({
   routes: [
     { path: '/', component: Home },
     { path: '/Home', component: Home },
-    {path:'/Grouptrip',component:Grouptrip},
+    { path:'/Grouptrip',component:Grouptrip },
     { path: '/Personal', component: Personal },
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },

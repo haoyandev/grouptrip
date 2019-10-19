@@ -337,12 +337,12 @@
         </div> 
     </div>
     <Sendgroup></Sendgroup>
-    <tabbar></tabbar>
+    <main-tab-bar></main-tab-bar>
   </main>
 </template>
 
 <script>
-import Tabbar from '../components/bar/Tabbar'
+import MainTabBar from '../components/mainTabBar'
 import Sendgroup from '../components/common/Sendgroup'
 export default {
   data(){
@@ -351,7 +351,7 @@ export default {
     }
   },
   components:{
-    Tabbar,
+    MainTabBar,
     Sendgroup
   }
 }

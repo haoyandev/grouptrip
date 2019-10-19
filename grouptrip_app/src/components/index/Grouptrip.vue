@@ -183,14 +183,14 @@ export default {
   height: 30px;
   justify-content: space-between;
 }
-#grouptrip-page .tabbar-top .tabbar-title a{
+#grouptrip-page .tabbar-top a,#note-page .tabbar-top a{
   text-decoration: none;
   display: block;
   width: 45px;
   font-size: 12px;
   height: 20px;
 }
-#grouptrip-page .tabbar-top .tabbar-title .start-group{
+#grouptrip-page .tabbar-top .tabbar-title .start-group,#note-page .tabbar-top .start-group{
   background-color: #8134af;
   color: #fff;
   border-radius: 30px;
