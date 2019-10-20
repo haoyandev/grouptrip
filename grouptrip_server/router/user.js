@@ -1,8 +1,9 @@
 const express = require('express')
 const pool = require('../pool')
-
 // 引入jwt
 const { generateToken } = require('../jwt')
+const { getBaseInfo, getFunsNum, getFocusNum } = require('../fun')
+
 // 创建路由器
 var router = express.Router()
 
@@ -102,18 +103,15 @@ router.get('/logout', (req, res) => {
 // 4. 个人信息
 router.get('/detail', (req, res) => {
   // 获取用户信息
-  var user = req.user
-  console.log(user)
+  var uid = req.user.uid
+
   // 查询用户相关信息
-  var sql = `select avatar, uname, gender, birthday, age, intr from trip_user where uid=?`
-  pool.query(sql, [user.uid], (err, result) => {
-    if (err) throw err
-    if (result.length > 0) {
-      console.log(result)
-      res.send({ code: 200, msg: `查询成功`, data: result[0] })
-    } else {
-      res.send({ code: 4001, msg: `查询失败` })
-    }
+  var userInfo = {}
+
+  Promise.all([getBaseInfo(uid), getFunsNum(uid), getFocusNum(uid)]).then(result => {
+    Object.assign(userInfo, ...result)
+    console.log(userInfo)
+    res.send(userInfo)
   })
 })
 
@@ -175,7 +173,7 @@ router.put('/updatename', (req, res) => {
             // 执行sql
             // 返回应答
             var sql = `update trip_user set uname=?,update_time=now() where uid=?`
-            pool.query(sql, [user.uname, user.uid], (err, result) => {
+            pool.query(sql, [uname, user.uid], (err, result) => {
               if (err) throw err
               if (result.affectedRows > 0) {
                 res.send({ code: 200, msg: `修改成功` })
@@ -190,6 +188,166 @@ router.put('/updatename', (req, res) => {
         res.send({ code: 4005, msg: `一个月内只可修改一次`})
       }
     }
+  })
+})
+
+// 6. 更新性别
+router.put('/updatesex', (req, res) => {
+  // 获取用户uid
+  var uid = req.user.uid
+  // 获取数据
+  var gender = req.body.gender
+  // 检验数据
+  if (!gender) {
+    return res.send({ code: 4001, msg: `性别为空` })
+  }
+  // 执行sql 修改性别
+  var sql =  `update trip_user set gender=? where uid=?`
+  pool.query(sql, [gender, uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0) {
+      res.send({ code: 200, msg: `修改成功` })
+    } else {
+      res.send({ code: 4002, msg: `修改失败` })
+    }
+  })
+})
+
+// 7. 更新生日
+router.put('/updatebirth', (req, res) => {
+  // 获取用户uid
+  var uid = req.user.uid
+  // 获取数据
+  var birthday = req.body.birthday
+  // 检验数据
+  if (!birthday) {
+    return res.send({ code: 4001, msg: `性别为空` })
+  }
+  // 执行sql 修改性别
+  var sql =  `update trip_user set birthday=? where uid=?`
+  pool.query(sql, [birthday, uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0) {
+      res.send({ code: 200, msg: `修改成功` })
+    } else {
+      res.send({ code: 4002, msg: `修改失败` })
+    }
+  })
+})
+
+// 8. 更新城市
+router.put('/updatecity', (req, res) => {
+  // 获取用户uid
+  var uid = req.user.uid
+  // 获取数据
+  var city = req.body.city
+  // 检验数据
+  if (!city) {
+    return res.send({ code: 4001, msg: `性别为空` })
+  }
+  // 执行sql 修改性别
+  var sql =  `update trip_user set city=? where uid=?`
+  pool.query(sql, [city, uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0) {
+      res.send({ code: 200, msg: `修改成功` })
+    } else {
+      res.send({ code: 4002, msg: `修改失败` })
+    }
+  })
+})
+
+// 9. 更新简介
+router.put('/updateintr', (req, res) => {
+  // 获取用户uid
+  var uid = req.user.uid
+  // 获取数据
+  var intr = req.body.intr
+  // 检验数据
+  if (!intr) {
+    return res.send({ code: 4001, msg: `性别为空` })
+  }
+  // 执行sql 修改性别
+  var sql =  `update trip_user set intr=? where uid=?`
+  pool.query(sql, [intr, uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0) {
+      res.send({ code: 200, msg: `修改成功` })
+    } else {
+      res.send({ code: 4002, msg: `修改失败` })
+    }
+  })
+})
+// 10. 关注
+router.post('/focus', (req, res) => {
+  // 获取用户信息
+  var user = req.user
+  // 获取被关注用户的uid
+  var uid = req.body.uid
+  // 检验数据是否为空
+  if (!uid) {
+    return res.send({ code: 4001, msg: `未提交被关注用户uid` })
+  }
+  if (uid === user.uid) {
+    return res.send({ code: 4002, msg: `不能关注自己` })
+  }
+  // 查看被关注用户是否存在
+  // 执行sql
+  var sql = `select uid from trip_user where uid=?`
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    // 该用户存在 可关注
+    if (result.length === 0) {
+      res.send({code: 4003, msg: `该用户不存在` })
+    } else {
+      // 查看是否已关注
+      var sql = `select id from trip_focus where uid=? and from_uid=?`
+      pool.query(sql, [uid, user.uid], (err, result) => {
+        if (err) throw err
+        if (result.length > 0) {
+          // 已关注
+          res.send({ code: 4004, msg: `已关注` })
+        } else {
+          // 未关注
+          var sql = `insert into trip_focus values (null, ?, ?)`
+          pool.query(sql, [uid, user.uid], (err, result) => {
+            if (err) throw err
+            if (result.affectedRows > 0) { 
+              res.send({ code: 200, msg: `关注成功` })
+            } else {
+              res.send({ code: 4005, msg: `关注失败` })
+            }
+          })
+        }
+      })
+    }
+  })
+})
+
+// 11 . 关注列表
+router.get('/focuslist', (req, res) => {
+  // 获取用户uid
+  var uid = req.user.uid
+  // 创建一个变量保存所有粉丝的信息
+  var fanslist = []
+  // 执行sql 查询粉丝的uid
+  var sql = `select from_uid from trip_focus where uid=?`
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    var fansUid = result
+    var tasks = []
+    for (var item of fansUid) {
+      var p = Promise.all([
+        getBaseInfo(item.from_uid),
+        getFunsNum(item.from_uid)]
+      ).then(result => {
+        fanslist.push(Object.assign({}, ...result))
+      })
+      tasks.push(p)
+    }
+    Promise.all(tasks).then(result => {
+      res.send({ code: 200, data: fanslist })
+    }).catch(err => console.log(err))
   })
 })
 
