@@ -11,10 +11,10 @@
           </mt-button>
         </div>
         <div class="tabbar-search">
-          <input type="text" class="form-text">
-          <svg class="search-white" aria-hidden="true">
-            <use xlink:href="#iconsearch-white"></use>
+          <svg class="search" aria-hidden="true">
+            <use xlink:href="#iconsearch-copy"></use>
           </svg>
+          <input type="text" class="form-text" placeholder="搜索当地玩乐">
         </div>
       </mt-tab-item>
     </mt-tabbar>
@@ -58,43 +58,15 @@
       </div>
       <div class="city-strategy">
           <ul class="strategy-items">
-            <li class="strategy-item">
+            <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
               <div class="cityimg">
-                <img src="../assets/citypics/save.jpg" alt="">
+                <img :src="strategy.imgpath" alt="">
               </div>
               <div class="city-details">
-                <h4 class="details-title">大阪</h4>
-                <p class="details">有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
+              <h4 class="details-title">{{strategy.title}}</h4>
+                <p class="details">{{strategy.details}}</p>
               </div>
             </li>
-            <li class="strategy-item">
-              <div class="cityimg">
-                <img src="../assets/citypics/save.jpg" alt="">
-              </div>
-              <div class="city-details">
-                <h4 class="details-title">大阪</h4>
-                <p class="details">有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
-              </div>
-            </li>
-            <li class="strategy-item">
-              <div class="cityimg">
-                <img src="../assets/citypics/save.jpg" alt="">
-              </div>
-              <div class="city-details">
-                <h4 class="details-title">大阪</h4>
-                <p class="details">有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
-              </div>
-            </li>
-            <li class="strategy-item">
-              <div class="cityimg">
-                <img src="../assets/citypics/save.jpg" alt="">
-              </div>
-              <div class="city-details">
-                <h4 class="details-title">大阪</h4>
-                <p class="details">有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
-              </div>
-            </li>
-
           </ul>
         </div>
         <div class="travel-sale">
@@ -140,40 +112,13 @@
           </div>
           <div class="notes">
             <ul class="notes-items">
-              <li class="notes-item">
-                <div class="note-title">日本环球影城 | 圣诞节</div>
+              <li class="notes-item" v-for="(item,i) of items" :key="i" :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}">
+                <div class="note-title">{{item.title}}</div>
                 <div class="personal-msg">
                   <div class="personal-head">
                     <img src="../assets/iconfont/girl.png" alt="">
                   </div>
-                  <span class="personal-name">维多利亚</span>
-                </div>
-              </li>
-              <li class="notes-item">
-                <div class="note-title">日本环球影城 | 圣诞节</div>
-                <div class="personal-msg">
-                  <div class="personal-head">
-                    <img src="../assets/iconfont/girl.png" alt="">
-                  </div>
-                  <span class="personal-name">维多利亚</span>
-                </div>
-              </li>
-              <li class="notes-item">
-                <div class="note-title">日本环球影城 | 圣诞节</div>
-                <div class="personal-msg">
-                  <div class="personal-head">
-                    <img src="../assets/iconfont/girl.png" alt="">
-                  </div>
-                  <span class="personal-name">维多利亚</span>
-                </div>
-              </li>
-              <li class="notes-item">
-                <div class="note-title">日本环球影城 | 圣诞节</div>
-                <div class="personal-msg">
-                  <div class="personal-head">
-                    <img src="../assets/iconfont/girl.png" alt="">
-                  </div>
-                  <span class="personal-name">维多利亚</span>
+                  <span class="personal-name">{{item.name}}</span>
                 </div>
               </li>
             </ul>
@@ -348,6 +293,30 @@ export default {
   data(){
     return{
       selected:"bottom1",//保存底部推荐面板当前显示的子面板id
+      strategies:[
+        {imgpath:require("../assets/citypics/save.jpg"),
+        title:"大阪",
+        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
+        {imgpath:require("../assets/citypics/save.jpg"),
+        title:"东京",
+        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
+        {imgpath:require("../assets/citypics/save.jpg"),
+        title:"京都",
+        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
+        {imgpath:require("../assets/citypics/save.jpg"),
+        title:"北海道",
+        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
+      ],
+      items:[
+        {title:"日本环球影城 | 圣诞",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
+        bgpath:require("../assets/citypics/img1957.jpg")},
+        {title:"大阪京都美食集 | 关西",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
+        bgpath:require("../assets/citypics/img1998.jpg")},
+        {title:"大阪京都美食集 | 关西",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
+        bgpath:require("../assets/citypics/img1998.jpg")},
+        {title:"大阪京都美食集 | 关西",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
+        bgpath:require("../assets/citypics/img1996.jpg")}
+      ],
     }
   },
   components:{
@@ -394,22 +363,25 @@ ul,li{ padding:0;margin:0;list-style:none}
 }
 #strategypage .form-text{
   border: none;
-  border-radius: 25px;
   height: 20px;
+  left: 23px;;
   width: 100%;
+  background-color: transparent;
   position: relative;
-  background-color: #fff;
-  opacity: 0.5;
 }
 #strategypage .tabbar-search{
   margin-left: 10px;
-  width: 75%;
+  border-radius: 30px;
+  width: 65%;height: 22px;
   display: flex;
-  position: absolute;
-  top: 20px;
-  right: 20px;
+  position: relative;
+  right: 50px;
+  top: 13px;
+  background-color: #fff;
+  opacity: 0.6;
+  
 }
-#strategypage .tabbar-search .search-white{
+#strategypage .tabbar-search .search{
   position: absolute;
   margin-top: 2.5px;
   margin-left: 5px;
@@ -590,8 +562,6 @@ ul,li{ padding:0;margin:0;list-style:none}
 .notes .notes-item{
   width: 320px;
   height: 160px;
-  background-image:url('../assets/citypics/img1957.jpg');
-  background-size: 100%;
   border-radius: 10px;
   position: relative;
 }
