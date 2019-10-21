@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <div :style="start?'opacity:1':'opacity:0'">
     <div class="icon">
       <div class="icon-left">
         <span>
@@ -24,7 +24,7 @@
           <use xlink:href="#icontouxiangnanhai" />
         </svg>
       </div>
-      <span>登录获取更多体验</span>
+      <span>{{this.$store.getters.user.uname}}</span>
     </div>
     <div class="self-content">
       <ul>
@@ -104,11 +104,21 @@
 // 这是个人中心页面
 export default {
   data() {
-    return {};
+    return {
+      start: false
+    };
+  },
+  created() {
+    setTimeout(() => {
+      this.start = true;
+    }, 200);
   }
 };
 </script>
 <style scoped>
+* {
+  transition: opacity 0.3s linear;
+}
 ul {
   padding: 0px;
 }
@@ -133,7 +143,7 @@ ul {
 }
 .user-head > span {
   font-weight: 700;
-  font-size:20px;
+  font-size: 20px;
 }
 .user-head {
   text-align: center;

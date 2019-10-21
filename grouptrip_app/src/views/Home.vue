@@ -88,15 +88,13 @@
       </div>
     </div>
     <Sendgroup></Sendgroup>
-    <tabbar></tabbar>
   </main>
 </template>
 <script>
-import Tabbar from '../components/bar/Tabbar'
+
 import Sendgroup from '../components/common/Sendgroup'
 export default {
   components:{
-    Tabbar,
     Sendgroup
   }
 }

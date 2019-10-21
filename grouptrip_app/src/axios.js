@@ -40,6 +40,7 @@ Axios.interceptors.response.use(
             sessionStorage.removeItem("token");
             store.commit("setIslogin", false);
             store.commit("setUname", "");
+            store.commit("setUser", "");
         } else if (res.data.code == -1) {
             store.commit("setIslogin", false);
             store.commit("setUname", "");

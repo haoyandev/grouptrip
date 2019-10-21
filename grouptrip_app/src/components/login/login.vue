@@ -1,15 +1,15 @@
 <template>
   <div class="parent" :style="height">
-    <div>
+    <div :style="active==='success'&&'display:none;'">
       <svg @click="jiantou" class="zuojiantou" aria-hidden="true">
         <use xlink:href="#iconzhixiangzuozuojiantou" />
       </svg>
-      <h1 style="text-align:left">
+      <h1 :style="active==='success'?'display:none;':'text-align:left;'">
         Hi,
         <br />欢迎开启穷游
       </h1>
     </div>
-    <mt-tab-container v-model="active">
+    <mt-tab-container :style="all?'opacity:0':'opacity:1'" v-model="active">
       <div class="login" :style="active!='login'&&'opacity:0;'">
         <mt-tab-container-item class="width" id="login">
           <div class="user-input">
@@ -63,7 +63,10 @@
       </div>
       <div class="success" :style="active!='success'&&'opacity:0;'">
         <mt-tab-container-item class="width" id="success">
-          <div>{{}}</div>
+          <h1>{{msg}}</h1>
+          <div :style="tisc?'opacity:1;margin-top:20px; transition:opacity 3s linear;':'opacity:0'">
+            <h1>继续旅程吧</h1>
+          </div>
         </mt-tab-container-item>
       </div>
       <div class="register" :style="active!='register'&&'opacity:0;'">
@@ -152,7 +155,7 @@
         </mt-tab-container-item>
       </div>
     </mt-tab-container>
-    <div :style="active==='code'&&'display:none'" id="parent-bottom">
+    <div :style="active==='success'&&'display:none'" id="parent-bottom">
       <div class="login-bottom">
         <router-link to>
           <svg class="taobao" aria-hidden="true">
@@ -186,7 +189,9 @@ import touchCode from "vue-slide-verification";
 export default {
   data() {
     return {
-      msg:'',//登录成功后出现的页面字段
+      all: false,
+      tisc: false,
+      msg: "", //登录成功后出现的页面字段
       height: "height:" + innerHeight + "px",
       drapopa: true,
       beginClientX: 0 /*距离屏幕左端距离*/,
@@ -230,14 +235,43 @@ export default {
     successFunction() {
       this.confirmSuccess = true;
       this.confirmWords = "验证通过";
-      var phone=this.user;
-      var upwd=this.pwd;
-      this.axios.post('/api/v1/user/login',{phone,upwd}).then((result)=>{
-        console.log(localStorage.getItem("token"))
-        this.axios.get('/api/v1/user/detail').then((result)=>{
-          console.log(result.data)
-        })
-      })
+
+      //登录成功后执行的axios
+
+      var phone = this.user;
+      var upwd = this.pwd;
+      this.axios.post("/api/v1/user/login", { phone, upwd }).then(result => {
+        if (result.data.code != 200) {
+          return;
+        } else {
+          this.$messagebox("登录成功").then(result => {
+            this.axios.get("/api/v1/user/detail").then(result => {
+              if (result.data.code === 200) {
+                this.$store.commit("setUser", result.data.data);
+                console.log(this.$store.getters.user);
+                this.active = "success";
+                var message = "Hi," + result.data.data.uname;
+                var i = 0;
+                var time = setInterval(() => {
+                  this.msg += message[i];
+                  ++i;
+                  if (i >= message.length - 1) {
+                    clearInterval(time);
+                    this.tisc = true;
+
+                    setTimeout(() => {
+                      this.all = true;
+                      setTimeout(() => {
+                        this.$router.push("/personal");
+                      }, 300);
+                    }, 3000);
+                  }
+                }, 100);
+              }
+            });
+          });
+        }
+      });
       if (window.addEventListener) {
         document
           .getElementsByTagName("html")[0]
@@ -320,7 +354,7 @@ export default {
       }
       var data = { phone: this.phone, upwd: this.regpwd };
       this.axios.post("api/v1/user/register", data).then(result => {
-        console.log(result)
+        console.log(result);
         if (result.data.code === 200) {
           this.$messagebox("注册成功").then(() => {
             this.$router.push("/personal");
@@ -365,6 +399,10 @@ export default {
 <style scoped>
 * {
   transition: opacity 0.2s linear;
+}
+.success {
+  width: 100%;
+  position: absolute;
 }
 .drag {
   position: relative;
@@ -426,6 +464,7 @@ export default {
   font-size: 13px;
   font-weight: 300;
 }
+
 .login-bottom {
   position: absolute;
   bottom: 60px;
@@ -531,6 +570,9 @@ h1 {
 .user-input div {
   border-bottom: 1px solid #ccc;
 }
+#user-next label {
+  justify-content: center;
+}
 #user-next {
   margin-top: 20px;
   margin-bottom: 24px;
@@ -539,5 +581,10 @@ h1 {
   border-radius: 40px;
   opacity: 0.4;
   font-size: 15px;
+}
+</style>
+<style >
+.mint-button-text {
+  justify-content: center;
 }
 </style>

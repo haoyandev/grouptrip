@@ -12,6 +12,7 @@ import 'normalize.css'
 Vue.config.productionTip = false;
 Vue.use(axios);
 Vue.use(MintUI);
+Vue.use(store);
 
 new Vue({
   router,
