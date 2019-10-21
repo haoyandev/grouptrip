@@ -11,7 +11,7 @@
           发起
         </router-link>
       </div>
-      <div class="tabbar-options">
+      <!-- <div class="tabbar-options">
         <mt-button class="option-place">
           地点
           <svg class="icondropdown" aria-hidden="true">
@@ -30,13 +30,18 @@
             <use xlink:href="#icondropdown"></use>
           </svg>
         </mt-button>
-      </div>
+      </div> -->
+      <van-dropdown-menu>
+        <van-dropdown-item v-model="value1" :options="option1" />
+        <van-dropdown-item v-model="value2" :options="option2" />
+        <van-dropdown-item v-model="value3" :options="option3" />
+      </van-dropdown-menu>
     </div>
     <div class="grouptrip-wrap">
       <div class="grouptrip-wrap-item">
         <mt-swipe :auto="4000">
           <mt-swipe-item>
-            <img src="../../assets/citypics/1.jpeg" alt="">
+            <img src="../../assets/citypics/city6.jpg" alt="">
           </mt-swipe-item>
           <mt-swipe-item>
             <img src="../../assets/citypics/img1957.jpg" alt="">
@@ -97,7 +102,7 @@
       <div class="grouptrip-wrap-item">
         <mt-swipe :auto="4000">
           <mt-swipe-item>
-            <img src="../../assets/citypics/1.jpeg" alt="">
+            <img src="../../assets/citypics/city8.jpg" alt="">
           </mt-swipe-item>
           <mt-swipe-item>
             <img src="../../assets/citypics/img1957.jpg" alt="">
@@ -163,7 +168,27 @@
 export default {
   data(){
     return{
-
+      //下拉菜单
+      value1: 0,
+      value2: 0,
+      value3: 0,
+      option1: [
+        { text: '地点', value: 0 },
+      ],
+      option2: [
+        { text: '主题', value: 0 },
+        { text: '一起去冒险', value: 1 },
+        { text: '要甜甜的浪漫', value: 2 },
+        { text: '走！探店去', value: 3 },
+        { text: '寻觅美食', value: 4 },
+        { text: '看展才是正经事', value: 5 },
+        { text: '约你去看音乐剧', value: 6 },
+        { text: '其他活动', value: 7 },
+      ],
+      option3:[
+        { text:'开始日期' ,value: 0 },
+        { text:'结束日期' , value: 1}
+      ]
     }
   }
 }
@@ -183,14 +208,14 @@ export default {
   height: 30px;
   justify-content: space-between;
 }
-#grouptrip-page .tabbar-top .tabbar-title a{
+#grouptrip-page .tabbar-top a,#note-page .tabbar-top a{
   text-decoration: none;
   display: block;
   width: 45px;
   font-size: 12px;
   height: 20px;
 }
-#grouptrip-page .tabbar-top .tabbar-title .start-group{
+#grouptrip-page .tabbar-top .tabbar-title .start-group,#note-page .tabbar-top .start-group{
   background-color: #8134af;
   color: #fff;
   border-radius: 30px;

@@ -98,10 +98,12 @@
         </li>
       </ul>
     </div>
+    <main-tab-bar></main-tab-bar>
   </div>
 </template>
 <script>
 // 这是个人中心页面
+import MainTabBar from '../components/mainTabBar'
 export default {
   data() {
     return {
@@ -112,6 +114,10 @@ export default {
     setTimeout(() => {
       this.start = true;
     }, 200);
+    return {};
+  },
+  components:{
+    MainTabBar,
   }
 };
 </script>

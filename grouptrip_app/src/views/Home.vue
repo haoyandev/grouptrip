@@ -2,14 +2,14 @@
   <main id="homepage">
     <mt-tabbar fixed class="tabbar-top">
       <mt-tab-item class="text-item logo-top">
-        <img src="../assets/cardpics/logo.png" alt="" width="180px">
+        <img src="../assets/cardpics/logo.png" alt="" style="width:180px;">
       </mt-tab-item>
       <mt-tab-item class="text-item search-top">
         <div class="tabbar-search">
-          <input type="text" class="form-text">
           <svg class="search" aria-hidden="true">
             <use xlink:href="#iconsearch-copy"></use>
           </svg>
+          <input type="text" class="form-text" placeholder="红叶季赏枫攻略">
         </div>
         <div class="tabbar-icon">
           <mt-button  class="iconbutton">
@@ -88,13 +88,15 @@
       </div>
     </div>
     <Sendgroup></Sendgroup>
+    <main-tab-bar></main-tab-bar>
   </main>
 </template>
 <script>
-
+import MainTabBar from '../components/mainTabBar'
 import Sendgroup from '../components/common/Sendgroup'
 export default {
   components:{
+    MainTabBar,
     Sendgroup
   }
 }
@@ -115,34 +117,53 @@ export default {
   height: 60px;
   object-fit: cover;
 }
+#homepage .tabbar-top .logo-top.text-item .mint-tab-item-label{
+  display: flex;
+  justify-content: center;
+}
 #homepage .mint-tabbar > .mint-tab-item.is-selected{
   background-color: #fff;
   color: #111111;
 }
-.text-item .mint-tab-item-label{
+#homepage .tabbar-top .search-top.text-item .mint-tab-item-label{
   width: 100% !important;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+  align-items: center;
 }
-#homepage .tabbar-search{
+#homepage .tabbar-search,#note-page .tabbar-search{
   margin-left: 10px;
-  width: 70%;
+  width: 65%;
   display: flex;
-}
-#homepage .form-text{
-  border: none;
-  border-radius: 25px;
-  height: 20px;
-  width: 100%;
   position: relative;
-  background: #f8f8f8;
+  border-radius: 30px;
+  background-color: #e4e4e47c;
 }
-#homepage .tabbar-search .search{
+#homepage .tabbar-search .search,#note-page .tabbar-search .search{
   position: absolute;
   margin-top: 2.5px;
   margin-left: 5px;
 }
+#homepage .form-text,#note-page .form-text{
+  border: none;
+  height: 20px;
+  width: 100%;
+  position: relative;
+  background: transparent;
+  font-size: 12px;
+  padding:3px 5px;
+  margin-left: 23px;
+}
+.tabbar-search input::-webkit-input-placeholder {
+  font-size: 12px;
+  color: #999999;
+  right: 5px;
+}
+.tabbar-search input{
+  outline: none
+}
+
 .tabbar-icon{
   width: 25%;
   display: flex;
