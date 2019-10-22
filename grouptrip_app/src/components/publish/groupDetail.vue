@@ -18,6 +18,7 @@
           @confirm="confirm"
         />
       </van-popup>
+
       <van-popup v-model="show1">
         <!-- 结束时间 -->
         <van-datetime-picker
@@ -27,6 +28,7 @@
           @confirm="confirm1"
         />
       </van-popup>
+      
     </div>
     <div class="publish">立即发布</div>
   </div>
