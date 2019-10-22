@@ -10,7 +10,10 @@ import Personal from '@/views/Personal.vue'
 import Strategy from '@/views/Strategy.vue'
 // 游记
 import Note from '@/views/Note.vue'
+<<<<<<< HEAD
 // 登陆
+=======
+>>>>>>> 7394fd3a69f3725494a103d9027f3cf20979361f
 import Login from '@/components/login/login'
 // 设置个人信息
 import Settings from '@/components/settings'
@@ -31,12 +34,12 @@ export default new Router({
     { path: '/Personal', component: Personal },
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
+    { path: '/login', component: Login },
     { path: '/Settings', component: Settings },
     { path: '/Detail', component: Detail },
     { path: '/Login', component: Login },
     { path: '/uploadimg', component: uploadImg },
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
-    // { path: '/test', component: test },
   ]
 })

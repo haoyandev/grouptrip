@@ -15,7 +15,11 @@ import Vant from 'vant'
 import 'vant/lib/index.css'
 Vue.use(axios);
 Vue.use(MintUI);
+
+Vue.use(store);
+
 Vue.use(Vant);
+
 
 new Vue({
   router,
