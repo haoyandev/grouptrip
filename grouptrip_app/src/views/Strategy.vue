@@ -11,16 +11,10 @@
           </mt-button>
         </div>
         <div class="tabbar-search">
-<<<<<<< HEAD
-          <input type="text" class="form-text" />
-          <svg class="search-white" aria-hidden="true">
-            <use xlink:href="#iconsearch-white" />
-=======
           <svg class="search" aria-hidden="true">
-            <use xlink:href="#iconsearch-copy"></use>
->>>>>>> 6545e70bb918b00e5e43b6cd61e20a160c32c553
+            <use xlink:href="#iconsearch-copy" />
           </svg>
-          <input type="text" class="form-text" placeholder="搜索当地玩乐">
+          <input type="text" class="form-text" placeholder="搜索当地玩乐" />
         </div>
       </mt-tab-item>
     </mt-tabbar>
@@ -63,50 +57,22 @@
         </div>
       </div>
       <div class="city-strategy">
-<<<<<<< HEAD
-        <ul class="strategy-items">
-          <li class="strategy-item">
+        <ul
+          id="u1"
+          class="strategy-items"
+          @touchmove="touchmove"
+          @touchstart="touchstart"
+          @touchend="touchend"
+          data-width="300"
+          :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
+        >
+          <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
             <div class="cityimg">
-              <img src="../assets/citypics/save.jpg" alt />
+              <img :src="strategy.imgpath" alt />
             </div>
             <div class="city-details">
-              <h4 class="details-title">大阪</h4>
-              <p
-                class="details"
-              >有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
-            </div>
-          </li>
-          <li class="strategy-item">
-            <div class="cityimg">
-              <img src="../assets/citypics/save.jpg" alt />
-            </div>
-            <div class="city-details">
-              <h4 class="details-title">大阪</h4>
-              <p
-                class="details"
-              >有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
-            </div>
-          </li>
-          <li class="strategy-item">
-            <div class="cityimg">
-              <img src="../assets/citypics/save.jpg" alt />
-            </div>
-            <div class="city-details">
-              <h4 class="details-title">大阪</h4>
-              <p
-                class="details"
-              >有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
-            </div>
-          </li>
-          <li class="strategy-item">
-            <div class="cityimg">
-              <img src="../assets/citypics/save.jpg" alt />
-            </div>
-            <div class="city-details">
-              <h4 class="details-title">大阪</h4>
-              <p
-                class="details"
-              >有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。</p>
+              <h4 class="details-title">{{strategy.title}}</h4>
+              <p class="details">{{strategy.details}}</p>
             </div>
           </li>
         </ul>
@@ -153,47 +119,19 @@
           </router-link>
         </div>
         <div class="notes">
-          <ul
-            class="notes-items"
-            :style="{marginLeft:move.left+'px'}"
-            @touchend="touchend"
-            @touchstart="touchstart"
-            @touchmove="touchmove"
-          >
-            <li class="notes-item">
-              <div class="note-title">日本环球影城 | 圣诞节</div>
+          <ul class="notes-items" @touchstart="touchstart1" @touchmove="touchmove1" @touchend="touchend1" :style="{marginLeft:move.left1+'px'}">
+            <li
+              class="notes-item"
+              v-for="(item,i) of items"
+              :key="i"
+              :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}"
+            >
+              <div class="note-title">{{item.title}}</div>
               <div class="personal-msg">
                 <div class="personal-head">
                   <img src="../assets/iconfont/girl.png" alt />
                 </div>
-                <span class="personal-name">维多利亚</span>
-              </div>
-            </li>
-            <li class="notes-item">
-              <div class="note-title">日本环球影城 | 圣诞节</div>
-              <div class="personal-msg">
-                <div class="personal-head">
-                  <img src="../assets/iconfont/girl.png" alt />
-                </div>
-                <span class="personal-name">维多利亚</span>
-              </div>
-            </li>
-            <li class="notes-item">
-              <div class="note-title">日本环球影城 | 圣诞节</div>
-              <div class="personal-msg">
-                <div class="personal-head">
-                  <img src="../assets/iconfont/girl.png" alt />
-                </div>
-                <span class="personal-name">维多利亚</span>
-              </div>
-            </li>
-            <li class="notes-item">
-              <div class="note-title">日本环球影城 | 圣诞节</div>
-              <div class="personal-msg">
-                <div class="personal-head">
-                  <img src="../assets/iconfont/girl.png" alt />
-                </div>
-                <span class="personal-name">维多利亚</span>
+                <span class="personal-name">{{item.name}}</span>
               </div>
             </li>
           </ul>
@@ -207,83 +145,6 @@
         <mt-tab-container v-model="selected">
           <div :style="selected=='bottom1'?'opacity:1':'opacity:0'">
             <mt-tab-container-item id="bottom1" style="display:block">
-=======
-          <ul class="strategy-items">
-            <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
-              <div class="cityimg">
-                <img :src="strategy.imgpath" alt="">
-              </div>
-              <div class="city-details">
-              <h4 class="details-title">{{strategy.title}}</h4>
-                <p class="details">{{strategy.details}}</p>
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="travel-sale">
-          <div class="travel-sale-title">
-            <h3>旅行特价</h3>
-          </div>
-          <div class="sale-content">
-            <router-link to="javascript;" class="sale-item sale-item1">
-              <span>特价酒店</span>
-              <p>388元起</p>
-            </router-link>
-            <router-link to="javascript;" class="sale-item sale-item2">
-              <span>日游小团</span>
-              <p>已售22686</p>
-            </router-link>
-            <router-link to="javascript;" class="sale-item sale-item3">
-              <span>WIFI电话卡</span>
-              <p>已售610300</p>
-            </router-link>
-            <router-link to="javascript;" class="sale-item sale-item4">
-              <span>签证</span>
-              <p>已售100855</p>
-            </router-link>
-            <router-link to="javascript;" class="sale-item sale-item5">
-              <span>门票票券</span>
-              <p>已售出81006</p>
-            </router-link>
-            <router-link to="javascript;" class="sale-item sale-item6">
-              <span>特价机票</span>
-              <p>533元起</p>
-            </router-link>
-          </div>
-        </div>
-        <div class="essence-notes">
-          <div class="essence-title">
-            <h3>精华游记</h3>
-            <router-link to="javascript;" class="see-more">
-            <span style="margin-right: 5px">查看更多</span>     
-            <svg class="iconforward-small" aria-hidden="true">
-              <use xlink:href="#iconforward"></use>
-            </svg>
-            </router-link>
-          </div>
-          <div class="notes">
-            <ul class="notes-items">
-              <li class="notes-item" v-for="(item,i) of items" :key="i" :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}">
-                <div class="note-title">{{item.title}}</div>
-                <div class="personal-msg">
-                  <div class="personal-head">
-                    <img src="../assets/iconfont/girl.png" alt="">
-                  </div>
-                  <span class="personal-name">{{item.name}}</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-        <div class="strategy-bottom">
-          <mt-navbar v-model="selected">
-            <mt-tab-item id="bottom1">推荐</mt-tab-item>
-            <mt-tab-item id="bottom2">找旅友</mt-tab-item>
-          </mt-navbar>
-          <mt-tab-container v-model="selected">
-            <div :style="selected=='bottom1'?'opacity:1':'opacity:0'">
-              <mt-tab-container-item id="bottom1" style="display:block">
->>>>>>> 6545e70bb918b00e5e43b6cd61e20a160c32c553
               <div class="bottom1_wrap">
                 <div class="wrap-item strategy-wrap-item">
                   <div class="wrap-item-content">
@@ -426,71 +287,118 @@
       </div>
     </div>
     <Sendgroup></Sendgroup>
-<<<<<<< HEAD
-=======
     <main-tab-bar></main-tab-bar>
->>>>>>> 6545e70bb918b00e5e43b6cd61e20a160c32c553
   </main>
 </template>
 
 <script>
 import Sendgroup from "../components/common/Sendgroup";
+import MainTabBar from "../components/mainTabBar";
 export default {
   data() {
     return {
+      width: 0,
+      selected: "bottom1", //保存底部推荐面板当前显示的子面板id
+      strategies: [
+        {
+          imgpath: require("../assets/citypics/save.jpg"),
+          title: "大阪",
+          details:
+            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
+        },
+        {
+          imgpath: require("../assets/citypics/save.jpg"),
+          title: "东京",
+          details:
+            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
+        },
+        {
+          imgpath: require("../assets/citypics/save.jpg"),
+          title: "京都",
+          details:
+            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
+        },
+        {
+          imgpath: require("../assets/citypics/save.jpg"),
+          title: "北海道",
+          details:
+            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
+        }
+      ],
+      items: [
+        {
+          title: "日本环球影城 | 圣诞",
+          name: "维多利亚",
+          headpath: require("../assets/iconfont/girl.png"),
+          bgpath: require("../assets/citypics/img1957.jpg")
+        },
+        {
+          title: "大阪京都美食集 | 关西",
+          name: "维多利亚",
+          headpath: require("../assets/iconfont/girl.png"),
+          bgpath: require("../assets/citypics/img1998.jpg")
+        },
+        {
+          title: "大阪京都美食集 | 关西",
+          name: "维多利亚",
+          headpath: require("../assets/iconfont/girl.png"),
+          bgpath: require("../assets/citypics/img1998.jpg")
+        },
+        {
+          title: "大阪京都美食集 | 关西",
+          name: "维多利亚",
+          headpath: require("../assets/iconfont/girl.png"),
+          bgpath: require("../assets/citypics/img1996.jpg")
+        }
+      ],
       imgs: {},
-      move: { start: 0, left: 0, end: 0 },
+      move: {
+        start: 0,
+        left: 0,
+        end: 0,
+        start1: 0,
+        left1: 0,
+        end1: 0
+      },
       selected: "bottom1" //保存底部推荐面板当前显示的子面板id
     };
   },
   methods: {
     touchmove(e) {
-      // if(this.left<=0&&this.left>=-){
-
-      // }
-      this.move.left = e.changedTouches[0].pageX - this.move.start + this.move.end;
+      this.move.left =
+        e.changedTouches[0].pageX - this.move.start + this.move.end;
+      if (this.move.left >= 0) {
+        this.move.left = 0;
+      }
+      if (this.move.left <= -850) {
+        this.move.left = -850;
+      }
     },
     touchstart(e) {
       this.move.start = e.changedTouches[0].pageX;
     },
     touchend(e) {
       this.move.end = this.move.left;
+    },
+
+    touchmove1(e) {
+      this.move.left1 =
+        e.changedTouches[0].pageX - this.move.start1 + this.move.end1;
+      if (this.move.left1 >= 0) {
+        this.move.left1 = 0;
+      }
+      if (this.move.left1 <= -965) {
+        this.move.left1 = -965;
+      }
+    },
+    touchstart1(e) {
+      this.move.start1 = e.changedTouches[0].pageX;
+    },
+    touchend1(e) {
+      this.move.end1 = this.move.left1;
     }
   },
   components: {
-import MainTabBar from '../components/mainTabBar'
-import Sendgroup from '../components/common/Sendgroup'
-export default {
-  data(){
-    return{
-      selected:"bottom1",//保存底部推荐面板当前显示的子面板id
-      strategies:[
-        {imgpath:require("../assets/citypics/save.jpg"),
-        title:"大阪",
-        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
-        {imgpath:require("../assets/citypics/save.jpg"),
-        title:"东京",
-        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
-        {imgpath:require("../assets/citypics/save.jpg"),
-        title:"京都",
-        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
-        {imgpath:require("../assets/citypics/save.jpg"),
-        title:"北海道",
-        details:"有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"},
-      ],
-      items:[
-        {title:"日本环球影城 | 圣诞",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
-        bgpath:require("../assets/citypics/img1957.jpg")},
-        {title:"大阪京都美食集 | 关西",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
-        bgpath:require("../assets/citypics/img1998.jpg")},
-        {title:"大阪京都美食集 | 关西",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
-        bgpath:require("../assets/citypics/img1998.jpg")},
-        {title:"大阪京都美食集 | 关西",name:"维多利亚",headpath:require("../assets/iconfont/girl.png"),
-        bgpath:require("../assets/citypics/img1996.jpg")}
-      ],
-    }
-  },
-  components:{
     MainTabBar,
     Sendgroup
   }
@@ -502,6 +410,9 @@ li {
   padding: 0;
   margin: 0;
   list-style: none;
+}
+* {
+  transition: all 0.3s linear;
 }
 .blank {
   height: 50px;
@@ -538,7 +449,7 @@ li {
 #strategypage .form-text {
   border: none;
   height: 20px;
-  left: 23px;;
+  left: 23px;
   width: 100%;
   background-color: transparent;
   position: relative;
@@ -546,20 +457,16 @@ li {
 #strategypage .tabbar-search {
   margin-left: 10px;
   border-radius: 30px;
-  width: 65%;height: 22px;
+  width: 65%;
+  height: 22px;
   display: flex;
   position: relative;
   right: 50px;
   top: 13px;
   background-color: #fff;
   opacity: 0.6;
-  
 }
-<<<<<<< HEAD
-#strategypage .tabbar-search .search-white {
-=======
-#strategypage .tabbar-search .search{
->>>>>>> 6545e70bb918b00e5e43b6cd61e20a160c32c553
+#strategypage .tabbar-search .search {
   position: absolute;
   margin-top: 2.5px;
   margin-left: 5px;
@@ -633,13 +540,15 @@ li {
   overflow: hidden;
 }
 .city-strategy .strategy-items {
-  width: 1270px;
   padding-left: 15px;
+}
+.city-strategy ul li,
+.notes ul li {
+  margin-right: 20px;
 }
 .city-strategy ul,
 .notes ul {
   display: flex;
-  justify-content: space-between;
 }
 .city-strategy ul .strategy-item {
   display: flex;
@@ -746,11 +655,8 @@ li {
 .notes .notes-item {
   width: 320px;
   height: 160px;
-<<<<<<< HEAD
   background-image: url("../assets/citypics/img1957.jpg");
   background-size: 100%;
-=======
->>>>>>> 6545e70bb918b00e5e43b6cd61e20a160c32c553
   border-radius: 10px;
   position: relative;
 }
