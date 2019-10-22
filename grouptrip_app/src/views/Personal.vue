@@ -1,6 +1,6 @@
 
 <template>
-  <div :style="start?'opacity:1':'opacity:0'">
+  <div>
     <div class="icon">
       <div class="icon-left">
         <span>
@@ -20,11 +20,11 @@
     </div>
     <div class="user-head">
       <div>
-        <svg class="boyhead" aria-hidden="true">
+        <svg @click="jump" class="boyhead" aria-hidden="true">
           <use xlink:href="#icontouxiangnanhai" />
         </svg>
       </div>
-      <span>{{this.$store.getters.user.uname}}</span>
+      <span @click="jump">{{this.$store.getters.user.uname||'登录查看更多信息'}}</span>
     </div>
     <div class="self-content">
       <ul>
@@ -107,7 +107,6 @@ import MainTabBar from '../components/mainTabBar'
 export default {
   data() {
     return {
-      start: false
     };
   },
   created() {
@@ -115,6 +114,11 @@ export default {
       this.start = true;
     }, 200);
     return {};
+  },
+  methods:{
+    jump(){
+      this.$router.push('/login')
+    }
   },
   components:{
     MainTabBar,
