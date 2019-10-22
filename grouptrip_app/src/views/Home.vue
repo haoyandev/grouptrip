@@ -132,20 +132,22 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-#homepage .tabbar-search,#note-page .tabbar-search{
-  margin-left: 10px;
-  width: 65%;
+#homepage .tabbar-search,#note-page .tabbar-search,#go-page .tabbar-search{
+  margin-left: 10px;;
   display: flex;
   position: relative;
   border-radius: 30px;
   background-color: #e4e4e47c;
 }
-#homepage .tabbar-search .search,#note-page .tabbar-search .search{
+#homepage .tabbar-search,#note-page .tabbar-search{
+  width: 65%;
+}
+#homepage .tabbar-search .search,#note-page .tabbar-search .search,.pop-panel .tabbar-search .search,#go-page .tabbar-search .search{
   position: absolute;
   margin-top: 2.5px;
   margin-left: 5px;
 }
-#homepage .form-text,#note-page .form-text{
+#homepage .form-text,#note-page .form-text, .pop-panel .form-text,#go-page .form-text{
   border: none;
   height: 20px;
   width: 100%;

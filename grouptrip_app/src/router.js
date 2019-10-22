@@ -12,6 +12,7 @@ import Strategy from '@/views/Strategy.vue'
 import Note from '@/views/Note.vue'
 // 设置个人信息
 import Settings from '@/components/settings'
+import go from '@/components/common/go'
 
 Vue.use(Router)
 
@@ -24,5 +25,6 @@ export default new Router({
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
     { path: '/Settings', component: Settings },
+    { path: '/go', component: go},
   ]
 })
