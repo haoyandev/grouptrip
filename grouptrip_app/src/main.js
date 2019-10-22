@@ -14,7 +14,11 @@ import 'vant/lib/index.css'
 Vue.config.productionTip = false;
 Vue.use(axios);
 Vue.use(MintUI);
+
+Vue.use(store);
+
 Vue.use(Vant);
+
 
 new Vue({
   router,
