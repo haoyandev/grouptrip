@@ -10,9 +10,17 @@ import Personal from '@/views/Personal.vue'
 import Strategy from '@/views/Strategy.vue'
 // 游记
 import Note from '@/views/Note.vue'
+// 登陆
+import Login from '@/components/login/login'
 // 设置个人信息
 import Settings from '@/components/settings'
+import Detail from '@/components/settings/persondetail'
 
+// 发布group trip
+import uploadImg from '@/components/publish/uploadImg'
+import groupDetail from '@/components/publish/groupDetail'
+import choseTheme from '@/components/publish/choseTheme'
+// import test from '@/components/publish/test'
 Vue.use(Router)
 
 export default new Router({
@@ -24,5 +32,11 @@ export default new Router({
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
     { path: '/Settings', component: Settings },
+    { path: '/Detail', component: Detail },
+    { path: '/Login', component: Login },
+    { path: '/uploadimg', component: uploadImg },
+    { path: '/Chosetheme', component: choseTheme },
+    { path: '/groupdetail', component: groupDetail },
+    // { path: '/test', component: test },
   ]
 })

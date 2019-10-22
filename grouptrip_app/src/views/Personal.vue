@@ -3,7 +3,7 @@
   <div>
     <div class="icon">
       <div class="icon-left">
-        <span>
+        <span @click="setting">
           <svg class="chilun" aria-hidden="true">
             <use xlink:href="#iconsetup" />
           </svg>
@@ -110,6 +110,22 @@ export default {
   },
   components:{
     MainTabBar,
+  },
+  methods: {
+    setting () {
+      // 如果用户没登陆则跳到登陆页面
+      // 调用store getUser方法获取用户信息
+      // var user = this.$store.getters.getUser()
+      // var user = { uid: 1}
+      var user = {}
+      if (!user) {
+        // 未登陆
+        this.$router.push('/Login')
+      } else {
+        // 已登陆
+        this.$router.push('/Settings')
+      }
+    }
   }
 };
 </script>

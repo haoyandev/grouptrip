@@ -1,25 +1,25 @@
 <template>
   <div>
     <!-- 修改跳转或返回至个人页面 -->
-    <header1 toRoute="/settings" hTitle="设置"></header1>
-
+    <header1 toRoute="/Settings" hTitle="设置"></header1>
     <!-- 个人设置 -->
     <h4 style="padding:10px" class="title1">个人设置</h4>
     <div class="mt-cell1">
     
-        <mt-cell to="usermanage" class="mt-cell" title="账号绑定与设置" is-link>
-          <span style="color: green"><img slot="icon" src="../../assets/iconfont/girl.png" width="24" height="24"></span>
-        </mt-cell>
-      
-      
-      <mt-cell to="/persondetail" title="编辑个人资料" is-link>  
-      </mt-cell>
-      <mt-cell to="/push" title="推送设置" is-link>
-      </mt-cell>
-      <mt-cell title="隐私设置" is-link>
-      </mt-cell>
-      <mt-cell title="视频自动播放" is-link> 
-      </mt-cell>
+    <mt-cell to="usermanage" class="mt-cell" title="账号绑定与设置" is-link>
+      <span style="color: green">
+        <img slot="icon" src="../../assets/iconfont/girl.png" width="24" height="24">
+      </span>
+    </mt-cell>
+
+    <mt-cell to="/Detail" title="编辑个人资料" is-link>  
+    </mt-cell>
+    <mt-cell to="/push" title="推送设置" is-link>
+    </mt-cell>
+    <mt-cell title="隐私设置" is-link>
+    </mt-cell>
+    <mt-cell title="视频自动播放" is-link> 
+    </mt-cell>
 
       <!-- 应用相关 -->
       <h4 style="padding:10px" class="title2">应用相关</h4>

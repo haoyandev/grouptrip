@@ -6,6 +6,7 @@ const cors = require('cors')
 const { verifyToken } = require('./jwt')
 // 引入路由器
 const userRouter = require('./router/user')
+const groupRouter = require('./router/group')
 // 创建服务器
 var app = express()
 
@@ -37,12 +38,13 @@ app.use((req, res, next) => {
   // 设置需要验证的接口
   var url = req.url
   // 用户接口除了登陆注册都要验证
-  // 购物车相关接口需要验证
+  // 发表group除了主题游记都要验证
   if (url !== '/api/v1/user/register' && 
     url !== '/api/v1/user/login' && 
     url.startsWith('/api/v1/user') ||
-    url !== '/api/vi/note/publish' &&
-    url.startsWith('/api/v1/note')) {
+    url !== '/api/v1/group/note' &&
+    url !== '/api/v1/group/themelist' &&
+    url.startsWith('/api/v1/group')) {
     // 获取用户传来的token值
     var token = req.headers.token
     if (!token) {
@@ -70,6 +72,7 @@ app.use((req, res, next) => {
 
 // 添加路由器
 app.use('/api/v1/user', userRouter)
+app.use('/api/v1/group', groupRouter)
 app.listen(3000, () => {
   console.log(`server start`)
 })

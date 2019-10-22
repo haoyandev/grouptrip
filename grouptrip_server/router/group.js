@@ -9,11 +9,33 @@ const { generateToken } = require('../jwt')
 var router = express.Router()
 
 // 1. 组队游列表
-router.get('/list', (req, res) => {
+router.get('/grouplist', (req, res) => {
   // 执行sql 查询组团信息
 })
 
-// 2. 上传组团游图片
+
+// 2. 获取主题列表
+router.get('/themelist', (req, res) => {
+  // 执行sql
+  var sql = `select tid, tname, timg from trip_theme`
+  pool.query(sql, (err, result) => {
+    if (err) throw err 
+    res.send({ code: 200, data: result })
+  })
+})
+// 3. 发布组团游
+router.post('/publish', (req, res) => {
+  // 获取用户id
+  var uid = req.user.uid
+  // 获取数据
+  var data = req.body
+  // 获取图片列表
+  var imgList = data.imgList
+  // 获取主题id 
+  var tid = data.tid
+  
+})
+// 4. 上传组团游图片
 router.post('/upload', (req, res) => {
   // 获取用户信息
   var user = { uid: 2 }
@@ -40,5 +62,6 @@ router.post('/upload', (req, res) => {
 
   res.send('ddd')
 })
+
 
 module.exports = router

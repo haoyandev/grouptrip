@@ -9,9 +9,13 @@ import 'mint-ui/lib/style.css'
 import MintUI from 'mint-ui'
 import 'normalize.css'
 
-Vue.config.productionTip = false;
+import Vant from 'vant'
+import 'vant/lib/index.css'
+Vue.use(Vant)
+
 Vue.use(axios);
 Vue.use(MintUI);
+Vue.config.productionTip = false;
 
 new Vue({
   router,
