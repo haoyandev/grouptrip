@@ -101,6 +101,7 @@
     <main-tab-bar></main-tab-bar>
   </div>
 </template>
+
 <script>
 // 这是个人中心页面
 import MainTabBar from '../components/mainTabBar'
