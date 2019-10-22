@@ -24,10 +24,7 @@ export default new Router({
     { path: '/Personal', component: Personal },
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
-<<<<<<< HEAD
     { path: '/login', component: Login },
-=======
     { path: '/Settings', component: Settings },
->>>>>>> 6545e70bb918b00e5e43b6cd61e20a160c32c553
   ]
 })
