@@ -8,6 +8,8 @@ import './assets/iconfont/travelicon.css'
 import 'mint-ui/lib/style.css'
 import MintUI from 'mint-ui'
 import 'normalize.css'
+import Vant from 'vant'
+import 'vant/lib/index.css'
 
 import Vant from 'vant'
 import 'vant/lib/index.css'
@@ -15,7 +17,7 @@ Vue.use(Vant)
 
 Vue.use(axios);
 Vue.use(MintUI);
-Vue.config.productionTip = false;
+Vue.use(Vant);
 
 new Vue({
   router,

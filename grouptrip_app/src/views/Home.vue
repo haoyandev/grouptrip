@@ -6,10 +6,10 @@
       </mt-tab-item>
       <mt-tab-item class="text-item search-top">
         <div class="tabbar-search">
-          <input type="text" class="form-text">
           <svg class="search" aria-hidden="true">
             <use xlink:href="#iconsearch-copy"></use>
           </svg>
+          <input type="text" class="form-text" placeholder="红叶季赏枫攻略">
         </div>
         <div class="tabbar-icon">
           <mt-button  class="iconbutton">
@@ -132,24 +132,38 @@ export default {
   justify-content: space-around;
   align-items: center;
 }
-#homepage .tabbar-search{
+#homepage .tabbar-search,#note-page .tabbar-search{
   margin-left: 10px;
-  width: 70%;
+  width: 65%;
   display: flex;
-}
-#homepage .form-text,#note-page .form-text{
-  border: none;
-  border-radius: 25px;
-  height: 20px;
-  width: 100%;
   position: relative;
-  background: #f8f8f8;
+  border-radius: 30px;
+  background-color: #e4e4e47c;
 }
-#homepage .tabbar-search .search{
+#homepage .tabbar-search .search,#note-page .tabbar-search .search{
   position: absolute;
   margin-top: 2.5px;
   margin-left: 5px;
 }
+#homepage .form-text,#note-page .form-text{
+  border: none;
+  height: 20px;
+  width: 100%;
+  position: relative;
+  background: transparent;
+  font-size: 12px;
+  padding:3px 5px;
+  margin-left: 23px;
+}
+.tabbar-search input::-webkit-input-placeholder {
+  font-size: 12px;
+  color: #999999;
+  right: 5px;
+}
+.tabbar-search input{
+  outline: none
+}
+
 .tabbar-icon{
   width: 25%;
   display: flex;
