@@ -370,8 +370,8 @@ export default {
       if (this.move.left >= 0) {
         this.move.left = 0;
       }
-      if (this.move.left <= -850) {
-        this.move.left = -850;
+      if (this.move.left <= -800) {
+        this.move.left = -800;
       }
     },
     touchstart(e) {
