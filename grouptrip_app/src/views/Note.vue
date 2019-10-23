@@ -51,7 +51,7 @@
           >
             <h5>{{item.title}}</h5>
             <p>{{item.subtitle}}</p>
-            <span></span>
+            <span :style="{'background':item.color}"></span>
           </li>
         </ul>
       </div>
@@ -234,45 +234,45 @@
               <h2>旅行新发现</h2>
               <div class="new-item">
                 <div class="new-itemimg">
-                  <img src="../assets/citypics/madrid.jpg" alt="">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
                 </div>
                 <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
                 <p>133456次浏览</p>
               </div>
               <div class="new-item">
                 <div class="new-itemimg">
-                  <img src="../assets/citypics/madrid.jpg" alt="">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
                 </div>
                 <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
                 <p>133456次浏览</p>
               </div>
               <div class="new-item">
                 <div class="new-itemimg">
-                  <img src="../assets/citypics/madrid.jpg" alt="">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
                 </div>
                 <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
                 <p>133456次浏览</p>
               </div>
               <div class="new-item">
                 <div class="new-itemimg">
-                  <img src="../assets/citypics/madrid.jpg" alt="">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
                 </div>
                 <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
                 <p>133456次浏览</p>
               </div>
-
             </div>
             <van-divider/>
             <div class="hot-route">
               <h2>热门玩法</h2>
               <ul class="hot-route-ul">
-                <li class="hot-route-li" v-for="(route,r) of routes" :key="r">
+                <li class="hot-route-li" v-for="(route,r) of routes" :key="r" >
                   <h4>{{route.title}}</h4>
                   <p>{{route.count}}人感兴趣</p>
-                  <span></span>
+                  <span :style="{'backgroundColor':route.color}"></span>
                 </li>
               </ul>
             </div>
+            <van-divider/>
           </div>
         </van-tab>
         <van-tab title="最新发表">
@@ -372,41 +372,47 @@ export default {
         require("../assets/citypics/city12.jpg")
       ],
       routes:[
-        {title:"自驾游",count:"120000"},
-        {title:"赏秋好去处",count:"187709"},
-        {title:"最省钱的一次旅游",count:"20000"},
-        {title:"忘不掉的味道",count:"187930"}
+        {title:"自驾游",count:"120000",color:"#2694ab"},
+        {title:"赏秋好去处",count:"187709",color:"#fdc4b6"},
+        {title:"最省钱的一次旅游",count:"20000",color:"#a696c8"},
+        {title:"忘不掉的味道",count:"187930",color:"#ea7070"}
       ],
       items: [
         {
           title: "#香港购物指南",
           subtitle: "购物",
-          imgpath: require("../assets/citypics/city12.jpg")
+          imgpath: require("../assets/citypics/city12.jpg"),
+          color:'#e59572'
         },
         {
           title: "#首尔小众秘境推荐",
           subtitle: "人少景美",
-          imgpath: require("../assets/citypics/city10.jpg")
+          imgpath: require("../assets/citypics/city10.jpg"),
+          color:'#96ceb4'
         },
         {
           title: "#大阪+京都",
           subtitle: "关西",
-          imgpath: require("../assets/citypics/city8.jpg")
+          imgpath: require("../assets/citypics/city8.jpg"),
+          color:"#fdc4b6"
         },
         {
           title: "#大马学潜水",
           subtitle: "潜水",
-          imgpath: require("../assets/citypics/city12.jpg")
+          imgpath: require("../assets/citypics/city12.jpg"),
+          color:"#F9CE00"
         },
         {
           title: "#泰国美食推荐",
           subtitle: "种草绿皮书",
-          imgpath: require("../assets/citypics/city7.jpg")
+          imgpath: require("../assets/citypics/city7.jpg"),
+          color:"#2694ab"
         },
         {
           title: "#新加坡网红打卡地",
           subtitle: "拍照",
-          imgpath: require("../assets/citypics/city6.jpg")
+          imgpath: require("../assets/citypics/city6.jpg"),
+          color:"#a696c8"
         }
       ]
     };
@@ -581,9 +587,7 @@ export default {
   z-index: 2;
   bottom: 5px;
 }
-.note-wrap .topic-suggest span::after {
-  content: "";
-  background-color: #e59572;
+.note-wrap .topic-suggest span{
   opacity: 0.7;
   z-index: 1;
   position: absolute;
@@ -763,7 +767,7 @@ export default {
 }
 .route-wrap .hot-route{
   width: 100%;
-  height: 400px;
+  height: 200px;
   overflow: hidden;
 }
 .route-wrap .hot-route ul{
@@ -773,7 +777,7 @@ export default {
 .route-wrap .hot-route li{
   width: 130px;
   height: 80px;
-  background: url('../assets/citypics/seoul.jpg');
+  background: url('../assets/citypics/beijin1.jpg');
   background-size: cover;
   background-repeat: no-repeat;
   margin-left: 15px;
@@ -793,11 +797,10 @@ export default {
   z-index: 2;
   position: absolute;
 }
-.route-wrap .hot-route li span::after{
-  content: '';
+.route-wrap .hot-route li span{
   width: 100%;height: 100%;
   z-index: 1;
-  background-color: purple;
+  /* background-color: purple; */
   position: absolute;
   top: 0px;left: 0px;
   border-radius: 10px;
