@@ -41,6 +41,7 @@ app.use((req, res, next) => {
   // 发表group除了主题游记都要验证
   if (url !== '/api/v1/user/register' && 
     url !== '/api/v1/user/login' && 
+    url !== '/api/v1/user/loginbytoken' &&
     url.startsWith('/api/v1/user') ||
     url !== '/api/v1/group/note' &&
     url !== '/api/v1/group/themelist' &&
@@ -54,7 +55,6 @@ app.use((req, res, next) => {
         var result = verifyToken(token)
         // 判断result结果
         if (result.name === 'TokenExpiredError') {
-          res.writeHead(403)
           res.send({ code: 403, msg: `登陆超时,请重新登陆` })
         } else if (result.name === 'JsonWebTokenError') {
           res.send({ code: 403, msg: `证书出错` })

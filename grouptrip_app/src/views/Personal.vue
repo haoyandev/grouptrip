@@ -3,7 +3,7 @@
   <div>
     <div class="icon">
       <div class="icon-left">
-        <span @click="setting">
+        <span>
           <svg class="chilun" aria-hidden="true">
             <use xlink:href="#iconsetup" />
           </svg>
@@ -24,7 +24,8 @@
           <use xlink:href="#icontouxiangnanhai" />
         </svg>
       </div>
-      <span @click="jump">{{this.$store.getters.user.uname||'登录查看更多信息'}}</span>
+      <span v-if="islogin">{{this.$store.getters.user.uname}}</span>
+      <span  v-else @click="jump">登录查看更多信息</span>
     </div>
     <div class="self-content">
       <ul>
@@ -33,11 +34,11 @@
           <span>获赞与收藏</span>
         </li>
         <li>
-          <h1>0</h1>
+          <h1>{{user.fansNum}}</h1>
           <span>粉丝</span>
         </li>
         <li>
-          <h1>0</h1>
+          <h1>{{user.focusNum}}</h1>
           <span>关注</span>
         </li>
         <li>
@@ -108,13 +109,13 @@ import MainTabBar from '../components/mainTabBar'
 export default {
   data() {
     return {
+      user: {},
+      islogin: false
     };
   },
   created() {
-    setTimeout(() => {
-      this.start = true;
-    }, 200);
-    return {};
+    this.user = this.$store.state.user
+    this.islogin = this.$store.state.islogin
   },
   methods:{
     jump(){
@@ -123,22 +124,6 @@ export default {
   },
   components:{
     MainTabBar,
-  },
-  methods: {
-    setting () {
-      // 如果用户没登陆则跳到登陆页面
-      // 调用store getUser方法获取用户信息
-      // var user = this.$store.getters.getUser()
-      // var user = { uid: 1}
-      var user = {}
-      if (!user) {
-        // 未登陆
-        this.$router.push('/Login')
-      } else {
-        // 已登陆
-        this.$router.push('/Settings')
-      }
-    }
   }
 };
 </script>

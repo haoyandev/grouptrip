@@ -1,7 +1,7 @@
 const express = require('express')
 const pool = require('../pool')
 // 引入jwt
-const { generateToken } = require('../jwt')
+const { generateToken, verifyToken } = require('../jwt')
 const { getBaseInfo, getFunsNum, getFocusNum } = require('../fun')
 
 // 创建路由器
@@ -107,11 +107,10 @@ router.get('/detail', (req, res) => {
 
   // 查询用户相关信息
   var userInfo = {}
-
   Promise.all([getBaseInfo(uid), getFunsNum(uid), getFocusNum(uid)]).then(result => {
     Object.assign(userInfo, ...result)
     console.log(userInfo)
-    res.send(userInfo)
+    res.send({ code: 200, data: userInfo })
   })
 })
 
@@ -351,5 +350,43 @@ router.get('/focuslist', (req, res) => {
   })
 })
 
+// 12. 登录by token
 
+router.get('/loginbytoken', (req, res) => {
+  // 获取用户信息
+  var token = req.headers.token
+  // 检验数据
+  if (!token) {
+    return res.send({ code: 4001, msg: `未提供token` })
+  }
+  var result = verifyToken(token)
+  // 判断result结果
+  if (result.name === 'TokenExpiredError') {
+    res.send({ code: 403, msg: `登陆超时,请重新登陆` })
+  } else if (result.name === 'JsonWebTokenError') {
+    res.send({ code: 403, msg: `证书出错` })
+  } else {
+    // 验证成功
+    // 查询数据库 检验用户信息的合法性
+    var uid = result.data.uid
+    var sql = `select uid, uname from trip_user where uid=?`
+    pool.query(sql, [uid], (err, result) => {
+      if (err) throw err
+      if (result.length > 0) {
+        // 该用户合法 登陆成功 返回token值
+        // 生成token
+        result = result[0]
+        var data = {
+          uid: result.uid,
+          uname: result.uname
+        }
+        var token = generateToken(data)
+        // 返回应答
+        res.send({ code: 200, msg: `登陆成功`, token: token })
+      } else {
+        res.send({ code: 4003, msg: `登陆失败` })
+      }
+    })
+  }
+})
 module.exports = router
