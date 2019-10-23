@@ -41,7 +41,6 @@ app.use((req, res, next) => {
   // 发表group除了主题游记都要验证
   if (url !== '/api/v1/user/register' && 
     url !== '/api/v1/user/login' && 
-    url !== '/api/v1/user/loginbytoken' &&
     url.startsWith('/api/v1/user') ||
     url !== '/api/v1/group/note' &&
     url !== '/api/v1/group/themelist' &&

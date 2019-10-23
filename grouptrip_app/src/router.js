@@ -14,6 +14,7 @@ import Login from '@/components/login/login'
 // 设置个人信息
 import Settings from '@/components/settings'
 import Detail from '@/components/settings/persondetail'
+import go from '@/components/common/go'
 
 // 发布group trip
 import uploadImg from '@/components/publish/uploadImg'
@@ -37,5 +38,6 @@ export default new Router({
     { path: '/uploadimg', component: uploadImg },
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
+    { path: '/go', component: go},
   ]
 })
