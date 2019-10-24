@@ -298,9 +298,8 @@ export default {
   font-size: 12px;
   height: 20px;
 }
-#grouptrip-page .tabbar-top .tabbar-title .start-group,
-#note-page .tabbar-top .start-group {
-  background-image: linear-gradient(#ad5389, #3c1053);
+#grouptrip-page .tabbar-top .tabbar-title .start-group,#note-page .tabbar-top .start-group{
+  background-color:#b689b6;
   color: #fff;
   border-radius: 30px;
   text-align: center;

@@ -30,29 +30,9 @@
           </router-link>
         </div>
         <div class="top-city-content">
-          <div class="top-city-item">
-            <span>大阪</span>
-            <span>Osaka</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
+          <div class="top-city-item" v-for="(t,i) of trip_city" :key="i" :style="{background:'url('+t.cityimg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}" >
+            <span>{{t.name}}</span>
+            <p>{{t.elname}}</p>
           </div>
         </div>
       </div>
@@ -299,6 +279,10 @@ export default {
     return {
       width: 0,
       selected: "bottom1", //保存底部推荐面板当前显示的子面板id
+      trip_city:[
+        {name:"大阪",elname:"Osaka",
+        cityimg:require('../assets/citypics/img1998.jpg')},
+      ],
       strategies: [
         {
           imgpath: require("../assets/citypics/save.jpg"),
@@ -520,7 +504,6 @@ li {
 .top-city-content .top-city-item {
   width: 31%;
   height: 70px;
-  background-color: plum;
   border-radius: 10px;
   margin-top: 10px;
   display: flex;
@@ -528,8 +511,13 @@ li {
   align-items: center;
   justify-content: center;
 }
-.top-city-content .top-city-item span {
+.top-city-content .top-city-item span,.top-city-content .top-city-item p{
   display: block;
+  color: #fff;
+}
+.top-city-content .top-city-item  p{
+  font-size: 12px;
+  font-weight: lighter;
 }
 .city-strategy {
   width: 100%;

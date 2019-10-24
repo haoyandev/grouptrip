@@ -183,7 +183,7 @@ export default {
 }
 .homewrap{
   position: relative;
-  top: 120px;
+  top: 140px;
   width: 100%;
   display: flex;
 }
