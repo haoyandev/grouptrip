@@ -9,6 +9,18 @@
       </div>
       <router-link to="javascript;" class="start-group">发布</router-link>
     </div>
+    <div class="top-title">
+      <div class="title-date">
+        <h1>23</h1>
+      </div>
+      <div class="title-year-mon">
+        <h5>OCT</h5>
+        <h5>2019</h5>
+      </div>
+      <div class="main-title">
+        <h1>游记</h1>
+      </div>
+    </div>
     <div>
       <div class="carousel">
         <div
@@ -57,86 +69,32 @@
       </div>
       <van-tabs v-model="active" swipeable class="note-tabs">
         <van-tab title="全部游记">
-          <div class="all-item">
+          <div class="all-item" v-for="(n,i) of notes" :key="i">
             <div class="item-text">
-              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
+              <h3>{{n.title}}</h3>
               <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg" alt />
+                <img :src="n.headimg" alt />
               </div>
-              <span class="text-personal">发表于2018-12-01</span>
+              <span class="text-personal">发表于{{n.date}}</span>
             </div>
             <div class="item-img">
-              <img src="../assets/citypics/food01.jpg" alt />
+              <img :src="n.noteimg" alt />
             </div>
             <div class="item-tag">
-              <span>关西攻略</span>
-              <span>日本美食</span>
+              <span>{{n.tag1}}</span>
+              <span>{{n.tag2}}</span>
             </div>
             <div class="item-icon">
               <svg class="iconblack_favorite-purple" aria-hidden="true">
                 <use xlink:href="#iconblack_favorite-purple" />
               </svg>
-              <span>128</span>
+              <span>{{n.likes}}</span>
               <svg class="iconcomment" aria-hidden="true">
                 <use xlink:href="#iconcomment" />
               </svg>
-              <span>83</span>
+              <span>{{n.comments}}</span>
             </div>
             <van-divider />
-          </div>
-          <div class="all-item">
-            <div class="item-text">
-              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
-              <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg" alt />
-              </div>
-              <span class="text-personal">发表于2018-12-01</span>
-            </div>
-            <div class="item-img">
-              <img src="../assets/citypics/food01.jpg" alt />
-            </div>
-            <div class="item-tag">
-              <span>关西攻略</span>
-              <span>日本美食</span>
-            </div>
-            <div class="item-icon">
-              <svg class="iconblack_favorite-purple" aria-hidden="true">
-                <use xlink:href="#iconblack_favorite-purple" />
-              </svg>
-              <span>128</span>
-              <svg class="iconcomment" aria-hidden="true">
-                <use xlink:href="#iconcomment" />
-              </svg>
-              <span>83</span>
-            </div>
-            <van-divider style="height:1px;width:100%;margin:0px;" />
-          </div>
-          <div class="all-item">
-            <div class="item-text">
-              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
-              <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg" alt />
-              </div>
-              <span class="text-personal">发表于2018-12-01</span>
-            </div>
-            <div class="item-img">
-              <img src="../assets/citypics/food01.jpg" alt />
-            </div>
-            <div class="item-tag">
-              <span>关西攻略</span>
-              <span>日本美食</span>
-            </div>
-            <div class="item-icon">
-              <svg class="iconblack_favorite-purple" aria-hidden="true">
-                <use xlink:href="#iconblack_favorite-purple" />
-              </svg>
-              <span>128</span>
-              <svg class="iconcomment" aria-hidden="true">
-                <use xlink:href="#iconcomment" />
-              </svg>
-              <span>83</span>
-            </div>
-            <van-divider style="height:1px;width:100%;margin:0px;" />
           </div>
         </van-tab>
         <van-tab title="宝藏游记">
@@ -172,57 +130,30 @@
           </div>
           <div class="history-note">
             <h2>历史榜首宝藏</h2>
-            <div class="all-item">
+            <div class="all-item" v-for="(n,i) of notes" :key="i">
               <div class="item-text">
-                <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
+                <h3>{{n.title}}</h3>
                 <div class="item-head">
-                  <img src="../assets/citypics/heimen.jpg" alt />
+                  <img :src="n.headimg" alt />
                 </div>
-                <span class="text-personal">发表于2018-12-01</span>
+                <span class="text-personal">发表于{{n.date}}</span>
               </div>
               <div class="item-img">
-                <img src="../assets/citypics/food01.jpg" alt />
+                <img :src="n.noteimg" alt />
               </div>
               <div class="item-tag">
-                <span>关西攻略</span>
-                <span>日本美食</span>
+                <span>{{n.tag1}}</span>
+                <span>{{n.tag2}}</span>
               </div>
               <div class="item-icon">
                 <svg class="iconblack_favorite-purple" aria-hidden="true">
                   <use xlink:href="#iconblack_favorite-purple" />
                 </svg>
-                <span>128</span>
+                <span>{{n.likes}}</span>
                 <svg class="iconcomment" aria-hidden="true">
                   <use xlink:href="#iconcomment" />
                 </svg>
-                <span>83</span>
-              </div>
-              <van-divider />
-            </div>
-            <div class="all-item">
-              <div class="item-text">
-                <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
-                <div class="item-head">
-                  <img src="../assets/citypics/heimen.jpg" alt />
-                </div>
-                <span class="text-personal">发表于2018-12-01</span>
-              </div>
-              <div class="item-img">
-                <img src="../assets/citypics/food01.jpg" alt />
-              </div>
-              <div class="item-tag">
-                <span>关西攻略</span>
-                <span>日本美食</span>
-              </div>
-              <div class="item-icon">
-                <svg class="iconblack_favorite-purple" aria-hidden="true">
-                  <use xlink:href="#iconblack_favorite-purple" />
-                </svg>
-                <span>128</span>
-                <svg class="iconcomment" aria-hidden="true">
-                  <use xlink:href="#iconcomment" />
-                </svg>
-                <span>83</span>
+                <span>{{n.comments}}</span>
               </div>
               <van-divider />
             </div>
@@ -230,35 +161,14 @@
         </van-tab>
         <van-tab title="玩法路线">
           <div class="route-wrap">
+            <h2>旅行新发现</h2>
             <div class="new-route">
-              <h2>旅行新发现</h2>
-              <div class="new-item">
+              <div class="new-item" v-for="(find,f) of finds" :key="f">
                 <div class="new-itemimg">
-                  <img src="../assets/citypics/beijin1.jpg" alt="">
+                  <img :src="find.imgpath" alt="">
                 </div>
-                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
-                <p>133456次浏览</p>
-              </div>
-              <div class="new-item">
-                <div class="new-itemimg">
-                  <img src="../assets/citypics/beijin1.jpg" alt="">
-                </div>
-                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
-                <p>133456次浏览</p>
-              </div>
-              <div class="new-item">
-                <div class="new-itemimg">
-                  <img src="../assets/citypics/beijin1.jpg" alt="">
-                </div>
-                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
-                <p>133456次浏览</p>
-              </div>
-              <div class="new-item">
-                <div class="new-itemimg">
-                  <img src="../assets/citypics/beijin1.jpg" alt="">
-                </div>
-                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
-                <p>133456次浏览</p>
+                <h4>{{find.title}}</h4>
+                <p>{{find.count}}次浏览</p>
               </div>
             </div>
             <van-divider/>
@@ -273,60 +183,48 @@
               </ul>
             </div>
             <van-divider/>
+            <div class="popular-route">
+              <h2>热门路线</h2> 
+              <div class="popular-item" v-for="(popular,p) of populars" :key="p">
+                <div class="popular-img">
+                 <img src="../assets/citypics/img1957.jpg" alt="">
+                </div>
+                <div class="popular-text">
+                 <h3>{{popular.title}}</h3>
+                 <span>{{popular.tag1}}</span>
+                 <span>{{popular.tag2}}</span>
+                 <p>{{popular.subtitle}}</p>
+                </div>
+                <van-divider/>
+              </div>
+            </div>
           </div>
         </van-tab>
         <van-tab title="最新发表">
-          <div class="all-item">
+          <div class="all-item" v-for="(n,i) of notes" :key="i">
             <div class="item-text">
-              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
+              <h3>{{n.title}}</h3>
               <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg" alt />
+                <img :src="n.headimg" alt />
               </div>
-              <span class="text-personal">发表于2018-12-01</span>
+              <span class="text-personal">发表于{{n.date}}</span>
             </div>
             <div class="item-img">
-              <img src="../assets/citypics/food01.jpg" alt />
+              <img :src="n.noteimg" alt />
             </div>
             <div class="item-tag">
-              <span>关西攻略</span>
-              <span>日本美食</span>
+              <span>{{n.tag1}}</span>
+              <span>{{n.tag2}}</span>
             </div>
             <div class="item-icon">
               <svg class="iconblack_favorite-purple" aria-hidden="true">
                 <use xlink:href="#iconblack_favorite-purple" />
               </svg>
-              <span>128</span>
+              <span>{{n.likes}}</span>
               <svg class="iconcomment" aria-hidden="true">
                 <use xlink:href="#iconcomment" />
               </svg>
-              <span>83</span>
-            </div>
-            <van-divider />
-          </div>
-          <div class="all-item">
-            <div class="item-text">
-              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
-              <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg" alt />
-              </div>
-              <span class="text-personal">发表于2018-12-01</span>
-            </div>
-            <div class="item-img">
-              <img src="../assets/citypics/food01.jpg" alt />
-            </div>
-            <div class="item-tag">
-              <span>关西攻略</span>
-              <span>日本美食</span>
-            </div>
-            <div class="item-icon">
-              <svg class="iconblack_favorite-purple" aria-hidden="true">
-                <use xlink:href="#iconblack_favorite-purple" />
-              </svg>
-              <span>128</span>
-              <svg class="iconcomment" aria-hidden="true">
-                <use xlink:href="#iconcomment" />
-              </svg>
-              <span>83</span>
+              <span>{{n.comments}}</span>
             </div>
             <van-divider />
           </div>
@@ -369,7 +267,40 @@ export default {
         require("../assets/citypics/city7.jpg"),
         require("../assets/citypics/city8.jpg"),
         require("../assets/citypics/city10.jpg"),
-        require("../assets/citypics/city12.jpg")
+        require("../assets/citypics/city12.jpg"),
+        require("../assets/citypics/img1957.jpg")
+      ],
+      notes:[
+        {title:"从平价小吃到米其林——大阪京都神户美食集(10日20店详记）",
+        date:"2018-12-01",tag1:"关西攻略",tag2:"日本美食",
+        headimg:require("../assets/citypics/heimen.jpg"),
+        noteimg:require("../assets/citypics/food01.jpg"),
+        likes:128,
+        comments:83
+        },
+        {title:"从平价小吃到米其林——大阪京都神户美食集(10日20店详记）",
+        date:"2018-12-01",tag1:"关西攻略",tag2:"日本美食",
+        headimg:require("../assets/citypics/heimen.jpg"),
+        noteimg:require("../assets/citypics/food01.jpg"),
+        likes:128,
+        comments:83
+        },
+      ],
+      populars:[
+        {title:"大阪3日路线",tag1:"初次必玩",tag2:"环球影城一日游",subtitle:"游玩3天/适宜9月-12月/4个景点"},
+        {title:"品味老广州经典1日游",tag1:"老广州的建筑",tag2:"品味粤菜",subtitle:"游玩6天/适宜10月-5月/14个景点"},
+        {title:"大阪3日路线",tag1:"初次必玩",tag2:"环球影城一日游",subtitle:"游玩3天/适宜3月-11月/12个景点"}
+      ],
+
+      finds:[
+        {title:"不止布达佩斯 | 走进不一样的匈牙利",
+        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")},
+        {title:"不止布达佩斯 | 走进不一样的匈牙利",
+        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")},
+        {title:"不止布达佩斯 | 走进不一样的匈牙利",
+        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")},
+        {title:"不止布达佩斯 | 走进不一样的匈牙利",
+        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")}
       ],
       routes:[
         {title:"自驾游",count:"120000",color:"#2694ab"},
@@ -513,15 +444,29 @@ export default {
 #note-page .tabbar-top .start-group {
   margin-top: 0px;
 }
-.li-border {
-  border: 2px solid#111111;
-  border-radius: 10px;
+#note-page .top-title{
+  display: flex;
+  height: 40px;
+  align-items: center;
+  margin:0px 0px 15px 15px;
+}
+#note-page .top-title h1,h5{
+  margin: 0px;
+}
+#note-page .top-title .title-year-mon{
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  border-left: 2px solid #111111;
+  padding: 0px 5px;
 }
 .carousel-ul {
   display: flex;
-  width: 100%;
+  width: 340px;
+  justify-content: space-between;
   list-style: none;
   padding: 0;
+  margin: 10px 15px;
 }
 .carousel-ul > li {
   width: 50px;
@@ -530,27 +475,35 @@ export default {
   padding: 2px;
   text-align: center;
   overflow: hidden;
-  border-radius: 10px;
+}
+.li-border {
+  border: 2px solid #b689b6;
+  border-radius: 8px;
 }
 .carousel-ul > li > img {
   max-width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 8px;
 }
 .hasTran {
   transition: all 0.25s linear;
 }
 .carousel {
   overflow: hidden;
+  width: 340px;
+  height: 200px;
+  border-radius: 6px;
+  margin: 0 auto;
 }
 .carousel-item {
   float: left;
 }
 .carousel-item img {
   width: 100%;
-  object-fit: cover;
-  -webkit-filter: blur(4px);
-  filter: blur(4px);
+  height: 100%;
+  object-fit: contain;
+
 }
 .note-wrap {
   width: 100%;
@@ -675,6 +628,7 @@ export default {
 }
 .item-icon {
   font-size: 13px;
+  align-items: center;
   display: flex;
   justify-content: center;
 }
@@ -694,10 +648,9 @@ export default {
   position: relative;
 }
 .note-top h2,
-.history-note h2,.new-route h2,.hot-route h2 {
+.history-note h2,.new-route h2,.route-wrap h2{
   margin: 0px 0px 15px 0px;
   font-weight: lighter;
-  width: 100%;
 }
 .history-note {
   width: 100%;
@@ -740,7 +693,7 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
 }
-.route-wrap .new-route h2,.route-wrap .hot-route h2{
+.route-wrap .new-route h2,.route-wrap h2,.route-wrap .popular-route h2{
   margin-left: 15px;
 }
 .route-wrap .new-route .new-item{
@@ -767,7 +720,7 @@ export default {
 }
 .route-wrap .hot-route{
   width: 100%;
-  height: 200px;
+  height: 150px;
   overflow: hidden;
 }
 .route-wrap .hot-route ul{
@@ -806,4 +759,48 @@ export default {
   border-radius: 10px;
   opacity: 0.6;
 }
+.route-wrap .popular-route{
+  width: 100%;
+  box-sizing: border-box;
+}
+.popular-route .popular-item{
+  width: 100%;
+  height: 150px;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  padding:0px 15px;
+}
+.popular-route .popular-item .popular-img{
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+}
+.popular-route .popular-item .popular-text {
+  margin-left: 15px;
+}
+.popular-route .popular-item .popular-text span{
+  font-size: 12px;
+  border-radius: 5px;
+  padding: 3px 5px;
+  margin-right: 5px;
+  background-color: #b689b6;
+  color: #ffffff;
+}
+.popular-route .popular-item .popular-text h3{
+  margin: 0px 0px 10px 0px;
+}
+.popular-route .popular-item .popular-text p{
+  color: #999999;
+  font-size: 12px;
+  margin:50px 0px 0px 5px;
+}
+.popular-route .popular-item .popular-img img{
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+
 </style>
