@@ -13,10 +13,7 @@ import Note from '@/views/Note.vue'
 import Login from '@/components/login/login'
 // 设置个人信息
 import Settings from '@/components/settings'
-<<<<<<< HEAD
-=======
 import go from '@/components/common/go'
->>>>>>> master
 import Guan from '@/components/common/guanzhu.vue'
 Vue.use(Router)
 
@@ -30,11 +27,7 @@ export default new Router({
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
     { path: '/login', component: Login },
-<<<<<<< HEAD
-    { path: '/Settings', component: Settings }
-=======
     { path: '/Settings', component: Settings },
     { path: '/go', component: go},
->>>>>>> master
   ]
 })

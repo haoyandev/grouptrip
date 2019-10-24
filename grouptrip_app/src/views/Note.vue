@@ -67,7 +67,7 @@
           </li>
         </ul>
       </div>
-      <van-tabs v-model="active" swipeable class="note-tabs">
+      <van-tabs v-model="active" animated class="note-tabs">
         <van-tab title="全部游记">
           <div class="all-item" v-for="(n,i) of notes" :key="i">
             <div class="item-text">
@@ -174,7 +174,7 @@
             <van-divider/>
             <div class="hot-route">
               <h2>热门玩法</h2>
-              <ul class="hot-route-ul">
+              <ul class="hot-route-ul" @touchmove="t2" @touchstart="t1" @touchend="t3" :style="{marginLeft:move.t2+'px'}">
                 <li class="hot-route-li" v-for="(route,r) of routes" :key="r" >
                   <h4>{{route.title}}</h4>
                   <p>{{route.count}}人感兴趣</p>
@@ -240,7 +240,7 @@ export default {
   created() {
     this.a = setInterval(() => {
       this.i++;
-    }, 3000);
+    }, 5000);
   },
   components: {
     MainTabBar
@@ -250,7 +250,10 @@ export default {
       move: {
         start: 0,
         left: 0,
-        end: 0
+        end: 0,
+        t1:0,
+        t2:0,
+        t3:0
       },
       active: 0,
       a: null,
@@ -389,7 +392,22 @@ export default {
     te(e) {
       this.move.end = this.move.left;
     },
-
+    t2(e) {
+      this.move.t2 =
+        e.changedTouches[0].pageX - this.move.t1 + this.move.t3;
+      if (this.move.t2 >= 0) {
+        this.move.t2 = 0;
+      }
+      if (this.move.t2 <= -180) {
+        this.move.t2 = -180;
+      }
+    },
+    t1(e) {
+      this.move.t1 = e.changedTouches[0].pageX;
+    },
+    t3(e) {
+      this.move.t3 = this.move.t2;
+    },
     touchend(e) {
       this.a = setInterval(() => {
         this.i++;
@@ -431,6 +449,9 @@ export default {
 };
 </script>
 <style>
+.topic-ul{
+  padding-left:10px;
+}
 #note-page .tabbar-top {
   width: 100%;
   height: 70px;
