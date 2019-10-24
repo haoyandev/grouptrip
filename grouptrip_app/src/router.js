@@ -13,11 +13,12 @@ import Note from '@/views/Note.vue'
 import Login from '@/components/login/login'
 // 设置个人信息
 import Settings from '@/components/settings'
-
+import Guan from '@/components/common/guanzhu.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {path:'/guan',component:Guan},
     { path: '/', component: Home },
     { path: '/Home', component: Home },
     { path:'/Grouptrip',component:Grouptrip },
@@ -25,6 +26,6 @@ export default new Router({
     { path: '/Strategy', component: Strategy },
     { path: '/Note', component: Note },
     { path: '/login', component: Login },
-    { path: '/Settings', component: Settings },
+    { path: '/Settings', component: Settings }
   ]
 })

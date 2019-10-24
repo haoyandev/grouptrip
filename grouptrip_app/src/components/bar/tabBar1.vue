@@ -19,5 +19,6 @@ export default {
   right: 0;
   bottom: 0;
   align-items: center;
+  z-index: 1000
 }
 </style>

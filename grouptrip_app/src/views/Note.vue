@@ -51,7 +51,7 @@
           >
             <h5>{{item.title}}</h5>
             <p>{{item.subtitle}}</p>
-            <span></span>
+            <span :style="{'background':item.color}"></span>
           </li>
         </ul>
       </div>
@@ -228,7 +228,53 @@
             </div>
           </div>
         </van-tab>
-        <van-tab title="玩法路线">3</van-tab>
+        <van-tab title="玩法路线">
+          <div class="route-wrap">
+            <div class="new-route">
+              <h2>旅行新发现</h2>
+              <div class="new-item">
+                <div class="new-itemimg">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
+                </div>
+                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
+                <p>133456次浏览</p>
+              </div>
+              <div class="new-item">
+                <div class="new-itemimg">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
+                </div>
+                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
+                <p>133456次浏览</p>
+              </div>
+              <div class="new-item">
+                <div class="new-itemimg">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
+                </div>
+                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
+                <p>133456次浏览</p>
+              </div>
+              <div class="new-item">
+                <div class="new-itemimg">
+                  <img src="../assets/citypics/beijin1.jpg" alt="">
+                </div>
+                <h4>不止布达佩斯 | 走进不一样的匈牙利</h4>
+                <p>133456次浏览</p>
+              </div>
+            </div>
+            <van-divider/>
+            <div class="hot-route">
+              <h2>热门玩法</h2>
+              <ul class="hot-route-ul">
+                <li class="hot-route-li" v-for="(route,r) of routes" :key="r" >
+                  <h4>{{route.title}}</h4>
+                  <p>{{route.count}}人感兴趣</p>
+                  <span :style="{'backgroundColor':route.color}"></span>
+                </li>
+              </ul>
+            </div>
+            <van-divider/>
+          </div>
+        </van-tab>
         <van-tab title="最新发表">
           <div class="all-item">
             <div class="item-text">
@@ -325,36 +371,48 @@ export default {
         require("../assets/citypics/city10.jpg"),
         require("../assets/citypics/city12.jpg")
       ],
+      routes:[
+        {title:"自驾游",count:"120000",color:"#2694ab"},
+        {title:"赏秋好去处",count:"187709",color:"#fdc4b6"},
+        {title:"最省钱的一次旅游",count:"20000",color:"#a696c8"},
+        {title:"忘不掉的味道",count:"187930",color:"#ea7070"}
+      ],
       items: [
         {
           title: "#香港购物指南",
           subtitle: "购物",
-          imgpath: require("../assets/citypics/city12.jpg")
+          imgpath: require("../assets/citypics/city12.jpg"),
+          color:'#e59572'
         },
         {
           title: "#首尔小众秘境推荐",
           subtitle: "人少景美",
-          imgpath: require("../assets/citypics/city10.jpg")
+          imgpath: require("../assets/citypics/city10.jpg"),
+          color:'#96ceb4'
         },
         {
           title: "#大阪+京都",
           subtitle: "关西",
-          imgpath: require("../assets/citypics/city8.jpg")
+          imgpath: require("../assets/citypics/city8.jpg"),
+          color:"#fdc4b6"
         },
         {
           title: "#大马学潜水",
           subtitle: "潜水",
-          imgpath: require("../assets/citypics/city12.jpg")
+          imgpath: require("../assets/citypics/city12.jpg"),
+          color:"#F9CE00"
         },
         {
           title: "#泰国美食推荐",
           subtitle: "种草绿皮书",
-          imgpath: require("../assets/citypics/city7.jpg")
+          imgpath: require("../assets/citypics/city7.jpg"),
+          color:"#2694ab"
         },
         {
           title: "#新加坡网红打卡地",
           subtitle: "拍照",
-          imgpath: require("../assets/citypics/city6.jpg")
+          imgpath: require("../assets/citypics/city6.jpg"),
+          color:"#a696c8"
         }
       ]
     };
@@ -501,7 +559,7 @@ export default {
 .van-divider {
   height: 1px;
   width: 100%;
-  margin: 0px;
+  margin: 0px 0px;
 }
 .note-tabs .van-tabs__line {
   background-color: #b689b6;
@@ -529,9 +587,7 @@ export default {
   z-index: 2;
   bottom: 5px;
 }
-.note-wrap .topic-suggest span::after {
-  content: "";
-  background-color: #e59572;
+.note-wrap .topic-suggest span{
   opacity: 0.7;
   z-index: 1;
   position: absolute;
@@ -638,9 +694,10 @@ export default {
   position: relative;
 }
 .note-top h2,
-.history-note h2 {
+.history-note h2,.new-route h2,.hot-route h2 {
   margin: 0px 0px 15px 0px;
   font-weight: lighter;
+  width: 100%;
 }
 .history-note {
   width: 100%;
@@ -672,5 +729,81 @@ export default {
   position: absolute;
   right: 15px;
   bottom: 30px;
+}
+.route-wrap{
+  width: 100%;
+  margin-top: 15px;
+}
+.route-wrap .new-route{
+  width:100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.route-wrap .new-route h2,.route-wrap .hot-route h2{
+  margin-left: 15px;
+}
+.route-wrap .new-route .new-item{
+  width: 45%;
+  height: 200px;
+  margin: 0px 5px;;
+}
+.new-route .new-item .new-itemimg{
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+.new-route .new-item .new-itemimg img{
+  width: 100%;
+  border-radius: 10px;
+}
+.new-route .new-item h4,p{
+  margin: 5px 0px;
+}
+.new-route .new-item p{
+  font-size: 12px;
+  color: #999999;
+  font-weight: lighter;
+}
+.route-wrap .hot-route{
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+}
+.route-wrap .hot-route ul{
+  display: flex;
+  width: 870px;
+}
+.route-wrap .hot-route li{
+  width: 130px;
+  height: 80px;
+  background: url('../assets/citypics/beijin1.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin-left: 15px;
+  border-radius: 10px;
+  position: relative;
+}
+.route-wrap .hot-route li h4{
+  margin: 10px 0px 0px 10px;
+  color: #fff;
+  z-index: 2;
+  position: absolute;
+}
+.route-wrap .hot-route li p{
+  color: #fff;
+  font-size: 12px;
+  margin: 60px 0px 0px 10px;
+  z-index: 2;
+  position: absolute;
+}
+.route-wrap .hot-route li span{
+  width: 100%;height: 100%;
+  z-index: 1;
+  /* background-color: purple; */
+  position: absolute;
+  top: 0px;left: 0px;
+  border-radius: 10px;
+  opacity: 0.6;
 }
 </style>
