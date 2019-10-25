@@ -704,6 +704,9 @@ li {
   width: 1340px;
   margin-left: 15px;
 }
+.notes-item:first-child{
+  margin-left:20px;
+}
 .notes .notes-item {
   width: 320px;
   height: 160px;

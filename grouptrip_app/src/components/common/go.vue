@@ -28,12 +28,6 @@
       <div class="active" :style="active===i&&'opacity:1;'" v-for="(ele,i) of gos_zt" :key="i">
         <mt-tab-container-item :id="i">
           <router-link
-            to="javascript:;"
-            class="trip-a"
-            v-for="(count,hk) of country"
-            :key="hk+'l'"
-          >{{hk}}</router-link>
-          <router-link
             to="javascript"
             @click="add_trip(trip)"
             class="trip-a"

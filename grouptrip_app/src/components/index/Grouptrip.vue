@@ -232,14 +232,14 @@ export default {
       for (var i = 550; i >= 0; i--) {
         setTimeout(() => {
           this.top = i;
-        }, 1);
+        }, 10);
       }
     },
     closePop() {
       for (var i = 0; i < 800; i++) {
         setTimeout(() => {
           this.top = i;
-        }, 3);
+        }, 10);
       }
       setTimeout(() => {
         this.pop=false;
