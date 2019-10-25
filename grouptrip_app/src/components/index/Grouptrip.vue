@@ -12,26 +12,6 @@
         </div>
         <router-link to="javacript;" class="start-group">发起</router-link>
       </div>
-      <!-- <div class="tabbar-options">
-        <mt-button class="option-place">
-          地点
-          <svg class="icondropdown" aria-hidden="true">
-            <use xlink:href="#icondropdown"></use>
-          </svg>
-        </mt-button>
-        <mt-button class="option-date">
-          主题
-          <svg class="icondropdown" aria-hidden="true">
-            <use xlink:href="#icondropdown"></use>
-          </svg>
-        </mt-button>
-        <mt-button class="option-date">
-          时间
-          <svg class="icondropdown" aria-hidden="true">
-            <use xlink:href="#icondropdown"></use>
-          </svg>
-        </mt-button>
-      </div>-->
       <van-dropdown-menu>
         <van-dropdown-item v-model="value1" :options="option1" />
         <van-dropdown-item v-model="value2" :options="option2" class="dropdown-theme" />
@@ -67,7 +47,7 @@
 
     <div class="grouptrip-wrap">
       <div class="grouptrip-wrap-item">
-        <mt-swipe :auto="4000">
+        <mt-swipe :auto="0">
           <mt-swipe-item>
             <img src="../../assets/citypics/city6.jpg" alt />
           </mt-swipe-item>
@@ -132,7 +112,7 @@
         </div>
       </div>
       <div class="grouptrip-wrap-item">
-        <mt-swipe :auto="4000">
+        <mt-swipe :auto="0">
           <mt-swipe-item>
             <img src="../../assets/citypics/city8.jpg" alt />
           </mt-swipe-item>

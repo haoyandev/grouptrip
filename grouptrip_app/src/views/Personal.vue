@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+  <main id="personal-page">
     <div class="icon">
       <div class="icon-left">
         <span>
@@ -99,7 +99,7 @@
       </ul>
     </div>
     <main-tab-bar></main-tab-bar>
-  </div>
+  </main>
 </template>
 
 <script>
@@ -127,7 +127,7 @@ export default {
 };
 </script>
 <style scoped>
-* {
+#personal-page{
   transition: opacity 0.3s linear;
 }
 ul {

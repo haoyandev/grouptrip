@@ -514,7 +514,7 @@ export default {
   width: 100%;
   margin: 0px 0px;
 }
-.note-tabs .van-tabs__line {
+.note-tabs .van-tabs__line, .strategy-bottom .van-tabs__line{
   background-color: #b689b6;
 }
 .note-wrap .topic-suggest {

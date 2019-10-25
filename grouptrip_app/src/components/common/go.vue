@@ -62,7 +62,7 @@ export default {
         国家:[
           {
             cname:'中国',
-            cityimg:''
+            cityimg: require("../../assets/citypics/img1998.jpg")
           },
           {
             cname:'韩国',
@@ -780,7 +780,7 @@ export default {
   width: 80%;
   height: 25px;
 }
-* {
+#go-page{
   transition: all 0.3s linear;
 }
 .active {
