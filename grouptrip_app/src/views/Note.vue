@@ -11,10 +11,10 @@
     </div>
     <div class="top-title">
       <div class="title-date">
-        <h1>23</h1>
+        <h1>{{times.getDate()}}</h1>
       </div>
       <div class="title-year-mon">
-        <h5>OCT</h5>
+        <h5>{{times.toString().slice(3,7)}}</h5>
         <h5>2019</h5>
       </div>
       <div class="main-title">
@@ -247,7 +247,9 @@ export default {
   },
   data() {
     return {
+      times:new Date(),
       move: {
+        
         start: 0,
         left: 0,
         end: 0,

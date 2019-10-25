@@ -775,7 +775,7 @@ export default {
   height: 25px;
 }
 * {
-  transition: all 0.3s linear;
+  transition: opacity 0.3s linear;
 }
 .active {
   opacity: 0;
