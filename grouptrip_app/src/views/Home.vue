@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <group-trip :style="{display:gos,opacity:copa,transition:'all .3s linear'}"></group-trip>
+  <div :style="{opacity:star,transition:'all .3s linear'}">
+    <group-trip @Child="showChild" :style="{display:gos,opacity:copa,transition:'all .3s linear'}"></group-trip>
     <main id="homepage" :style="{display:go,opacity:opa,transition:'all .3s linear'}">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item logo-top">
@@ -87,8 +87,14 @@ export default {
     Sendgroup,
     GroupTrip
   },
+  created() {
+    setTimeout(() => {
+      this.star = 1;
+    }, 300);
+  },
   data() {
     return {
+      star: 0,
       opa: 1,
       copa: 0,
       width: innerWidth * 2 + "px",
@@ -107,15 +113,6 @@ export default {
   },
   methods: {
     jump() {
-      // this.opa = 0;
-      // setTimeout(() => {
-      //   this.block = "none";
-      //   this.none="block";
-      //   setTimeout(() => {
-      //     this.opac = 1;
-      //   }, 50);
-      // }, 300);
-
       this.opa = 0;
       setTimeout(() => {
         this.gos = "block";
@@ -124,6 +121,25 @@ export default {
           this.copa = 1;
         }, 50);
       }, 300);
+    },
+    showChild(data) {
+      console.log(data)
+      this.copa=0;
+      setTimeout(() => {
+        this.go=data.go;
+        this.gos=data.gos;
+        setTimeout(() => {
+          this.opa=data.opa;
+        }, 50);
+      }, 300);
+      // this.opa = data.opa;
+      // setTimeout(() => {
+      //   this.gos = data.gos;
+      //   this.go = data.go;
+      //   setTimeout(() => {
+      //     this.copa =data.copa;
+      //   }, 50);
+      // }, 300);
     }
   }
 };

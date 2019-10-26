@@ -2,7 +2,7 @@
   <main id="go-page">
     <mt-tabbar fixed class="go-head">
       <mt-tab-item class="go-head-item">
-        <svg class="zuojiantou_small" aria-hidden="true">
+        <svg @click="jumpStr" class="zuojiantou_small" aria-hidden="true">
           <use xlink:href="#iconzhixiangzuozuojiantou" />
         </svg>
         <div class="tabbar-search">
@@ -744,6 +744,9 @@ export default {
         }
       }
       this.late = result;
+    },
+    jumpStr(){
+      this.$emit("Child",{opa:1,gos:'none',go:'block',copa:0})
     }
   }
 };

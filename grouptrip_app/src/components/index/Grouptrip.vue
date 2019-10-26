@@ -2,8 +2,8 @@
   <main id="grouptrip-page">
     <div class="tabbar-top">
       <div class="tabbar-title">
-        <router-link to="javascript;" class="grouptrip-back">
-          <svg class="zuojiantou_small" aria-hidden="true">
+        <router-link to="" class="grouptrip-back">
+          <svg @click="jumphome()" class="zuojiantou_small" aria-hidden="true">
             <use xlink:href="#iconzhixiangzuozuojiantou" />
           </svg>
         </router-link>
@@ -182,6 +182,9 @@ export default {
     };
   },
   methods: {
+    jumphome(){
+      this.$emit("Child",{opa:1,gos:'none',go:'block',copa:0})
+    },
     showPop() {
       this.pop = true;
       for (var i = 550; i >= 0; i--) {
