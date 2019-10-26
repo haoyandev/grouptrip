@@ -13,7 +13,6 @@ router.get('/grouplist', (req, res) => {
   // 执行sql 查询组团信息
 })
 
-
 // 2. 获取主题列表
 router.get('/themelist', (req, res) => {
   // 执行sql
