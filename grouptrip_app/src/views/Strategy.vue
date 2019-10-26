@@ -1,333 +1,374 @@
 <template>
-  <main id="strategypage">
-    <mt-tabbar fixed class="tabbar-top">
-      <mt-tab-item class="text-item">
-        <div class="placebutton">
-          <mt-button>
-            日本
-            <svg class="iicondropdown-white" aria-hidden="true">
-              <use xlink:href="#icondropdown-white-copy" />
-            </svg>
-          </mt-button>
-        </div>
-        <div class="tabbar-search">
-          <svg class="search" aria-hidden="true">
-            <use xlink:href="#iconsearch-copy" />
-          </svg>
-          <input type="text" class="form-text" placeholder="搜索当地玩乐" />
-        </div>
-      </mt-tab-item>
-    </mt-tabbar>
-    <div class="strategywrap">
-      <div class="top-city" >
-        <div class="top-city-title">
-          <h3>热门城市</h3>
-          <router-link to="javascript;" style="display: flex;align-item:center; line-height: 15px">
-            <span style="margin-right: 5px">查看更多</span>
-            <svg class="iconforward-small" aria-hidden="true">
-              <use xlink:href="#iconforward" />
-            </svg>
-          </router-link>
-        </div>
-        <div class="top-city-content">
-          <div class="top-city-item" v-for="(t,i) of trip_city" :key="i" :style="{background:'url('+t.cityimg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}" >
-            <span>{{t.name}}</span>
-            <p>{{t.elname}}</p>
+  <div>
+    <main :style="{display:go,opacity:opa,transition:'opacity .3s linear'}" id="strategypage">
+      <mt-tabbar fixed class="tabbar-top">
+        <mt-tab-item class="text-item">
+          <div class="placebutton">
+            <mt-button @click="jumpgo()">
+              日本
+              <svg class="iicondropdown-white" aria-hidden="true">
+                <use xlink:href="#icondropdown-white-copy" />
+              </svg>
+            </mt-button>
           </div>
-        </div>
-      </div>
-      <div class="city-tips" style="display:none">
-        <router-link to="javascript;">
-          <div class="city-tips-item">
-            <div class="tips-item-bg">
-              <h3>景点</h3>
-              <p>人气榜</p>
-              <span></span>
-            </div>
-            <div class="tips-item-text">
-              <div>
-                <span>1</span><p>广州塔</p>
-              </div>
-              <div>
-                <span>2</span><p>中山大学</p>
-              </div>
-              <div>
-                <span>3</span><p>沙面</p>
-              </div>
-            </div>
-            <svg class="iconforward" aria-hidden="true">
-              <use xlink:href="#iconforward" />
+          <div class="tabbar-search">
+            <svg class="search" aria-hidden="true">
+              <use xlink:href="#iconsearch-copy" />
             </svg>
+            <input type="text" class="form-text" placeholder="搜索当地玩乐" />
           </div>
-        </router-link>
-        <router-link to="javascript;">
-          <div class="city-tips-item">
-            <div class="tips-item-bg">
-              <h3>景点</h3>
-              <p>人气榜</p>
-              <span></span>
-            </div>
-            <div class="tips-item-text">
-              <div>
-                <span>1</span><p>广州塔</p>
-              </div>
-              <div>
-                <span>2</span><p>中山大学</p>
-              </div>
-              <div>
-                <span>3</span><p>沙面</p>
-              </div>
-            </div>
-            <svg class="iconforward" aria-hidden="true">
-              <use xlink:href="#iconforward" />
-            </svg>
-          </div>
-        </router-link>
-        <router-link to="javascript;">
-          <div class="city-tips-item">
-            <div class="tips-item-bg">
-              <h3>景点</h3>
-              <p>人气榜</p>
-              <span></span>
-            </div>
-            <div class="tips-item-text">
-              <div>
-                <span>1</span><p>广州塔</p>
-              </div>
-              <div>
-                <span>2</span><p>中山大学</p>
-              </div>
-              <div>
-                <span>3</span><p>沙面</p>
-              </div>
-            </div>
-            <svg class="iconforward" aria-hidden="true">
-              <use xlink:href="#iconforward" />
-            </svg>
-          </div>
-        </router-link>
-      </div>
-      <div class="city-strategy">
-        <ul
-          id="u1"
-          class="strategy-items"
-          @touchmove="touchmove"
-          @touchstart="touchstart"
-          @touchend="touchend"
-          data-width="300"
-          :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
-        >
-          <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
-            <div class="cityimg">
-              <img :src="strategy.imgpath" alt />
-            </div>
-            <div class="city-details">
-              <h4 class="details-title">{{strategy.title}}</h4>
-              <p class="details">{{strategy.details}}</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="travel-sale">
-        <div class="travel-sale-title">
-          <h3>旅行特价</h3>
-        </div>
-        <div class="sale-content">
-          <router-link to="javascript;" class="sale-item sale-item1" v-for="(s,i) of sales" :key="i" :style="{background:'url('+s.salebg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover',
-          color:s.fcolor
-          }">
-            <span>{{s.title}}</span>
-            <p>{{s.subtitle}}</p>
-          </router-link>
-        </div>
-      </div>
-      <div class="essence-notes">
-        <div class="essence-title">
-          <h3>精华游记</h3>
-          <router-link to="javascript;" class="see-more">
-            <span style="margin-right: 5px">查看更多</span>
-            <svg class="iconforward-small" aria-hidden="true">
-              <use xlink:href="#iconforward" />
-            </svg>
-          </router-link>
-        </div>
-        <div class="notes">
-          <ul class="notes-items" @touchstart="touchstart1" @touchmove="touchmove1" @touchend="touchend1" :style="{marginLeft:move.left1+'px'}">
-            <li
-              class="notes-item"
-              v-for="(item,i) of items"
-              :key="i"
-              :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}"
+        </mt-tab-item>
+      </mt-tabbar>
+      <div class="strategywrap">
+        <div class="top-city">
+          <div class="top-city-title">
+            <h3>热门城市</h3>
+            <router-link
+              to="javascript;"
+              style="display: flex;align-item:center; line-height: 15px"
             >
-              <div class="note-title">{{item.title}}</div>
-              <div class="personal-msg">
-                <div class="personal-head">
-                  <img src="../assets/iconfont/girl.png" alt />
+              <span style="margin-right: 5px">查看更多</span>
+              <svg class="iconforward-small" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </router-link>
+          </div>
+          <div class="top-city-content">
+            <div
+              class="top-city-item"
+              v-for="(t,i) of trip_city"
+              :key="i"
+              :style="{background:'url('+t.cityimg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}"
+            >
+              <span>{{t.name}}</span>
+              <p>{{t.elname}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="city-tips" style="display:none">
+          <router-link to="javascript;">
+            <div class="city-tips-item">
+              <div class="tips-item-bg">
+                <h3>景点</h3>
+                <p>人气榜</p>
+                <span></span>
+              </div>
+              <div class="tips-item-text">
+                <div>
+                  <span>1</span>
+                  <p>广州塔</p>
                 </div>
-                <span class="personal-name">{{item.name}}</span>
+                <div>
+                  <span>2</span>
+                  <p>中山大学</p>
+                </div>
+                <div>
+                  <span>3</span>
+                  <p>沙面</p>
+                </div>
+              </div>
+              <svg class="iconforward" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </div>
+          </router-link>
+          <router-link to="javascript;">
+            <div class="city-tips-item">
+              <div class="tips-item-bg">
+                <h3>景点</h3>
+                <p>人气榜</p>
+                <span></span>
+              </div>
+              <div class="tips-item-text">
+                <div>
+                  <span>1</span>
+                  <p>广州塔</p>
+                </div>
+                <div>
+                  <span>2</span>
+                  <p>中山大学</p>
+                </div>
+                <div>
+                  <span>3</span>
+                  <p>沙面</p>
+                </div>
+              </div>
+              <svg class="iconforward" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </div>
+          </router-link>
+          <router-link to="javascript;">
+            <div class="city-tips-item">
+              <div class="tips-item-bg">
+                <h3>景点</h3>
+                <p>人气榜</p>
+                <span></span>
+              </div>
+              <div class="tips-item-text">
+                <div>
+                  <span>1</span>
+                  <p>广州塔</p>
+                </div>
+                <div>
+                  <span>2</span>
+                  <p>中山大学</p>
+                </div>
+                <div>
+                  <span>3</span>
+                  <p>沙面</p>
+                </div>
+              </div>
+              <svg class="iconforward" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </div>
+          </router-link>
+        </div>
+        <div class="city-strategy">
+          <ul
+            id="u1"
+            class="strategy-items"
+            @touchmove="touchmove"
+            @touchstart="touchstart"
+            @touchend="touchend"
+            data-width="300"
+            :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
+          >
+            <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
+              <div class="cityimg">
+                <img :src="strategy.imgpath" alt />
+              </div>
+              <div class="city-details">
+                <h4 class="details-title">{{strategy.title}}</h4>
+                <p class="details">{{strategy.details}}</p>
               </div>
             </li>
           </ul>
         </div>
+        <div class="travel-sale">
+          <div class="travel-sale-title">
+            <h3>旅行特价</h3>
+          </div>
+          <div class="sale-content">
+            <router-link
+              to="javascript;"
+              class="sale-item sale-item1"
+              v-for="(s,i) of sales"
+              :key="i"
+              :style="{background:'url('+s.salebg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover',
+          color:s.fcolor
+          }"
+            >
+              <span>{{s.title}}</span>
+              <p>{{s.subtitle}}</p>
+            </router-link>
+          </div>
+        </div>
+        <div class="essence-notes">
+          <div class="essence-title">
+            <h3>精华游记</h3>
+            <router-link to="javascript;" class="see-more">
+              <span style="margin-right: 5px">查看更多</span>
+              <svg class="iconforward-small" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </router-link>
+          </div>
+          <div class="notes">
+            <ul
+              class="notes-items"
+              @touchstart="touchstart1"
+              @touchmove="touchmove1"
+              @touchend="touchend1"
+              :style="{marginLeft:move.left1+'px'}"
+            >
+              <li
+                class="notes-item"
+                v-for="(item,i) of items"
+                :key="i"
+                :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}"
+              >
+                <div class="note-title">{{item.title}}</div>
+                <div class="personal-msg">
+                  <div class="personal-head">
+                    <img src="../assets/iconfont/girl.png" alt />
+                  </div>
+                  <span class="personal-name">{{item.name}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="strategy-bottom">
+          <van-tabs v-model="active" swipeable>
+            <van-tab title="推荐">
+              <div class="bottom1_wrap">
+                <div class="wrap-item strategy-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="personal-pic"></div>
+                    <span class="place">泰国,芭提雅</span>
+                    <span class="date">10月16日-10月30日</span>
+                    <div class="wrap-item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-item strategy-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="personal-pic"></div>
+                    <span class="place">泰国,芭提雅</span>
+                    <span class="date">10月16日-10月30日</span>
+                    <div class="wrap-item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-item strategy-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="personal-pic"></div>
+                    <span class="place">泰国,芭提雅</span>
+                    <span class="date">10月16日-10月30日</span>
+                    <div class="wrap-item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="wrap-item strategy-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="personal-pic"></div>
+                    <span class="place">泰国,芭提雅</span>
+                    <span class="date">10月16日-10月30日</span>
+                    <div class="wrap-item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </van-tab>
+            <van-tab title="找旅友">
+              <div class="bottom2_wrap">
+                <div class="tips-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="tips-notes-img">
+                      <img src="../assets/citypics/img1998.jpg" alt />
+                    </div>
+                    <div class="item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                    <div class="tips-personal">
+                      <div class="personal-head">
+                        <img src="../assets/iconfont/girl.png" alt />
+                      </div>
+                      <span>维多利亚</span>
+                      <div class="favorite">
+                        <svg class="iconblack_favorite-purple" aria-hidden="true">
+                          <use xlink:href="#iconblack_favorite-purple" />
+                        </svg>
+                        <span>115</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tips-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="tips-notes-img">
+                      <img src="../assets/citypics/img1998.jpg" alt />
+                    </div>
+                    <div class="item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                    <div class="tips-personal">
+                      <div class="personal-head">
+                        <img src="../assets/iconfont/girl.png" alt />
+                      </div>
+                      <span>维多利亚</span>
+                      <div class="favorite">
+                        <svg class="iconblack_favorite-purple" aria-hidden="true">
+                          <use xlink:href="#iconblack_favorite-purple" />
+                        </svg>
+                        <span>115</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tips-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="tips-notes-img">
+                      <img src="../assets/citypics/img1998.jpg" alt />
+                    </div>
+                    <div class="item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                    <div class="tips-personal">
+                      <div class="personal-head">
+                        <img src="../assets/iconfont/girl.png" alt />
+                      </div>
+                      <span>维多利亚</span>
+                      <div class="favorite">
+                        <svg class="iconblack_favorite-purple" aria-hidden="true">
+                          <use xlink:href="#iconblack_favorite-purple" />
+                        </svg>
+                        <span>115</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="tips-wrap-item">
+                  <div class="wrap-item-content">
+                    <div class="tips-notes-img">
+                      <img src="../assets/citypics/img1998.jpg" alt />
+                    </div>
+                    <div class="item-details">
+                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    </div>
+                    <div class="tips-personal">
+                      <div class="personal-head">
+                        <img src="../assets/iconfont/girl.png" alt />
+                      </div>
+                      <span>维多利亚</span>
+                      <div class="favorite">
+                        <svg class="iconblack_favorite-purple" aria-hidden="true">
+                          <use xlink:href="#iconblack_favorite-purple" />
+                        </svg>
+                        <span>115</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </van-tab>
+          </van-tabs>
+        </div>
       </div>
-      <div class="strategy-bottom">
-        <van-tabs v-model="active" swipeable="">
-          <van-tab title="推荐">
-            <div class="bottom1_wrap">
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </van-tab>
-          <van-tab title="找旅友">
-            <div class="bottom2_wrap">
-              <div class="tips-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
-                  </div>
-                  <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                  <div class="tips-personal">
-                    <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
-                    </div>
-                    <span>维多利亚</span>
-                    <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
-                      <span>115</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tips-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
-                  </div>
-                  <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                  <div class="tips-personal">
-                    <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
-                    </div>
-                    <span>维多利亚</span>
-                    <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
-                      <span>115</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tips-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
-                  </div>
-                  <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                  <div class="tips-personal">
-                    <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
-                    </div>
-                    <span>维多利亚</span>
-                    <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
-                      <span>115</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tips-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
-                  </div>
-                  <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                  <div class="tips-personal">
-                    <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
-                    </div>
-                    <span>维多利亚</span>
-                    <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
-                      <span>115</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </van-tab>
-        </van-tabs>
-      </div>
-    </div>
-    <Sendgroup></Sendgroup>
-    <main-tab-bar></main-tab-bar>
-  </main>
+      <Sendgroup></Sendgroup>
+      <main-tab-bar></main-tab-bar>
+    </main>
+    <Go @Child="showChild" :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"></Go>
+  </div>
 </template>
 
 <script>
 import Sendgroup from "../components/common/Sendgroup";
 import MainTabBar from "../components/mainTabBar";
+import Go from "../components/common/go";
 export default {
   data() {
     return {
+      opa: 1,
+      copa: 0,
+      go: "block",
+      gos: "none",
+      //这四个数据是做切换页面透明度渐变效果
 
       width: 0,
-      active:1,//保存底部推荐面板当前显示的子面板id
-      trip_city:[
-        {name:"大阪",elname:"Osaka",
-        cityimg:require('../assets/citypics/img1998.jpg')},
+      active: 1, //保存底部推荐面板当前显示的子面板id
+      trip_city: [
+        {
+          name: "大阪",
+          elname: "Osaka",
+          cityimg: require("../assets/citypics/img1998.jpg")
+        }
       ],
       strategies: [
         {
@@ -355,23 +396,43 @@ export default {
             "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
         }
       ],
-      sales:[
-        {title:'特价酒店',subtitle:'388元起',fcolor:' #8134af',
-        salebg:require("../assets/cardpics/2.jpg")},
-        {title:'日游小团',subtitle:'已售22686',fcolor:'#ea7070',
-        salebg:require("../assets/cardpics/6.jpg")},
-        {title:'WIFI电话卡',subtitle:'已售610300',
-        fcolor:'#20366b',
-        salebg:require("../assets/cardpics/7.jpg")},
-        {title:'签证',subtitle:'已售100855',
-        fcolor:'#d25565',
-        salebg:require("../assets/cardpics/3.jpg")},
-        {title:'门票票券',subtitle:'已售出81006',
-        fcolor:'#f0b775',
-        salebg:require("../assets/cardpics/4.jpg")},
-        {title:'特价机票',subtitle:'533元起',
-        fcolor:'#003399',
-        salebg:require("../assets/cardpics/10.jpg")}
+      sales: [
+        {
+          title: "特价酒店",
+          subtitle: "388元起",
+          fcolor: " #8134af",
+          salebg: require("../assets/cardpics/2.jpg")
+        },
+        {
+          title: "日游小团",
+          subtitle: "已售22686",
+          fcolor: "#ea7070",
+          salebg: require("../assets/cardpics/6.jpg")
+        },
+        {
+          title: "WIFI电话卡",
+          subtitle: "已售610300",
+          fcolor: "#20366b",
+          salebg: require("../assets/cardpics/7.jpg")
+        },
+        {
+          title: "签证",
+          subtitle: "已售100855",
+          fcolor: "#d25565",
+          salebg: require("../assets/cardpics/3.jpg")
+        },
+        {
+          title: "门票票券",
+          subtitle: "已售出81006",
+          fcolor: "#f0b775",
+          salebg: require("../assets/cardpics/4.jpg")
+        },
+        {
+          title: "特价机票",
+          subtitle: "533元起",
+          fcolor: "#003399",
+          salebg: require("../assets/cardpics/10.jpg")
+        }
       ],
       items: [
         {
@@ -444,11 +505,41 @@ export default {
     },
     touchend1(e) {
       this.move.end1 = this.move.left1;
+    },
+    jumpgo() {
+      this.opa = 0;
+      setTimeout(() => {
+        this.gos = "block";
+        this.go = "none";
+        setTimeout(() => {
+          this.copa = 1;
+        }, 50);
+      }, 300);
+    },
+    showChild(data) {
+      console.log(data);
+      this.copa = 0;
+      setTimeout(() => {
+        this.go = data.go;
+        this.gos = data.gos;
+        setTimeout(() => {
+          this.opa = data.opa;
+        }, 50);
+      }, 300);
+      // this.opa = data.opa;
+      // setTimeout(() => {
+      //   this.gos = data.gos;
+      //   this.go = data.go;
+      //   setTimeout(() => {
+      //     this.copa =data.copa;
+      //   }, 50);
+      // }, 300);
     }
   },
   components: {
     MainTabBar,
-    Sendgroup
+    Sendgroup,
+    Go
   }
 };
 </script>
@@ -459,7 +550,7 @@ li {
   margin: 0;
   list-style: none;
 }
-#strategypage{
+#strategypage {
   transition: all 0.1s linear;
 }
 .blank {
@@ -575,11 +666,12 @@ li {
   align-items: center;
   justify-content: center;
 }
-.top-city-content .top-city-item span,.top-city-content .top-city-item p{
+.top-city-content .top-city-item span,
+.top-city-content .top-city-item p {
   display: block;
   color: #fff;
 }
-.top-city-content .top-city-item  p{
+.top-city-content .top-city-item p {
   font-size: 12px;
   font-weight: lighter;
 }
@@ -704,8 +796,8 @@ li {
   width: 1340px;
   margin-left: 15px;
 }
-.notes-item:first-child{
-  margin-left:20px;
+.notes-item:first-child {
+  margin-left: 20px;
 }
 .notes .notes-item {
   width: 320px;
@@ -750,7 +842,7 @@ li {
   flex-wrap: wrap;
   background-color: #fff;
   justify-content: space-around;
-  padding-top:15px;
+  padding-top: 15px;
 }
 .strategy-wrap-item {
   width: 46%;
@@ -761,7 +853,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  padding-top:15px;
+  padding-top: 15px;
 }
 .tips-wrap-item {
   height: 280px;
@@ -818,7 +910,7 @@ li {
   transition: opacity 0.6s linear;
   transition: marginLeft 0.6s linear;
 }
-.strategywrap .city-tips{
+.strategywrap .city-tips {
   width: 100%;
   height: 250px;
   background: #fff;
@@ -829,17 +921,19 @@ li {
   box-sizing: border-box;
   padding-top: 15px;
 }
-.strategywrap .city-tips .city-tips-item{
-  width: 100%;height: 65px;
+.strategywrap .city-tips .city-tips-item {
+  width: 100%;
+  height: 65px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   margin-bottom: 15px;
 }
-.city-tips-item .tips-item-bg{
-  width: 65px;height: 65px;
-  background: url('../assets/citypics/beijin1.jpg');
-  background-size:cover;
+.city-tips-item .tips-item-bg {
+  width: 65px;
+  height: 65px;
+  background: url("../assets/citypics/beijin1.jpg");
+  background-size: cover;
   border-radius: 6px;
   display: flex;
   flex-direction: column;
@@ -849,32 +943,32 @@ li {
   color: #fff;
   position: relative;
 }
-.city-tips-item .tips-item-text{
+.city-tips-item .tips-item-text {
   width: 60%;
   height: 65px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 }
-.city-tips-item .tips-item-text>div{
+.city-tips-item .tips-item-text > div {
   margin-bottom: 5px;
 }
-.city-tips-item .tips-item-text p{
+.city-tips-item .tips-item-text p {
   display: inline;
   font-size: 14px;
   margin-left: 10px;
   font-weight: bold;
 }
-.city-tips-item .tips-item-bg h3{
+.city-tips-item .tips-item-bg h3 {
   margin: 0px 0px 5px 0px;
   z-index: 2;
 }
-.city-tips-item .tips-item-bg p{
+.city-tips-item .tips-item-bg p {
   margin: 0px;
   font-weight: lighter;
   z-index: 2;
 }
-.city-tips-item .tips-item-bg span{
+.city-tips-item .tips-item-bg span {
   background-color: #8134af;
   opacity: 0.7;
   z-index: 1;
@@ -885,5 +979,4 @@ li {
   top: 0;
   border-radius: 6px;
 }
-
 </style>
