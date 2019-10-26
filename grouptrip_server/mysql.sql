@@ -20,6 +20,12 @@ CREATE TABLE trip_user(
 	is_delete BOOLEAN default '0',
 	status TINYINT
 );
+/** 关注表 **/
+CREATE TABLE trip_focus(
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	uid INT,
+	from_uid INT
+);
 /** 国家表 **/
 CREATE TABLE trip_state (
 	sid INT PRIMARY KEY AUTO_INCREMENT, # 国家id
@@ -96,11 +102,22 @@ CREATE TABLE trip_group (
 );
 
 /** 插入数据 **/
+/** 用户表 **/
 INSERT INTO trip_user(uname, upwd, phone, birthday, city, gender) VALUES
 ('dingding', md5('123456'), '13790091222', '1990-02-18', '上海', 1),
 ('victoria', md5('123456'), '13790091223', '1995-06-23', '广州', 0),
 ('xiaohao', md5('123456'), '13790091224', '1899-12-06', '顺德', 1),
 ('dongdong', md5('123456'), '13790091225', '2000-01-25', '北京', -1);
+
+/** 关注表 **/
+INSERT INTO trip_focus VALUES
+(null, 1, 2),
+(null, 1, 3),
+(null, 1, 4),
+(null, 2, 1),
+(null, 2, 4);
+(null, 3, 2);
+(null, 4, 1);
 
 /** 主题表 **/
 INSERT INTO trip_theme(tid, tname, timg) VALUES
