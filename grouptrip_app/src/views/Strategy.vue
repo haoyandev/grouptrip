@@ -172,7 +172,7 @@
       </div>
       <div class="strategy-bottom">
         <van-tabs v-model="active" swipeable="">
-          <van-tab title="推荐">
+          <van-tab title="旅伴">
             <div class="bottom1_wrap">
               <div class="wrap-item strategy-wrap-item">
                 <div class="wrap-item-content">
@@ -216,7 +216,7 @@
               </div>
             </div>
           </van-tab>
-          <van-tab title="找旅友">
+          <van-tab title="推荐玩法">
             <div class="bottom2_wrap">
               <div class="tips-wrap-item">
                 <div class="wrap-item-content">

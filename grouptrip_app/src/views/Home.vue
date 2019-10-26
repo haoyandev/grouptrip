@@ -32,53 +32,41 @@
         <div class="wrap-left">
           <div class="wrap-item top-item">
             <div class="wrap-item-content">
-              <div class="personal-pic"></div>
-              <span class="place">泰国,芭提雅</span>
-              <span class="date">10月16日-10月30日</span>
+              <div class="personal-pic">
+                <img src="../assets/citypics/img1957.jpg" alt="">
+              </div>
+              <span class="place">马来西亚,沙巴</span>
+              <span class="date">11月16日-11月30日</span>
               <div class="wrap-item-details">
                 <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
               </div>
             </div>
           </div>
-          <div class="wrap-item">
+          <div class="wrap-item" v-for="(t,i) of trips" :key="
+          i">
             <div class="wrap-item-content">
-              <div class="personal-pic"></div>
-              <span class="place">泰国,芭提雅</span>
-              <span class="date">10月16日-10月30日</span>
-              <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+              <div class="personal-pic">
+                <img :src="t.headpic" alt="">
               </div>
-            </div>
-          </div>
-          <div class="wrap-item">
-            <div class="wrap-item-content">
-              <div class="personal-pic"></div>
-              <span class="place">泰国,芭提雅</span>
-              <span class="date">10月16日-10月30日</span>
+              <span class="place">{{t.place}}</span>
+              <span class="date">{{t.date}}</span>
               <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                <p>{{t.details}}</p>
               </div>
             </div>
           </div>
         </div>
         <div class="wrap-right home-wrap-item">
-          <div class="wrap-item home-wrap-item">
+          <div class="wrap-item" v-for="(t,i) of trips" :key="
+          i">
             <div class="wrap-item-content">
-              <div class="personal-pic"></div>
-              <span class="place">泰国,芭提雅</span>
-              <span class="date">10月16日-10月30日</span>
-              <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+              <div class="personal-pic">
+                <img :src="t.headpic" alt="">
               </div>
-            </div>
-          </div>
-          <div class="wrap-item home-wrap-item">
-            <div class="wrap-item-content">
-              <div class="personal-pic"></div>
-              <span class="place">泰国,芭提雅</span>
-              <span class="date">10月16日-10月30日</span>
+              <span class="place">{{t.place}}</span>
+              <span class="date">{{t.date}}</span>
               <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                <p>{{t.details}}</p>
               </div>
             </div>
           </div>
@@ -105,7 +93,16 @@ export default {
       copa: 0,
       width: innerWidth * 2 + "px",
       go: "block",
-      gos: "none"
+      gos: "none",
+
+      trips:[
+        {headpic:require('../assets/citypics/heimen.jpg'),
+        place:"泰国,芭提雅",date:"10月16日-10月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        {headpic:require('../assets/citypics/heimen.jpg'),
+        place:"日本，大阪",date:"11月16日-11月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"}
+      ]
     };
   },
   methods: {
@@ -228,8 +225,8 @@ export default {
 }
 
 .wrap-item {
-  height: 210px;
-  background-image: url("../assets/cardpics/img_2523.jpg");
+  height: 175px;
+  background:url('../assets/cardpics/bg-test.jpg');
   background-size: 100%;
   border-radius: 10px;
   position: relative;
@@ -240,7 +237,7 @@ export default {
   width: 100%;
 }
 .top-item {
-  height: 230px;
+  height: 205px;
   width: 100%;
 }
 .wrap-item .wrap-item-content {
@@ -251,8 +248,14 @@ export default {
 .wrap-item .wrap-item-content .personal-pic {
   width: 50px;
   height: 50px;
+  border:2px solid #ffffff;
   border-radius: 50px;
-  background-color: #fff;
+}
+.wrap-item .wrap-item-content .personal-pic img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50px;
 }
 .wrap-item .wrap-item-content span {
   display: block;
@@ -275,11 +278,9 @@ export default {
 }
 .wrap-item .wrap-item-content .wrap-item-details {
   height: 50px;
-  background-color: #fff;
-  color: #111111;
+  color: #ffffff;
   position: absolute;
   bottom: 0px;
-  border: 1px solid #ececec;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
   padding: 10px;
