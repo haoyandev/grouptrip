@@ -115,6 +115,7 @@ export default {
       var url = `api/v1/user/updatebirth`
       var data = { birthday }
       this.axios.put(url, data).then(res => {
+        console.log(res)
         if (res.data.code === 200) {
           // 修改成功 更新用户信息
           this.$store.commit('updateBirth', birthday)
