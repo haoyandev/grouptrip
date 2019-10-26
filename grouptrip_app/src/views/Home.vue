@@ -1,6 +1,11 @@
 <template>
   <div :style="{opacity:star,transition:'all .3s linear'}">
-    <group-trip @Child="showChild" :style="{display:gos,opacity:copa,transition:'all .3s linear'}"></group-trip>
+    <group-trip
+      @Gjc="gjc"
+      @Child="showChild"
+      :style="{display:gos,opacity:copa,transition:'all .3s linear'}"
+    ></group-trip>
+    <chose :style="{opacity:chosopa,display:chosdis,transition:'opacity .3s linear'}"></chose>
     <main id="homepage" :style="{display:go,opacity:opa,transition:'all .3s linear'}">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item logo-top">
@@ -33,7 +38,7 @@
           <div class="wrap-item top-item">
             <div class="wrap-item-content">
               <div class="personal-pic">
-                <img src="../assets/citypics/img1957.jpg" alt="">
+                <img src="../assets/citypics/img1957.jpg" alt />
               </div>
               <span class="place">马来西亚,沙巴</span>
               <span class="date">11月16日-11月30日</span>
@@ -46,7 +51,7 @@
           i">
             <div class="wrap-item-content">
               <div class="personal-pic">
-                <img :src="t.headpic" alt="">
+                <img :src="t.headpic" alt />
               </div>
               <span class="place">{{t.place}}</span>
               <span class="date">{{t.date}}</span>
@@ -61,7 +66,7 @@
           i">
             <div class="wrap-item-content">
               <div class="personal-pic">
-                <img :src="t.headpic" alt="">
+                <img :src="t.headpic" alt />
               </div>
               <span class="place">{{t.place}}</span>
               <span class="date">{{t.date}}</span>
@@ -72,7 +77,7 @@
           </div>
         </div>
       </div>
-      <Sendgroup></Sendgroup>
+      <Sendgroup @Chose="jumpchos"></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
   </div>
@@ -81,11 +86,13 @@
 import MainTabBar from "../components/mainTabBar";
 import Sendgroup from "../components/common/Sendgroup";
 import GroupTrip from "../components/index/Grouptrip";
+import chose from "../components/publish/choseTheme";
 export default {
   components: {
     MainTabBar,
     Sendgroup,
-    GroupTrip
+    GroupTrip,
+    chose
   },
   created() {
     setTimeout(() => {
@@ -94,6 +101,8 @@ export default {
   },
   data() {
     return {
+      chosopa: 0,
+      chosdis: "none",
       star: 0,
       opa: 1,
       copa: 0,
@@ -101,17 +110,43 @@ export default {
       go: "block",
       gos: "none",
 
-      trips:[
-        {headpic:require('../assets/citypics/heimen.jpg'),
-        place:"泰国,芭提雅",date:"10月16日-10月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../assets/citypics/heimen.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"}
+      trips: [
+        {
+          headpic: require("../assets/citypics/heimen.jpg"),
+          place: "泰国,芭提雅",
+          date: "10月16日-10月30日",
+          details:
+            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"
+        },
+        {
+          headpic: require("../assets/citypics/heimen.jpg"),
+          place: "日本，大阪",
+          date: "11月16日-11月30日",
+          details:
+            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"
+        }
       ]
     };
   },
   methods: {
+    gjc(data) {
+      this.chosdis = data.chosdis;
+      this.copa = data.opa;
+      setTimeout(() => {
+        this.chosopa = data.chosopa;
+        this.gos = data.go;
+        setTimeout(() => {}, 50);
+      }, 300);
+    },
+    jumpchos(data) {
+      this.chosdis = data.chosdis;
+      this.opa = data.opa;
+      setTimeout(() => {
+        this.chosopa = data.chosopa;
+        this.go = data.go;
+        setTimeout(() => {}, 50);
+      }, 300);
+    },
     jump() {
       this.opa = 0;
       setTimeout(() => {
@@ -123,13 +158,12 @@ export default {
       }, 300);
     },
     showChild(data) {
-      console.log(data)
-      this.copa=0;
+      this.copa = 0;
       setTimeout(() => {
-        this.go=data.go;
-        this.gos=data.gos;
+        this.go = data.go;
+        this.gos = data.gos;
         setTimeout(() => {
-          this.opa=data.opa;
+          this.opa = data.opa;
         }, 50);
       }, 300);
       // this.opa = data.opa;
@@ -242,7 +276,7 @@ export default {
 
 .wrap-item {
   height: 175px;
-  background:url('../assets/cardpics/bg-test.jpg');
+  background: url("../assets/cardpics/bg-test.jpg");
   background-size: 100%;
   border-radius: 10px;
   position: relative;
@@ -264,10 +298,10 @@ export default {
 .wrap-item .wrap-item-content .personal-pic {
   width: 50px;
   height: 50px;
-  border:2px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 50px;
 }
-.wrap-item .wrap-item-content .personal-pic img{
+.wrap-item .wrap-item-content .personal-pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
