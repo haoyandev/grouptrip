@@ -47,6 +47,11 @@ CREATE TABLE trip_city (
   is_delete TINYINT(1) DEFAULT '0',
   status TINYINT(4) DEFAULT NULL
 );
+/** 主题表 **/
+CREATE TABLE trip_theme (
+	tid PRIMARY KEY AUTO_INCREMENT,
+	tname VARCHAR(16)
+);
 /** 游记表 **/
 CREATE TABLE trip_note(
 	nid INT PRIMARY KEY AUTO_INCREMENT,
