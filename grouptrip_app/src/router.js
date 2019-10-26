@@ -42,10 +42,6 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
-<<<<<<< HEAD
-    { path: '/test', component: test},
-=======
     { path: '/allcity', component:allcity}
->>>>>>> dev
   ]
 })

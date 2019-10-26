@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import header1 from "../settings/header"
+import header1 from "../settings/header/header"
 export default {
     data(){
       return {

@@ -35,12 +35,8 @@ export default {
     /* border-top: 1px solid #ccc; */
     padding-top: 15px;
   }
-<<<<<<< HEAD:grouptrip_app/src/components/settings/header/header.vue
-   #header .mint-header-title{
-=======
    #header >>> .mint-header-title{
     color:black;
->>>>>>> dev:grouptrip_app/src/components/settings/header/index.vue
     font-weight: bold;
     /* border-bottom: none; */
   }

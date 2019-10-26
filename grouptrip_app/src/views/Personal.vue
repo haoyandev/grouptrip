@@ -126,7 +126,7 @@ export default {
     if (token !== 'undefined') {
       // 如果有登录 展现有用户信息的页面
       // 发送ajax获取最新的信息
-      console.log(token)
+      console.log('token', token)
       var url = '/api/v1/user/detail'
       this.axios.get(url).then(res => {
         if (res.data.code === 200) {
