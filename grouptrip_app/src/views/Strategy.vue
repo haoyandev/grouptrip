@@ -1,150 +1,208 @@
 <template>
-  <main id="strategypage">
-    <mt-tabbar fixed class="tabbar-top">
-      <mt-tab-item class="text-item">
-        <div class="placebutton">
-          <mt-button>
-            日本
-            <svg class="iicondropdown-white" aria-hidden="true">
-              <use xlink:href="#icondropdown-white-copy" />
+  <div>
+    <main :style="{display:go,opacity:opa,transition:'opacity .3s linear'}" id="strategypage">
+      <mt-tabbar fixed class="tabbar-top">
+        <mt-tab-item class="text-item">
+          <div class="placebutton">
+            <mt-button @click="jumpgo()">
+              日本
+              <svg class="iicondropdown-white" aria-hidden="true">
+                <use xlink:href="#icondropdown-white-copy" />
+              </svg>
+            </mt-button>
+          </div>
+          <div class="tabbar-search">
+            <svg class="search" aria-hidden="true">
+              <use xlink:href="#iconsearch-copy" />
             </svg>
-          </mt-button>
-        </div>
-        <div class="tabbar-search">
-          <svg class="search" aria-hidden="true">
-            <use xlink:href="#iconsearch-copy" />
-          </svg>
-          <input type="text" class="form-text" placeholder="搜索当地玩乐" />
-        </div>
-      </mt-tab-item>
-    </mt-tabbar>
-    <div class="strategywrap">
-      <div class="top-city">
-        <div class="top-city-title">
-          <h3>热门城市</h3>
-          <router-link to="javascript;" style="display: flex;align-item:center; line-height: 15px">
-            <span style="margin-right: 5px">查看更多</span>
-            <svg class="iconforward-small" aria-hidden="true">
-              <use xlink:href="#iconforward" />
-            </svg>
-          </router-link>
-        </div>
-        <div class="top-city-content">
-          <div class="top-city-item">
-            <span>大阪</span>
-            <span>Osaka</span>
+            <input type="text" class="form-text" placeholder="搜索当地玩乐" />
           </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-          <div class="top-city-item">
-            <span>首尔</span>
-            <span>Seoul</span>
-          </div>
-        </div>
-      </div>
-      <div class="city-strategy">
-        <ul
-          id="u1"
-          class="strategy-items"
-          @touchmove="touchmove"
-          @touchstart="touchstart"
-          @touchend="touchend"
-          data-width="300"
-          :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
-        >
-          <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
-            <div class="cityimg">
-              <img :src="strategy.imgpath" alt />
-            </div>
-            <div class="city-details">
-              <h4 class="details-title">{{strategy.title}}</h4>
-              <p class="details">{{strategy.details}}</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="travel-sale">
-        <div class="travel-sale-title">
-          <h3>旅行特价</h3>
-        </div>
-        <div class="sale-content">
-          <router-link to="javascript;" class="sale-item sale-item1">
-            <span>特价酒店</span>
-            <p>388元起</p>
-          </router-link>
-          <router-link to="javascript;" class="sale-item sale-item2">
-            <span>日游小团</span>
-            <p>已售22686</p>
-          </router-link>
-          <router-link to="javascript;" class="sale-item sale-item3">
-            <span>WIFI电话卡</span>
-            <p>已售610300</p>
-          </router-link>
-          <router-link to="javascript;" class="sale-item sale-item4">
-            <span>签证</span>
-            <p>已售100855</p>
-          </router-link>
-          <router-link to="javascript;" class="sale-item sale-item5">
-            <span>门票票券</span>
-            <p>已售出81006</p>
-          </router-link>
-          <router-link to="javascript;" class="sale-item sale-item6">
-            <span>特价机票</span>
-            <p>533元起</p>
-          </router-link>
-        </div>
-      </div>
-      <div class="essence-notes">
-        <div class="essence-title">
-          <h3>精华游记</h3>
-          <router-link to="javascript;" class="see-more">
-            <span style="margin-right: 5px">查看更多</span>
-            <svg class="iconforward-small" aria-hidden="true">
-              <use xlink:href="#iconforward" />
-            </svg>
-          </router-link>
-        </div>
-        <div class="notes">
-          <ul class="notes-items" @touchstart="touchstart1" @touchmove="touchmove1" @touchend="touchend1" :style="{marginLeft:move.left1+'px'}">
-            <li
-              class="notes-item"
-              v-for="(item,i) of items"
-              :key="i"
-              :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}"
+        </mt-tab-item>
+      </mt-tabbar>
+      <div class="strategywrap">
+        <div class="top-city">
+          <div class="top-city-title">
+            <h3>热门城市</h3>
+            <router-link
+              to="javascript;"
+              style="display: flex;align-item:center; line-height: 15px"
             >
-              <div class="note-title">{{item.title}}</div>
-              <div class="personal-msg">
-                <div class="personal-head">
-                  <img src="../assets/iconfont/girl.png" alt />
+              <span style="margin-right: 5px">查看更多</span>
+              <svg class="iconforward-small" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </router-link>
+          </div>
+          <div class="top-city-content">
+            <div
+              class="top-city-item"
+              v-for="(t,i) of trip_city"
+              :key="i"
+              :style="{background:'url('+t.cityimg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}"
+            >
+              <span>{{t.name}}</span>
+              <p>{{t.elname}}</p>
+            </div>
+          </div>
+        </div>
+        <div class="city-tips" style="display:none">
+          <router-link to="javascript;">
+            <div class="city-tips-item">
+              <div class="tips-item-bg">
+                <h3>景点</h3>
+                <p>人气榜</p>
+                <span></span>
+              </div>
+              <div class="tips-item-text">
+                <div>
+                  <span>1</span>
+                  <p>广州塔</p>
                 </div>
-                <span class="personal-name">{{item.name}}</span>
+                <div>
+                  <span>2</span>
+                  <p>中山大学</p>
+                </div>
+                <div>
+                  <span>3</span>
+                  <p>沙面</p>
+                </div>
+              </div>
+              <svg class="iconforward" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </div>
+          </router-link>
+          <router-link to="javascript;">
+            <div class="city-tips-item">
+              <div class="tips-item-bg">
+                <h3>景点</h3>
+                <p>人气榜</p>
+                <span></span>
+              </div>
+              <div class="tips-item-text">
+                <div>
+                  <span>1</span>
+                  <p>广州塔</p>
+                </div>
+                <div>
+                  <span>2</span>
+                  <p>中山大学</p>
+                </div>
+                <div>
+                  <span>3</span>
+                  <p>沙面</p>
+                </div>
+              </div>
+              <svg class="iconforward" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </div>
+          </router-link>
+          <router-link to="javascript;">
+            <div class="city-tips-item">
+              <div class="tips-item-bg">
+                <h3>景点</h3>
+                <p>人气榜</p>
+                <span></span>
+              </div>
+              <div class="tips-item-text">
+                <div>
+                  <span>1</span>
+                  <p>广州塔</p>
+                </div>
+                <div>
+                  <span>2</span>
+                  <p>中山大学</p>
+                </div>
+                <div>
+                  <span>3</span>
+                  <p>沙面</p>
+                </div>
+              </div>
+              <svg class="iconforward" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </div>
+          </router-link>
+        </div>
+        <div class="city-strategy">
+          <ul
+            id="u1"
+            class="strategy-items"
+            @touchmove="touchmove"
+            @touchstart="touchstart"
+            @touchend="touchend"
+            data-width="300"
+            :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
+          >
+            <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
+              <div class="cityimg">
+                <img :src="strategy.imgpath" alt />
+              </div>
+              <div class="city-details">
+                <h4 class="details-title">{{strategy.title}}</h4>
+                <p class="details">{{strategy.details}}</p>
               </div>
             </li>
           </ul>
         </div>
-      </div>
-      <div class="strategy-bottom">
-        <mt-navbar v-model="selected">
-          <mt-tab-item id="bottom1">推荐</mt-tab-item>
-          <mt-tab-item id="bottom2">找旅友</mt-tab-item>
-        </mt-navbar>
-        <mt-tab-container v-model="selected">
-          <div :style="selected=='bottom1'?'opacity:1':'opacity:0'">
-            <mt-tab-container-item id="bottom1" style="display:block">
+        <div class="travel-sale">
+          <div class="travel-sale-title">
+            <h3>旅行特价</h3>
+          </div>
+          <div class="sale-content">
+            <router-link
+              to="javascript;"
+              class="sale-item sale-item1"
+              v-for="(s,i) of sales"
+              :key="i"
+              :style="{background:'url('+s.salebg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover',
+          color:s.fcolor
+          }"
+            >
+              <span>{{s.title}}</span>
+              <p>{{s.subtitle}}</p>
+            </router-link>
+          </div>
+        </div>
+        <div class="essence-notes">
+          <div class="essence-title">
+            <h3>精华游记</h3>
+            <router-link to="javascript;" class="see-more">
+              <span style="margin-right: 5px">查看更多</span>
+              <svg class="iconforward-small" aria-hidden="true">
+                <use xlink:href="#iconforward" />
+              </svg>
+            </router-link>
+          </div>
+          <div class="notes">
+            <ul
+              class="notes-items"
+              @touchstart="touchstart1"
+              @touchmove="touchmove1"
+              @touchend="touchend1"
+              :style="{marginLeft:move.left1+'px'}"
+            >
+              <li
+                class="notes-item"
+                v-for="(item,i) of items"
+                :key="i"
+                :style="{background:'url('+item.bgpath+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: '100%'}"
+              >
+                <div class="note-title">{{item.title}}</div>
+                <div class="personal-msg">
+                  <div class="personal-head">
+                    <img src="../assets/iconfont/girl.png" alt />
+                  </div>
+                  <span class="personal-name">{{item.name}}</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="strategy-bottom">
+          <van-tabs v-model="active" swipeable>
+            <van-tab title="推荐">
               <div class="bottom1_wrap">
                 <div class="wrap-item strategy-wrap-item">
                   <div class="wrap-item-content">
@@ -187,10 +245,8 @@
                   </div>
                 </div>
               </div>
-            </mt-tab-container-item>
-          </div>
-          <div :style="selected=='bottom2'?'opacity:1':'opacity:0'">
-            <mt-tab-container-item id="bottom2">
+            </van-tab>
+            <van-tab title="找旅友">
               <div class="bottom2_wrap">
                 <div class="tips-wrap-item">
                   <div class="wrap-item-content">
@@ -281,24 +337,39 @@
                   </div>
                 </div>
               </div>
-            </mt-tab-container-item>
-          </div>
-        </mt-tab-container>
+            </van-tab>
+          </van-tabs>
+        </div>
       </div>
-    </div>
-    <Sendgroup></Sendgroup>
-    <main-tab-bar></main-tab-bar>
-  </main>
+      <Sendgroup></Sendgroup>
+      <main-tab-bar></main-tab-bar>
+    </main>
+    <Go @Child="showChild" :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"></Go>
+  </div>
 </template>
 
 <script>
 import Sendgroup from "../components/common/Sendgroup";
 import MainTabBar from "../components/mainTabBar";
+import Go from "../components/common/go";
 export default {
   data() {
     return {
+      opa: 1,
+      copa: 0,
+      go: "block",
+      gos: "none",
+      //这四个数据是做切换页面透明度渐变效果
+
       width: 0,
-      selected: "bottom1", //保存底部推荐面板当前显示的子面板id
+      active: 1, //保存底部推荐面板当前显示的子面板id
+      trip_city: [
+        {
+          name: "大阪",
+          elname: "Osaka",
+          cityimg: require("../assets/citypics/img1998.jpg")
+        }
+      ],
       strategies: [
         {
           imgpath: require("../assets/citypics/save.jpg"),
@@ -323,6 +394,44 @@ export default {
           title: "北海道",
           details:
             "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
+        }
+      ],
+      sales: [
+        {
+          title: "特价酒店",
+          subtitle: "388元起",
+          fcolor: " #8134af",
+          salebg: require("../assets/cardpics/2.jpg")
+        },
+        {
+          title: "日游小团",
+          subtitle: "已售22686",
+          fcolor: "#ea7070",
+          salebg: require("../assets/cardpics/6.jpg")
+        },
+        {
+          title: "WIFI电话卡",
+          subtitle: "已售610300",
+          fcolor: "#20366b",
+          salebg: require("../assets/cardpics/7.jpg")
+        },
+        {
+          title: "签证",
+          subtitle: "已售100855",
+          fcolor: "#d25565",
+          salebg: require("../assets/cardpics/3.jpg")
+        },
+        {
+          title: "门票票券",
+          subtitle: "已售出81006",
+          fcolor: "#f0b775",
+          salebg: require("../assets/cardpics/4.jpg")
+        },
+        {
+          title: "特价机票",
+          subtitle: "533元起",
+          fcolor: "#003399",
+          salebg: require("../assets/cardpics/10.jpg")
         }
       ],
       items: [
@@ -396,11 +505,41 @@ export default {
     },
     touchend1(e) {
       this.move.end1 = this.move.left1;
+    },
+    jumpgo() {
+      this.opa = 0;
+      setTimeout(() => {
+        this.gos = "block";
+        this.go = "none";
+        setTimeout(() => {
+          this.copa = 1;
+        }, 50);
+      }, 300);
+    },
+    showChild(data) {
+      console.log(data);
+      this.copa = 0;
+      setTimeout(() => {
+        this.go = data.go;
+        this.gos = data.gos;
+        setTimeout(() => {
+          this.opa = data.opa;
+        }, 50);
+      }, 300);
+      // this.opa = data.opa;
+      // setTimeout(() => {
+      //   this.gos = data.gos;
+      //   this.go = data.go;
+      //   setTimeout(() => {
+      //     this.copa =data.copa;
+      //   }, 50);
+      // }, 300);
     }
   },
   components: {
     MainTabBar,
-    Sendgroup
+    Sendgroup,
+    Go
   }
 };
 </script>
@@ -411,8 +550,8 @@ li {
   margin: 0;
   list-style: none;
 }
-* {
-  transition: all 0.3s linear;
+#strategypage {
+  transition: all 0.1s linear;
 }
 .blank {
   height: 50px;
@@ -520,7 +659,6 @@ li {
 .top-city-content .top-city-item {
   width: 31%;
   height: 70px;
-  background-color: plum;
   border-radius: 10px;
   margin-top: 10px;
   display: flex;
@@ -528,8 +666,14 @@ li {
   align-items: center;
   justify-content: center;
 }
-.top-city-content .top-city-item span {
+.top-city-content .top-city-item span,
+.top-city-content .top-city-item p {
   display: block;
+  color: #fff;
+}
+.top-city-content .top-city-item p {
+  font-size: 12px;
+  font-weight: lighter;
 }
 .city-strategy {
   width: 100%;
@@ -592,7 +736,7 @@ li {
   justify-content: space-between;
   padding: 0 12px 0 12px;
 }
-.sale-content .sale-item1 {
+/* .sale-content .sale-item1 {
   background-image: url("../assets/cardpics/2.jpg");
   color: #8134af;
 }
@@ -615,7 +759,7 @@ li {
 .sale-content .sale-item6 {
   background-image: url("../assets/cardpics/10.jpg");
   color: #003399;
-}
+} */
 .sale-content .sale-item {
   width: 31%;
   height: 70px;
@@ -651,6 +795,9 @@ li {
 .notes-items {
   width: 1340px;
   margin-left: 15px;
+}
+.notes-item:first-child {
+  margin-left: 20px;
 }
 .notes .notes-item {
   width: 320px;
@@ -689,31 +836,13 @@ li {
   font-size: 5px;
   margin-left: 5px;
 }
-.strategy-bottom .mint-navbar .mint-tab-item.is-selected {
-  color: #111111;
-  font-weight: 500;
-  font-style: italic;
-  border: none;
-}
-.strategy-bottom .mint-navbar .mint-tab-item.is-selected::after {
-  content: "";
-  display: block;
-  width: 100px;
-  background: #f3edff;
-  height: 7px;
-  z-index: -1;
-  margin-left: 100px;
-  transform: translateX(-50%);
-}
-.strategy-bottom .mint-navbar .mint-tab-item .mint-tab-item-label {
-  font-size: 13px;
-}
 .bottom1_wrap {
   width: 100%;
   display: flex;
   flex-wrap: wrap;
   background-color: #fff;
   justify-content: space-around;
+  padding-top: 15px;
 }
 .strategy-wrap-item {
   width: 46%;
@@ -724,6 +853,7 @@ li {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
+  padding-top: 15px;
 }
 .tips-wrap-item {
   height: 280px;
@@ -776,8 +906,77 @@ li {
   position: absolute;
   right: 2px;
 }
-* {
+#strategypage {
   transition: opacity 0.6s linear;
   transition: marginLeft 0.6s linear;
+}
+.strategywrap .city-tips {
+  width: 100%;
+  height: 250px;
+  background: #fff;
+  padding: 0px 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding-top: 15px;
+}
+.strategywrap .city-tips .city-tips-item {
+  width: 100%;
+  height: 65px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 15px;
+}
+.city-tips-item .tips-item-bg {
+  width: 65px;
+  height: 65px;
+  background: url("../assets/citypics/beijin1.jpg");
+  background-size: cover;
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: center;
+  text-align: center;
+  color: #fff;
+  position: relative;
+}
+.city-tips-item .tips-item-text {
+  width: 60%;
+  height: 65px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.city-tips-item .tips-item-text > div {
+  margin-bottom: 5px;
+}
+.city-tips-item .tips-item-text p {
+  display: inline;
+  font-size: 14px;
+  margin-left: 10px;
+  font-weight: bold;
+}
+.city-tips-item .tips-item-bg h3 {
+  margin: 0px 0px 5px 0px;
+  z-index: 2;
+}
+.city-tips-item .tips-item-bg p {
+  margin: 0px;
+  font-weight: lighter;
+  z-index: 2;
+}
+.city-tips-item .tips-item-bg span {
+  background-color: #8134af;
+  opacity: 0.7;
+  z-index: 1;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  border-radius: 6px;
 }
 </style>

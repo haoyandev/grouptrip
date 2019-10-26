@@ -21,10 +21,12 @@ import uploadImg from '@/components/publish/uploadImg'
 import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
 import test from '@/components/publish/test'
+import Guan from '@/components/common/guanzhu.vue'
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {path:'/guan',component:Guan},
     { path: '/', component: Home },
     { path: '/Home', component: Home },
     { path:'/Grouptrip',component:Grouptrip },

@@ -165,7 +165,7 @@ export default {
 };
 </script>
 <style scoped>
-* {
+#personal-page{
   transition: opacity 0.3s linear;
 }
 [v-cloak] {
