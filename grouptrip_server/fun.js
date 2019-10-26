@@ -20,6 +20,7 @@ function getFunsNum (uid) {
   return new Promise((resolve, reject) => {
     var sql = `select count(1) as fansNum from trip_focus where uid=?`
     pool.query(sql, [uid], (err, result) => {
+      console.log('fan', result)
       if (err) {
         reject(err)
       }

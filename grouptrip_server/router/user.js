@@ -104,6 +104,7 @@ router.get('/logout', (req, res) => {
 router.get('/detail', (req, res) => {
   // 获取用户信息
   var uid = req.user.uid
+  console.log(uid)
   // 查询用户相关信息
   var userInfo = {}
   Promise.all([getBaseInfo(uid), getFunsNum(uid), getFocusNum(uid)]).then(result => {

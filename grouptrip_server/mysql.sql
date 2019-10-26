@@ -22,14 +22,18 @@ CREATE TABLE trip_user(
 );
 /** 关注表 **/
 CREATE TABLE trip_focus(
-	id INT PRIMARY KEY AUTO_INCREMENT,
+	fid INT PRIMARY KEY AUTO_INCREMENT,
 	uid INT,
-	from_uid INT
+	from_uid INT,
+	create_time VARCHAR(128),
+  update_time VARCHAR(128),
+  is_delete TINYINT(1) DEFAULT '0',
+  status TINYINT(4) DEFAULT NULL
 );
 /** 国家表 **/
 CREATE TABLE trip_state (
 	sid INT PRIMARY KEY AUTO_INCREMENT, # 国家id
-	cname VARCHAR(60),
+	sname VARCHAR(60), # 国家名
 	create_time VARCHAR(128),
   update_time VARCHAR(128),
   is_delete TINYINT(1) DEFAULT '0',
@@ -46,11 +50,6 @@ CREATE TABLE trip_city (
   update_time VARCHAR(128),
   is_delete TINYINT(1) DEFAULT '0',
   status TINYINT(4) DEFAULT NULL
-);
-/** 主题表 **/
-CREATE TABLE trip_theme (
-	tid PRIMARY KEY AUTO_INCREMENT,
-	tname VARCHAR(16)
 );
 /** 游记表 **/
 CREATE TABLE trip_note(
@@ -69,23 +68,35 @@ CREATE TABLE trip_note(
 /** 游记标签表 **/
 CREATE TABLE trip_tag (
 	tid INT PRIMARY KEY AUTO_INCREMENT, 
-	tname VARCHAR(16)
+	tname VARCHAR(16),
+	create_time VARCHAR(128),
+  update_time VARCHAR(128),
+  is_delete TINYINT(1) DEFAULT '0',
+  status TINYINT(4) DEFAULT NULL
 );
 /** 游记图片 **/
 CREATE TABLE trip_note_pic (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nid INT,
-	img VARCHAR(128)
+	img VARCHAR(128),
+	create_time VARCHAR(128),
+  update_time VARCHAR(128),
+  is_delete TINYINT(1) DEFAULT '0',
+  status TINYINT(4) DEFAULT NULL
 );
 /** 游记 标签 表 **/
 CREATE TABLE trip_note_tag (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	nid INT,
-	tid INT
+	tid INT,
+	create_time VARCHAR(128),
+  update_time VARCHAR(128),
+  is_delete TINYINT(1) DEFAULT '0',
+  status TINYINT(4) DEFAULT NULL
 );
 /** 主题表 **/
 CREATE TABLE trip_theme (
-  tid INT(11) PRIMARY KEY (`tid`) AUTO_INCREMENT,
+  tid INT PRIMARY KEY AUTO_INCREMENT,
   tname VARCHAR(16),
 	timg VARCHAR(128),
   create_time VARCHAR(128),
@@ -115,13 +126,13 @@ INSERT INTO trip_user(uname, upwd, phone, birthday, city, gender) VALUES
 ('dongdong', md5('123456'), '13790091225', '2000-01-25', '北京', -1);
 
 /** 关注表 **/
-INSERT INTO trip_focus VALUES
+INSERT INTO trip_focus (fid, uid, from_uid)VALUES
 (null, 1, 2),
 (null, 1, 3),
 (null, 1, 4),
 (null, 2, 1),
-(null, 2, 4);
-(null, 3, 2);
+(null, 2, 4),
+(null, 3, 2),
 (null, 4, 1);
 
 /** 主题表 **/
@@ -131,11 +142,11 @@ INSERT INTO trip_theme(tid, tname, timg) VALUES
 (null, '走！探店去', 'http://127.0.0.1:3000/theme/shop.png'),
 (null, '寻觅美食', 'http://127.0.0.1:3000/theme/food.png'),
 (null, '看展才是正经事', 'http://127.0.0.1:3000/theme/show.png'),
-(null, '音乐剧', 'http://127.0.0.1:3000/theme/music.png'),
+(null, '约你去看音乐剧', 'http://127.0.0.1:3000/theme/music.png'),
 (null, '其他活动', 'http://127.0.0.1:3000/theme/other.png');
 
 /** 国家表**/
-INSERT INTO trip_country(sid, cname) VALUES
+INSERT INTO trip_state(sid, sname) VALUES
 (110000, "中国"),
 (120000, "日本"),
 (130000, "马来西亚"),
@@ -147,36 +158,36 @@ INSERT INTO trip_country(sid, cname) VALUES
 /** 城市表 **/
 /** id 国家id **/
 INSERT INTO trip_city(cid, sid, cname, elname, views) VALUES 
-(110000, 110100, '香港', 'Hong Kong' ,1000),
-(110000, 110200, '澳门', 'Macau' ,1000),
-(110000, 110300, '广州', 'Guang Zhou' ,1000),
-(110000, 110400, '台北', 'Taipei' ,1000),
-(110000, 110500, '垦丁', 'Kenting' ,1000),
-(110000, 110600, '北京', 'Beijing' ,1000),
-(110000, 110700, '上海', 'Shang Hai' ,1000),
-(110000, 110800, '成都', 'Chengdu' ,1000),
-(120000, 120100, '东京', 'Tokyo' ,1000),
-(120000, 120200, '大阪', 'Osaka' ,1000),
-(120000, 120300, '京都', 'Kyoto' ,1000),
-(120000, 120400, '北海道', 'HokKaido', 1000),
-(120000, 120500, '奈良', 'Nagoya', 1000),
-(120000, 120600, '名古屋', 'Nagaya', 1000),
-(120000, 120700, '神户', 'Kobe', 1000),
-(120000, 120800, '札幌', 'Sapporo', 1000),
-(130000, 130100, '吉隆坡', 'Kuala Lumpur', 1000),
-(130000, 130200, '马六甲', 'Melaka', 1000),
-(130000, 130300, '亚庇', 'Kota Kinabalu', 1000),
-(130000, 130400, '沙巴', 'Sabah', 1000),
-(130000, 130500, '槟城', 'Penang', 1000),
-(140000, 140100, '巴黎', 'Paris', 1000),
-(150000, 150100, '马德里', 'Madrid', 1000),
-(150000, 150200, '巴塞罗那', 'Barcelona', 1000),
-(160000, 160100, '纽约', 'NewYork', 1000),
-(160000, 160200, '洛杉矶', 'Los Angeles', 1000),
-(170000, 170100, '曼谷', 'Bangkok', 1000),
-(170000, 170200, '清迈', 'Chiang Mai', 1000),
-(170000, 170300, '普吉岛', 'Phuket', 1000),
-(180000, 180100, '首尔', 'Seoul', 1000);
+(110100, 110000, '香港', 'Hong Kong' ,1000),
+(110200, 110000, '澳门', 'Macau' ,1000),
+(110300, 110000, '广州', 'Guang Zhou' ,1000),
+(110400, 110000, '台北', 'Taipei' ,1000),
+(110500, 110000, '垦丁', 'Kenting' ,1000),
+(110600, 110000, '北京', 'Beijing' ,1000),
+(110700, 110000, '上海', 'Shang Hai' ,1000),
+(110800, 110000, '成都', 'Chengdu' ,1000),
+(120100, 120000, '东京', 'Tokyo' ,1000),
+(120200, 120000, '大阪', 'Osaka' ,1000),
+(120300, 120000, '京都', 'Kyoto' ,1000),
+(120400, 120000, '北海道', 'HokKaido', 1000),
+(120500, 120000, '奈良', 'Nagoya', 1000),
+(120600, 120000, '名古屋', 'Nagaya', 1000),
+(120700, 120000, '神户', 'Kobe', 1000),
+(120800, 120000, '札幌', 'Sapporo', 1000),
+(130100, 130000, '吉隆坡', 'Kuala Lumpur', 1000),
+(130200, 130000, '马六甲', 'Melaka', 1000),
+(130300, 130000, '亚庇', 'Kota Kinabalu', 1000),
+(130400, 130000, '沙巴', 'Sabah', 1000),
+(130500, 130000, '槟城', 'Penang', 1000),
+(140100, 140000, '巴黎', 'Paris', 1000),
+(150100, 150000, '马德里', 'Madrid', 1000),
+(150200, 150000, '巴塞罗那', 'Barcelona', 1000),
+(160100, 160000, '纽约', 'NewYork', 1000),
+(160200, 160000, '洛杉矶', 'Los Angeles', 1000),
+(170100, 170000, '曼谷', 'Bangkok', 1000),
+(170200, 170000, '清迈', 'Chiang Mai', 1000),
+(170300, 170000, '普吉岛', 'Phuket', 1000),
+(180100, 180000, '首尔', 'Seoul', 1000);
 
 /** Note表 **/
 INSERT INTO trip_note(nid, sid, cid, title, likes, comments, create_time) VALUES
@@ -222,7 +233,7 @@ INSERT INTO trip_note(nid, sid, cid, title, likes, comments, create_time) VALUES
 );
 
 /** tag表 **/
-INSERT INTO trip_tag VALUES
+INSERT INTO trip_tag (tid, tname) VALUES
 (1, '日本美食'),
 (2, '关西攻略'),
 (3, '北海道'),
@@ -246,7 +257,7 @@ INSERT INTO trip_tag VALUES
 (21, '大马攻略');
 
 /** note tag **/
-INSERT INTO trip_note_tag VALUES
+INSERT INTO trip_note_tag (id, nid, tid) VALUES
 (null, 1, 1),
 (null, 1, 2),
 (null, 2, 3),
@@ -268,31 +279,3 @@ INSERT INTO trip_note_tag VALUES
 (null, 9, 19),
 (null, 10, 20),
 (null, 10, 21);
-
-INSERT INTO trip_note_pic VALUES
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
-(),
