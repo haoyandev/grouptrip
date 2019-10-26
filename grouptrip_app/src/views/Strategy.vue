@@ -200,146 +200,118 @@
             </ul>
           </div>
         </div>
-        <div class="strategy-bottom">
-          <van-tabs v-model="active" swipeable>
-            <van-tab title="推荐">
-              <div class="bottom1_wrap">
-                <div class="wrap-item strategy-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="personal-pic"></div>
-                    <span class="place">泰国,芭提雅</span>
-                    <span class="date">10月16日-10月30日</span>
-                    <div class="wrap-item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
+      </div>
+      <div class="strategy-bottom">
+        <van-tabs v-model="active" swipeable="">
+          <van-tab title="旅伴">
+            <div class="bottom1_wrap">
+              <div class="wrap-item strategy-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="personal-pic"></div>
+                  <span class="place">泰国,芭提雅</span>
+                  <span class="date">10月16日-10月30日</span>
+                  <div class="wrap-item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
                   </div>
                 </div>
-                <div class="wrap-item strategy-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="personal-pic"></div>
-                    <span class="place">泰国,芭提雅</span>
-                    <span class="date">10月16日-10月30日</span>
-                    <div class="wrap-item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
+              </div>
+              <div class="wrap-item strategy-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="personal-pic"></div>
+                  <span class="place">泰国,芭提雅</span>
+                  <span class="date">10月16日-10月30日</span>
+                  <div class="wrap-item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
                   </div>
                 </div>
-                <div class="wrap-item strategy-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="personal-pic"></div>
-                    <span class="place">泰国,芭提雅</span>
-                    <span class="date">10月16日-10月30日</span>
-                    <div class="wrap-item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
+              </div>
+              <div class="wrap-item strategy-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="personal-pic"></div>
+                  <span class="place">泰国,芭提雅</span>
+                  <span class="date">10月16日-10月30日</span>
+                  <div class="wrap-item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
                   </div>
                 </div>
-                <div class="wrap-item strategy-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="personal-pic"></div>
-                    <span class="place">泰国,芭提雅</span>
-                    <span class="date">10月16日-10月30日</span>
-                    <div class="wrap-item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+              </div>
+              <div class="wrap-item strategy-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="personal-pic"></div>
+                  <span class="place">泰国,芭提雅</span>
+                  <span class="date">10月16日-10月30日</span>
+                  <div class="wrap-item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                  </div>
+                </div>
+              </div>
+            </div>  
+          </van-tab>
+          <van-tab title="推荐玩法">
+            <div class="bottom2_wrap">
+              <div class="tips-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="tips-notes-img">
+                    <img src="../assets/citypics/img1998.jpg" alt />
+                  </div>
+                  <div class="item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                  </div>
+                  <div class="tips-personal">
+                    <div class="personal-head">
+                      <img src="../assets/iconfont/girl.png" alt />
+                    </div>
+                    <span>维多利亚</span>
+                    <div class="favorite">
+                     <like></like>
+                      <span>115</span>
                     </div>
                   </div>
                 </div>
               </div>
-            </van-tab>
-            <van-tab title="找旅友">
-              <div class="bottom2_wrap">
-                <div class="tips-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="tips-notes-img">
-                      <img src="../assets/citypics/img1998.jpg" alt />
-                    </div>
-                    <div class="item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
-                    <div class="tips-personal">
-                      <div class="personal-head">
-                        <img src="../assets/iconfont/girl.png" alt />
-                      </div>
-                      <span>维多利亚</span>
-                      <div class="favorite">
-                        <svg class="iconblack_favorite-purple" aria-hidden="true">
-                          <use xlink:href="#iconblack_favorite-purple" />
-                        </svg>
-                        <span>115</span>
-                      </div>
-                    </div>
+              <div class="tips-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="tips-notes-img">
+                    <img src="../assets/citypics/img1998.jpg" alt />
                   </div>
-                </div>
-                <div class="tips-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="tips-notes-img">
-                      <img src="../assets/citypics/img1998.jpg" alt />
-                    </div>
-                    <div class="item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
-                    <div class="tips-personal">
-                      <div class="personal-head">
-                        <img src="../assets/iconfont/girl.png" alt />
-                      </div>
-                      <span>维多利亚</span>
-                      <div class="favorite">
-                        <svg class="iconblack_favorite-purple" aria-hidden="true">
-                          <use xlink:href="#iconblack_favorite-purple" />
-                        </svg>
-                        <span>115</span>
-                      </div>
-                    </div>
+                  <div class="item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
                   </div>
-                </div>
-                <div class="tips-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="tips-notes-img">
-                      <img src="../assets/citypics/img1998.jpg" alt />
+                  <div class="tips-personal">
+                    <div class="personal-head">
+                      <img src="../assets/iconfont/girl.png" alt />
                     </div>
-                    <div class="item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
-                    <div class="tips-personal">
-                      <div class="personal-head">
-                        <img src="../assets/iconfont/girl.png" alt />
-                      </div>
-                      <span>维多利亚</span>
-                      <div class="favorite">
-                        <svg class="iconblack_favorite-purple" aria-hidden="true">
-                          <use xlink:href="#iconblack_favorite-purple" />
-                        </svg>
-                        <span>115</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tips-wrap-item">
-                  <div class="wrap-item-content">
-                    <div class="tips-notes-img">
-                      <img src="../assets/citypics/img1998.jpg" alt />
-                    </div>
-                    <div class="item-details">
-                      <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                    </div>
-                    <div class="tips-personal">
-                      <div class="personal-head">
-                        <img src="../assets/iconfont/girl.png" alt />
-                      </div>
-                      <span>维多利亚</span>
-                      <div class="favorite">
-                        <svg class="iconblack_favorite-purple" aria-hidden="true">
-                          <use xlink:href="#iconblack_favorite-purple" />
-                        </svg>
-                        <span>115</span>
-                      </div>
+                    <span>维多利亚</span>
+                    <div class="favorite">
+                      <like></like>
+                      <span>115</span>
                     </div>
                   </div>
                 </div>
               </div>
+              <div class="tips-wrap-item">
+                <div class="wrap-item-content">
+                  <div class="tips-notes-img">
+                    <img src="../assets/citypics/img1998.jpg" alt />
+                  </div>
+                  <div class="item-details">
+                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                  </div>
+                  <div class="tips-personal">
+                    <div class="personal-head">
+                      <img src="../assets/iconfont/girl.png" alt />
+                    </div>
+                    <span>维多利亚</span>
+                    <div class="favorite">
+                      <like></like>
+                      <span>115</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             </van-tab>
           </van-tabs>
-        </div>
       </div>
       <Sendgroup></Sendgroup>
       <main-tab-bar></main-tab-bar>
@@ -352,6 +324,7 @@
 import Sendgroup from "../components/common/Sendgroup";
 import MainTabBar from "../components/mainTabBar";
 import Go from "../components/common/go";
+import like from '../components/common/like';
 export default {
   data() {
     return {
@@ -539,7 +512,8 @@ export default {
   components: {
     MainTabBar,
     Sendgroup,
-    Go
+    Go,
+    like,
   }
 };
 </script>
@@ -905,6 +879,8 @@ li {
 .tips-personal .favorite {
   position: absolute;
   right: 2px;
+  display: flex;
+  align-items: center;
 }
 #strategypage {
   transition: opacity 0.6s linear;

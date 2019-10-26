@@ -19,6 +19,7 @@ export default {
   name: 'App',
   components:{
   },
+<<<<<<< HEAD
   methods: {
     reload() {
       this.isAlive = false;
@@ -30,6 +31,8 @@ export default {
   created () {
   
   }
+=======
+>>>>>>> dev
 }
 </script>
 <style>

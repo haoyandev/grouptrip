@@ -8,6 +8,7 @@ import Grouptrip from './components/index/Grouptrip.vue'
 import Personal from '@/views/Personal.vue'
 // 攻略
 import Strategy from '@/views/Strategy.vue'
+import allcity from '@/components/strategy/allcity'
 // 游记
 import Note from '@/views/Note.vue'
 import Login from '@/components/login/login'
@@ -41,6 +42,10 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
+<<<<<<< HEAD
     { path: '/test', component: test},
+=======
+    { path: '/allcity', component:allcity}
+>>>>>>> dev
   ]
 })

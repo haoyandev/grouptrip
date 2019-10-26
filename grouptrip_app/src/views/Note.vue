@@ -85,9 +85,7 @@
               <span>{{n.tag2}}</span>
             </div>
             <div class="item-icon">
-              <svg class="iconblack_favorite-purple" aria-hidden="true">
-                <use xlink:href="#iconblack_favorite-purple" />
-              </svg>
+              <like></like>
               <span>{{n.likes}}</span>
               <svg class="iconcomment" aria-hidden="true">
                 <use xlink:href="#iconcomment" />
@@ -116,9 +114,7 @@
                 <b>日本</b>
               </span>
               <div class="item-icon">
-                <svg class="iconblack_favorite-purple" aria-hidden="true">
-                  <use xlink:href="#iconblack_favorite-purple" />
-                </svg>
+                <like></like>
                 <span>128</span>
                 <svg class="iconcomment" aria-hidden="true">
                   <use xlink:href="#iconcomment" />
@@ -146,9 +142,7 @@
                 <span>{{n.tag2}}</span>
               </div>
               <div class="item-icon">
-                <svg class="iconblack_favorite-purple" aria-hidden="true">
-                  <use xlink:href="#iconblack_favorite-purple" />
-                </svg>
+                <like></like>
                 <span>{{n.likes}}</span>
                 <svg class="iconcomment" aria-hidden="true">
                   <use xlink:href="#iconcomment" />
@@ -217,9 +211,7 @@
               <span>{{n.tag2}}</span>
             </div>
             <div class="item-icon">
-              <svg class="iconblack_favorite-purple" aria-hidden="true">
-                <use xlink:href="#iconblack_favorite-purple" />
-              </svg>
+              <like></like>
               <span>{{n.likes}}</span>
               <svg class="iconcomment" aria-hidden="true">
                 <use xlink:href="#iconcomment" />
@@ -236,6 +228,7 @@
 </template>
 <script>
 import MainTabBar from "../components/mainTabBar";
+import like from "../components/common/like"
 export default {
   created() {
     this.a = setInterval(() => {
@@ -243,7 +236,8 @@ export default {
     }, 5000);
   },
   components: {
-    MainTabBar
+    MainTabBar,
+    like
   },
   data() {
     return {

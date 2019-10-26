@@ -46,7 +46,7 @@
     </div>
 
     <div class="grouptrip-wrap">
-      <div class="grouptrip-wrap-item">
+      <div class="grouptrip-wrap-item" v-for="(t,i) of trips" :key="i">
         <mt-swipe :auto="0">
           <mt-swipe-item>
             <img src="../../assets/citypics/city6.jpg" alt />
@@ -58,17 +58,23 @@
             <img src="../../assets/citypics/img1996.jpg" alt />
           </mt-swipe-item>
         </mt-swipe>
+        <div class="theme-item">
+          <div class="theme-icon">
+            <img :src="t.themepic" alt="">
+          </div>
+          <p>{{t.theme}}</p>
+        </div>
         <div class="item-personal-msg">
           <div class="personal-msg-header">
             <div class="msg-header-head">
               <img
-                src="../../assets/citypics/heimen.jpg"
+                :src="t.personalhead"
                 style=" max-width: 100%;height: auto;"
                 alt
               />
             </div>
             <div class="msg-header-text">
-              <h4 class="msg-header-name">维多利亚</h4>
+              <h4 class="msg-header-name">{{t.name}}</h4>
               <div class="msg-header-person-text">
                 <div class="msg-sex-age">
                   <span class="msg-sex">
@@ -76,14 +82,12 @@
                       <use xlink:href="#iconnv" />
                     </svg>
                   </span>
-                  <span class="msg-age">20岁</span>
+                  <span class="msg-age">{{t.age}}岁</span>
                 </div>
-                <router-link to="javascript;" class="msg-favoriate">
+                <div class="msg-favoriate">
                   <span>喜欢</span>
-                  <svg class="iconblack_favorite-purple" aria-hidden="true">
-                    <use xlink:href="#iconblack_favorite-purple" />
-                  </svg>
-                </router-link>
+                  <like></like>
+                </div>
               </div>
             </div>
             <router-link class="msg-more" to="javascript;">
@@ -97,92 +101,37 @@
               <use xlink:href="#iconshijian" />
             </svg>
             <span class="msg-date">日期</span>
-            <span>12月23日~2020年1月8日</span>
+            <span>{{t.date}}</span>
           </div>
           <div class="personal-msg-place">
             <svg class="icondidian" aria-hidden="true">
               <use xlink:href="#icondidian" />
             </svg>
             <span class="msg-place">地点</span>
-            <span>日本•大阪•京都</span>
+            <span>{{t.place}}</span>
             <svg class="iconstar-yellow" aria-hidden="true">
               <use xlink:href="#iconstar-yellow" />
             </svg>
           </div>
-        </div>
-      </div>
-      <div class="grouptrip-wrap-item">
-        <mt-swipe :auto="0">
-          <mt-swipe-item>
-            <img src="../../assets/citypics/city8.jpg" alt />
-          </mt-swipe-item>
-          <mt-swipe-item>
-            <img src="../../assets/citypics/img1957.jpg" alt />
-          </mt-swipe-item>
-          <mt-swipe-item>
-            <img src="../../assets/citypics/img1996.jpg" alt />
-          </mt-swipe-item>
-        </mt-swipe>
-        <div class="item-personal-msg">
-          <div class="personal-msg-header">
-            <div class="msg-header-head">
-              <img
-                src="../../assets/citypics/heimen.jpg"
-                style=" max-width: 100%;height: auto;"
-                alt
-              />
-            </div>
-            <div class="msg-header-text">
-              <h4 class="msg-header-name">维多利亚</h4>
-              <div class="msg-header-person-text">
-                <div class="msg-sex-age">
-                  <span class="msg-sex">
-                    <svg class="iconnv" aria-hidden="true">
-                      <use xlink:href="#iconnv" />
-                    </svg>
-                  </span>
-                  <span class="msg-age">20岁</span>
-                </div>
-                <router-link to="javascript;" class="msg-favoriate">
-                  <span>喜欢</span>
-                  <svg class="iconblack_favorite-purple" aria-hidden="true">
-                    <use xlink:href="#iconblack_favorite-purple" />
-                  </svg>
-                </router-link>
-              </div>
-            </div>
-            <router-link class="msg-more" to="javascript;">
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
+          <div class="interest">
+            <p>{{t.fans}}</p>
+            <span>人感兴趣</span>
+            <router-link to="">
+              和他聊聊
             </router-link>
           </div>
-          <div class="personal-msg-date">
-            <svg class="iconshijian" aria-hidden="true">
-              <use xlink:href="#iconshijian" />
-            </svg>
-            <span class="msg-date">日期</span>
-            <span>12月23日~2020年1月8日</span>
-          </div>
-          <div class="personal-msg-place">
-            <svg class="icondidian" aria-hidden="true">
-              <use xlink:href="#icondidian" />
-            </svg>
-            <span class="msg-place">地点</span>
-            <span>日本•大阪•京都</span>
-            <svg class="iconstar-yellow" aria-hidden="true">
-              <use xlink:href="#iconstar-yellow" />
-            </svg>
-          </div>
         </div>
       </div>
+      
     </div>
   </main>
 </template>
 <script>
+import like from '../common/like.vue';
 export default {
   data() {
     return {
+      
       //下拉菜单
       top: 550,
       pop: false,
@@ -198,6 +147,13 @@ export default {
         { text: "看展才是正经事", value: 5 },
         { text: "约你去看音乐剧", value: 6 },
         { text: "其他活动", value: 7 }
+      ],
+      trips:[
+        {theme:'一起去冒险',name:'维多利亚',age:'20',
+        date:'12月23日~2020年1月8日',
+        place:'日本•大阪•京都',fans:'87',
+        themepic:require('../../assets/theme/explore.png'),
+        personalhead:require('../../assets/citypics/heimen.jpg')}
       ],
       show: false, //底部弹出层
       cities: [
@@ -226,6 +182,9 @@ export default {
       ]
     };
   },
+  components:{
+    like
+  },
   methods: {
     jumphome(){
       this.$emit("Child",{opa:1,gos:'none',go:'block',copa:0})
@@ -247,7 +206,8 @@ export default {
       setTimeout(() => {
         this.pop=false;
       }, 300);
-    }
+    },
+    
   }
 };
 </script>
@@ -324,9 +284,34 @@ export default {
 .grouptrip-wrap {
   position: relative;
   width: 100%;
+  
+}
+.grouptrip-wrap .theme-item{
+  position: absolute;
+  width: 100px;height: 70px;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.grouptrip-wrap .theme-item p{
+  color: #fff;
+  font-size: 13px;
+  margin: 0px;
+}
+.grouptrip-wrap .theme-item .theme-icon{
+  width: 60px;height: 60px;
+  object-fit: cover;
+}
+.grouptrip-wrap .theme-item .theme-icon img{
+  width: 100%;
 }
 .grouptrip-wrap .grouptrip-wrap-item {
   height: 520px;
+  position: relative;
 }
 .grouptrip-wrap .grouptrip-wrap-item img {
   max-width: 100%;
@@ -412,6 +397,32 @@ export default {
 .personal-msg-place .iconstar-yellow {
   margin-left: 150px;
 }
+.item-personal-msg .interest {
+  width: 100%;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: space-around;
+}
+.item-personal-msg .interest p{
+  margin: 0px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.item-personal-msg .interest span{
+  font-size: 15px;
+  margin-left: -15px;
+}
+.item-personal-msg .interest a{
+  width: 230px;
+  height: 40px;
+  background-color: #8134af;
+  border-radius: 30px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+}
+/* 弹出组件 */
 .tabbar-top .van-hairline--top-bottom::after,
 .van-hairline-unset--top-bottom::after {
   border: none;
