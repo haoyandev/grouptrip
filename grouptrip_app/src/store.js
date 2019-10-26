@@ -10,7 +10,7 @@ export default new Vuex.Store({
     searchKws: "",
     uname: "",
     user: {},
-    islogin: false
+    isLogin: false
   },
   // 读取状态
   getters: {
@@ -26,8 +26,8 @@ export default new Vuex.Store({
     setUname(state, uname) {
       state.uname = uname;
     },
-    setIslogin(state, islogin) {
-      state.islogin = islogin;
+    setIsLogin(state, status) {
+      state.isLogin = status;
     },
     cityAlert: (state, cid) => {
       state.cid = cid;
@@ -38,6 +38,9 @@ export default new Vuex.Store({
     },
     setGroupInfo (state, obj) {
       Object.assign(state.groupInfo, obj)
+    },
+    updateBirth (state, birth) {
+      state.user.birthday = birth
     }
   },
 

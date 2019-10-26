@@ -158,7 +158,7 @@ export default {
       pwd: "", //保存用户密码
       active: "login", //默认初始化显示的面板
       phone: "", //用户注册的手机号
-      now: ["login", "register"]
+      now: ["login", "register"],
     };
   },
   components: {
@@ -188,7 +188,7 @@ export default {
     successFunction() {
       this.confirmSuccess = true;
       this.confirmWords = "验证通过";
-      //登录成功后执行的axios
+      // 验证成功后执行的axios
       var phone = this.user;
       var upwd = this.pwd;
       this.axios.post("/api/v1/user/login", { phone, upwd }).then(result => {
@@ -201,14 +201,10 @@ export default {
           }, 1500)
         } else {
           this.$toast({message: result.data.msg, duration: 1500, iconClass: 'icon icon-success'})
-          // 获取该用户的信息并且保存在store里
+          // 获取该用户的信息并且保存在store里和本地localStore里
           this.axios.get("/api/v1/user/detail").then(result => {
-            console.log(result)
             if (result.data.code === 200) {
-              console.log('ok')
-              this.$store.commit("setUser", result.data.data);
-              this.$store.commit('setIslogin', true)
-              console.log(this.$store.getters.user);
+              // 显示欢迎语
               this.active = "success";
               var message = "Hi," + result.data.data.uname;
               var i = 0 
@@ -221,7 +217,7 @@ export default {
                   setTimeout(() => {
                     this.all = true;
                     setTimeout(() => {
-                      this.$router.push("/Home");
+                      this.$router.push("/Personal");
                     }, 300);
                   }, 3000);
                 }
@@ -305,9 +301,6 @@ export default {
           this.phone = ''
           this.regpwd = ''
           document.getElementById('phone').focus()
-          setTimeout(() => {
-            
-          }, 1500)
         }
       });
     }

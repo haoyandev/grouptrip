@@ -62,6 +62,10 @@ router.post('/upload', (req, res) => {
 
   res.send('ddd')
 })
-
+// 5. 获取国家城市
+router.get('/getlocation', (req, res) => {
+  // 获取数据
+  
+})
 
 module.exports = router

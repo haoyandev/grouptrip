@@ -104,7 +104,6 @@ router.get('/logout', (req, res) => {
 router.get('/detail', (req, res) => {
   // 获取用户信息
   var uid = req.user.uid
-
   // 查询用户相关信息
   var userInfo = {}
   Promise.all([getBaseInfo(uid), getFunsNum(uid), getFocusNum(uid)]).then(result => {
@@ -220,7 +219,7 @@ router.put('/updatebirth', (req, res) => {
   var birthday = req.body.birthday
   // 检验数据
   if (!birthday) {
-    return res.send({ code: 4001, msg: `性别为空` })
+    return res.send({ code: 4001, msg: `生日为空` })
   }
   // 执行sql 修改性别
   var sql =  `update trip_user set birthday=? where uid=?`

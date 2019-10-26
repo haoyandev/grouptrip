@@ -1,9 +1,9 @@
 
 <template>
-  <div>
+  <div v-if="canShow">
     <div class="icon">
       <div class="icon-left">
-        <span>
+        <span @click="jumpSetting">
           <svg class="chilun" aria-hidden="true">
             <use xlink:href="#iconsetup" />
           </svg>
@@ -20,11 +20,16 @@
     </div>
     <div class="user-head">
       <div>
-        <svg @click="jump" class="boyhead" aria-hidden="true">
-          <use xlink:href="#icontouxiangnanhai" />
-        </svg>
+        <div v-if="isLogin" class="header">
+          <img src="@/assets/iconfont/boy.png" alt="">
+        </div>
+        <div v-else>
+          <svg @click="jump" class="boyhead" aria-hidden="true">
+            <use xlink:href="#icontouxiangnanhai" />
+          </svg>
+        </div>
       </div>
-      <span v-if="islogin">{{this.$store.getters.user.uname}}</span>
+      <span v-if="isLogin">{{user.uname}}</span>
       <span  v-else @click="jump">登录查看更多信息</span>
     </div>
     <div class="self-content">
@@ -34,11 +39,11 @@
           <span>获赞与收藏</span>
         </li>
         <li>
-          <h1>{{user.fansNum}}</h1>
+          <h1>{{user.fansNum || 0}}</h1>
           <span>粉丝</span>
         </li>
         <li>
-          <h1>{{user.focusNum}}</h1>
+          <h1>{{user.focusNum || 0}}</h1>
           <span>关注</span>
         </li>
         <li>
@@ -110,16 +115,48 @@ export default {
   data() {
     return {
       user: {},
-      islogin: false
+      isLogin: false,
+      canShow: false
     };
   },
   created() {
-    this.user = this.$store.state.user
-    this.islogin = this.$store.state.islogin
+    // 每次创建personal都要先判断用户是否已登录
+    // 获取本定token判断用户是否有登录
+    var token = localStorage.getItem('token')
+    if (token !== 'undefined') {
+      // 如果有登录 展现有用户信息的页面
+      // 发送ajax获取最新的信息
+      console.log(token)
+      var url = '/api/v1/user/detail'
+      this.axios.get(url).then(res => {
+        if (res.data.code === 200) {
+          // token正常
+          this.user = res.data.data
+          this.isLogin = true
+          // 设置vuex
+          this.$store.commit('setUser', this.user)
+          this.$store.commit('setIsLogin', this.isLogin)
+        } 
+      }).catch(err => console.log(err))
+    }
+    this.canShow = true
+    // 发送ajax获取用户最新的信息
   },
   methods:{
     jump(){
       this.$router.push('/login')
+    },
+    jumpSetting () {
+      if (this.isLogin) {
+        // 如果登录 则跳去个人设置页面
+        this.$router.push('/Settings')
+      } else {
+        // 如果未登录 则跳去登录页面
+        this.$toast({ message: '未登录', duration: 1000 })
+        setTimeout(() => {
+          this.$router.push('/Login')
+        }, 1000)
+      }
     }
   },
   components:{
@@ -130,6 +167,9 @@ export default {
 <style scoped>
 * {
   transition: opacity 0.3s linear;
+}
+[v-cloak] {
+  display: none;
 }
 ul {
   padding: 0px;
@@ -161,8 +201,21 @@ ul {
   text-align: center;
   margin-bottom: 25px;
 }
-.user-hobby > ul {
+/* 头像 */
+.user-head .header {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto;
+  border-radius: 50%;
+  text-align: center;
+}
+.user-head .header img {
   width: 100%;
+  object-fit: cover;
+}
+.user-hobby > ul {
+  max-width: 100%;
+  height: 100%;
   flex-wrap: wrap;
   list-style: none;
 }

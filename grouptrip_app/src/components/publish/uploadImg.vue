@@ -37,6 +37,7 @@ export default {
     }
   },
   methods: {
+    
     next () {
       // 获取用户输入的内容
       var intr = this.intr
@@ -48,7 +49,6 @@ export default {
       },100)
       return
       }
-      
       // 此时可以自行将文件上传至服务器
       // 遍历图片对象并添加到一个数组里
       var imgList = []
@@ -72,7 +72,6 @@ export default {
     changeFlag (e) {
       if (!e.target.value) {
         this.flag = true
-
       }
     },
     check (e) {

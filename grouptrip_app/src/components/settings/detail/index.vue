@@ -25,7 +25,7 @@
   </div>
 </template>
 <script>
-import header1 from "./../header/index"
+import header1 from "./../header/header"
 import test from "./../test"
 export default {
   components:{

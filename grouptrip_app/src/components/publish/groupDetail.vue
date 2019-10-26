@@ -1,36 +1,58 @@
 <template>
-  <div class="main">
-    <div class="detail-box clearfix">
-      <div class="tip">
-        完善信息，<br>
-        让更多人看到<br>  
-        你的group伴
+  <div class="group-box">
+    <div class="main-box">
+      <div class="top-box">
+        <!-- 返回按钮 -->
+        <span class="toBack">--</span>
+        <div class="tip">
+          完善信息，<br>
+          让更多人看到<br>  
+          你的group伴
+        </div>
+        <!-- 时间选择器 -->
+        <div class="time-picker">
+          <van-cell is-link @click="selectBeginTime"><span class="time-tip">开始日期</span>{{beginTime}}</van-cell>
+          <van-cell is-link @click="selectEndTime"><span class="time-tip">结束日期</span>{{endTime}}</van-cell>
+          <!-- 开始时间 -->
+          <van-popup v-model="showBeginTime">
+          <van-datetime-picker
+          type="date"
+          :min-date="minDate"
+          @confirm="handleBeginTime"
+          @cancel="handleCancel"
+          />
+          </van-popup>
+          <!-- 结束时间 -->
+          <van-popup v-model="showEndTime">
+          <van-datetime-picker
+          type="date"
+          :min-date="minDate"
+          @confirm="handleEndTime"
+          @cancel="handleCancel"
+          />
+          </van-popup>
+        </div>
+        <!-- 地区选择器 -->
+        <div class="location-picker">
+          <van-cell is-link @click="selectLocation"><span class="time-tip">地区</span>{{beginTime}}</van-cell>
+          <van-popup v-model="showLocation">
+           <van-area :area-list="areaList" :columns-num="2"
+           @confirm="handleLocation"
+           />
+          </van-popup>
+        </div>
+
       </div>
-      <van-cell is-link @click="showPopup">开始{{starttime}}</van-cell>
-      <van-cell is-link @click="showPopup">结束{{endtime}}</van-cell>
-
-      <van-popup v-model="show">
-        <!-- 开始时间 -->
-        <van-datetime-picker
-          v-model="currentDate"
-          type="date"
-          :min-date="minDate"
-          @confirm="confirm"
-        />
-      </van-popup>
-
-      <van-popup v-model="show1">
-        <!-- 结束时间 -->
-        <van-datetime-picker
-          v-model="currentDate"
-          type="date"
-          :min-date="minDate"
-          @confirm="confirm1"
-        />
-      </van-popup>
-      
-    </div>
-    <div class="publish">立即发布</div>
+      <div class="bottom-box">
+        <van-loading size="24px" vertical v-show="loading">加载中...</van-loading>
+        <!-- 阅读规范 -->
+        <div class="read">我已阅读《
+          <router-link to="">发布规范和风险提示</router-link>
+          》
+          </div>
+        <div class="publish" @click="publish">立即发布</div>   
+      </div>
+    </div>   
   </div>
 </template>
 
@@ -38,80 +60,154 @@
 export default {
   data() {
     return {
-      show: false,
-      show1: false,
-      minHour: 10,
-      maxHour: 20,
-      minDate: new Date(),
-      maxDate: new Date(2019, 10, 1),
-      currentDate: new Date(),
-      starttime: '',
-      endtime: ''
+      minDate: new Date(), // 最小时间
+      currentDate: new Date(), // 当前时间
+      beginTime: '',
+      endTime: '',
+      showBeginTime: false, // 是否显示benginTime选择器
+      showEndTime: false, // 是否显示EndTime选择器,
+      showLocation: false, // 是否显示地区选择器
+      loading: false,
+      areaList: {
+        province_list: {
+          110000: '中国',
+          120000: '日本',
+          130000: '马来西亚',
+          140000: '法国',
+          150000: '西班牙',
+          160000: '美国',
+          170000: '泰国',
+          180000: '韩国'
+        },
+        city_list: {
+          110100: '香港',
+          110200: '澳门',
+          120100: '东京',
+          130100: '吉隆波',
+          140100: '巴黎',
+          150100: '马德里',
+        },
+        county_list: {
+          110000: '',
+        }
+      }
     }
-  },
 
+  },
   methods: {
-    showPopup() {
-      this.show = true;
-    },
-    confirm (val) {
-      console.log(111)
+    handleLocation (val) {
       console.log(val)
+    },
+    publish () {
+      // 显示loding
+      this.loading = true
+      // 发表组队
+      console.log(this.beginTime, this.endTime)
+    },
+    selectBeginTime () {
+      // 判断结束时间是否已选择
+      if (this.endTime) {
+        // 已选择 把最小值设置成当前时间
+        this.minDate = this.currentDate
+      }
+      this.showBeginTime = true
+    },
+    selectEndTime () {
+      this.showEndTime = true
+    },
+    selectLocation () {
+      this.showLocation = true
+    },
+    handleBeginTime (val) {
+      var date = new Date(val)
+      this.beginTime = this.handleDate(date)
+      // 设置最小时间为beginTime
+      this.minDate = date
+      // 隐藏选择器
+      this.showBeginTime = false
+    },
+    handleEndTime (val) {
+      var date = new Date(val)
+      this.endTime = this.handleDate(date)
+      // 隐藏选择器
+      this.showEndTime = false
+    },
+    handleCancel () {
+      // 隐藏选择器
+      this.showBeginTime = false
+      this.showEndTime = false
+    },
+    handleDate (val) {
       var date = new Date(val)
       var year = date.getFullYear()
       var month = date.getMonth() + 1
       var day = date.getDate()
-      this.show = false
-      this.starttime = `${year}年${month}月${day}日`
-    },
-    confirm1 (val) {
-      console.log(111111)
-      console.log(val)
-      var date = new Date(val)
-      var year = date.getFullYear()
-      var month = date.getMonth() + 1
-      var day = date.getDate()
-      this.show = false
-      this.starttime = `${year}年${month}月${day}日`
-    },
+      return `${year}年${month}月${day}日`
+    }
   }
 }
 </script>
 
-<style scoped>
-  .main {
+<style>
+  .group-box {
+    background-color: #343434;
     position: fixed;
-    width: 100%;
-    height: 100%;
     top: 0;
     left: 0;
-    /* padding: 0 10px; */
+    width: 100%;
+    height: 100%;
   }
-  .detail-box {
-    height: 92%;
-    background-color: #343434;
-    padding: 0 20px;
+  .group-box .main-box {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: space-between;
   }
-  .tip {
-    margin-top: 50px;
+  .group-box .tip {
     font-size: 30px;
     line-height: 40px;
+    margin-left: 30px;
     color: #fff;
     font-weight: 700;
   }
-  .publish {
+  /* 选择时间 */
+  .group-box .time-picker, .group-box .location-picker {
+    margin-top: 30px;
+    padding: 0 30px;
+  } 
+  .group-box .location-picker {
+    margin-top: 0;
+  }
+  .group-box .van-cell {
+    border-bottom: 1px solid #fff;
+    background-color: transparent;
+    padding: 10px 0;
+    font-size: 16px;
+  }
+  .group-box .van-cell .time-tip {
+    margin-right: 55px;
+  }
+  .group-box .van-cell__value--alone {
+    color: #fff;
+  }
+  .van-cell:not(:last-child)::after {
+    border-bottom: none;
+  }
+  /* 发布 */
+  .group-box .bottom-box .publish {
     background-color: #000;
     color: #909090;
     text-align: center;
-    height: 8%;
     line-height: 46px;
+    margin-top: 30px;
   }
-  .clearfix::before {
-    content: "";
-    display: table;
-    clear: both;
+  .group-box .bottom-box .read {
+    margin-left: 30px;
+    color: #fff;
+    font-size: 14px;
+
   }
-  .van-popup--center {
-    width: 100%;
+  .group-box .bottom-box .router-link-active {
+    color: #fff;
   }
 </style>

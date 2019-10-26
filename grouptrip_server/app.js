@@ -54,8 +54,10 @@ app.use((req, res, next) => {
         var result = verifyToken(token)
         // 判断result结果
         if (result.name === 'TokenExpiredError') {
+          res.writeHead(403)
           res.send({ code: 403, msg: `登陆超时,请重新登陆` })
         } else if (result.name === 'JsonWebTokenError') {
+          res.writeHead(403)
           res.send({ code: 403, msg: `证书出错` })
         } else {
           req.user = result.data

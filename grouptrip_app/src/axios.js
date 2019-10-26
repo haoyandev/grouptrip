@@ -30,17 +30,14 @@ Axios.interceptors.response.use(
     if (res.data.status == 403) {
       localStorage.removeItem("token");
       sessionStorage.removeItem("token");
-      store.commit("setIslogin", false);
+      store.commit("setIsLogin", false);
       store.commit("setUname", "");
       store.commit("setUser", "");
-    } else if (res.data.code == -1) {
-        store.commit("setIslogin", false);
-        store.commit("setUname", "");
     } else if (res.data.token) {
         store.commit("setUname", res.data.uname);
-        store.commit("setIslogin", true);
+        store.commit("setIsLogin", true);
         localStorage.setItem("token", res.data.token);
-    }
+      }
     return res;
   },
   error => {

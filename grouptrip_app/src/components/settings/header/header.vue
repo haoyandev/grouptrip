@@ -31,7 +31,7 @@ export default {
     /* border-top: 1px solid #ccc; */
     padding-top: 15px;
   }
-   #header >>> .mint-header-title{
+   #header .mint-header-title{
     font-weight: bold;
     /* border-bottom: none; */
   }

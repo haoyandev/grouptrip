@@ -12,15 +12,15 @@ import Strategy from '@/views/Strategy.vue'
 import Note from '@/views/Note.vue'
 import Login from '@/components/login/login'
 // 设置个人信息
-import Settings from '@/components/settings'
-import Detail from '@/components/settings/persondetail'
+import Settings from '@/components/settings/settings'
+import Detail from '@/components/settings/persondetail/persondetail'
 import go from '@/components/common/go'
 
 // 发布group trip
 import uploadImg from '@/components/publish/uploadImg'
 import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
-// import test from '@/components/publish/test'
+import test from '@/components/publish/test'
 Vue.use(Router)
 
 export default new Router({
@@ -39,5 +39,6 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
+    { path: '/test', component: test},
   ]
 })

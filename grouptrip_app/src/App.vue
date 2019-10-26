@@ -28,10 +28,7 @@ export default {
     }
   },
   created () {
-    var user = localStorage.getItem('token')
-    console.log('user', user)
-    var url = `/api/v1/user/loginbytoken`
-    this.axios.get(url).then(res => console.log(res))
+  
   }
 }
 </script>
