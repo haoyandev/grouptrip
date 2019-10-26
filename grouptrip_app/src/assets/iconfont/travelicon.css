@@ -208,6 +208,13 @@
   fill: currentColor;
   overflow: hidden;
 }
+.iconred_favorite{
+  width: 15px;
+  height: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 .iconstar-yellow{
   width: 20px;
   height: 20px;

@@ -60,7 +60,7 @@
         </mt-swipe>
         <div class="theme-item">
           <div class="theme-icon">
-            <img src="../../assets/iconfont/home.png" alt="">
+            <img :src="t.themepic" alt="">
           </div>
           <p>{{t.theme}}</p>
         </div>
@@ -84,12 +84,10 @@
                   </span>
                   <span class="msg-age">{{t.age}}岁</span>
                 </div>
-                <router-link to="javascript;" class="msg-favoriate">
+                <div class="msg-favoriate">
                   <span>喜欢</span>
-                  <svg class="iconblack_favorite-purple" aria-hidden="true">
-                    <use xlink:href="#iconblack_favorite-purple" />
-                  </svg>
-                </router-link>
+                  <like></like>
+                </div>
               </div>
             </div>
             <router-link class="msg-more" to="javascript;">
@@ -116,8 +114,8 @@
             </svg>
           </div>
           <div class="interest">
-            <span>87</span>
-            <span>感兴趣</span>
+            <p>{{t.fans}}</p>
+            <span>人感兴趣</span>
             <router-link to="">
               和他聊聊
             </router-link>
@@ -129,9 +127,11 @@
   </main>
 </template>
 <script>
+import like from '../common/like.vue';
 export default {
   data() {
     return {
+      
       //下拉菜单
       top: 550,
       pop: false,
@@ -151,7 +151,8 @@ export default {
       trips:[
         {theme:'一起去冒险',name:'维多利亚',age:'20',
         date:'12月23日~2020年1月8日',
-        place:'日本•大阪•京都',
+        place:'日本•大阪•京都',fans:'87',
+        themepic:require('../../assets/theme/explore.png'),
         personalhead:require('../../assets/citypics/heimen.jpg')}
       ],
       show: false, //底部弹出层
@@ -181,6 +182,9 @@ export default {
       ]
     };
   },
+  components:{
+    like
+  },
   methods: {
     jumphome(){
       this.$emit("Child",{opa:1,gos:'none',go:'block',copa:0})
@@ -202,7 +206,8 @@ export default {
       setTimeout(() => {
         this.pop=false;
       }, 300);
-    }
+    },
+    
   }
 };
 </script>
@@ -284,7 +289,7 @@ export default {
 .grouptrip-wrap .theme-item{
   position: absolute;
   width: 100px;height: 70px;
-  top: 20px;
+  top: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -294,11 +299,15 @@ export default {
 }
 .grouptrip-wrap .theme-item p{
   color: #fff;
-  font-size: 15px;
+  font-size: 13px;
+  margin: 0px;
 }
 .grouptrip-wrap .theme-item .theme-icon{
-  width: 40px;height: 40px;
+  width: 60px;height: 60px;
   object-fit: cover;
+}
+.grouptrip-wrap .theme-item .theme-icon img{
+  width: 100%;
 }
 .grouptrip-wrap .grouptrip-wrap-item {
   height: 520px;
@@ -388,7 +397,31 @@ export default {
 .personal-msg-place .iconstar-yellow {
   margin-left: 150px;
 }
-.
+.item-personal-msg .interest {
+  width: 100%;
+  display: flex;
+  height: 50px;
+  align-items: center;
+  justify-content: space-around;
+}
+.item-personal-msg .interest p{
+  margin: 0px;
+  font-size: 20px;
+  font-weight: bolder;
+}
+.item-personal-msg .interest span{
+  font-size: 15px;
+  margin-left: -15px;
+}
+.item-personal-msg .interest a{
+  width: 230px;
+  height: 40px;
+  background-color: #8134af;
+  border-radius: 30px;
+  color: #fff;
+  text-align: center;
+  line-height: 40px;
+}
 /* 弹出组件 */
 .tabbar-top .van-hairline--top-bottom::after,
 .van-hairline-unset--top-bottom::after {

@@ -245,8 +245,7 @@
                   </div>
                 </div>
               </div>
-            </div>
-          
+            </div>  
           </van-tab>
           <van-tab title="推荐玩法">
             <div class="bottom2_wrap">
@@ -264,9 +263,7 @@
                     </div>
                     <span>维多利亚</span>
                     <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
+                     <like></like>
                       <span>115</span>
                     </div>
                   </div>
@@ -286,9 +283,7 @@
                     </div>
                     <span>维多利亚</span>
                     <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
+                      <like></like>
                       <span>115</span>
                     </div>
                   </div>
@@ -308,9 +303,7 @@
                     </div>
                     <span>维多利亚</span>
                     <div class="favorite">
-                      <svg class="iconblack_favorite-purple" aria-hidden="true">
-                        <use xlink:href="#iconblack_favorite-purple" />
-                      </svg>
+                      <like></like>
                       <span>115</span>
                     </div>
                   </div>
@@ -331,6 +324,7 @@
 import Sendgroup from "../components/common/Sendgroup";
 import MainTabBar from "../components/mainTabBar";
 import Go from "../components/common/go";
+import like from '../components/common/like';
 export default {
   data() {
     return {
@@ -518,7 +512,8 @@ export default {
   components: {
     MainTabBar,
     Sendgroup,
-    Go
+    Go,
+    like,
   }
 };
 </script>
@@ -884,6 +879,8 @@ li {
 .tips-personal .favorite {
   position: absolute;
   right: 2px;
+  display: flex;
+  align-items: center;
 }
 #strategypage {
   transition: opacity 0.6s linear;
