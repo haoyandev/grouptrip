@@ -23,11 +23,8 @@
         <div class="top-city">
           <div class="top-city-title">
             <h3>热门城市</h3>
-            <router-link
-              to="javascript;"
-              style="display: flex;align-item:center; line-height: 15px"
-            >
-              <span>查看更多</span>
+            <router-link to style="display: flex;align-item:center; line-height: 15px">
+              <span @click="jumpcity">查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />
               </svg>
@@ -202,11 +199,11 @@
         </div>
       </div>
       <div class="strategy-bottom">
-        <van-tabs v-model="active" swipeable="">
+        <van-tabs v-model="active" swipeable>
           <van-tab title="旅伴">
             <div class="bottom1_wrap">
               <trips></trips>
-            </div>  
+            </div>
           </van-tab>
           <van-tab title="推荐玩法">
             <div class="bottom2_wrap">
@@ -271,25 +268,29 @@
                 </div>
               </div>
             </div>
-            </van-tab>
-          </van-tabs>
+          </van-tab>
+        </van-tabs>
       </div>
       <Sendgroup></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
+    <City @come="come" :style="{display:citydis,opacity:cityopa,transition:'opacity .3s linear'}"></City>
     <Go @Child="showChild" :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"></Go>
   </div>
 </template>
 
 <script>
-import Trips from '../components/index/Trips'
+import Trips from "../components/index/Trips";
 import Sendgroup from "../components/common/Sendgroup";
 import MainTabBar from "../components/mainTabBar";
 import Go from "../components/common/go";
-import like from '../components/common/like';
+import like from "../components/common/like";
+import City from "../components/strategy/morecity";
 export default {
   data() {
     return {
+      cityopa: 0,
+      citydis: "none",
       opa: 1,
       copa: 0,
       go: "block",
@@ -408,6 +409,26 @@ export default {
     };
   },
   methods: {
+    come(data) {
+      this.cityopa = data.cityopa;
+      setTimeout(() => {
+        this.citydis = data.citydis;
+        this.go = data.go;
+        setTimeout(() => {
+          this.opa = data.opa;
+        }, 50);
+      }, 300);
+    },
+    jumpcity() {
+      this.opa = 0;
+      setTimeout(() => {
+        this.citydis = "block";
+        this.go = "none";
+        setTimeout(() => {
+          this.cityopa = 1;
+        }, 50);
+      }, 300);
+    },
     touchmove(e) {
       this.move.left =
         e.changedTouches[0].pageX - this.move.start + this.move.end;
@@ -476,7 +497,8 @@ export default {
     Sendgroup,
     Go,
     like,
-    Trips
+    Trips,
+    City
   }
 };
 </script>
@@ -644,7 +666,7 @@ li {
   width: 200px;
   height: 100px;
   margin-top: 12.5px;
-  background-color: #f2f4f6;;
+  background-color: #f2f4f6;
 }
 .city-strategy .cityimg img {
   width: 100%;
@@ -816,11 +838,11 @@ li {
   margin-left: 5px;
   color: #999999;
 }
-.tips-personal p{
+.tips-personal p {
   font-size: 12px;
   margin-left: 5px;
 }
-.tips-personal .favorite{
+.tips-personal .favorite {
   position: absolute;
   right: 2px;
   display: flex;
