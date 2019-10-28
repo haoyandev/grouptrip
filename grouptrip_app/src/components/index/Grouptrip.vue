@@ -8,7 +8,7 @@
           </svg>
         </router-link>
         <div class="tabbar-top-bg">
-          <img src="../../assets/iconfont/logotext.png" alt style="width" />
+          <img src="../../assets/iconfont/logo-black.png" alt style="width" />
         </div>
         <router-link to="javacript;" class="start-group">发起</router-link>
       </div>
@@ -76,13 +76,29 @@
             <div class="msg-header-text">
               <h4 class="msg-header-name">{{t.name}}</h4>
               <div class="msg-header-person-text">
-                <div class="msg-sex-age">
-                  <span class="msg-sex">
-                    <svg class="iconnv" aria-hidden="true">
+                <div class="msg-sex-age"
+                  :class="{
+                    'msg-male': t.gender===1,
+                    'msg-female': t.gender===0,
+                    'msg-screct': t.gender===-1,
+                    }"
+                >
+                  <span v-if="t.gender==-1"></span>
+                  <span class="msg-sex" v-else-if="t.gender==1">
+                    <svg class="icon_male" aria-hidden="true">
+                      <use xlink:href="#iconicon28" />
+                    </svg>
+                  </span>
+                  <span class="msg-sex" v-else>
+                    <svg class="icon_female" aria-hidden="true">
                       <use xlink:href="#iconnv" />
                     </svg>
                   </span>
-                  <span class="msg-age">{{t.age}}岁</span>
+                  <span class="msg-age" :class="{
+                    'msg-age-male': t.gender===1,
+                    'msg-age-female': t.gender===0,
+                    'msg-age-screct': t.gender===-1,
+                    }">{{t.age}}岁</span>
                 </div>
                 <div class="msg-favoriate">
                   <span>喜欢</span>
@@ -101,17 +117,14 @@
               <use xlink:href="#iconshijian" />
             </svg>
             <span class="msg-date">日期</span>
-            <span>{{t.date}}</span>
+            <p>{{t.date}}</p>
           </div>
           <div class="personal-msg-place">
             <svg class="icondidian" aria-hidden="true">
               <use xlink:href="#icondidian" />
             </svg>
             <span class="msg-place">地点</span>
-            <span>{{t.place}}</span>
-            <svg class="iconstar-yellow" aria-hidden="true">
-              <use xlink:href="#iconstar-yellow" />
-            </svg>
+            <p>{{t.place}}</p>
           </div>
           <div class="interest">
             <p>{{t.fans}}</p>
@@ -148,12 +161,24 @@ export default {
         { text: "约你去看音乐剧", value: 6 },
         { text: "其他活动", value: 7 }
       ],
+      
       trips:[
         {theme:'一起去冒险',name:'维多利亚',age:'20',
-        date:'12月23日~2020年1月8日',
+        date:'12月23日~2020年1月8日',gender:0,
         place:'日本•大阪•京都',fans:'87',
         themepic:require('../../assets/theme/explore.png'),
-        personalhead:require('../../assets/citypics/heimen.jpg')}
+        personalhead:require('../../assets/citypics/heimen.jpg')},
+        {theme:'一起去冒险',name:'维多利亚',age:'20',
+        date:'12月23日~2020年1月8日',gender:1,
+        place:'日本•大阪•京都',fans:'87',
+        themepic:require('../../assets/theme/explore.png'),
+        personalhead:require('../../assets/citypics/heimen.jpg')},
+        {theme:'一起去冒险',name:'维多利亚',age:'20',
+        date:'12月23日~2020年1月8日',gender:-1,
+        place:'日本•大阪•京都',fans:'87',
+        themepic:require('../../assets/theme/explore.png'),
+        personalhead:require('../../assets/citypics/heimen.jpg')},
+        
       ],
       show: false, //底部弹出层
       cities: [
@@ -183,7 +208,7 @@ export default {
     };
   },
   components:{
-    like
+    like,
   },
   methods: {
     jumphome(){
@@ -229,9 +254,14 @@ export default {
 #grouptrip-page .tabbar-top .tabbar-title .tabbar-top-bg {
   width: 100px;
   height: 30px;
+  margin-top: 6px;
+  margin-left: 25px;
 }
 #grouptrip-page .tabbar-top .tabbar-title .tabbar-top-bg img {
   width: 100%;
+}
+#grouptrip-page .tabbar-top .grouptrip-back{
+  height: 35px;
 }
 #grouptrip-page .tabbar-top a,
 #note-page .tabbar-top a {
@@ -310,7 +340,7 @@ export default {
   width: 100%;
 }
 .grouptrip-wrap .grouptrip-wrap-item {
-  height: 520px;
+  height: 570px;
   position: relative;
 }
 .grouptrip-wrap .grouptrip-wrap-item img {
@@ -353,7 +383,6 @@ export default {
   width: 200px;
 }
 .msg-header-person-text .msg-sex-age {
-  border: 1px solid #ffb6b9;
   border-radius: 30px;
   width: 50px;
   height: 16px;
@@ -362,10 +391,27 @@ export default {
   margin-left: 10px;
   margin-right: 10px;
 }
+.msg-header-person-text .msg-screct{
+  border: 1px solid #b689b6;
+}
+.msg-header-person-text .msg-female{
+  border: 1px solid #ffb6b9;
+}
+.msg-header-person-text .msg-male{
+  border: 1px solid #8ac6d1;
+}
 .msg-header-person-text .msg-sex-age .msg-age {
   font-size: 12px;
-  color: #ffb6b9;
   margin-left: 3px;
+}
+.msg-header-person-text .msg-sex-age .msg-age-screct{
+  color: #b689b6;
+}
+.msg-header-person-text .msg-sex-age .msg-age-female{
+  color: #ffb6b9;
+}
+.msg-header-person-text .msg-sex-age .msg-age-male{
+  color: #8ac6d1;
 }
 .personal-msg-header .msg-more {
   height: 60px;
@@ -378,6 +424,12 @@ export default {
 .item-personal-msg .msg-date,
 .item-personal-msg .msg-place {
   margin: 0 10px;
+  font-size: 14px;
+}
+.item-personal-msg p, .item-personal-msg p{
+  display: inline;
+  font-weight: 500;
+  font-size: 14px;
 }
 .msg-header-person-text .msg-favoriate {
   border: 1px solid #b689b6;
@@ -394,9 +446,6 @@ export default {
   color: #b689b6;
   margin-left: 3px;
 }
-.personal-msg-place .iconstar-yellow {
-  margin-left: 150px;
-}
 .item-personal-msg .interest {
   width: 100%;
   display: flex;
@@ -410,8 +459,9 @@ export default {
   font-weight: bolder;
 }
 .item-personal-msg .interest span{
-  font-size: 15px;
+  font-size: 13px;
   margin-left: -15px;
+  font-weight: 500;
 }
 .item-personal-msg .interest a{
   width: 230px;
@@ -495,5 +545,8 @@ export default {
 }
 .pop-panel .pop-panel-wrap .pop-item h5 {
   margin: 0px 0px 10px 0px;
+}
+.note-tabs .collection{
+  margin-left: 15px;
 }
 </style>

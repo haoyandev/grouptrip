@@ -8,7 +8,7 @@ import Grouptrip from './components/index/Grouptrip.vue'
 import Personal from '@/views/Personal.vue'
 // 攻略
 import Strategy from '@/views/Strategy.vue'
-import allcity from '@/components/strategy/allcity'
+import morecity from '@/components/strategy/morecity'
 // 游记
 import Note from '@/views/Note.vue'
 import Login from '@/components/login/login'
@@ -21,7 +21,6 @@ import go from '@/components/common/go'
 import uploadImg from '@/components/publish/uploadImg'
 import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
-import test from '@/components/publish/test'
 import Guan from '@/components/common/guanzhu.vue'
 Vue.use(Router)
 
@@ -42,6 +41,6 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
-    { path: '/allcity', component:allcity}
+    { path: '/morecity', component:morecity},
   ]
 })

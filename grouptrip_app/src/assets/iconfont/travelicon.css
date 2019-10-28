@@ -124,9 +124,9 @@
   fill: currentColor;
   overflow: hidden;
 }
-.iicondropdown-white{
-  width: 23px;
-  height: 23px;
+.icondropdown-white{
+  width: 10px;
+  height: 10px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;
@@ -187,7 +187,14 @@
   fill: currentColor;
   overflow: hidden;
 }
-.iconnv{
+.icon_female{
+  width: 15px;
+  height: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.icon_male{
   width: 15px;
   height: 15px;
   vertical-align: -0.15em;
@@ -216,8 +223,15 @@
   overflow: hidden;
 }
 .iconstar-yellow{
-  width: 20px;
-  height: 20px;
+  width: 15px;
+  height: 15px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
+.iconCollection{
+  width: 15px;
+  height: 15px;
   vertical-align: -0.15em;
   fill: currentColor;
   overflow: hidden;

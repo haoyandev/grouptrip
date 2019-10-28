@@ -91,6 +91,7 @@
                 <use xlink:href="#iconcomment" />
               </svg>
               <span>{{n.comments}}</span>
+              <collect class="collection"></collect>
             </div>
             <van-divider />
           </div>
@@ -114,12 +115,14 @@
                 <b>日本</b>
               </span>
               <div class="item-icon">
+                
                 <like></like>
                 <span>128</span>
                 <svg class="iconcomment" aria-hidden="true">
                   <use xlink:href="#iconcomment" />
                 </svg>
                 <span>83</span>
+                <collect class="collection"></collect>
               </div>
             </div>
             <van-divider />
@@ -148,6 +151,7 @@
                   <use xlink:href="#iconcomment" />
                 </svg>
                 <span>{{n.comments}}</span>
+                <collect class="collection"></collect>
               </div>
               <van-divider />
             </div>
@@ -217,6 +221,7 @@
                 <use xlink:href="#iconcomment" />
               </svg>
               <span>{{n.comments}}</span>
+              <collect class="collection"></collect>
             </div>
             <van-divider />
           </div>
@@ -229,6 +234,7 @@
 <script>
 import MainTabBar from "../components/mainTabBar";
 import like from "../components/common/like"
+import collect from '../components/common/collect'
 export default {
   created() {
     this.a = setInterval(() => {
@@ -237,7 +243,8 @@ export default {
   },
   components: {
     MainTabBar,
-    like
+    like,
+    collect
   },
   data() {
     return {
@@ -586,6 +593,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding: 15px 15px 0px 15px;
+  margin-top: 10px;
   box-sizing: border-box;
 }
 .note-wrap .all-item .item-text {
