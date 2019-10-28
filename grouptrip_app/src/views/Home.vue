@@ -23,8 +23,8 @@
               <svg class="iconshaixuan" aria-hidden="true">
                 <use xlink:href="#iconshaixuan" />
               </svg>
+              <span style="font-size:5px;">筛选</span>
             </mt-button>
-            <span style="font-size:5px;">筛选</span>
             <mt-button class="iconbutton">
               <svg class="iconmessage" aria-hidden="true">
                 <use xlink:href="#iconmessage" />
@@ -34,48 +34,7 @@
         </mt-tab-item>
       </mt-tabbar>
       <div class="homewrap">
-        <div class="wrap-left">
-          <div class="wrap-item top-item">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img src="../assets/citypics/img1957.jpg" alt />
-              </div>
-              <span class="place">马来西亚,沙巴</span>
-              <span class="date">11月16日-11月30日</span>
-              <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-              </div>
-            </div>
-          </div>
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img :src="t.headpic" alt />
-              </div>
-              <span class="place">{{t.place}}</span>
-              <span class="date">{{t.date}}</span>
-              <div class="wrap-item-details">
-                <p>{{t.details}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="wrap-right home-wrap-item">
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img :src="t.headpic" alt />
-              </div>
-              <span class="place">{{t.place}}</span>
-              <span class="date">{{t.date}}</span>
-              <div class="wrap-item-details">
-                <p>{{t.details}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <trips></trips>
       </div>
       <Sendgroup @Chose="jumpchos"></Sendgroup>
       <main-tab-bar></main-tab-bar>
@@ -83,6 +42,7 @@
   </div>
 </template>
 <script>
+import Trips from "../components/index/Trips"
 import MainTabBar from "../components/mainTabBar";
 import Sendgroup from "../components/common/Sendgroup";
 import GroupTrip from "../components/index/Grouptrip";
@@ -92,6 +52,7 @@ export default {
     MainTabBar,
     Sendgroup,
     GroupTrip,
+    Trips,
     chose
   },
   created() {
@@ -109,23 +70,6 @@ export default {
       width: innerWidth * 2 + "px",
       go: "block",
       gos: "none",
-
-      trips: [
-        {
-          headpic: require("../assets/citypics/heimen.jpg"),
-          place: "泰国,芭提雅",
-          date: "10月16日-10月30日",
-          details:
-            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"
-        },
-        {
-          headpic: require("../assets/citypics/heimen.jpg"),
-          place: "日本，大阪",
-          date: "11月16日-11月30日",
-          details:
-            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"
-        }
-      ]
     };
   },
   methods: {
@@ -263,6 +207,10 @@ export default {
   border: none;
   box-shadow: none;
   height: 20px;
+  line-height: 20px;
+}
+.tabbar-icon .mint-button-text span{
+  margin-left: 5px;
 }
 .tabbar-icon .mint-button--normal {
   padding: 0 2px;
@@ -270,8 +218,6 @@ export default {
 .homewrap {
   position: relative;
   top: 140px;
-  width: 100%;
-  display: flex;
 }
 
 .wrap-item {
