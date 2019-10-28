@@ -2,7 +2,7 @@
   <main id="grouptrip-page">
     <div class="tabbar-top">
       <div class="tabbar-title">
-        <router-link to="" class="grouptrip-back">
+        <router-link to class="grouptrip-back">
           <svg @click="jumphome()" class="zuojiantou_small" aria-hidden="true">
             <use xlink:href="#iconzhixiangzuozuojiantou" />
           </svg>
@@ -10,7 +10,9 @@
         <div class="tabbar-top-bg">
           <img src="../../assets/iconfont/logo-black.png" alt style="width" />
         </div>
-        <router-link to="javacript;" class="start-group">发起</router-link>
+        <div @click="jumpchos">
+          <router-link to="" class="start-group">发起</router-link>
+        </div>
       </div>
       <van-dropdown-menu>
         <van-dropdown-item v-model="value1" :options="option1" />
@@ -60,18 +62,14 @@
         </mt-swipe>
         <div class="theme-item">
           <div class="theme-icon">
-            <img :src="t.themepic" alt="">
+            <img :src="t.themepic" alt />
           </div>
           <p>{{t.theme}}</p>
         </div>
         <div class="item-personal-msg">
           <div class="personal-msg-header">
             <div class="msg-header-head">
-              <img
-                :src="t.personalhead"
-                style=" max-width: 100%;height: auto;"
-                alt
-              />
+              <img :src="t.personalhead" style=" max-width: 100%;height: auto;" alt />
             </div>
             <div class="msg-header-text">
               <h4 class="msg-header-name">{{t.name}}</h4>
@@ -129,22 +127,18 @@
           <div class="interest">
             <p>{{t.fans}}</p>
             <span>人感兴趣</span>
-            <router-link to="">
-              和他聊聊
-            </router-link>
+            <router-link to>和他聊聊</router-link>
           </div>
         </div>
       </div>
-      
     </div>
   </main>
 </template>
 <script>
-import like from '../common/like.vue';
+import like from "../common/like.vue";
 export default {
   data() {
     return {
-      
       //下拉菜单
       top: 550,
       pop: false,
@@ -211,8 +205,11 @@ export default {
     like,
   },
   methods: {
-    jumphome(){
-      this.$emit("Child",{opa:1,gos:'none',go:'block',copa:0})
+    jumpchos(){
+      this.$emit('Gjc',{chosopa:1,chosdis:'block',go:'none',opa:0})
+    },
+    jumphome() {
+      this.$emit("Child", { opa: 1, gos: "none", go: "block", copa: 0 });
     },
     showPop() {
       this.pop = true;
@@ -229,10 +226,9 @@ export default {
         }, 10);
       }
       setTimeout(() => {
-        this.pop=false;
+        this.pop = false;
       }, 300);
-    },
-    
+    }
   }
 };
 </script>
@@ -271,8 +267,9 @@ export default {
   font-size: 12px;
   height: 20px;
 }
-#grouptrip-page .tabbar-top .tabbar-title .start-group,#note-page .tabbar-top .start-group{
-  background-color:#b689b6;
+#grouptrip-page .tabbar-top .tabbar-title .start-group,
+#note-page .tabbar-top .start-group {
+  background-color: #b689b6;
   color: #fff;
   border-radius: 30px;
   text-align: center;
@@ -314,11 +311,11 @@ export default {
 .grouptrip-wrap {
   position: relative;
   width: 100%;
-  
 }
-.grouptrip-wrap .theme-item{
+.grouptrip-wrap .theme-item {
   position: absolute;
-  width: 100px;height: 70px;
+  width: 100px;
+  height: 70px;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
@@ -327,16 +324,17 @@ export default {
   justify-content: center;
   align-items: center;
 }
-.grouptrip-wrap .theme-item p{
+.grouptrip-wrap .theme-item p {
   color: #fff;
   font-size: 13px;
   margin: 0px;
 }
-.grouptrip-wrap .theme-item .theme-icon{
-  width: 60px;height: 60px;
+.grouptrip-wrap .theme-item .theme-icon {
+  width: 60px;
+  height: 60px;
   object-fit: cover;
 }
-.grouptrip-wrap .theme-item .theme-icon img{
+.grouptrip-wrap .theme-item .theme-icon img {
   width: 100%;
 }
 .grouptrip-wrap .grouptrip-wrap-item {
@@ -453,7 +451,7 @@ export default {
   align-items: center;
   justify-content: space-around;
 }
-.item-personal-msg .interest p{
+.item-personal-msg .interest p {
   margin: 0px;
   font-size: 20px;
   font-weight: bolder;
@@ -463,7 +461,7 @@ export default {
   margin-left: -15px;
   font-weight: 500;
 }
-.item-personal-msg .interest a{
+.item-personal-msg .interest a {
   width: 230px;
   height: 40px;
   background-color: #8134af;

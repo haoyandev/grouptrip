@@ -1,5 +1,5 @@
 <template>
-  <div class="parent" :style="height">
+  <div class="parent">
     <div :style="active==='success'&&'display:none;'">
       <svg @click="jiantou" class="zuojiantou" aria-hidden="true">
         <use xlink:href="#iconzhixiangzuozuojiantou" />

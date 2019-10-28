@@ -1,6 +1,11 @@
 <template>
   <div :style="{opacity:star,transition:'all .3s linear'}">
-    <group-trip @Child="showChild" :style="{display:gos,opacity:copa,transition:'all .3s linear'}"></group-trip>
+    <group-trip
+      @Gjc="gjc"
+      @Child="showChild"
+      :style="{display:gos,opacity:copa,transition:'all .3s linear'}"
+    ></group-trip>
+    <chose :style="{opacity:chosopa,display:chosdis,transition:'opacity .3s linear'}"></chose>
     <main id="homepage" :style="{display:go,opacity:opa,transition:'all .3s linear'}">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item logo-top">
@@ -31,7 +36,7 @@
       <div class="homewrap">
         <trips></trips>
       </div>
-      <Sendgroup></Sendgroup>
+      <Sendgroup @Chose="jumpchos"></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
   </div>
@@ -41,12 +46,14 @@ import Trips from "../components/index/Trips"
 import MainTabBar from "../components/mainTabBar";
 import Sendgroup from "../components/common/Sendgroup";
 import GroupTrip from "../components/index/Grouptrip";
+import chose from "../components/publish/choseTheme";
 export default {
   components: {
     MainTabBar,
     Sendgroup,
     GroupTrip,
-    Trips
+    Trips,
+    chose
   },
   created() {
     setTimeout(() => {
@@ -55,6 +62,8 @@ export default {
   },
   data() {
     return {
+      chosopa: 0,
+      chosdis: "none",
       star: 0,
       opa: 1,
       copa: 0,
@@ -64,6 +73,24 @@ export default {
     };
   },
   methods: {
+    gjc(data) {
+      this.chosdis = data.chosdis;
+      this.copa = data.opa;
+      setTimeout(() => {
+        this.chosopa = data.chosopa;
+        this.gos = data.go;
+        setTimeout(() => {}, 50);
+      }, 300);
+    },
+    jumpchos(data) {
+      this.chosdis = data.chosdis;
+      this.opa = data.opa;
+      setTimeout(() => {
+        this.chosopa = data.chosopa;
+        this.go = data.go;
+        setTimeout(() => {}, 50);
+      }, 300);
+    },
     jump() {
       this.opa = 0;
       setTimeout(() => {
@@ -75,13 +102,12 @@ export default {
       }, 300);
     },
     showChild(data) {
-      console.log(data)
-      this.copa=0;
+      this.copa = 0;
       setTimeout(() => {
-        this.go=data.go;
-        this.gos=data.gos;
+        this.go = data.go;
+        this.gos = data.gos;
         setTimeout(() => {
-          this.opa=data.opa;
+          this.opa = data.opa;
         }, 50);
       }, 300);
       // this.opa = data.opa;
@@ -196,7 +222,7 @@ export default {
 
 .wrap-item {
   height: 175px;
-  background:url('../assets/cardpics/bg-test.jpg');
+  background: url("../assets/cardpics/bg-test.jpg");
   background-size: 100%;
   border-radius: 10px;
   position: relative;
@@ -218,10 +244,10 @@ export default {
 .wrap-item .wrap-item-content .personal-pic {
   width: 50px;
   height: 50px;
-  border:2px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 50px;
 }
-.wrap-item .wrap-item-content .personal-pic img{
+.wrap-item .wrap-item-content .personal-pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;

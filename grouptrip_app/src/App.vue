@@ -19,6 +19,14 @@ export default {
   name: 'App',
   components:{
   },
+  methods: {
+    reload() {
+      this.isAlive = false;
+      this.$nextTick(function () {
+        this.isAlive = true
+      })
+    }
+  }
 }
 </script>
 <style>
