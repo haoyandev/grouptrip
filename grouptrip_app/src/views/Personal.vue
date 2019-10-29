@@ -1,119 +1,129 @@
 
 <template>
-  <div v-if="canShow">
-    <div class="icon">
-      <div class="icon-left">
-        <span @click="jumpSetting">
-          <svg class="chilun" aria-hidden="true">
-            <use xlink:href="#iconsetup" />
+  <div>
+    <div :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}" v-if="canShow">
+      <div class="icon">
+        <div class="icon-left">
+          <span @click="jumpSetting">
+            <svg class="chilun" aria-hidden="true">
+              <use xlink:href="#iconsetup" />
+            </svg>
+          </span>
+          <svg class="erweima" aria-hidden="true">
+            <use xlink:href="#iconscan" />
           </svg>
-        </span>
-        <svg class="erweima" aria-hidden="true">
-          <use xlink:href="#iconscan" />
-        </svg>
-      </div>
-      <div class="icon-right">
-        <svg class="message" aria-hidden="true">
-          <use xlink:href="#iconmessage" />
-        </svg>
-      </div>
-    </div>
-    <div class="user-head">
-      <div>
-        <div v-if="isLogin" class="header">
-          <img src="@/assets/iconfont/boy.png" alt="">
         </div>
-        <div v-else>
-          <svg @click="jump" class="boyhead" aria-hidden="true">
-            <use xlink:href="#icontouxiangnanhai" />
+        <div class="icon-right">
+          <svg class="message" aria-hidden="true">
+            <use xlink:href="#iconmessage" />
           </svg>
         </div>
       </div>
-      <span v-if="isLogin">{{user.uname}}</span>
-      <span  v-else @click="jump">登录查看更多信息</span>
+      <div class="user-head">
+        <div>
+          <div v-if="isLogin" class="header">
+            <img src="@/assets/iconfont/boy.png" alt />
+          </div>
+          <div v-else>
+            <svg @click="jump" class="boyhead" aria-hidden="true">
+              <use xlink:href="#icontouxiangnanhai" />
+            </svg>
+          </div>
+        </div>
+        <span v-if="isLogin">{{user.uname}}</span>
+        <span v-else @click="jump">登录查看更多信息</span>
+      </div>
+      <div class="self-content">
+        <ul>
+          <li>
+            <h1>0</h1>
+            <span>获赞与收藏</span>
+          </li>
+          <li @click="jumpfans()">
+            <h1>{{user.fansNum || 0}}</h1>
+            <span>粉丝</span>
+          </li>
+          <li>
+            <h1>{{user.focusNum || 0}}</h1>
+            <span>关注</span>
+          </li>
+          <li>
+            <h1>0</h1>
+            <span>国家</span>
+          </li>
+        </ul>
+      </div>
+      <div class="user-hobby">
+        <ul>
+          <li>
+            <div>
+              <svg class="shoucangjia" aria-hidden="true">
+                <use xlink:href="#iconshoucangjia" />
+              </svg>
+            </div>
+            <span>收藏夹</span>
+          </li>
+          <li>
+            <div>
+              <svg class="youhuiquan" aria-hidden="true">
+                <use xlink:href="#iconyouhuiquan2" />
+              </svg>
+            </div>
+            <span>优惠券</span>
+          </li>
+          <li>
+            <div>
+              <svg class="qianbao" aria-hidden="true">
+                <use xlink:href="#iconqianbao" />
+              </svg>
+            </div>
+            <span>钱包</span>
+          </li>
+          <li>
+            <div>
+              <svg class="ban" aria-hidden="true">
+                <use xlink:href="#iconhuoban" />
+              </svg>
+            </div>
+            <span>Biu伴</span>
+          </li>
+          <li>
+            <div>
+              <svg class="dingdan" aria-hidden="true">
+                <use xlink:href="#iconshoutibao" />
+              </svg>
+            </div>
+            <span>订单</span>
+          </li>
+          <li>
+            <div>
+              <svg class="wenda" aria-hidden="true">
+                <use xlink:href="#iconwenda" />
+              </svg>
+            </div>
+            <span>问答</span>
+          </li>
+        </ul>
+      </div>
+      <main-tab-bar></main-tab-bar>
     </div>
-    <div class="self-content">
-      <ul>
-        <li>
-          <h1>0</h1>
-          <span>获赞与收藏</span>
-        </li>
-        <li>
-          <h1>{{user.fansNum || 0}}</h1>
-          <span>粉丝</span>
-        </li>
-        <li>
-          <h1>{{user.focusNum || 0}}</h1>
-          <span>关注</span>
-        </li>
-        <li>
-          <h1>0</h1>
-          <span>国家</span>
-        </li>
-      </ul>
-    </div>
-    <div class="user-hobby">
-      <ul>
-        <li>
-          <div>
-            <svg class="shoucangjia" aria-hidden="true">
-              <use xlink:href="#iconshoucangjia" />
-            </svg>
-          </div>
-          <span>收藏夹</span>
-        </li>
-        <li>
-          <div>
-            <svg class="youhuiquan" aria-hidden="true">
-              <use xlink:href="#iconyouhuiquan2" />
-            </svg>
-          </div>
-          <span>优惠券</span>
-        </li>
-        <li>
-          <div>
-            <svg class="qianbao" aria-hidden="true">
-              <use xlink:href="#iconqianbao" />
-            </svg>
-          </div>
-          <span>钱包</span>
-        </li>
-        <li>
-          <div>
-            <svg class="ban" aria-hidden="true">
-              <use xlink:href="#iconhuoban" />
-            </svg>
-          </div>
-          <span>Biu伴</span>
-        </li>
-        <li>
-          <div>
-            <svg class="dingdan" aria-hidden="true">
-              <use xlink:href="#iconshoutibao" />
-            </svg>
-          </div>
-          <span>订单</span>
-        </li>
-        <li>
-          <div>
-            <svg class="wenda" aria-hidden="true">
-              <use xlink:href="#iconwenda" />
-            </svg>
-          </div>
-          <span>问答</span>
-        </li>
-      </ul>
-    </div>
-    <main-tab-bar></main-tab-bar>
+    <fans :style="{opacity:opa.fanopa,display:opa.fandis,transition:'opacity .3s linear'}"></fans>
   </div>
 </template>
 
 <script>
 // 这是个人中心页面
-import MainTabBar from '../components/mainTabBar'
+import MainTabBar from "../components/mainTabBar";
+import fans from "../components/home/fanList";
 export default {
   data() {
     return {
+      opa:{
+        paropa:1,
+        pardis:'block',
+        fanopa:0,
+        fandis:'none'
+      },
       user: {},
       isLogin: false,
       canShow: false
@@ -122,50 +132,64 @@ export default {
   created() {
     // 每次创建personal都要先判断用户是否已登录
     // 获取本定token判断用户是否有登录
-    var token = localStorage.getItem('token')
-    if (token !== 'undefined') {
+    var token = localStorage.getItem("token");
+    if (token !== "undefined") {
       // 如果有登录 展现有用户信息的页面
       // 发送ajax获取最新的信息
-      console.log('token', token)
-      var url = '/api/v1/user/detail'
-      this.axios.get(url).then(res => {
-        if (res.data.code === 200) {
-          // token正常
-          this.user = res.data.data
-          this.isLogin = true
-          // 设置vuex
-          this.$store.commit('setUser', this.user)
-          this.$store.commit('setIsLogin', this.isLogin)
-        } 
-      }).catch(err => console.log(err))
+      console.log("token", token);
+      var url = "/api/v1/user/detail";
+      this.axios
+        .get(url)
+        .then(res => {
+          if (res.data.code === 200) {
+            // token正常
+            this.user = res.data.data;
+            this.isLogin = true;
+            // 设置vuex
+            this.$store.commit("setUser", this.user);
+            this.$store.commit("setIsLogin", this.isLogin);
+          }
+        })
+        .catch(err => console.log(err));
     }
-    this.canShow = true
+    this.canShow = true;
     // 发送ajax获取用户最新的信息
   },
-  methods:{
-    jump(){
-      this.$router.push('/login')
+  methods: {
+    jumpfans() {
+      this.opa.paropa=0;
+      setTimeout(() => {
+        this.opa.pardis='none';
+        this.opa.fandis='block';
+        setTimeout(() => {
+          this.opa.fanopa=1;
+        }, 50);
+      }, 50);
     },
-    jumpSetting () {
+    jump() {
+      this.$router.push("/login");
+    },
+    jumpSetting() {
       if (this.isLogin) {
         // 如果登录 则跳去个人设置页面
-        this.$router.push('/Settings')
+        this.$router.push("/Settings");
       } else {
         // 如果未登录 则跳去登录页面
-        this.$toast({ message: '未登录', duration: 1000 })
+        this.$toast({ message: "未登录", duration: 1000 });
         setTimeout(() => {
-          this.$router.push('/Login')
-        }, 1000)
+          this.$router.push("/Login");
+        }, 1000);
       }
     }
   },
-  components:{
+  components: {
     MainTabBar,
+    fans
   }
 };
 </script>
 <style scoped>
-#personal-page{
+#personal-page {
   transition: opacity 0.3s linear;
 }
 [v-cloak] {
