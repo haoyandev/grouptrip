@@ -269,6 +269,8 @@
               </div>
             </div>
           </van-tab>
+          <div class="blank"></div>
+          <div class="blank"></div>
         </van-tabs>
       </div>
       <main-tab-bar></main-tab-bar>
