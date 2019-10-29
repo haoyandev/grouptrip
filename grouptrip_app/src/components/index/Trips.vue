@@ -13,8 +13,8 @@
               </div>
             </div>
           </div>
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i">
+          <div class="wrap-item" v-for="(t,i) of trips2" :key="
+          i" :style="{background:'url('+t.tripbg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}">
             <div class="wrap-item-content">
               <div class="personal-pic">
                 <img :src="t.headpic" alt="">
@@ -29,7 +29,7 @@
         </div>
         <div class="wrap-right home-wrap-item">
           <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i">
+          i" :style="{background:'url('+t.tripbg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}">
             <div class="wrap-item-content">
               <div class="personal-pic">
                 <img :src="t.headpic" alt="">
@@ -50,12 +50,41 @@ export default {
     return{
       trips:[
         {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/gkGaO_2656.jpg'),
         place:"泰国,芭提雅",date:"10月16日-10月30日",
         details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
         {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/bg2.jpg'),
+        place:"日本，大阪",date:"11月16日-11月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/mDOZ2_7086.jpg'),
+        place:"日本，大阪",date:"11月16日-11月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/MJdjR_0158.jpg'),
         place:"日本，大阪",date:"11月16日-11月30日",
         details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"}
-      ]
+      ],
+      trips2:[
+        {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics//ZpGM5_2033.jpg'),
+        place:"泰国,芭提雅",date:"10月16日-10月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/12345.jpg'),
+        place:"日本，大阪",date:"11月16日-11月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/bg5.jpg'),
+        place:"日本，大阪",date:"11月16日-11月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        {headpic:require('../../assets/citypics/heimen.jpg'),
+        tripbg:require('../../assets/cardpics/9876.jpg'),
+        place:"日本，大阪",date:"11月16日-11月30日",
+        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
+        
+      ],
     }
   }
 }

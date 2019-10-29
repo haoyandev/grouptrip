@@ -271,7 +271,6 @@
           </van-tab>
         </van-tabs>
       </div>
-      <Sendgroup></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
     <City @come="come" :style="{display:citydis,opacity:cityopa,transition:'opacity .3s linear'}"></City>
@@ -281,7 +280,6 @@
 
 <script>
 import Trips from "../components/index/Trips";
-import Sendgroup from "../components/common/Sendgroup";
 import MainTabBar from "../components/mainTabBar";
 import Go from "../components/common/go";
 import like from "../components/common/like";
@@ -496,7 +494,6 @@ export default {
   },
   components: {
     MainTabBar,
-    Sendgroup,
     Go,
     like,
     Trips,
