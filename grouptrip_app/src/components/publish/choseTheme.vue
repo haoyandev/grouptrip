@@ -52,7 +52,7 @@ export default {
   },
   created () {
     // 发送请求获取所有主题信息
-    var url = 'api/v1/group/themelist'
+    var url = 'group/api/v1/themelist'
     this.axios.get(url).then(res => {
       if (res.data.code === 200) {
         console.log(res.data.data)

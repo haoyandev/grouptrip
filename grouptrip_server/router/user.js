@@ -9,7 +9,7 @@ var router = express.Router()
 
 // 添加路由
 // 1. 用户注册
-router.post('/register', (req, res) => {
+router.post('/api/v1/register', (req, res) => {
   // 获取数据
   var obj = req.body
   // 检验数据
@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
 })
 
 // 2. 登陆
-router.post('/login', (req, res) => {
+router.post('/api/v1/login', (req, res) => {
   // 获取用户信息
   var obj = req.body
   var phone = obj.phone
@@ -96,12 +96,12 @@ router.post('/login', (req, res) => {
 })
 
 // 3. 注销
-router.get('/logout', (req, res) => {
+router.get('/api/v1/logout', (req, res) => {
   res.send({ code: 200, msg: `注销成功` })
 })
  
 // 4. 个人信息
-router.get('/detail', (req, res) => {
+router.get('/api/v1/detail', (req, res) => {
   // 获取用户信息
   var uid = req.user.uid
   console.log(uid)
@@ -115,7 +115,7 @@ router.get('/detail', (req, res) => {
 })
 
 // 5. 更新昵称
-router.put('/updatename', (req, res) => {
+router.put('/api/v1/updatename', (req, res) => {
   // 获取数据
   var uname = req.body.uname
   // 检验名字是否为空
@@ -191,7 +191,7 @@ router.put('/updatename', (req, res) => {
 })
 
 // 6. 更新性别
-router.put('/updatesex', (req, res) => {
+router.put('/api/v1/updatesex', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -213,7 +213,7 @@ router.put('/updatesex', (req, res) => {
 })
 
 // 7. 更新生日
-router.put('/updatebirth', (req, res) => {
+router.put('/api/v1/updatebirth', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -235,7 +235,7 @@ router.put('/updatebirth', (req, res) => {
 })
 
 // 8. 更新城市
-router.put('/updatecity', (req, res) => {
+router.put('/api/v1/updatecity', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -257,7 +257,7 @@ router.put('/updatecity', (req, res) => {
 })
 
 // 9. 更新简介
-router.put('/updateintr', (req, res) => {
+router.put('/api/v1/updateintr', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -279,7 +279,7 @@ router.put('/updateintr', (req, res) => {
 })
 
 // 10. 关注
-router.post('/focus', (req, res) => {
+router.post('/api/v1/focus', (req, res) => {
   // 获取用户信息
   var user = req.user
   // 获取被关注用户的uid
@@ -325,7 +325,7 @@ router.post('/focus', (req, res) => {
 })
 
 // 11 . 粉丝列表
-router.get('/fanslist', (req, res) => {
+router.get('/api/v1/fanslist', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   console.log(uid)
@@ -362,7 +362,7 @@ router.get('/fanslist', (req, res) => {
 })
 
 // 12. 关注列表
-router.get('/focuslist', (req, res) => {
+router.get('/api/v1/focuslist', (req, res) => {
   // 获取用户id
   var uid = req.user.uid
   // 创建一个变量保存该用户关注的所有用户信息

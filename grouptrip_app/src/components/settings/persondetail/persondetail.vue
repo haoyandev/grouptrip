@@ -86,7 +86,7 @@ export default {
       // 询问用户是否真的退出
       this.$messagebox.confirm('确定登出账号?').then(res => {
         // 退出
-        var url =  `api/v1/user/logout`
+        var url =  `/user/api/v1/logout`
         this.axios.get(url).then(res => {
           if (res.data.code === 200) {
             // 清除token
@@ -115,7 +115,7 @@ export default {
       var birthday = `${year}-${month}-${date}`
       console.log(birthday)
       // 发送ajax 修改生日
-      var url = `api/v1/user/updatebirth`
+      var url = `user/api/v1/updatebirth`
       var data = { birthday }
       this.axios.put(url, data).then(res => {
         console.log(res)
