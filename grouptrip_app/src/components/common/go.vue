@@ -752,6 +752,7 @@ export default {
 };
 </script>
 <style>
+*{transition: all .4s linear}
 #go-page {
   width: 100%;
   position: relative;
