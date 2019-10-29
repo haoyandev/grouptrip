@@ -2,8 +2,8 @@
   <div>
     <header1 toRoute="/Settings" hTitle="编辑个人信息"></header1>
     <div class="detail-box">
-      <mt-cell class="mt-cell" title="账号绑定与设置" is-link>
-        <span><img src="@/assets/iconfont/boy.png" width="24" height="24"></span>
+      <mt-cell class="mt-cell" title="头像" is-link @click.native="toChangeAvatar">
+        <span class="avatar"><img :src="user.avatar"></span>
       </mt-cell>
       <mt-cell title="用户昵称" is-link>
         <span style="font-size:12px">{{user.uname}}</span>
@@ -75,6 +75,9 @@ export default {
     }
   },
   methods: {
+    created() {
+      console.log(this.$store.state.user)
+    },
     handleReload() {
       this.reload(); // 在想要刷新页面的时候调用reload方法
     },
@@ -130,6 +133,9 @@ export default {
     handleSelectCity (e) {
       console.log(e.target.className.indexOf('van-cell'))
       console.log(e.target.value)
+    },
+    toChangeAvatar () {
+      this.$router.push('/Changeavatar')
     }
   },
   components:{
@@ -155,6 +161,20 @@ export default {
     background-color: #eee;
     position: absolute;
     bottom: 0;
+  }
+  .detail-box .mint-cell-wrapper:first-child {
+    height: 65px;
+    line-height: 65px;
+  }
+  .detail-box .avatar {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+  }
+  .detail-box .avatar img {
+    vertical-align: top;
+    width:  100%;
+    height: 100%;
   }
   /* 时间选择器 */
   .van-popup--center {

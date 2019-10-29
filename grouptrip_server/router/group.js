@@ -61,10 +61,42 @@ router.post('/upload', (req, res) => {
 
   res.send('ddd')
 })
-// 5. 获取国家城市
-router.get('/getlocation', (req, res) => {
+// 5. 城市列表
+router.get('/citylist/:start', (req, res) => {
   // 获取数据
-  
+  var start = req.params.start
+  start = parseInt(start)
+  if (start) {
+    start = 0
+  }
+  // 执行sql
+  var sql = `select cid, cname, elname, views, hot_spots from trip_city limit ?, 6`
+  pool.query(sql, [start], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, data: result })
+    } else {
+      res.send({ code: 4001, msg: `没有更多数据` })
+    }
+  })
+})
+
+// 6. 获取景点列表
+router.get('/spotslist/:start', (req, res) => {
+  // 获取数据
+  var start = req.params.start
+  start = parseInt(start)
+  if (!start) {
+    start = 0
+  }
+  // 执行sql 
+  var sql = `select sid, cid from trip_spots limit ?, 6`
+  pool.query(sql, [start], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, data: result })
+    }
+  })
 })
 
 module.exports = router

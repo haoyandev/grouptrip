@@ -101,8 +101,14 @@ Content-Type: application/json
 
 ###
 # 查看用户粉丝列表
-GET   {{url}}/user/getfans HTTP/1.1
+GET  {{url}}/user/getfans HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MiwidW5hbWUiOiJ1c2VyX3MxVEVLVWJpZFIifSwiaWF0IjoxNTcxMzA5Nzc5LCJleHAiOjE1NzM5MDE3Nzl9.Ft5fxXLk-Olz8zQKYmRJGKxTu4evnwIBSKOFHg757z8
+Content-Type: application/json
+
+###
+# 粉丝列表
+get {{url}}/user/fanslist HTTP/1.1
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
 ###
@@ -122,3 +128,7 @@ Content-Type: application/json
 GET  {{url}}/user/loginbytoken HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 
+# 景点列表
+###
+GET  {{url}}/group/spotslist/1 HTTP/1.1
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8

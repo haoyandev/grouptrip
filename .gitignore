@@ -1,7 +1,10 @@
 # node_modules
-node_modules/
+**/node_modules/
 # .DS_Store
 .DS_Store
+# avatar/**
+**/avatar/
+!**/avatar/default.png
 # test.http
 *.http
 # Logs

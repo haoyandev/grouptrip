@@ -65,8 +65,11 @@ export default {
 
 <style>
 .theme-box {
-  background-color: #000;
+  background-color: #1f1f1f;
   margin-bottom: 30px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 /* 标题 底部进度提醒 */
 .theme-box .title, .theme-box .step {

@@ -23,6 +23,7 @@ import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
 import test from '@/components/publish/test'
 import Guan from '@/components/common/guanzhu.vue'
+import Changeavatar from '@/components/settings/changeAvatar/changeAvatar'
 Vue.use(Router)
 
 export default new Router({
@@ -42,6 +43,7 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
-    { path: '/allcity', component:allcity}
+    { path: '/allcity', component:allcity},
+    { path: '/Changeavatar', component: Changeavatar },
   ]
 })

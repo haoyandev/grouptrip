@@ -41,7 +41,7 @@ export default new Vuex.Store({
     },
     updateBirth (state, birth) {
       state.user.birthday = birth
-    }
+    },
   },
 
   actions: {
