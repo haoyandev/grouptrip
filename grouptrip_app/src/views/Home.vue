@@ -1,6 +1,11 @@
 <template>
   <div :style="{opacity:star,transition:'all .3s linear'}">
-    <group-trip @Child="showChild" :style="{display:gos,opacity:copa,transition:'all .3s linear'}"></group-trip>
+    <group-trip
+      @Gjc="gjc"
+      @Child="showChild"
+      :style="{display:gos,opacity:copa,transition:'all .3s linear'}"
+    ></group-trip>
+    <chose :style="{opacity:chosopa,display:chosdis,transition:'opacity .3s linear'}"></chose>
     <main id="homepage" :style="{display:go,opacity:opa,transition:'all .3s linear'}">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item logo-top">
@@ -18,8 +23,8 @@
               <svg class="iconshaixuan" aria-hidden="true">
                 <use xlink:href="#iconshaixuan" />
               </svg>
+              <span style="font-size:5px;">筛选</span>
             </mt-button>
-            <span style="font-size:5px;">筛选</span>
             <mt-button class="iconbutton">
               <svg class="iconmessage" aria-hidden="true">
                 <use xlink:href="#iconmessage" />
@@ -29,89 +34,102 @@
         </mt-tab-item>
       </mt-tabbar>
       <div class="homewrap">
-        <div class="wrap-left">
-          <div class="wrap-item top-item">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img src="../assets/citypics/img1957.jpg" alt="">
-              </div>
-              <span class="place">马来西亚,沙巴</span>
-              <span class="date">11月16日-11月30日</span>
-              <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-              </div>
-            </div>
-          </div>
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img :src="t.headpic" alt="">
-              </div>
-              <span class="place">{{t.place}}</span>
-              <span class="date">{{t.date}}</span>
-              <div class="wrap-item-details">
-                <p>{{t.details}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="wrap-right home-wrap-item">
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img :src="t.headpic" alt="">
-              </div>
-              <span class="place">{{t.place}}</span>
-              <span class="date">{{t.date}}</span>
-              <div class="wrap-item-details">
-                <p>{{t.details}}</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        <trips></trips>
+        <div class="blank"></div>
       </div>
-      <Sendgroup></Sendgroup>
+      <Sendgroup @Chose="jumpchos"></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
   </div>
 </template>
 <script>
+import Trips from "../components/index/Trips";
 import MainTabBar from "../components/mainTabBar";
 import Sendgroup from "../components/common/Sendgroup";
 import GroupTrip from "../components/index/Grouptrip";
+import chose from "../components/publish/choseTheme";
 export default {
   components: {
     MainTabBar,
     Sendgroup,
-    GroupTrip
+    GroupTrip,
+    Trips,
+    chose
   },
   created() {
+    this.lazy();
     setTimeout(() => {
       this.star = 1;
     }, 300);
   },
   data() {
     return {
+      chosopa: 0,
+      chosdis: "none",
       star: 0,
       opa: 1,
       copa: 0,
       width: innerWidth * 2 + "px",
       go: "block",
-      gos: "none",
-
-      trips:[
-        {headpic:require('../assets/citypics/heimen.jpg'),
-        place:"泰国,芭提雅",date:"10月16日-10月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../assets/citypics/heimen.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"}
-      ]
+      gos: "none"
     };
   },
   methods: {
+    lazy() {
+      document.addEventListener("scroll", ()=>{
+        function getWinHeight() {
+          return (
+            document.documentElement.clientHeight || document.body.clientHeight
+          );
+        }
+        function getScrollHeight() {
+          let bodyScrollHeight = 0;
+          let documentScrollHeight = 0;
+          if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+          }
+          if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+          }
+          // 当页面内容超出浏览器可视窗口大小时，Html的高度包含body高度+margin+padding+border所以html高度可能会大于body高度
+          return bodyScrollHeight - documentScrollHeight > 0
+            ? bodyScrollHeight
+            : documentScrollHeight;
+        }
+        function isReachBottom() {
+          const scrollTop = getScrollTop(); // 获取滚动条的高度
+          const winHeight = getWinHeight(); // 一屏的高度
+          const scrollHeight = getScrollHeight(); // 获取文档总高度
+          return scrollTop >= parseInt(scrollHeight) - winHeight;
+        }
+        function getScrollTop() {
+          // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
+          return document.documentElement.scrollTop || document.body.scrollTop;
+        }
+        var address=this.$store.state.page;
+        if (address==='/Home') {
+          console.log(isReachBottom());
+        }
+      });
+    },
+    gjc(data) {
+      this.chosdis = data.chosdis;
+      this.copa = data.opa;
+      setTimeout(() => {
+        this.chosopa = data.chosopa;
+        this.gos = data.go;
+        setTimeout(() => {}, 50);
+      }, 300);
+    },
+    jumpchos(data) {
+      this.chosdis = data.chosdis;
+      this.opa = data.opa;
+      setTimeout(() => {
+        this.chosopa = data.chosopa;
+        this.go = data.go;
+        setTimeout(() => {}, 50);
+      }, 300);
+    },
     jump() {
       this.opa = 0;
       setTimeout(() => {
@@ -123,13 +141,12 @@ export default {
       }, 300);
     },
     showChild(data) {
-      console.log(data)
-      this.copa=0;
+      this.copa = 0;
       setTimeout(() => {
-        this.go=data.go;
-        this.gos=data.gos;
+        this.go = data.go;
+        this.gos = data.gos;
         setTimeout(() => {
-          this.opa=data.opa;
+          this.opa = data.opa;
         }, 50);
       }, 300);
       // this.opa = data.opa;
@@ -145,6 +162,14 @@ export default {
 };
 </script>
 <style>
+@font-face {
+  font-family: Mqi;
+  src: url('../assets/font/MicrosoftYaqiHei-2.ttf');
+}
+@font-face {
+  font-family: JianHei;
+  src: url('../assets/font/HanYiZhongJianHei-2.ttf');
+}
 #homepage {
   position: relative;
 }
@@ -229,6 +254,10 @@ export default {
   border: none;
   box-shadow: none;
   height: 20px;
+  line-height: 20px;
+}
+.tabbar-icon .mint-button-text span {
+  margin-left: 5px;
 }
 .tabbar-icon .mint-button--normal {
   padding: 0 2px;
@@ -236,14 +265,10 @@ export default {
 .homewrap {
   position: relative;
   top: 140px;
-  width: 100%;
-  display: flex;
 }
 
 .wrap-item {
   height: 175px;
-  background:url('../assets/cardpics/bg-test.jpg');
-  background-size: 100%;
   border-radius: 10px;
   position: relative;
   padding-top: 50px;
@@ -255,6 +280,8 @@ export default {
 .top-item {
   height: 205px;
   width: 100%;
+  background-image: url('../assets/cardpics/bg1.jpg');
+  background-size: cover;
 }
 .wrap-item .wrap-item-content {
   display: flex;
@@ -264,10 +291,10 @@ export default {
 .wrap-item .wrap-item-content .personal-pic {
   width: 50px;
   height: 50px;
-  border:2px solid #ffffff;
+  border: 2px solid #ffffff;
   border-radius: 50px;
 }
-.wrap-item .wrap-item-content .personal-pic img{
+.wrap-item .wrap-item-content .personal-pic img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -287,10 +314,12 @@ export default {
   -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
   -webkit-line-clamp: 2; /** 显示的行数 **/
   overflow: hidden;
+  font:bold 16px Mqi;
 }
 .wrap-item .wrap-item-content .date {
   color: #fff;
   font: 5px "VisbyCFMedium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-top: 0px;
 }
 .wrap-item .wrap-item-content .wrap-item-details {
   height: 50px;
@@ -310,7 +339,7 @@ export default {
   -webkit-line-clamp: 2; /** 显示的行数 **/
   margin: 0;
   padding-top: 10px;
-  font: 0.8em "VisbyCFExtraBold", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: bold 14px JianHei; 
 }
 .wrap-left,
 .wrap-right {
@@ -325,4 +354,9 @@ export default {
 .wrap-right {
   padding-right: 10px;
 }
+ #homepage .blank{
+    width: 100%;
+    height: 60px;
+    background: #fff;
+  }
 </style>

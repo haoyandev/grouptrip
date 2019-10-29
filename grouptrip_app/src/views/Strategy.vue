@@ -6,8 +6,8 @@
           <div class="placebutton">
             <mt-button @click="jumpgo()">
               日本
-              <svg class="iicondropdown-white" aria-hidden="true">
-                <use xlink:href="#icondropdown-white-copy" />
+              <svg class="icondropdown-white" aria-hidden="true">
+                <use xlink:href="#iconxiala" />
               </svg>
             </mt-button>
           </div>
@@ -23,13 +23,10 @@
         <div class="top-city">
           <div class="top-city-title">
             <h3>热门城市</h3>
-            <router-link
-              to="javascript;"
-              style="display: flex;align-item:center; line-height: 15px"
-            >
-              <span style="margin-right: 5px">查看更多</span>
+            <router-link to style="display: flex;align-item:center; line-height: 15px">
+              <span @click="jumpcity">查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
-                <use xlink:href="#iconforward" />
+                <use xlink:href="#iconforward-purple" />
               </svg>
             </router-link>
           </div>
@@ -169,9 +166,9 @@
           <div class="essence-title">
             <h3>精华游记</h3>
             <router-link to="javascript;" class="see-more">
-              <span style="margin-right: 5px">查看更多</span>
+              <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
-                <use xlink:href="#iconforward" />
+                <use xlink:href="#iconforward-purple" />
               </svg>
             </router-link>
           </div>
@@ -202,50 +199,11 @@
         </div>
       </div>
       <div class="strategy-bottom">
-        <van-tabs v-model="active" swipeable="">
+        <van-tabs v-model="active" swipeable>
           <van-tab title="旅伴">
             <div class="bottom1_wrap">
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-              <div class="wrap-item strategy-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="personal-pic"></div>
-                  <span class="place">泰国,芭提雅</span>
-                  <span class="date">10月16日-10月30日</span>
-                  <div class="wrap-item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                </div>
-              </div>
-            </div>  
+              <trips></trips>
+            </div>
           </van-tab>
           <van-tab title="推荐玩法">
             <div class="bottom2_wrap">
@@ -263,8 +221,8 @@
                     </div>
                     <span>维多利亚</span>
                     <div class="favorite">
-                     <like></like>
-                      <span>115</span>
+                      <like></like>
+                      <p>115</p>
                     </div>
                   </div>
                 </div>
@@ -284,7 +242,7 @@
                     <span>维多利亚</span>
                     <div class="favorite">
                       <like></like>
-                      <span>115</span>
+                      <p>115</p>
                     </div>
                   </div>
                 </div>
@@ -304,30 +262,35 @@
                     <span>维多利亚</span>
                     <div class="favorite">
                       <like></like>
-                      <span>115</span>
+                      <p>115</p>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            </van-tab>
-          </van-tabs>
+          </van-tab>
+        </van-tabs>
       </div>
-      <Sendgroup></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
+    <City @come="come" :style="{display:citydis,opacity:cityopa,transition:'opacity .3s linear'}"></City>
     <Go @Child="showChild" :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"></Go>
   </div>
 </template>
 
 <script>
-import Sendgroup from "../components/common/Sendgroup";
+import Trips from "../components/index/Trips";
 import MainTabBar from "../components/mainTabBar";
 import Go from "../components/common/go";
-import like from '../components/common/like';
+import like from "../components/common/like";
+import City from "../components/strategy/morecity";
 export default {
+  created() {
+  },
   data() {
     return {
+      cityopa: 0,
+      citydis: "none",
       opa: 1,
       copa: 0,
       go: "block",
@@ -446,14 +409,34 @@ export default {
     };
   },
   methods: {
+    come(data) {
+      this.cityopa = data.cityopa;
+      setTimeout(() => {
+        this.citydis = data.citydis;
+        this.go = data.go;
+        setTimeout(() => {
+          this.opa = data.opa;
+        }, 50);
+      }, 300);
+    },
+    jumpcity() {
+      this.opa = 0;
+      setTimeout(() => {
+        this.citydis = "block";
+        this.go = "none";
+        setTimeout(() => {
+          this.cityopa = 1;
+        }, 50);
+      }, 300);
+    },
     touchmove(e) {
       this.move.left =
         e.changedTouches[0].pageX - this.move.start + this.move.end;
       if (this.move.left >= 0) {
         this.move.left = 0;
       }
-      if (this.move.left <= -800) {
-        this.move.left = -800;
+      if (this.move.left <= -830) {
+        this.move.left = -830;
       }
     },
     touchstart(e) {
@@ -511,9 +494,10 @@ export default {
   },
   components: {
     MainTabBar,
-    Sendgroup,
     Go,
     like,
+    Trips,
+    City
   }
 };
 </script>
@@ -551,8 +535,11 @@ li {
   top: 12px;
   left: 5px;
 }
-.mint-button-text {
+.placebutton .mint-button-text {
   display: flex;
+  align-items: center;
+  width: 50px;
+  justify-content: space-between;
 }
 .text-item .mint-tab-item-label {
   display: flex;
@@ -588,7 +575,7 @@ li {
   width: 100%;
   height: 100%;
   position: relative;
-  background-color: #e6e6e6;
+  background-color: #f2f4f6;
 }
 .strategywrap .top-city {
   width: 100%;
@@ -678,7 +665,7 @@ li {
   width: 200px;
   height: 100px;
   margin-top: 12.5px;
-  background-color: #e6e6e6;
+  background-color: #f2f4f6;
 }
 .city-strategy .cityimg img {
   width: 100%;
@@ -710,30 +697,7 @@ li {
   justify-content: space-between;
   padding: 0 12px 0 12px;
 }
-/* .sale-content .sale-item1 {
-  background-image: url("../assets/cardpics/2.jpg");
-  color: #8134af;
-}
-.sale-content .sale-item2 {
-  background-image: url("../assets/cardpics/6.jpg");
-  color: #ea7070;
-}
-.sale-content .sale-item3 {
-  background-image: url("../assets/cardpics/7.jpg");
-  color: #20366b;
-}
-.sale-content .sale-item4 {
-  background-image: url("../assets/cardpics/3.jpg");
-  color: #d25565;
-}
-.sale-content .sale-item5 {
-  background-image: url("../assets/cardpics/4.jpg");
-  color: #f0b775;
-}
-.sale-content .sale-item6 {
-  background-image: url("../assets/cardpics/10.jpg");
-  color: #003399;
-} */
+
 .sale-content .sale-item {
   width: 31%;
   height: 70px;
@@ -812,14 +776,8 @@ li {
 }
 .bottom1_wrap {
   width: 100%;
-  display: flex;
-  flex-wrap: wrap;
   background-color: #fff;
-  justify-content: space-around;
   padding-top: 15px;
-}
-.strategy-wrap-item {
-  width: 46%;
 }
 .bottom2_wrap {
   width: 100%;
@@ -852,7 +810,7 @@ li {
   height: 100%;
 }
 .tips-wrap-item .item-details {
-  height: 60px;
+  height: 55px;
   background-color: #fff;
 }
 .tips-wrap-item .item-details p {
@@ -863,6 +821,9 @@ li {
   -webkit-line-clamp: 2;
   line-clamp: 2;
   -webkit-box-orient: vertical;
+  margin: 10px 0px 0px 0px;
+  font-weight: 500;
+  font-size: 14px;
 }
 .tips-personal {
   display: flex;
@@ -872,8 +833,12 @@ li {
   align-items: center;
 }
 .tips-personal span {
+  font-size: 12px;
+  margin-left: 5px;
   color: #999999;
-  font-size: 5px;
+}
+.tips-personal p {
+  font-size: 12px;
   margin-left: 5px;
 }
 .tips-personal .favorite {

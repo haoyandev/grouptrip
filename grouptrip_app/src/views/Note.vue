@@ -10,7 +10,7 @@
       <router-link to="javascript;" class="start-group">发布</router-link>
     </div>
     <div class="top-title">
-      <div class="title-date">
+      <div class="title-date">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
         <h1>{{times.getDate()}}</h1>
       </div>
       <div class="title-year-mon">
@@ -91,6 +91,7 @@
                 <use xlink:href="#iconcomment" />
               </svg>
               <span>{{n.comments}}</span>
+              <collect class="collection"></collect>
             </div>
             <van-divider />
           </div>
@@ -114,12 +115,14 @@
                 <b>日本</b>
               </span>
               <div class="item-icon">
+                
                 <like></like>
                 <span>128</span>
                 <svg class="iconcomment" aria-hidden="true">
                   <use xlink:href="#iconcomment" />
                 </svg>
                 <span>83</span>
+                <collect class="collection"></collect>
               </div>
             </div>
             <van-divider />
@@ -148,6 +151,7 @@
                   <use xlink:href="#iconcomment" />
                 </svg>
                 <span>{{n.comments}}</span>
+                <collect class="collection"></collect>
               </div>
               <van-divider />
             </div>
@@ -217,6 +221,7 @@
                 <use xlink:href="#iconcomment" />
               </svg>
               <span>{{n.comments}}</span>
+              <collect class="collection"></collect>
             </div>
             <van-divider />
           </div>
@@ -229,6 +234,7 @@
 <script>
 import MainTabBar from "../components/mainTabBar";
 import like from "../components/common/like"
+import collect from '../components/common/collect'
 export default {
   created() {
     this.a = setInterval(() => {
@@ -237,7 +243,8 @@ export default {
   },
   components: {
     MainTabBar,
-    like
+    like,
+    collect
   },
   data() {
     return {
@@ -378,8 +385,8 @@ export default {
       if (this.move.left >= 0) {
         this.move.left = 0;
       }
-      if (this.move.left <= -220) {
-        this.move.left = -220;
+      if (this.move.left <= -270) {
+        this.move.left = -270;
       }
     },
     ts(e) {
@@ -394,8 +401,8 @@ export default {
       if (this.move.t2 >= 0) {
         this.move.t2 = 0;
       }
-      if (this.move.t2 <= -180) {
-        this.move.t2 = -180;
+      if (this.move.t2 <= -225) {
+        this.move.t2 = -225;
       }
     },
     t1(e) {
@@ -586,6 +593,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding: 15px 15px 0px 15px;
+  margin-top: 10px;
   box-sizing: border-box;
 }
 .note-wrap .all-item .item-text {

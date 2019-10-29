@@ -23,7 +23,6 @@ export default {
   },
   data(){
     return{
-
     }
   },
   computed:{
@@ -38,6 +37,7 @@ export default {
   methods:{
     itemClick(){
       this.$router.replace(this.path)
+      this.$store.commit('setPage',this.path);
     }
   }
 }

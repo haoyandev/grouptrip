@@ -10,16 +10,23 @@ export default new Vuex.Store({
     searchKws: "",
     uname: "",
     user: {},
-    isLogin: false
+    isLogin: false,
+    page:''
   },
   // 读取状态
   getters: {
     user: (state) => {
       return state.user;
+    },
+    page:(state)=>{
+      return state.page;
     }
   },
   //修改状态值
   mutations: {
+    setPage(state,page){
+      state.page=page;
+    },
     setUser(state, user) {
       state.user = user;
     },
