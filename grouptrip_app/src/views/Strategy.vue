@@ -285,6 +285,8 @@ import Go from "../components/common/go";
 import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
+  created() {
+  },
   data() {
     return {
       cityopa: 0,
@@ -433,8 +435,8 @@ export default {
       if (this.move.left >= 0) {
         this.move.left = 0;
       }
-      if (this.move.left <= -800) {
-        this.move.left = -800;
+      if (this.move.left <= -830) {
+        this.move.left = -830;
       }
     },
     touchstart(e) {

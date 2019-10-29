@@ -10,7 +10,7 @@
       <router-link to="javascript;" class="start-group">发布</router-link>
     </div>
     <div class="top-title">
-      <div class="title-date">
+      <div class="title-date">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
         <h1>{{times.getDate()}}</h1>
       </div>
       <div class="title-year-mon">
@@ -385,8 +385,8 @@ export default {
       if (this.move.left >= 0) {
         this.move.left = 0;
       }
-      if (this.move.left <= -220) {
-        this.move.left = -220;
+      if (this.move.left <= -270) {
+        this.move.left = -270;
       }
     },
     ts(e) {
@@ -401,8 +401,8 @@ export default {
       if (this.move.t2 >= 0) {
         this.move.t2 = 0;
       }
-      if (this.move.t2 <= -180) {
-        this.move.t2 = -180;
+      if (this.move.t2 <= -225) {
+        this.move.t2 = -225;
       }
     },
     t1(e) {
