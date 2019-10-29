@@ -1,10 +1,10 @@
-@url = http://localhost:3000/api/v1
+@url = http://localhost:3000
 
 @Content-Type = application/json
 
 ###
 # 注册
-POST {{url}}/user/register HTTP/1.1
+POST {{url}}/user/api/v1/register HTTP/1.1
 Content-Type: application/json
 
 {
@@ -14,7 +14,7 @@ Content-Type: application/json
 
 ###
 # 登陆
-POST {{url}}/user/login HTTP/1.1
+POST {{url}}/user/api/v1/login HTTP/1.1
 Content-Type: application/json
 
 {
@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ###
 # 更新名字
-PUT {{url}}/user/updatename HTTP/1.1
+PUT {{url}}/user/api/v1/updatename HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -35,17 +35,17 @@ Content-Type: application/json
 
 ###
 # 注销
-GET {{url}}/user/logout HTTP/1.1
+GET {{url}}/user/api/v1/logout HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MywidW5hbWUiOiJ1c2VyX1RscURpVHdDRnEifSwiaWF0IjoxNTcxMjk0NjE2LCJleHAiOjE1NzM4ODY2MTZ9.ogrgjuIVjRzkyitWPVf6TQCWM9zs8lo0bwX3rpHXRn4
 
 ###
 # 参看用户详情
-GET {{url}}/user/detail HTTP/1.1
+GET {{url}}/user/api/v1/detail HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 
 ###
 # 更新性别
-PUT {{url}}/user/updatesex HTTP/1.1
+PUT {{url}}/user/api/v1/updatesex HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -55,7 +55,7 @@ Content-Type: application/json
 
 ###
 # 更新生日
-PUT {{url}}/user/updatebirth HTTP/1.1
+PUT {{url}}/user/api/v1/updatebirth HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -65,7 +65,7 @@ Content-Type: application/json
 
 ###
 # 更新城市
-PUT {{url}}/user/updatecity HTTP/1.1
+PUT {{url}}/user/api/v1/updatecity HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -75,7 +75,7 @@ Content-Type: application/json
 
 ###
 # 更新简介
-PUT {{url}}/user/updateintr HTTP/1.1
+PUT {{url}}/user/api/v1/updateintr HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -85,7 +85,7 @@ Content-Type: application/json
 
 ###
 # 关注
-POST  {{url}}/user/focus HTTP/1.1
+POST  {{url}}/user/api/v1/focus HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -95,13 +95,7 @@ Content-Type: application/json
 
 ###
 # 查看用户详情
-GET   {{url}}/user/detail/2 HTTP/1.1
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MiwidW5hbWUiOiJ1c2VyX3MxVEVLVWJpZFIifSwiaWF0IjoxNTcxMzA5Nzc5LCJleHAiOjE1NzM5MDE3Nzl9.Ft5fxXLk-Olz8zQKYmRJGKxTu4evnwIBSKOFHg757z8
-Content-Type: application/json
-
-###
-# 查看用户粉丝列表
-GET  {{url}}/user/getfans HTTP/1.1
+GET   {{url}}/user/api/v1/detail/2 HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MiwidW5hbWUiOiJ1c2VyX3MxVEVLVWJpZFIifSwiaWF0IjoxNTcxMzA5Nzc5LCJleHAiOjE1NzM5MDE3Nzl9.Ft5fxXLk-Olz8zQKYmRJGKxTu4evnwIBSKOFHg757z8
 Content-Type: application/json
 
@@ -119,16 +113,12 @@ Content-Type: application/json
 
 ###
 # 主题列表
-get {{url}}/group/themelist HTTP/1.1
-
+get {{url}}/group/api/v1/themelist HTTP/1.1
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
 
-###
-GET  {{url}}/user/loginbytoken HTTP/1.1
-token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
-
 # 城市列表
 ###
-GET  {{url}}/group/citylist/1 HTTP/1.1
+GET  {{url}}/group/api/v1/citylist/1 HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
