@@ -227,6 +227,7 @@
           </div>
         </van-tab>
       </van-tabs>
+      <div class="blank"></div>
     </div>
     <main-tab-bar></main-tab-bar>
   </main>
