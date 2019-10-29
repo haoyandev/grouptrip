@@ -11,7 +11,7 @@ export default new Vuex.Store({
     uname: "",
     user: {},
     isLogin: false,
-    page:''
+    page:'/Home'
   },
   // 读取状态
   getters: {
