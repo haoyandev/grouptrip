@@ -62,12 +62,13 @@ router.post('/upload', (req, res) => {
   res.send('ddd')
 })
 // 5. 城市列表
-router.get('/citylist/:start', (req, res) => {
+router.get('/citylist/:pno', (req, res) => {
   // 获取数据
-  var start = req.params.start
-  start = parseInt(start)
+  var pno = req.params.pno
+  pno = parseInt(pno)
+  var start = (pno - 1) * count
   if (start) {
-    start = 0
+    start = 1
   }
   // 执行sql
   var sql = `select cid, cname, elname, views, hot_spots from trip_city limit ?, 6`
@@ -91,7 +92,7 @@ router.get('/spotslist/:pno', (req, res) => {
   pno = parseInt(pno)
   var start = (pno - 1) * count
   if (!start) {
-    start = 0
+    start = 1
   }
   // 执行sql 
   var sql = `select sid, cid from trip_spots limit ?, 6`
