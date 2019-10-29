@@ -39,12 +39,12 @@ app.use((req, res, next) => {
   var url = req.url
   // 用户接口除了登陆注册都要验证
   // 发表group除了主题游记都要验证
-  if (url !== '/api/v1/user/register' && 
-    url !== '/api/v1/user/login' && 
-    url.startsWith('/api/v1/user') ||
-    url !== '/api/v1/group/note' &&
-    url !== '/api/v1/group/themelist' &&
-    url.startsWith('/api/v1/group')) {
+  if (url !== '/user/api/v1/register' && 
+    url !== '/user/api/v1/login' && 
+    url.startsWith('/user/api/v1') ||
+    url !== '/group/api/v1/note' &&
+    url !== '/group//api/v1themelist' &&
+    url.startsWith('/group/api/v1')) {
     // 获取用户传来的token值
     var token = req.headers.token
     if (!token) {
@@ -72,8 +72,8 @@ app.use((req, res, next) => {
 })
 
 // 添加路由器
-app.use('/api/v1/user', userRouter)
-app.use('/api/v1/group', groupRouter)
+app.use('/user', userRouter)
+app.use('/group', groupRouter)
 app.listen(3000, () => {
   console.log(`server start`)
 })

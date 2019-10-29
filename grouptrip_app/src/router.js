@@ -22,6 +22,7 @@ import uploadImg from '@/components/publish/uploadImg'
 import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
 import Guan from '@/components/common/guanzhu.vue'
+import Changeavatar from '@/components/settings/changeAvatar/changeAvatar'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +42,7 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
+    { path: '/Changeavatar', component: Changeavatar },
     { path: '/fanList', component:fanList}
   ]
 })

@@ -1,5 +1,5 @@
 const pool = require('./pool')
-
+const fs = require('fs')
 
 // 获取基本用户信息
 function getBaseInfo (uid) {
@@ -20,7 +20,6 @@ function getFunsNum (uid) {
   return new Promise((resolve, reject) => {
     var sql = `select count(1) as fansNum from trip_focus where uid=?`
     pool.query(sql, [uid], (err, result) => {
-      console.log('fan', result)
       if (err) {
         reject(err)
       }
@@ -28,7 +27,6 @@ function getFunsNum (uid) {
     })
   })
 }
-
 // 获取关注数
 function getFocusNum (uid) {
   return new Promise ((resolve, reject) => {
@@ -42,4 +40,38 @@ function getFocusNum (uid) {
     })
   })
 }
-module.exports = { getBaseInfo, getFunsNum, getFocusNum }
+// 判断是否被关注
+function checkIsFollowed (uid, from_uid) {
+  return new Promise ((resolve, reject) => {
+    var sql = `select fid from trip_focus where uid=? and from_uid=?`
+    pool.query(sql, [uid, from_uid], (err, result) => {
+      if (err) {
+        reject(err)
+      } else {
+        if (result.length > 0) {
+          resolve({ checkIsFollowed: true })
+        } else {
+          resolve({ checkIsFollowed: false })
+        }
+      }
+    })
+  })
+}
+// 上传图片
+function uploadImg (dataUrl, localFileID) {
+  return new Promise((resolve, reject) => {
+    //  过滤data:URL
+    var base64Data = dataUrl.replace(/^data:image\/\w+;base64,/, "")
+    // 解码图片
+    var dataBuffer = new Buffer(base64Data, 'base64')
+    // 写入图片
+    fs.writeFile(localFileID, dataBuffer, (err) => {
+      if (err) reject(err)
+      // 成功
+      // 执行回调函数
+      resolve('ok')
+    })
+  })
+}
+
+module.exports = { getBaseInfo, getFunsNum, getFocusNum, uploadImg, checkIsFollowed }

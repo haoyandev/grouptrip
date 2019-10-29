@@ -329,7 +329,7 @@ export default {
 }
 .wrap-item .wrap-item-content .date {
   color: #fff;
-  font: 5px "VisbyCFMedium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 5px JianHei;
   margin-top: 0px;
 }
 .wrap-item .wrap-item-content .wrap-item-details {
@@ -350,7 +350,7 @@ export default {
   -webkit-line-clamp: 2; /** 显示的行数 **/
   margin: 0;
   padding-top: 10px;
-  font: bold 14px JianHei;
+  font: bold 14px Mqi;
 }
 .wrap-left,
 .wrap-right {
