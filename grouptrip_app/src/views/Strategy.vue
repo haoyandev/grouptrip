@@ -287,6 +287,8 @@ import Go from "../components/common/go";
 import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
+  created() {
+  },
   data() {
     return {
       cityopa: 0,

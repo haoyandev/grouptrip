@@ -42,7 +42,7 @@
   </div>
 </template>
 <script>
-import Trips from "../components/index/Trips"
+import Trips from "../components/index/Trips";
 import MainTabBar from "../components/mainTabBar";
 import Sendgroup from "../components/common/Sendgroup";
 import GroupTrip from "../components/index/Grouptrip";
@@ -56,6 +56,7 @@ export default {
     chose
   },
   created() {
+    this.lazy();
     setTimeout(() => {
       this.star = 1;
     }, 300);
@@ -69,10 +70,47 @@ export default {
       copa: 0,
       width: innerWidth * 2 + "px",
       go: "block",
-      gos: "none",
+      gos: "none"
     };
   },
   methods: {
+    lazy() {
+      document.addEventListener("scroll", ()=>{
+        function getWinHeight() {
+          return (
+            document.documentElement.clientHeight || document.body.clientHeight
+          );
+        }
+        function getScrollHeight() {
+          let bodyScrollHeight = 0;
+          let documentScrollHeight = 0;
+          if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+          }
+          if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+          }
+          // 当页面内容超出浏览器可视窗口大小时，Html的高度包含body高度+margin+padding+border所以html高度可能会大于body高度
+          return bodyScrollHeight - documentScrollHeight > 0
+            ? bodyScrollHeight
+            : documentScrollHeight;
+        }
+        function isReachBottom() {
+          const scrollTop = getScrollTop(); // 获取滚动条的高度
+          const winHeight = getWinHeight(); // 一屏的高度
+          const scrollHeight = getScrollHeight(); // 获取文档总高度
+          return scrollTop >= parseInt(scrollHeight) - winHeight;
+        }
+        function getScrollTop() {
+          // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
+          return document.documentElement.scrollTop || document.body.scrollTop;
+        }
+        var address=this.$store.state.page;
+        if (address==='/Home') {
+          console.log(isReachBottom());
+        }
+      });
+    },
     gjc(data) {
       this.chosdis = data.chosdis;
       this.copa = data.opa;
@@ -209,7 +247,7 @@ export default {
   height: 20px;
   line-height: 20px;
 }
-.tabbar-icon .mint-button-text span{
+.tabbar-icon .mint-button-text span {
   margin-left: 5px;
 }
 .tabbar-icon .mint-button--normal {

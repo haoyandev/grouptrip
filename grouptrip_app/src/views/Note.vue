@@ -10,7 +10,7 @@
       <router-link to="javascript;" class="start-group">发布</router-link>
     </div>
     <div class="top-title">
-      <div class="title-date">
+      <div class="title-date">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
         <h1>{{times.getDate()}}</h1>
       </div>
       <div class="title-year-mon">
