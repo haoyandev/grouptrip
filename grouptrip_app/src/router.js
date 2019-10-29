@@ -42,7 +42,6 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
-    { path: '/allcity', component:allcity},
     { path: '/Changeavatar', component: Changeavatar },
     { path: '/fanList', component:fanList}
   ]
