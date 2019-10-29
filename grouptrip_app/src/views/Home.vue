@@ -127,6 +127,10 @@ export default {
   font-family: Mqi;
   src: url('../assets/font/MicrosoftYaqiHei-2.ttf');
 }
+@font-face {
+  font-family: JianHei;
+  src: url('../assets/font/HanYiZhongJianHei-2.ttf');
+}
 #homepage {
   position: relative;
 }
@@ -226,8 +230,6 @@ export default {
 
 .wrap-item {
   height: 175px;
-  background: url("../assets/cardpics/bg-test.jpg");
-  background-size: cover;
   border-radius: 10px;
   position: relative;
   padding-top: 50px;
@@ -239,6 +241,8 @@ export default {
 .top-item {
   height: 205px;
   width: 100%;
+  background-image: url('../assets/cardpics/bg1.jpg');
+  background-size: cover;
 }
 .wrap-item .wrap-item-content {
   display: flex;
@@ -271,6 +275,7 @@ export default {
   -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
   -webkit-line-clamp: 2; /** 显示的行数 **/
   overflow: hidden;
+  font:bold 16px Mqi;
 }
 .wrap-item .wrap-item-content .date {
   color: #fff;
@@ -295,7 +300,7 @@ export default {
   -webkit-line-clamp: 2; /** 显示的行数 **/
   margin: 0;
   padding-top: 10px;
-  font: bold 14px Mqi; 
+  font: bold 14px JianHei; 
 }
 .wrap-left,
 .wrap-right {

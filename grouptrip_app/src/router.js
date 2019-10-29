@@ -6,9 +6,9 @@ import Home from '@/views/Home.vue'
 import Grouptrip from './components/index/Grouptrip.vue'
 // 个人中心
 import Personal from '@/views/Personal.vue'
+import fanList from '@/components/home/fanList'
 // 攻略
 import Strategy from '@/views/Strategy.vue'
-import morecity from '@/components/strategy/morecity'
 // 游记
 import Note from '@/views/Note.vue'
 import Login from '@/components/login/login'
@@ -41,6 +41,6 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
-    { path: '/morecity', component:morecity},
+    { path: '/fanList', component:fanList}
   ]
 })
