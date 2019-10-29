@@ -35,6 +35,7 @@
       </mt-tabbar>
       <div class="homewrap">
         <trips></trips>
+        <div class="blank"></div>
       </div>
       <Sendgroup @Chose="jumpchos"></Sendgroup>
       <main-tab-bar></main-tab-bar>
@@ -315,4 +316,9 @@ export default {
 .wrap-right {
   padding-right: 10px;
 }
+ #homepage .blank{
+    width: 100%;
+    height: 60px;
+    background: #fff;
+  }
 </style>
