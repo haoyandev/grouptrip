@@ -82,10 +82,14 @@ router.get('/citylist/:start', (req, res) => {
 })
 
 // 6. 获取景点列表
-router.get('/spotslist/:start', (req, res) => {
+router.get('/spotslist/:pno', (req, res) => {
   // 获取数据
-  var start = req.params.start
-  start = parseInt(start)
+  var pno = req.params.pno
+  // 每次返回6条数据
+  var count = 6
+  // 计算start
+  pno = parseInt(pno)
+  var start = (pno - 1) * count
   if (!start) {
     start = 0
   }
