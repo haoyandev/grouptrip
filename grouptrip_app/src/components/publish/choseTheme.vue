@@ -2,65 +2,71 @@
   <div class="theme-box">
     <p class="title">选择group游主题</p>
     <ul class="main-box">
-      <li class="theme-item" v-for="(item) of themeList" :key='item.tid'>
+      <li class="theme-item" v-for="(item) of themeList" :key="item.tid">
         <div class="left">
           <h1 class="icon">
-            <img :src="item.timg" alt="">
+            <img :src="item.timg" alt />
           </h1>
           <p class="theme-name">{{item.tname}}</p>
-        </div> 
-        <div class="right" v-show="activeTid==item.tid">
-          <img src="@/assets/iconfont/tag.png" alt="">
         </div>
-        <div @click="radio" class="touch"  :data-i="item.tid" :data-tname="item.tname" :data-timg="item.timg"></div>
+        <div class="right" v-show="activeTid==item.tid">
+          <img src="@/assets/iconfont/tag.png" alt />
+        </div>
+        <div
+          @click="radio"
+          class="touch"
+          :data-i="item.tid"
+          :data-tname="item.tname"
+          :data-timg="item.timg"
+        ></div>
       </li>
     </ul>
-    <p class="step" @click.prevent='next' :class="{ selected: activeTid !== null }">下一步 (1/3)</p>
+    <p class="step" @click.prevent="next" :class="{ selected: activeTid !== null }">下一步 (1/3)</p>
   </div>
 </template>
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       activeTid: null,
-      tname: '',
-      timg: '',
+      tname: "",
+      timg: "",
       themeList: []
-    }
+    };
   },
   methods: {
-    next (e) {
+    next(e) {
       if (!this.activeTid && !this.tname) {
-        return
+        return;
       }
-      var obj = { tid: this.activeTid, tname: this.tname, timg: this.timg }
-      console.log(obj)
-      this.$store.commit('setGroupInfo', obj)
-      console.log(this.$store.state.groupInfo)
-      this.$router.push('/uploadimg')
+      var obj = { tid: this.activeTid, tname: this.tname, timg: this.timg };
+      console.log(obj);
+      this.$store.commit("setGroupInfo", obj);
+      console.log(this.$store.state.groupInfo);
+      this.$router.push("/uploadimg");
     },
-    radio (e) {
-      var i = e.target.dataset.i
-      var tname = e.target.dataset.tname
-      var timg = e.target.dataset.timg
-      this.activeTid = i 
-      this.tname = tname
-      this.timg = timg
+    radio(e) {
+      var i = e.target.dataset.i;
+      var tname = e.target.dataset.tname;
+      var timg = e.target.dataset.timg;
+      this.activeTid = i;
+      this.tname = tname;
+      this.timg = timg;
       // console.log(this.activeTid)
     }
   },
-  created () {
+  created() {
     // 发送请求获取所有主题信息
-    var url = 'api/v1/group/themelist'
+    var url = 'group/api/v1/themelist'
     this.axios.get(url).then(res => {
       if (res.data.code === 200) {
-        console.log(res.data.data)
-        this.themeList = res.data.data
+        console.log(res.data.data);
+        this.themeList = res.data.data;
       }
-    })
+    });
   }
-}
+};
 </script>
 
 <style>
@@ -72,7 +78,8 @@ export default {
   height: 100%;
 }
 /* 标题 底部进度提醒 */
-.theme-box .title, .theme-box .step {
+.theme-box .title,
+.theme-box .step {
   position: fixed;
   width: 100%;
   height: 60px;
@@ -109,7 +116,7 @@ export default {
   font-size: 18px;
   display: flex;
   align-items: center;
-  justify-content: space-between; 
+  justify-content: space-between;
   position: relative;
 }
 .theme-box .left {

@@ -9,12 +9,12 @@ const { generateToken } = require('../jwt')
 var router = express.Router()
 
 // 1. 组队游列表
-router.get('/grouplist', (req, res) => {
+router.get('/api/v1/grouplist', (req, res) => {
   // 执行sql 查询组团信息
 })
 
 // 2. 获取主题列表
-router.get('/themelist', (req, res) => {
+router.get('/api/v1/themelist', (req, res) => {
   // 执行sql
   var sql = `select tid, tname, timg from trip_theme`
   pool.query(sql, (err, result) => {
@@ -23,7 +23,7 @@ router.get('/themelist', (req, res) => {
   })
 })
 // 3. 发布组团游
-router.post('/publish', (req, res) => {
+router.post('/api/v1/publish', (req, res) => {
   // 获取用户id
   var uid = req.user.uid
   // 获取数据
@@ -35,7 +35,7 @@ router.post('/publish', (req, res) => {
   
 })
 // 4. 上传组团游图片
-router.post('/upload', (req, res) => {
+router.post('/api/v1/upload', (req, res) => {
   // 获取用户信息
   var user = { uid: 2 }
   // 获取当前时间
@@ -62,7 +62,7 @@ router.post('/upload', (req, res) => {
   res.send('ddd')
 })
 // 5. 城市列表
-router.get('/citylist/:pno', (req, res) => {
+router.get('/api/v1/citylist/:pno', (req, res) => {
   // 获取数据
   var pno = req.params.pno
   pno = parseInt(pno)
@@ -83,7 +83,7 @@ router.get('/citylist/:pno', (req, res) => {
 })
 
 // 6. 获取景点列表
-router.get('/spotslist/:pno', (req, res) => {
+router.get('/api/v1/spotslist/:pno', (req, res) => {
   // 获取数据
   var pno = req.params.pno
   // 每次返回6条数据

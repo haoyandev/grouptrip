@@ -203,6 +203,7 @@
           <van-tab title="旅伴">
             <div class="bottom1_wrap">
               <trips></trips>
+              <div class="blank"></div>
             </div>
           </van-tab>
           <van-tab title="推荐玩法">
@@ -266,6 +267,8 @@
                     </div>
                   </div>
                 </div>
+                <div class="blank"></div>
+                <div class="blank"></div>
               </div>
             </div>
           </van-tab>
@@ -287,8 +290,7 @@ import Go from "../components/common/go";
 import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
-  created() {
-  },
+  created() {},
   data() {
     return {
       cityopa: 0,

@@ -36,6 +36,10 @@ export default {
         {img:require(`@/assets/citypics/heimen.jpg`),fanName:"陈六",amount:"5",biu:'4' ,fans:28 },
       ]
     }
+  },
+  created(){
+    //发送axio获取用户的粉丝列表
+    var url = ''
   }
 }
 </script>

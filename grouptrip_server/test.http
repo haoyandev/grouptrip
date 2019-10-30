@@ -107,13 +107,13 @@ Content-Type: application/json
 
 ###
 # 粉丝列表
-get {{url}}/user/fanslist HTTP/1.1
+get {{url}}/user/api/v1/fanslist HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
 ###
 # 关注列表
-get {{url}}/user/focuslist HTTP/1.1
+get {{url}}/user/api/v1/focuslist HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 Content-Type: application/json
 
@@ -128,7 +128,7 @@ Content-Type: application/json
 GET  {{url}}/user/loginbytoken HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
 
-# 景点列表
+# 城市列表
 ###
-GET  {{url}}/group/spotslist/1 HTTP/1.1
+GET  {{url}}/group/citylist/1 HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
