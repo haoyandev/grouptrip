@@ -431,4 +431,24 @@ router.put('/changeavatar', (req, res) => {
     })
   }).catch(err => { throw err })
 })
+// 14. 取消关注
+router.put('/api/v1/canclefocus', (req, res) => {
+  // 获取被关注用户id
+  var uid = req.body.uid
+  // 获取取消关注的用户id
+  var from_uid = req.user.uid
+  if (!from_uid) {
+    return res.send({ code: 4001, msg: `被取消关注用户id为空` })
+  }
+  // 执行sql
+  var sql = `update trip_focus set is_delete = 1 where uid=? and from_uid=?`
+  pool.query(sql, [uid, from_uid], (err, result) => {
+    if (err) throw err
+    if (result.affectedRows > 0) {
+      res.send({ code: 200, msg: `取消关注成功` })
+    } else {
+      res.send({ code: 4002, msg: `取消关注失败` })
+    }
+  })
+})
 module.exports = router

@@ -1,4 +1,3 @@
-
 <template>
   <div v-if="canShow">
     <div class="icon">
