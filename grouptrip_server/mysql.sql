@@ -118,10 +118,12 @@ CREATE TABLE trip_theme (
   is_delete TINYINT(1) DEFAULT '0',
   status TINYINT(4) DEFAULT NULL
 );
- /** group表 **/ 
+ /** 组团游表 **/ 
 CREATE TABLE trip_group (
 	gip INT PRIMARY KEY AUTO_INCREMENT,
-	tid INT,
+	uid INT, # 用户id
+	tid INT, # 主题id
+	cid INT, # 城市id
 	intr VARCHAR(200),
 	start_time VARCHAR(128),
 	end_time VARCHAR(128),
@@ -130,16 +132,31 @@ CREATE TABLE trip_group (
   is_delete TINYINT(1) DEFAULT '0',
   status TINYINT(4) DEFAULT NULL
 );
+/** 组团游图片表 **/
+CREATE TABLE trip_group_img (
+	id INT PRIMARY KEY AUTO_INCREMENT,
+	gid INT,
+	img VARCHAR(128),
+	begin_time VARCHAR(128),
+	end_time VARCHAR(128),
+	create_time VARCHAR(128),
+  update_time VARCHAR(128),
+  is_delete TINYINT(1) DEFAULT '0',
+  status TINYINT(4) DEFAULT NULL
+);
 
 /** 插入数据 **/
-/** 用户表 **/
-INSERT INTO trip_user(uname, upwd, phone, birthday, city, gender) VALUES
-('dingding', md5('123456'), '13790091222', '1990-02-18', '上海', '1'),
-('xiaohao', md5('123456'), '13790091223', '1995-06-23', '顺德', '1'),
-('victoria', md5('123456'), '13790091224', '1998-09-03', '广州', '0'),
-('dongdong', md5('123456'), '13790091225', '2000-01-25', '北京', '-1');
+/** 插入用户表数据 **/
+INSERT INTO trip_user(uid, uname, upwd, phone, birthday, city, gender) VALUES
+(1, 'dingding', md5('123456'), '13790091222', '1990-02-18', '上海', '1'),
+(2, 'xiaohao', md5('123456'), '13790091223', '1995-06-23', '顺德', '1'),
+(3, 'victoria', md5('123456'), '13790091224', '1998-09-03', '广州', '0'),
+(4, '金曼', md5('123456'), '15857836078', '1993-07-03', '北京', '0'),
+(5, '乌拉拉多', md5('123456'), '1832200078', '1978-02-18', '天津', '0'),
+(6, '皮卡兰', md5('123456'), '13501019666', '2000-09-28', '长春', '0'),
+(7, 'dongdong', md5('123456'), '13790091225', '2000-01-25', '北京', '-1');
 
-/** 关注表 **/
+/** 插入关注表数据 **/
 INSERT INTO trip_focus (fid, uid, from_uid)VALUES
 (null, 1, 2),
 (null, 1, 3),
@@ -149,17 +166,17 @@ INSERT INTO trip_focus (fid, uid, from_uid)VALUES
 (null, 3, 2),
 (null, 4, 1);
 
-/** 主题表 **/
+/** 插入主题表数据 **/
 INSERT INTO trip_theme(tid, tname, timg) VALUES
-(null, '一起去冒险', 'http://127.0.0.1:3000/theme/explore.png'),
-(null, '要甜甜的浪漫', 'http://127.0.0.1:3000/theme/romance.png'),
-(null, '走！探店去', 'http://127.0.0.1:3000/theme/shop.png'),
-(null, '寻觅美食', 'http://127.0.0.1:3000/theme/food.png'),
-(null, '看展才是正经事', 'http://127.0.0.1:3000/theme/show.png'),
-(null, '约你去看音乐剧', 'http://127.0.0.1:3000/theme/music.png'),
-(null, '其他活动', 'http://127.0.0.1:3000/theme/other.png');
+(1, '一起去冒险', 'http://127.0.0.1:3000/theme/explore.png'),
+(2, '要甜甜的浪漫', 'http://127.0.0.1:3000/theme/romance.png'),
+(3, '走！探店去', 'http://127.0.0.1:3000/theme/shop.png'),
+(4, '寻觅美食', 'http://127.0.0.1:3000/theme/food.png'),
+(5, '看展才是正经事', 'http://127.0.0.1:3000/theme/show.png'),
+(6, '约你去看音乐剧', 'http://127.0.0.1:3000/theme/music.png'),
+(7, '其他活动', 'http://127.0.0.1:3000/theme/other.png');
 
-/** 国家表**/
+/** 插入国家表数据 **/
 INSERT INTO trip_state(sid, sname) VALUES
 (110000, "中国"),
 (120000, "日本"),
@@ -169,7 +186,8 @@ INSERT INTO trip_state(sid, sname) VALUES
 (160000, "美国"),
 (170000, "泰国"),
 (180000, "韩国");
-/** 城市表 **/
+
+/** 插入城市表数据 **/
 /** id 国家id **/
 INSERT INTO trip_city(cid, sid, cname, elname, views, detail, hot_spots, img) VALUES 
 (110100, 110000, '香港', 'Hong Kong' ,1000,
@@ -219,7 +237,7 @@ INSERT INTO trip_city(cid, sid, cname, elname, views, detail, hot_spots, img) VA
 (170300, 170000, '普吉岛', 'Phuket', 1000, null, null, null),
 (180100, 180000, '首尔', 'Seoul', 1000, null, null, null);
 
-/** 景点表 **/
+/** 插入景点表数据 **/
 INSERT INTO trip_spots(sid, cid, views, sname) VALUES
 (110101, 110100, 10000, '星光大道'),
 (110102, 110100, 10000, '太平山'),
@@ -312,7 +330,7 @@ INSERT INTO trip_spots(sid, cid, views, sname) VALUES
 (120804, 120800, 10000, '札幌钟楼'),
 (120805, 120800, 10000, '大通公园');
 
-/** Note表 **/
+/** 插入Note表数据 **/
 INSERT INTO trip_note(nid, sid, cid, title, likes, comments, create_time) VALUES
 (1, 120000, 120200,
 '从平价小吃到米其林——大阪京都神户美食集(10日20店详记',
@@ -355,7 +373,7 @@ INSERT INTO trip_note(nid, sid, cid, title, likes, comments, create_time) VALUES
 769, 342, '2018-06-03'
 );
 
-/** tag表 **/
+/** 插入tag表数据 **/
 INSERT INTO trip_tag (tid, tname) VALUES
 (1, '日本美食'),
 (2, '关西攻略'),
@@ -379,7 +397,7 @@ INSERT INTO trip_tag (tid, tname) VALUES
 (20, 'ow潜水证'),
 (21, '大马攻略');
 
-/** note tag **/
+/** 插入note tag数据 **/
 INSERT INTO trip_note_tag (id, nid, tid) VALUES
 (null, 1, 1),
 (null, 1, 2),
@@ -402,3 +420,43 @@ INSERT INTO trip_note_tag (id, nid, tid) VALUES
 (null, 9, 19),
 (null, 10, 20),
 (null, 10, 21);
+
+/** 插入组团游表数据 **/
+INSERT INTO trip_group(gid, uid, tid, cid, intr, begin_time, end_time) VALUES
+# 同一主题不同城市 香港 台湾 东京
+(1, 1, 1, 110100,
+'看到香港崇光百货新开店，想去看见有没有打折的商品，有一起去的吗'
+),
+(2, 2, 1, 110100,
+'看到香港崇光百货新开店，想去看见有没有打折的商品，有一起去的吗'
+),
+(3, 3, 1, 110100,
+'看到香港崇光百货新开店，想去看见有没有打折的商品，有一起去的吗'
+),
+(4, 4, 1, 110100,
+'看到香港崇光百货新开店，想去看见有没有打折的商品，有一起去的吗'
+),
+(5, 5, 1, 110400, '11月9号到16号。机票已定。想找个人一起结伴旅行。不一定要拼住，要是你刚好也在台北就能约一起狂街。'),
+(6, 6, 1, 110400, '11月9号到16号。机票已定。想找个人一起结伴旅行。不一定要拼住，要是你刚好也在台北就能约一起狂街。'),
+(7, 7, 1, 110400, '11月9号到16号。机票已定。想找个人一起结伴旅行。不一定要拼住，要是你刚好也在台北就能约一起狂街。'),
+(8, 8, 1, 110400, '11月9号到16号。机票已定。想找个人一起结伴旅行。不一定要拼住，要是你刚好也在台北就能约一起狂街。'),
+(9, 1, 1, 120100, '目的地东京，主要对展览、美食、中古感兴趣，本人85后，性格外向事不多，有多国旅游经验，约年纪差距不太大，志同道合的女生，逛吃逛吃～'),
+(10, 2, 1, 120100, '目的地东京，主要对展览、美食、中古感兴趣，本人85后，性格外向事不多，有多国旅游经验，约年纪差距不太大，志同道合的女生，逛吃逛吃～'),
+(11, 3, 1, 120100, '目的地东京，主要对展览、美食、中古感兴趣，本人85后，性格外向事不多，有多国旅游经验，约年纪差距不太大，志同道合的女生，逛吃逛吃～'),
+(12, 4, 1, 120100, '目的地东京，主要对展览、美食、中古感兴趣，本人85后，性格外向事不多，有多国旅游经验，约年纪差距不太大，志同道合的女生，逛吃逛吃～'),
+(13, 5, 2, 110100, '找个一起旅行一辈子的人'),
+(14, 6, 2, 110100, '找个一起旅行一辈子的人'),
+(15, 7, 2, 110100, '找个一起旅行一辈子的人'),
+(16, 8, 2, 110100, '找个一起旅行一辈子的人'),
+(17, 5, 2, 110400, '寻知心说走就走的散心之旅'),
+(18, 5, 2, 110400, '寻知心说走就走的散心之旅'),
+(19, 5, 2, 110400, '寻知心说走就走的散心之旅'),
+(20, 5, 2, 110400, '寻知心说走就走的散心之旅'),
+(21, 5, 2, 120100, '11月东京，主要去迪士尼，去过2次日本自由行，多国自由行经验丰富。'),
+(22, 5, 2, 120100, '11月东京，主要去迪士尼，去过2次日本自由行，多国自由行经验丰富。'),
+(23, 5, 2, 120100, '11月东京，主要去迪士尼，去过2次日本自由行，多国自由行经验丰富。'),
+(24, 5, 2, 120100, '11月东京，主要去迪士尼，去过2次日本自由行，多国自由行经验丰富。'),
+(25, 5, 2,),
+(26, 5, 2,),
+(27, 5, 2,),
+(28, 5, 2,),

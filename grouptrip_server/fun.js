@@ -18,7 +18,7 @@ function getBaseInfo (uid) {
 // 获取粉丝数
 function getFunsNum (uid) {
   return new Promise((resolve, reject) => {
-    var sql = `select count(1) as fansNum from trip_focus where uid=?`
+    var sql = `select count(1) as fansNum from trip_focus where uid=? and is_delete=0`
     pool.query(sql, [uid], (err, result) => {
       if (err) {
         reject(err)
@@ -30,7 +30,7 @@ function getFunsNum (uid) {
 // 获取关注数
 function getFocusNum (uid) {
   return new Promise ((resolve, reject) => {
-    var sql = `select count(1) as focusNum from trip_focus where from_uid=?`
+    var sql = `select count(1) as focusNum from trip_focus where from_uid=? and is_delete=0`
     pool.query(sql, [uid], (err, result) => {
       if (err) {
         reject(err)

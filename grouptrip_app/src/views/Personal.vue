@@ -1,4 +1,3 @@
-
 <template>
   <div>
     <div :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}" v-if="canShow">
@@ -22,7 +21,7 @@
       <div class="user-head">
         <div>
           <div v-if="isLogin" class="header">
-            <img src="@/assets/iconfont/boy.png" alt />
+            <img :src="user.avatar" alt />
           </div>
           <div v-else>
             <svg @click="jump" class="boyhead" aria-hidden="true">
