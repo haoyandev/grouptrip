@@ -66,6 +66,8 @@ router.get('/api/v1/citylist/:pno', (req, res) => {
   // 获取数据
   var pno = req.params.pno
   pno = parseInt(pno)
+  // 每次返回6条数据
+  var count = 6
   var start = (pno - 1) * count
   if (start) {
     start = 1
