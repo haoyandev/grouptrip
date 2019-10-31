@@ -714,14 +714,18 @@ h5 {
   bottom: 37px;
 }
 .note-wrap .all-item .item-img {
-  width: 50%;
+  width: 170px;
+  height: 130px;
 }
 .note-wrap .all-item .item-img img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 6px;
 }
 .note-wrap .all-item .item-tag {
-  width: 70%;
+  width: 60%;
+  margin-top: 20px;
   font-size: 12px;
   margin-bottom: 15px;
 }
@@ -737,6 +741,8 @@ h5 {
   align-items: center;
   display: flex;
   justify-content: center;
+  width: 40%;
+  margin-top: 10px;
 }
 .item-icon span {
   margin-left: 5px;
