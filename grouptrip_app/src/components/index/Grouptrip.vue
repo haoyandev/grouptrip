@@ -1,145 +1,165 @@
 <template>
-  <main id="grouptrip-page">
-    <div class="tabbar-top">
-      <div class="tabbar-title">
-        <router-link to class="grouptrip-back">
-          <svg @click="jumphome()" class="zuojiantou_small" aria-hidden="true">
-            <use xlink:href="#iconzhixiangzuozuojiantou" />
-          </svg>
-        </router-link>
-        <div class="tabbar-top-bg">
-          <img src="../../assets/iconfont/logo-black.png" alt style="width" />
-        </div>
-        <div @click="jumpchos">
-          <router-link to="" class="start-group">发起</router-link>
-        </div>
-      </div>
-      <van-dropdown-menu>
-        <van-dropdown-item v-model="value1" :options="option1" />
-        <van-dropdown-item v-model="value2" :options="option2" class="dropdown-theme" />
-        <div role="button" class="van-dropdown-menu__item" @click="showPop">
-          <span class="van-dropdown-menu__title">
-            <div class="van-ellipsis">地点</div>
-          </span>
-        </div>
-      </van-dropdown-menu>
-      <div class="pop-panel" :style="{top:top+'px',transition:'top .3s linear'}" v-show="pop">
-        <div class="pop-top">
-          <div class="tabbar-search">
-            <svg class="search" aria-hidden="true">
-              <use xlink:href="#iconsearch-copy" />
+  <div>
+    <main
+      :style="{opacity:qiehuan.mainopa,display:qiehuan.maindis,transition:'opacity .4s linear'}"
+      id="grouptrip-page"
+    >
+      <div class="tabbar-top">
+        <div class="tabbar-title">
+          <router-link to class="grouptrip-back">
+            <svg @click="jumphome()" class="zuojiantou_small" aria-hidden="true">
+              <use xlink:href="#iconzhixiangzuozuojiantou" />
             </svg>
-            <input type="text" class="form-text" placeholder="搜索地点" />
+          </router-link>
+          <div class="tabbar-top-bg">
+            <img src="../../assets/iconfont/logo-black.png" alt style="width" />
           </div>
-          <van-button type="default" @click="closePop">取消</van-button>
+          <div @click="jumpchos">
+            <router-link to class="start-group">发起</router-link>
+          </div>
         </div>
-        <div class="pop-panel-title">
-          <span>热门地点</span>
-        </div>
-        <div class="pop-panel-wrap">
-          <div class="pop-item" v-for="(city,c) of cities" :key="c">
-            <div class="pop-item-img">
-              <img :src="city.cityimg" alt />
+        <van-dropdown-menu>
+          <van-dropdown-item v-model="value1" :options="option1" />
+          <van-dropdown-item v-model="value2" :options="option2" class="dropdown-theme" />
+          <div role="button" class="van-dropdown-menu__item" @click="showPop">
+            <span class="van-dropdown-menu__title">
+              <div class="van-ellipsis">地点</div>
+            </span>
+          </div>
+        </van-dropdown-menu>
+        <div class="pop-panel" :style="{top:top+'px',transition:'top .3s linear'}" v-show="pop">
+          <div class="pop-top">
+            <div class="tabbar-search">
+              <svg class="search" aria-hidden="true">
+                <use xlink:href="#iconsearch-copy" />
+              </svg>
+              <input type="text" class="form-text" placeholder="搜索地点" />
             </div>
-            <h5>{{city.name}}</h5>
+            <van-button type="default" @click="closePop">取消</van-button>
+          </div>
+          <div class="pop-panel-title">
+            <span>热门地点</span>
+          </div>
+          <div class="pop-panel-wrap">
+            <div class="pop-item" v-for="(city,c) of cities" :key="c">
+              <div class="pop-item-img">
+                <img :src="city.cityimg" alt />
+              </div>
+              <h5>{{city.name}}</h5>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="grouptrip-wrap">
-      <div class="grouptrip-wrap-item" v-for="(t,i) of trips" :key="i">
-        <mt-swipe :auto="0">
-          <mt-swipe-item>
-            <img src="../../assets/citypics/city6.jpg" alt />
-          </mt-swipe-item>
-          <mt-swipe-item>
-            <img src="../../assets/citypics/img1957.jpg" alt />
-          </mt-swipe-item>
-          <mt-swipe-item>
-            <img src="../../assets/citypics/img1996.jpg" alt />
-          </mt-swipe-item>
-        </mt-swipe>
-        <div class="theme-item">
-          <div class="theme-icon">
-            <img :src="t.themepic" alt />
-          </div>
-          <p>{{t.theme}}</p>
-        </div>
-        <div class="item-personal-msg">
-          <div class="personal-msg-header">
-            <div class="msg-header-head">
-              <img :src="t.personalhead" style=" max-width: 100%;height: auto;" alt />
+      <div class="grouptrip-wrap">
+        <div class="grouptrip-wrap-item" v-for="(t,i) of trips" :key="i">
+          <mt-swipe :auto="0">
+            <mt-swipe-item>
+              <img src="../../assets/citypics/city6.jpg" alt />
+            </mt-swipe-item>
+            <mt-swipe-item>
+              <img src="../../assets/citypics/img1957.jpg" alt />
+            </mt-swipe-item>
+            <mt-swipe-item>
+              <img src="../../assets/citypics/img1996.jpg" alt />
+            </mt-swipe-item>
+          </mt-swipe>
+          <div class="theme-item">
+            <div class="theme-icon">
+              <img :src="t.themepic" alt />
             </div>
-            <div class="msg-header-text">
-              <h4 class="msg-header-name">{{t.name}}</h4>
-              <div class="msg-header-person-text">
-                <div class="msg-sex-age"
-                  :class="{
+            <p>{{t.theme}}</p>
+          </div>
+          <div class="item-personal-msg">
+            <div class="personal-msg-header">
+              <div class="msg-header-head">
+                <img :src="t.personalhead" style=" max-width: 100%;height: auto;" alt />
+              </div>
+              <div class="msg-header-text">
+                <h4 class="msg-header-name">{{t.name}}</h4>
+                <div class="msg-header-person-text">
+                  <div
+                    class="msg-sex-age"
+                    :class="{
                     'msg-male': t.gender===1,
                     'msg-female': t.gender===0,
                     'msg-screct': t.gender===-1,
                     }"
-                >
-                  <span v-if="t.gender==-1"></span>
-                  <span class="msg-sex" v-else-if="t.gender==1">
-                    <svg class="icon_male" aria-hidden="true">
-                      <use xlink:href="#iconicon28" />
-                    </svg>
-                  </span>
-                  <span class="msg-sex" v-else>
-                    <svg class="icon_female" aria-hidden="true">
-                      <use xlink:href="#iconnv" />
-                    </svg>
-                  </span>
-                  <span class="msg-age" :class="{
+                  >
+                    <span v-if="t.gender==-1"></span>
+                    <span class="msg-sex" v-else-if="t.gender==1">
+                      <svg class="icon_male" aria-hidden="true">
+                        <use xlink:href="#iconicon28" />
+                      </svg>
+                    </span>
+                    <span class="msg-sex" v-else>
+                      <svg class="icon_female" aria-hidden="true">
+                        <use xlink:href="#iconnv" />
+                      </svg>
+                    </span>
+                    <span
+                      class="msg-age"
+                      :class="{
                     'msg-age-male': t.gender===1,
                     'msg-age-female': t.gender===0,
                     'msg-age-screct': t.gender===-1,
-                    }">{{t.age}}岁</span>
-                </div>
-                <div class="msg-favoriate">
-                  <span>喜欢</span>
-                  <like></like>
+                    }"
+                    >{{t.age}}岁</span>
+                  </div>
+                  <div class="msg-favoriate">
+                    <span>喜欢</span>
+                    <like></like>
+                  </div>
                 </div>
               </div>
+              <span @click="jt" class="msg-more" to>
+                <svg class="iconforward" aria-hidden="true">
+                  <use xlink:href="#iconforward-purple" />
+                </svg>
+              </span>
             </div>
-            <router-link class="msg-more" to="javascript;">
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
+            <div class="personal-msg-date">
+              <svg class="iconshijian" aria-hidden="true">
+                <use xlink:href="#iconshijian" />
               </svg>
-            </router-link>
-          </div>
-          <div class="personal-msg-date">
-            <svg class="iconshijian" aria-hidden="true">
-              <use xlink:href="#iconshijian" />
-            </svg>
-            <span class="msg-date">日期</span>
-            <p>{{t.date}}</p>
-          </div>
-          <div class="personal-msg-place">
-            <svg class="icondidian" aria-hidden="true">
-              <use xlink:href="#icondidian" />
-            </svg>
-            <span class="msg-place">地点</span>
-            <p>{{t.place}}</p>
-          </div>
-          <div class="interest">
-            <p>{{t.fans}}</p>
-            <span>人感兴趣</span>
-            <router-link to>和他聊聊</router-link>
+              <span class="msg-date">日期</span>
+              <p>{{t.date}}</p>
+            </div>
+            <div class="personal-msg-place">
+              <svg class="icondidian" aria-hidden="true">
+                <use xlink:href="#icondidian" />
+              </svg>
+              <span class="msg-place">地点</span>
+              <p>{{t.place}}</p>
+            </div>
+            <div class="interest">
+              <p>{{t.fans}}</p>
+              <span>人感兴趣</span>
+              <router-link to>和他聊聊</router-link>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
+    <user
+      @fh="fh"
+      :style="{opacity:qiehuan.useropa,display:qiehuan.userdis,transition:'opacity .4s linear'}"
+    ></user>
+  </div>
 </template>
 <script>
 import like from "../common/like.vue";
+import user from "../index/PersonalIndex";
 export default {
   data() {
     return {
       //下拉菜单
+      qiehuan: {
+        useropa: 0,
+        userdis: "none",
+        mainopa: 1,
+        maindis: "block"
+      },
       top: 550,
       pop: false,
       value1: 0,
@@ -155,24 +175,41 @@ export default {
         { text: "约你去看音乐剧", value: 6 },
         { text: "其他活动", value: 7 }
       ],
-      
-      trips:[
-        {theme:'一起去冒险',name:'维多利亚',age:'20',
-        date:'12月23日~2020年1月8日',gender:0,
-        place:'日本•大阪•京都',fans:'87',
-        themepic:require('../../assets/theme/explore.png'),
-        personalhead:require('../../assets/citypics/heimen.jpg')},
-        {theme:'一起去冒险',name:'维多利亚',age:'20',
-        date:'12月23日~2020年1月8日',gender:1,
-        place:'日本•大阪•京都',fans:'87',
-        themepic:require('../../assets/theme/explore.png'),
-        personalhead:require('../../assets/citypics/heimen.jpg')},
-        {theme:'一起去冒险',name:'维多利亚',age:'20',
-        date:'12月23日~2020年1月8日',gender:-1,
-        place:'日本•大阪•京都',fans:'87',
-        themepic:require('../../assets/theme/explore.png'),
-        personalhead:require('../../assets/citypics/heimen.jpg')},
-        
+
+      trips: [
+        {
+          theme: "一起去冒险",
+          name: "维多利亚",
+          age: "20",
+          date: "12月23日~2020年1月8日",
+          gender: 0,
+          place: "日本•大阪•京都",
+          fans: "87",
+          themepic: require("../../assets/theme/explore.png"),
+          personalhead: require("../../assets/citypics/heimen.jpg")
+        },
+        {
+          theme: "一起去冒险",
+          name: "维多利亚",
+          age: "20",
+          date: "12月23日~2020年1月8日",
+          gender: 1,
+          place: "日本•大阪•京都",
+          fans: "87",
+          themepic: require("../../assets/theme/explore.png"),
+          personalhead: require("../../assets/citypics/heimen.jpg")
+        },
+        {
+          theme: "一起去冒险",
+          name: "维多利亚",
+          age: "20",
+          date: "12月23日~2020年1月8日",
+          gender: -1,
+          place: "日本•大阪•京都",
+          fans: "87",
+          themepic: require("../../assets/theme/explore.png"),
+          personalhead: require("../../assets/citypics/heimen.jpg")
+        }
       ],
       show: false, //底部弹出层
       cities: [
@@ -201,12 +238,33 @@ export default {
       ]
     };
   },
-  components:{
+  components: {
     like,
+    user
   },
   methods: {
-    jumpchos(){
-      this.$emit('Gjc',{chosopa:1,chosdis:'block',go:'none',opa:0})
+    fh(data) {
+      this.qiehuan.useropa = 0;
+      setTimeout(() => {
+        this.qiehuan.userdis = "none";
+        this.qiehuan.maindis = "block";
+        setTimeout(() => {
+          this.qiehuan.mainopa = 1;
+        }, 50);
+      }, 300);
+    },
+    jt() {
+      this.qiehuan.mainopa = 0;
+      setTimeout(() => {
+        this.qiehuan.maindis = "none";
+        this.qiehuan.userdis = "block";
+        setTimeout(() => {
+          this.qiehuan.useropa = 1;
+        }, 50);
+      }, 300);
+    },
+    jumpchos() {
+      this.$emit("Gjc", { chosopa: 1, chosdis: "block", go: "none", opa: 0 });
     },
     jumphome() {
       this.$emit("Child", { opa: 1, gos: "none", go: "block", copa: 0 });
@@ -256,7 +314,7 @@ export default {
 #grouptrip-page .tabbar-top .tabbar-title .tabbar-top-bg img {
   width: 100%;
 }
-#grouptrip-page .tabbar-top .grouptrip-back{
+#grouptrip-page .tabbar-top .grouptrip-back {
   height: 35px;
 }
 #grouptrip-page .tabbar-top a,
@@ -389,26 +447,26 @@ export default {
   margin-left: 10px;
   margin-right: 10px;
 }
-.msg-header-person-text .msg-screct{
+.msg-header-person-text .msg-screct {
   border: 1px solid #b689b6;
 }
-.msg-header-person-text .msg-female{
+.msg-header-person-text .msg-female {
   border: 1px solid #ffb6b9;
 }
-.msg-header-person-text .msg-male{
+.msg-header-person-text .msg-male {
   border: 1px solid #8ac6d1;
 }
 .msg-header-person-text .msg-sex-age .msg-age {
   font-size: 12px;
   margin-left: 3px;
 }
-.msg-header-person-text .msg-sex-age .msg-age-screct{
+.msg-header-person-text .msg-sex-age .msg-age-screct {
   color: #b689b6;
 }
-.msg-header-person-text .msg-sex-age .msg-age-female{
+.msg-header-person-text .msg-sex-age .msg-age-female {
   color: #ffb6b9;
 }
-.msg-header-person-text .msg-sex-age .msg-age-male{
+.msg-header-person-text .msg-sex-age .msg-age-male {
   color: #8ac6d1;
 }
 .personal-msg-header .msg-more {
@@ -424,7 +482,8 @@ export default {
   margin: 0 10px;
   font-size: 14px;
 }
-.item-personal-msg p, .item-personal-msg p{
+.item-personal-msg p,
+.item-personal-msg p {
   display: inline;
   font-weight: 500;
   font-size: 14px;
@@ -456,7 +515,7 @@ export default {
   font-size: 20px;
   font-weight: bolder;
 }
-.item-personal-msg .interest span{
+.item-personal-msg .interest span {
   font-size: 13px;
   margin-left: -15px;
   font-weight: 500;
@@ -544,7 +603,7 @@ export default {
 .pop-panel .pop-panel-wrap .pop-item h5 {
   margin: 0px 0px 10px 0px;
 }
-.note-tabs .collection{
+.note-tabs .collection {
   margin-left: 15px;
 }
 </style>

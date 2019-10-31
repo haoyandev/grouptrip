@@ -1,7 +1,7 @@
 <template>
   <main id="personalindex-page">
-    <div class="tabbar-top">
-      <svg @click="jumpmain" class="zuojiantou_small" aria-hidden="true">
+    <div @click="jumpfh" class="tabbar-top">
+      <svg class="zuojiantou_small" aria-hidden="true">
         <use xlink:href="#iconzhixiangzuozuojiantou" />
       </svg>
     </div>
@@ -15,7 +15,7 @@
               <img src="../../assets/citypics/city1.jpg">
             </div>
             <div class="msg-top-follow">
-              <svg @click="jumpmain" class="iconsend-small" aria-hidden="true">
+              <svg class="iconsend-small" aria-hidden="true">
                 <use xlink:href="#iconsend" />
               </svg>
               关注</div>
@@ -104,6 +104,11 @@ export default {
   },
   components:{
     like
+  },
+  methods:{
+    jumpfh(){
+      this.$emit('fh','0')
+    }
   }
 }
 </script>

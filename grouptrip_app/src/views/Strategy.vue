@@ -5,7 +5,7 @@
         <mt-tab-item class="text-item">
           <div class="placebutton">
             <mt-button @click="jumpgo()">
-              日本
+              {{city}}
               <svg class="icondropdown-white" aria-hidden="true">
                 <use xlink:href="#iconxiala" />
               </svg>
@@ -211,14 +211,14 @@
               <div class="tips-wrap-item" v-for="(t,i) of tips" :key="i">
                 <div class="wrap-item-content">
                   <div class="tips-notes-img">
-                    <img :src=t.timg alt />
+                    <img :src="t.timg" alt />
                   </div>
                   <div class="item-details">
                     <p>{{t.details}}</p>
                   </div>
                   <div class="tips-personal">
                     <div class="personal-head">
-                      <img :src=t.head alt />
+                      <img :src="t.head" alt />
                     </div>
                     <span>{{t.uname}}</span>
                     <div class="favorite">
@@ -234,10 +234,14 @@
           <div class="blank"></div>
         </van-tabs>
       </div>
-      <main-tab-bar></main-tab-bar>
+      <main-tab-bar :cities="city"></main-tab-bar>
     </main>
     <City @come="come" :style="{display:citydis,opacity:cityopa,transition:'opacity .3s linear'}"></City>
-    <Go @Child="showChild" :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"></Go>
+    <Go
+      @city="citys"
+      @Child="showChild"
+      :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"
+    ></Go>
   </div>
 </template>
 
@@ -248,9 +252,12 @@ import Go from "../components/common/go";
 import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
-  created() {},
+  created() {
+    this.citys();
+  },
   data() {
     return {
+      city: "",
       cityopa: 0,
       citydis: "none",
       opa: 1,
@@ -358,15 +365,23 @@ export default {
           bgpath: require("../assets/citypics/img1996.jpg")
         }
       ],
-      tips:[
-        {details:'90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！',uname:'维多利亚',likes:'100',
-        timg:require('../assets/citypics/img1998.jpg'),
-        head:require('../assets/citypics/img1998.jpg')
+      tips: [
+        {
+          details:
+            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！",
+          uname: "维多利亚",
+          likes: "100",
+          timg: require("../assets/citypics/img1998.jpg"),
+          head: require("../assets/citypics/img1998.jpg")
         },
-        {details:'90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！',uname:'维多利亚',likes:'100',
-        timg:require('../assets/citypics/img1998.jpg'),
-        head:require('../assets/citypics/img1998.jpg')
-        },
+        {
+          details:
+            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！",
+          uname: "维多利亚",
+          likes: "100",
+          timg: require("../assets/citypics/img1998.jpg"),
+          head: require("../assets/citypics/img1998.jpg")
+        }
       ],
       imgs: {},
       move: {
@@ -381,6 +396,17 @@ export default {
     };
   },
   methods: {
+    citys(data) {
+      this.city = data||'广州';
+      this.copa = 0;
+      setTimeout(() => {
+        this.gos = "none";
+        this.go = "block";
+        setTimeout(() => {
+          this.opa = 1;
+        }, 50);
+      }, 300);
+    },
     come(data) {
       this.cityopa = data.cityopa;
       setTimeout(() => {
@@ -819,13 +845,13 @@ li {
   display: flex;
   align-items: center;
 }
-.personal-head{
+.personal-head {
   width: 20px;
   height: 20px;
   border-radius: 50px;
   overflow: hidden;
 }
-.personal-head img{
+.personal-head img {
   max-width: 100%;
   height: 100%;
   object-fit: cover;

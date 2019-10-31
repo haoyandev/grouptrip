@@ -26,17 +26,18 @@
     </div>
     <mt-tab-container v-model="active" class="go-container">
       <div class="active" :style="active===i&&'opacity:1;'" v-for="(ele,i) of gos_zt" :key="i">
-        <mt-tab-container-item :id="i">
+        <mt-tab-container-item @click.native="city" :id="i">
           <router-link
-            to="javascript"
+            to=""
             @click="add_trip(trip)"
             class="trip-a"
             href="javascript:;"
             v-for="(trip,j) of gos_zt[i]"
+            :data-city="trip.cname"
             :key="'index'+j"
             :style="{background:'url('+trip.cityimg+')',backgroundRepeat:'no-repeat',backgroundPosition:'center center', backgroundSize: 'cover'}"
           >
-            <span>{{trip.cname}}</span>
+            <span :data-citys="trip.cname">{{trip.cname}}</span>
           </router-link>
         </mt-tab-container-item>
       </div>
@@ -733,6 +734,10 @@ export default {
     };
   },
   methods: {
+    city(e){
+      var city=e.target.dataset.city||e.target.dataset.citys;
+      this.$emit('city',city)
+    },
     add_trip(trip) {
       this.late.push(trip);
       var result = [];

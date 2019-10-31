@@ -24,7 +24,7 @@
       </div>
       <div class="user-head">
         <div>
-          <div v-if="isLogin" class="header">
+          <div @click="jump" v-if="isLogin" class="header">
             <img :src="user.avatar" alt />
           </div>
           <div v-else>
@@ -110,8 +110,14 @@
       </div>
       <main-tab-bar></main-tab-bar>
     </div>
-    <fans @fans="jumppro"
-      :style="{opacity:opa.fanopa,display:opa.fandis,transition:'opacity .3s linear'}"></fans>
+    <fans
+      @fans="jumppro"
+      :style="{opacity:opa.fanopa,display:opa.fandis,transition:'opacity .3s linear'}"
+    ></fans>
+    <user
+      @fh="fh"
+      :style="{opacity:opa.useropa,display:opa.userdis,transition:'opacity .3s linear'}"
+    ></user>
   </div>
 </template>
 
@@ -119,6 +125,7 @@
 // 这是个人中心页面
 import MainTabBar from "../components/mainTabBar";
 import fans from "../components/home/fanList";
+import user from "../components/index/PersonalIndex";
 export default {
   data() {
     return {
@@ -126,7 +133,9 @@ export default {
         paropa: 1,
         pardis: "block",
         fanopa: 0,
-        fandis: "none"
+        fandis: "none",
+        useropa: 0,
+        userdis: "none"
       },
       user: {},
       isLogin: false,
@@ -140,28 +149,41 @@ export default {
     if (token !== "undefined") {
       // 如果有登录 展现有用户信息的页面
       // 发送ajax获取最新的信息
-      console.log('token', token)
-      var url = '/user/api/v1/detail'
-      this.axios.get(url).then(res => {
-        if (res.data.code === 200) {
-          // token正常
-          this.user = res.data.data
-          this.isLogin = true
-          // 设置vuex
-          this.$store.commit('setUser', this.user)
-          this.$store.commit('setIsLogin', this.isLogin)
-        } 
-      }).catch(err => console.log(err))
+      console.log("token", token);
+      var url = "/user/api/v1/detail";
+      this.axios
+        .get(url)
+        .then(res => {
+          if (res.data.code === 200) {
+            // token正常
+            this.user = res.data.data;
+            this.isLogin = true;
+            // 设置vuex
+            this.$store.commit("setUser", this.user);
+            this.$store.commit("setIsLogin", this.isLogin);
+          }
+        })
+        .catch(err => console.log(err));
     }
     this.canShow = true;
     // 发送ajax获取用户最新的信息
   },
   methods: {
-    jumppro(data) {
-      this.opa.fanopa=data.fanopa;
+    fh() {
+      this.opa.useropa = 0;
       setTimeout(() => {
-        this.opa.fandis =data.fandis;
-        this.opa.pardis=data.pardis;
+        this.opa.userdis = "none";
+        this.opa.pardis = "block";
+        setTimeout(() => {
+          this.opa.paropa = 1;
+        }, 50);
+      }, 50);
+    },
+    jumppro(data) {
+      this.opa.fanopa = data.fanopa;
+      setTimeout(() => {
+        this.opa.fandis = data.fandis;
+        this.opa.pardis = data.pardis;
         setTimeout(() => {
           this.opa.paropa = 1;
         }, 50);
@@ -178,7 +200,18 @@ export default {
       }, 50);
     },
     jump() {
-      this.$router.push("/login");
+      if (!this.isLogin) {
+        this.$router.push("/login");
+      } else {
+        this.opa.paropa = 0;
+        setTimeout(() => {
+          this.opa.pardis = "none";
+          this.opa.userdis = "block";
+          setTimeout(() => {
+            this.opa.useropa = 1;
+          }, 50);
+        }, 50);
+      }
     },
     jumpSetting() {
       if (this.isLogin) {
@@ -195,7 +228,8 @@ export default {
   },
   components: {
     MainTabBar,
-    fans
+    fans,
+    user
   }
 };
 </script>

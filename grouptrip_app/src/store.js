@@ -15,6 +15,9 @@ export default new Vuex.Store({
   },
   // 读取状态
   getters: {
+    isLogin:(state)=>{
+      return state.isLogin;
+    },
     user: (state) => {
       return state.user;
     },
