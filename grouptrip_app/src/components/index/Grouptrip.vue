@@ -50,7 +50,7 @@
       </div>
 
       <div class="grouptrip-wrap">
-        <div class="grouptrip-wrap-item" v-for="(t,i) of trips" :key="i">
+        <div class="grouptrip-wrap-item" v-for="(t,i) of tripsgo" :key="i">
           <mt-swipe :auto="0">
             <mt-swipe-item>
               <img src="../../assets/citypics/city6.jpg" alt />
@@ -64,20 +64,20 @@
           </mt-swipe>
           <div class="theme-item">
             <div class="theme-icon">
-              <img :src="t.themepic" alt />
+              <img :src="trips[0].themepic" alt />
             </div>
-            <span>{{t.theme}}</span>
+            <span>一起去冒险</span>
             <p class="theme_details">
-              {{t.details}}
+              {{t.intr}}
             </p>
           </div>
           <div class="item-personal-msg">
             <div class="personal-msg-header">
               <div class="msg-header-head">
-                <img :src="t.personalhead" style=" max-width: 100%;height: auto;" alt />
+                <img :src="t.avatar" style=" max-width: 100%;height: auto;" alt />
               </div>
               <div class="msg-header-text">
-                <h4 class="msg-header-name">{{t.name}}</h4>
+                <h4 class="msg-header-name">维多利亚</h4>
                 <div class="msg-header-person-text">
                   <div
                     class="msg-sex-age"
@@ -124,14 +124,14 @@
                 <use xlink:href="#iconshijian" />
               </svg>
               <span class="msg-date">日期</span>
-              <p>{{t.date}}</p>
+              <p>{{t.begin_time+'~'+t.end_time}}</p>
             </div>
             <div class="personal-msg-place">
               <svg class="icondidian" aria-hidden="true">
                 <use xlink:href="#icondidian" />
               </svg>
               <span class="msg-place">地点</span>
-              <p>{{t.place}}</p>
+              <p>{{t.cname}}</p>
             </div>
             <div class="interest">
               <p>{{t.fans}}</p>
@@ -148,9 +148,16 @@
 import like from "../common/like.vue";
 import user from "../index/PersonalIndex";
 export default {
+  created(){
+    this.axios.get(`/group/api/v1/grouplist/${this.page}`).then(res=>{
+      this.tripsgo=this.tripsgo.concat(res.data.data)
+    })
+  },
   data() {
     return {
       //下拉菜单
+      page:1,
+      tripsgo:[],
       qiehuan: {
         useropa: 0,
         userdis: "none",

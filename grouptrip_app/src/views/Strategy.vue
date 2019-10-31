@@ -35,11 +35,11 @@
           <div class="top-city-content">
             <div
               class="top-city-item"
-              v-for="(t,i) of trip_city"
+              v-for="(t,i) of trip_city_tuozhai"
               :key="i"
-              :style="{background:'url('+t.cityimg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}"
+              :style="{background:'url('+t.hot_spots+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}"
             >
-              <span>{{t.name}}</span>
+              <span>{{t.cname}}</span>
               <p>{{t.elname}}</p>
             </div>
           </div>
@@ -134,13 +134,13 @@
             data-width="300"
             :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
           >
-            <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
+            <li class="strategy-item" v-for="(strategy,s) of trip_city_tuozhai" :key="s">
               <div class="cityimg">
-                <img :src="strategy.imgpath" alt />
+                <img :src="strategy.hot_spots" alt />
               </div>
               <div class="city-details">
-                <h4 class="details-title">{{strategy.title}}</h4>
-                <p class="details">{{strategy.details}}</p>
+                <h4 class="details-title">{{strategy.cname}}</h4>
+                <p class="details">{{strategy.detail}}</p>
               </div>
             </li>
           </ul>
@@ -249,9 +249,11 @@ import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
   created() {
+    this.axios.get(`/group/api/v1/citylist/${this.page}`).then(res=>{this.trip_city_tuozhai=this.trip_city_tuozhai.concat(res.data.data)})
   },
   data() {
     return {
+      page:1,
       cityopa: 0,
       citydis: "none",
       opa: 1,
@@ -259,9 +261,10 @@ export default {
       go: "block",
       gos: "none",
       //这四个数据是做切换页面透明度渐变效果
-
+      strategies_tuozhuai:[],
       width: 0,
       active: 0, //保存底部推荐面板当前显示的子面板id
+      trip_city_tuozhai:[],
       trip_city: [
         {
           name: "大阪",
