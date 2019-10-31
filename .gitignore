@@ -2,6 +2,7 @@
 **/node_modules/
 # .DS_Store
 # test.http
+**/citypics/
 *.http
 # Logs
 logs

@@ -327,7 +327,7 @@ export default {
 }
 .wrap-item .wrap-item-content .date {
   color: #fff;
-  font: 5px "VisbyCFMedium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: bold 5px JianHei;
   margin-top: 0px;
 }
 .wrap-item .wrap-item-content .wrap-item-details {

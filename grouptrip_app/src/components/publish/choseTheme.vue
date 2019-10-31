@@ -40,7 +40,8 @@ export default {
       if (!this.activeTid && !this.tname) {
         return;
       }
-      var obj = { tid: this.activeTid, tname: this.tname, timg: this.timg };
+      var obj = { tid: this.activeTid, tname: this.tname, timg: this.timg 
+      };
       console.log(obj);
       this.$store.commit("setGroupInfo", obj);
       console.log(this.$store.state.groupInfo);
