@@ -10,7 +10,7 @@
       <router-link to="javascript;" class="start-group">发布</router-link>
     </div>
     <div class="top-title">
-      <div class="title-date">                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+      <div class="title-date">
         <h1>{{times.getDate()}}</h1>
       </div>
       <div class="title-year-mon">
@@ -69,20 +69,20 @@
       </div>
       <van-tabs v-model="active" animated class="note-tabs">
         <van-tab title="全部游记">
-          <div class="all-item" v-for="(n,i) of notes" :key="i">
+          <div class="all-item" v-for="(n,i) of newnotes" :key="i">
             <div class="item-text">
               <h3>{{n.title}}</h3>
               <div class="item-head">
-                <img :src="n.headimg" alt />
+                <img :src="n.avatar" alt />
               </div>
-              <span class="text-personal">发表于{{n.date}}</span>
+              <span class="text-personal">发表于{{n.create_time}}</span>
             </div>
             <div class="item-img">
-              <img :src="n.noteimg" alt />
+              <img :src="n.img" alt />
             </div>
             <div class="item-tag">
-              <span>{{n.tag1}}</span>
-              <span>{{n.tag2}}</span>
+              <span>{{n.tags[0]}}</span>
+              <span>{{n.tags[1]}}</span>
             </div>
             <div class="item-icon">
               <like></like>
@@ -94,6 +94,9 @@
               <collect class="collection"></collect>
             </div>
             <van-divider />
+          </div>
+          <div style="text-align:center">
+            <van-loading v-show="!can" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
           </div>
         </van-tab>
         <van-tab title="宝藏游记">
@@ -115,7 +118,6 @@
                 <b>日本</b>
               </span>
               <div class="item-icon">
-                
                 <like></like>
                 <span>128</span>
                 <svg class="iconcomment" aria-hidden="true">
@@ -129,20 +131,20 @@
           </div>
           <div class="history-note">
             <h2>历史榜首宝藏</h2>
-            <div class="all-item" v-for="(n,i) of notes" :key="i">
+            <div class="all-item" v-for="(n,i) of newnotes" :key="i">
               <div class="item-text">
                 <h3>{{n.title}}</h3>
                 <div class="item-head">
-                  <img :src="n.headimg" alt />
+                  <img :src="n.avatar" alt />
                 </div>
-                <span class="text-personal">发表于{{n.date}}</span>
+                <span class="text-personal">发表于{{n.create_time}}</span>
               </div>
               <div class="item-img">
-                <img :src="n.noteimg" alt />
+                <img :src="n.img" alt />
               </div>
               <div class="item-tag">
-                <span>{{n.tag1}}</span>
-                <span>{{n.tag2}}</span>
+                <span>{{n.tags[0]}}</span>
+                <span>{{n.tags[1]}}</span>
               </div>
               <div class="item-icon">
                 <like></like>
@@ -155,6 +157,9 @@
               </div>
               <van-divider />
             </div>
+            <div style="text-align:center">
+              <van-loading v-show="!can" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+            </div>
           </div>
         </van-tab>
         <van-tab title="玩法路线">
@@ -163,67 +168,76 @@
             <div class="new-route">
               <div class="new-item" v-for="(find,f) of finds" :key="f">
                 <div class="new-itemimg">
-                  <img :src="find.imgpath" alt="">
+                  <img :src="find.imgpath" alt />
                 </div>
                 <h4>{{find.title}}</h4>
                 <p>{{find.count}}次浏览</p>
               </div>
             </div>
-            <van-divider/>
+            <van-divider />
             <div class="hot-route">
               <h2>热门玩法</h2>
-              <ul class="hot-route-ul" @touchmove="t2" @touchstart="t1" @touchend="t3" :style="{marginLeft:move.t2+'px'}">
-                <li class="hot-route-li" v-for="(route,r) of routes" :key="r" >
+              <ul
+                class="hot-route-ul"
+                @touchmove="t2"
+                @touchstart="t1"
+                @touchend="t3"
+                :style="{marginLeft:move.t2+'px'}"
+              >
+                <li class="hot-route-li" v-for="(route,r) of routes" :key="r">
                   <h4>{{route.title}}</h4>
                   <p>{{route.count}}人感兴趣</p>
                   <span :style="{'backgroundColor':route.color}"></span>
                 </li>
               </ul>
             </div>
-            <van-divider/>
+            <van-divider />
             <div class="popular-route">
-              <h2>热门路线</h2> 
+              <h2>热门路线</h2>
               <div class="popular-item" v-for="(popular,p) of populars" :key="p">
                 <div class="popular-img">
-                 <img src="../assets/citypics/img1957.jpg" alt="">
+                  <img src="../assets/citypics/img1957.jpg" alt />
                 </div>
                 <div class="popular-text">
-                 <h3>{{popular.title}}</h3>
-                 <span>{{popular.tag1}}</span>
-                 <span>{{popular.tag2}}</span>
-                 <p>{{popular.subtitle}}</p>
+                  <h3>{{popular.title}}</h3>
+                  <span>{{popular.tag1}}</span>
+                  <span>{{popular.tag2}}</span>
+                  <p>{{popular.subtitle}}</p>
                 </div>
-                <van-divider/>
+                <van-divider />
               </div>
             </div>
           </div>
         </van-tab>
         <van-tab title="最新发表">
-          <div class="all-item" v-for="(n,i) of notes" :key="i">
+          <div class="all-item" v-for="(item,i) of newnotes" :key="i">
             <div class="item-text">
-              <h3>{{n.title}}</h3>
+              <h3>{{item.title}}</h3>
               <div class="item-head">
-                <img :src="n.headimg" alt />
+                <img :src="item.avatar" alt />
               </div>
-              <span class="text-personal">发表于{{n.date}}</span>
+              <span class="text-personal">发表于{{item.create_time}}</span>
             </div>
             <div class="item-img">
-              <img :src="n.noteimg" alt />
+              <img :src="item.img" alt />
             </div>
             <div class="item-tag">
-              <span>{{n.tag1}}</span>
-              <span>{{n.tag2}}</span>
+              <span>{{item.tags[0]}}</span>
+              <span>{{item.tags[1]}}</span>
             </div>
             <div class="item-icon">
               <like></like>
-              <span>{{n.likes}}</span>
+              <span>{{item.likes}}</span>
               <svg class="iconcomment" aria-hidden="true">
                 <use xlink:href="#iconcomment" />
               </svg>
-              <span>{{n.comments}}</span>
+              <span>{{item.comments}}</span>
               <collect class="collection"></collect>
             </div>
             <van-divider />
+          </div>
+          <div style="text-align:center">
+            <van-loading v-show="!can" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
           </div>
         </van-tab>
       </van-tabs>
@@ -234,14 +248,20 @@
 </template>
 <script>
 import MainTabBar from "../components/mainTabBar";
-import like from "../components/common/like"
-import collect from '../components/common/collect'
+import like from "../components/common/like";
+import collect from "../components/common/collect";
 export default {
-  created() {
+  beforeCreate() {
     this.a = setInterval(() => {
       this.i++;
     }, 5000);
-    this.axios.get()
+  },
+  mounted() {
+    this.lazy();
+    this.axios.get(`/group/api/v1/notelist/${this.page}`).then(res => {
+      this.newnotes = this.newnotes.concat(res.data.data);
+      console.log(this.newnotes);
+    });
   },
   components: {
     MainTabBar,
@@ -250,15 +270,16 @@ export default {
   },
   data() {
     return {
-      times:new Date(),
+      page: 1,
+      can: true,
+      times: new Date(),
       move: {
-        
         start: 0,
         left: 0,
         end: 0,
-        t1:0,
-        t2:0,
-        t3:0
+        t1: 0,
+        t2: 0,
+        t3: 0
       },
       active: 0,
       a: null,
@@ -278,80 +299,92 @@ export default {
         require("../assets/citypics/city12.jpg"),
         require("../assets/citypics/img1957.jpg")
       ],
-      notes:[
-        {title:"从平价小吃到米其林——大阪京都神户美食集(10日20店详记）",
-        date:"2018-12-01",tag1:"关西攻略",tag2:"日本美食",
-        headimg:require("../assets/citypics/heimen.jpg"),
-        noteimg:require("../assets/citypics/food01.jpg"),
-        likes:128,
-        comments:83
+      newnotes: [],
+      populars: [
+        {
+          title: "大阪3日路线",
+          tag1: "初次必玩",
+          tag2: "环球影城一日游",
+          subtitle: "游玩3天/适宜9月-12月/4个景点"
         },
-        {title:"从平价小吃到米其林——大阪京都神户美食集(10日20店详记）",
-        date:"2018-12-01",tag1:"关西攻略",tag2:"日本美食",
-        headimg:require("../assets/citypics/heimen.jpg"),
-        noteimg:require("../assets/citypics/food01.jpg"),
-        likes:128,
-        comments:83
+        {
+          title: "品味老广州经典1日游",
+          tag1: "老广州的建筑",
+          tag2: "品味粤菜",
+          subtitle: "游玩6天/适宜10月-5月/14个景点"
         },
-      ],
-      populars:[
-        {title:"大阪3日路线",tag1:"初次必玩",tag2:"环球影城一日游",subtitle:"游玩3天/适宜9月-12月/4个景点"},
-        {title:"品味老广州经典1日游",tag1:"老广州的建筑",tag2:"品味粤菜",subtitle:"游玩6天/适宜10月-5月/14个景点"},
-        {title:"大阪3日路线",tag1:"初次必玩",tag2:"环球影城一日游",subtitle:"游玩3天/适宜3月-11月/12个景点"}
+        {
+          title: "大阪3日路线",
+          tag1: "初次必玩",
+          tag2: "环球影城一日游",
+          subtitle: "游玩3天/适宜3月-11月/12个景点"
+        }
       ],
 
-      finds:[
-        {title:"不止布达佩斯 | 走进不一样的匈牙利",
-        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")},
-        {title:"不止布达佩斯 | 走进不一样的匈牙利",
-        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")},
-        {title:"不止布达佩斯 | 走进不一样的匈牙利",
-        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")},
-        {title:"不止布达佩斯 | 走进不一样的匈牙利",
-        count:"133456",imgpath:require("../assets/citypics/beijin1.jpg")}
+      finds: [
+        {
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          count: "133456",
+          imgpath: require("../assets/citypics/beijin1.jpg")
+        },
+        {
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          count: "133456",
+          imgpath: require("../assets/citypics/beijin1.jpg")
+        },
+        {
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          count: "133456",
+          imgpath: require("../assets/citypics/beijin1.jpg")
+        },
+        {
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          count: "133456",
+          imgpath: require("../assets/citypics/beijin1.jpg")
+        }
       ],
-      routes:[
-        {title:"自驾游",count:"120000",color:"#2694ab"},
-        {title:"赏秋好去处",count:"187709",color:"#fdc4b6"},
-        {title:"最省钱的一次旅游",count:"20000",color:"#a696c8"},
-        {title:"忘不掉的味道",count:"187930",color:"#ea7070"}
+      routes: [
+        { title: "自驾游", count: "120000", color: "#2694ab" },
+        { title: "赏秋好去处", count: "187709", color: "#fdc4b6" },
+        { title: "最省钱的一次旅游", count: "20000", color: "#a696c8" },
+        { title: "忘不掉的味道", count: "187930", color: "#ea7070" }
       ],
       items: [
         {
           title: "#香港购物指南",
           subtitle: "购物",
           imgpath: require("../assets/citypics/city12.jpg"),
-          color:'#e59572'
+          color: "#e59572"
         },
         {
           title: "#首尔小众秘境推荐",
           subtitle: "人少景美",
           imgpath: require("../assets/citypics/city10.jpg"),
-          color:'#96ceb4'
+          color: "#96ceb4"
         },
         {
           title: "#大阪+京都",
           subtitle: "关西",
           imgpath: require("../assets/citypics/city8.jpg"),
-          color:"#fdc4b6"
+          color: "#fdc4b6"
         },
         {
           title: "#大马学潜水",
           subtitle: "潜水",
           imgpath: require("../assets/citypics/city12.jpg"),
-          color:"#F9CE00"
+          color: "#F9CE00"
         },
         {
           title: "#泰国美食推荐",
           subtitle: "种草绿皮书",
           imgpath: require("../assets/citypics/city7.jpg"),
-          color:"#2694ab"
+          color: "#2694ab"
         },
         {
           title: "#新加坡网红打卡地",
           subtitle: "拍照",
           imgpath: require("../assets/citypics/city6.jpg"),
-          color:"#a696c8"
+          color: "#a696c8"
         }
       ]
     };
@@ -378,6 +411,52 @@ export default {
     }
   },
   methods: {
+    lazy() {
+      document.addEventListener("scroll", () => {
+        function getWinHeight() {
+          return (
+            document.documentElement.clientHeight || document.body.clientHeight
+          );
+        }
+        function getScrollHeight() {
+          let bodyScrollHeight = 0;
+          let documentScrollHeight = 0;
+          if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+          }
+          if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+          }
+          // 当页面内容超出浏览器可视窗口大小时，Html的高度包含body高度+margin+padding+border所以html高度可能会大于body高度
+          return bodyScrollHeight - documentScrollHeight > 0
+            ? bodyScrollHeight
+            : documentScrollHeight;
+        }
+        function isReachBottom() {
+          const scrollTop = getScrollTop(); // 获取滚动条的高度
+          const winHeight = getWinHeight(); // 一屏的高度
+          const scrollHeight = getScrollHeight(); // 获取文档总高度
+          return scrollTop >= parseInt(scrollHeight) - winHeight;
+        }
+        function getScrollTop() {
+          // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
+          return document.documentElement.scrollTop || document.body.scrollTop;
+        }
+        var address = this.$store.state.page;
+        if (isReachBottom() && address === "/Note" && this.can) {
+          this.can = false;
+          setTimeout(() => {
+            this.axios
+              .get(`/group/api/v1/notelist/${++this.page}`, { params: {} })
+              .then(res => {
+                this.newnotes = this.newnotes.concat(res.data.data);
+                this.can = true;
+              });
+          }, 2000);
+        }
+      });
+    },
+
     time(num) {
       console.log(num);
     },
@@ -398,8 +477,7 @@ export default {
       this.move.end = this.move.left;
     },
     t2(e) {
-      this.move.t2 =
-        e.changedTouches[0].pageX - this.move.t1 + this.move.t3;
+      this.move.t2 = e.changedTouches[0].pageX - this.move.t1 + this.move.t3;
       if (this.move.t2 >= 0) {
         this.move.t2 = 0;
       }
@@ -454,8 +532,8 @@ export default {
 };
 </script>
 <style>
-.topic-ul{
-  padding-left:10px;
+.topic-ul {
+  padding-left: 10px;
 }
 #note-page .tabbar-top {
   width: 100%;
@@ -470,16 +548,17 @@ export default {
 #note-page .tabbar-top .start-group {
   margin-top: 0px;
 }
-#note-page .top-title{
+#note-page .top-title {
   display: flex;
   height: 40px;
   align-items: center;
-  margin:0px 0px 15px 15px;
+  margin: 0px 0px 15px 15px;
 }
-#note-page .top-title h1,h5{
+#note-page .top-title h1,
+h5 {
   margin: 0px;
 }
-#note-page .top-title .title-year-mon{
+#note-page .top-title .title-year-mon {
   margin: 0 5px;
   display: flex;
   flex-direction: column;
@@ -529,7 +608,6 @@ export default {
   width: 100%;
   height: 100%;
   object-fit: contain;
-
 }
 .note-wrap {
   width: 100%;
@@ -540,7 +618,8 @@ export default {
   width: 100%;
   margin: 0px 0px;
 }
-.note-tabs .van-tabs__line, .strategy-bottom .van-tabs__line{
+.note-tabs .van-tabs__line,
+.strategy-bottom .van-tabs__line {
   background-color: #b689b6;
 }
 .note-wrap .topic-suggest {
@@ -566,7 +645,7 @@ export default {
   z-index: 2;
   bottom: 5px;
 }
-.note-wrap .topic-suggest span{
+.note-wrap .topic-suggest span {
   opacity: 0.7;
   z-index: 1;
   position: absolute;
@@ -675,7 +754,9 @@ export default {
   position: relative;
 }
 .note-top h2,
-.history-note h2,.new-route h2,.route-wrap h2{
+.history-note h2,
+.new-route h2,
+.route-wrap h2 {
   margin: 0px 0px 15px 0px;
   font-weight: lighter;
 }
@@ -710,95 +791,100 @@ export default {
   right: 15px;
   bottom: 30px;
 }
-.route-wrap{
+.route-wrap {
   width: 100%;
   margin-top: 15px;
 }
-.route-wrap .new-route{
-  width:100%;
+.route-wrap .new-route {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
-.route-wrap .new-route h2,.route-wrap h2,.route-wrap .popular-route h2{
+.route-wrap .new-route h2,
+.route-wrap h2,
+.route-wrap .popular-route h2 {
   margin-left: 15px;
 }
-.route-wrap .new-route .new-item{
+.route-wrap .new-route .new-item {
   width: 45%;
   height: 200px;
-  margin: 0px 5px;;
+  margin: 0px 5px;
 }
-.new-route .new-item .new-itemimg{
+.new-route .new-item .new-itemimg {
   width: 100%;
   height: auto;
   border-radius: 10px;
 }
-.new-route .new-item .new-itemimg img{
+.new-route .new-item .new-itemimg img {
   width: 100%;
   border-radius: 10px;
 }
-.new-route .new-item h4,p{
+.new-route .new-item h4,
+p {
   margin: 5px 0px;
 }
-.new-route .new-item p{
+.new-route .new-item p {
   font-size: 12px;
   color: #999999;
   font-weight: lighter;
 }
-.route-wrap .hot-route{
+.route-wrap .hot-route {
   width: 100%;
   height: 150px;
   overflow: hidden;
 }
-.route-wrap .hot-route ul{
+.route-wrap .hot-route ul {
   display: flex;
   width: 870px;
 }
-.route-wrap .hot-route li{
+.route-wrap .hot-route li {
   width: 130px;
   height: 80px;
-  background: url('../assets/citypics/beijin1.jpg');
+  background: url("../assets/citypics/beijin1.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   margin-left: 15px;
   border-radius: 10px;
   position: relative;
 }
-.route-wrap .hot-route li h4{
+.route-wrap .hot-route li h4 {
   margin: 10px 0px 0px 10px;
   color: #fff;
   z-index: 2;
   position: absolute;
 }
-.route-wrap .hot-route li p{
+.route-wrap .hot-route li p {
   color: #fff;
   font-size: 12px;
   margin: 60px 0px 0px 10px;
   z-index: 2;
   position: absolute;
 }
-.route-wrap .hot-route li span{
-  width: 100%;height: 100%;
+.route-wrap .hot-route li span {
+  width: 100%;
+  height: 100%;
   z-index: 1;
   /* background-color: purple; */
   position: absolute;
-  top: 0px;left: 0px;
+  top: 0px;
+  left: 0px;
   border-radius: 10px;
   opacity: 0.6;
 }
-.route-wrap .popular-route{
+.route-wrap .popular-route {
   width: 100%;
   box-sizing: border-box;
 }
-.popular-route .popular-item{
+.popular-route .popular-item {
   width: 100%;
   height: 150px;
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  padding:0px 15px;
+  padding: 0px 15px;
 }
-.popular-route .popular-item .popular-img{
+.popular-route .popular-item .popular-img {
   width: 120px;
   height: 120px;
   border-radius: 10px;
@@ -806,7 +892,7 @@ export default {
 .popular-route .popular-item .popular-text {
   margin-left: 15px;
 }
-.popular-route .popular-item .popular-text span{
+.popular-route .popular-item .popular-text span {
   font-size: 12px;
   border-radius: 5px;
   padding: 3px 5px;
@@ -814,20 +900,18 @@ export default {
   background-color: #b689b6;
   color: #ffffff;
 }
-.popular-route .popular-item .popular-text h3{
+.popular-route .popular-item .popular-text h3 {
   margin: 0px 0px 10px 0px;
 }
-.popular-route .popular-item .popular-text p{
+.popular-route .popular-item .popular-text p {
   color: #999999;
   font-size: 12px;
-  margin:50px 0px 0px 5px;
+  margin: 50px 0px 0px 5px;
 }
-.popular-route .popular-item .popular-img img{
+.popular-route .popular-item .popular-img img {
   max-width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10px;
 }
-
-
 </style>
