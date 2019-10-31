@@ -1,15 +1,17 @@
 <template>
   <div>
-    <main :style="{display:go,opacity:opa,transition:'opacity .3s linear'}" id="strategypage">
+    <main id="strategypage">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item">
           <div class="placebutton">
-            <mt-button @click="jumpgo()">
+            <router-link to="/go">
+            <mt-button>
               {{city}}
               <svg class="icondropdown-white" aria-hidden="true">
                 <use xlink:href="#iconxiala" />
               </svg>
             </mt-button>
+            </router-link>
           </div>
           <div class="tabbar-search">
             <svg class="search" aria-hidden="true">
@@ -23,8 +25,8 @@
         <div class="top-city">
           <div class="top-city-title">
             <h3>热门城市</h3>
-            <router-link to style="display: flex;align-item:center; line-height: 15px">
-              <span @click="jumpcity">查看更多</span>
+            <router-link to="/more" style="display: flex;align-item:center; line-height: 15px">
+              <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />
               </svg>
@@ -236,12 +238,6 @@
       </div>
       <main-tab-bar :cities="city"></main-tab-bar>
     </main>
-    <City @come="come" :style="{display:citydis,opacity:cityopa,transition:'opacity .3s linear'}"></City>
-    <Go
-      @city="citys"
-      @Child="showChild"
-      :style="{display:gos,opacity:copa,transition:'opacity .3s linear'}"
-    ></Go>
   </div>
 </template>
 
@@ -257,7 +253,7 @@ export default {
   },
   data() {
     return {
-      city: "",
+      city: this.$store.getters.city[this.$store.getters.city.length-1],
       cityopa: 0,
       citydis: "none",
       opa: 1,
@@ -397,7 +393,7 @@ export default {
   },
   methods: {
     citys(data) {
-      this.city = data||'广州';
+      this.city = data;
       this.copa = 0;
       setTimeout(() => {
         this.gos = "none";

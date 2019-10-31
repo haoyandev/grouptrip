@@ -16,17 +16,20 @@ import Login from '@/components/login/login'
 import Settings from '@/components/settings/settings'
 import Detail from '@/components/settings/persondetail/persondetail'
 import go from '@/components/common/go'
-
+import more from '@/components/strategy/morecity'
 // 发布group trip
 import uploadImg from '@/components/publish/uploadImg'
 import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
 import Guan from '@/components/common/guanzhu.vue'
 import Changeavatar from '@/components/settings/changeAvatar/changeAvatar'
+import fans from "@/components/home/fanList"
 Vue.use(Router)
 
 export default new Router({
   routes: [
+    {path:'/more',component:more},
+    {path:'/fans',component:fans},
     {path:'/guan',component:Guan},
     { path: '/', component: Home },
     { path: '/Home', component: Home },

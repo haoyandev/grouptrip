@@ -1,123 +1,119 @@
 
 <template>
-  <div>
-    <div
-      :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}"
-      v-if="canShow"
-    >
-      <div class="icon">
-        <div class="icon-left">
-          <span @click="jumpSetting">
-            <svg class="chilun" aria-hidden="true">
-              <use xlink:href="#iconsetup" />
-            </svg>
-          </span>
-          <svg class="erweima" aria-hidden="true">
-            <use xlink:href="#iconscan" />
+  <div
+    :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}"
+    v-if="canShow">
+    <div class="icon">
+      <div class="icon-left">
+        <span @click="jumpSetting">
+          <svg class="chilun" aria-hidden="true">
+            <use xlink:href="#iconsetup" />
           </svg>
-        </div>
-        <div class="icon-right">
-          <svg class="message" aria-hidden="true">
-            <use xlink:href="#iconmessage" />
-          </svg>
-        </div>
+        </span>
+        <svg class="erweima" aria-hidden="true">
+          <use xlink:href="#iconscan" />
+        </svg>
       </div>
-      <div class="user-head">
-        <div>
-          <div @click="jump" v-if="isLogin" class="header">
+      <div class="icon-right">
+        <svg class="message" aria-hidden="true">
+          <use xlink:href="#iconmessage" />
+        </svg>
+      </div>
+    </div>
+    <div class="user-head">
+      <div>
+        <div @click="jump" v-if="isLogin" class="header">
+          <router-link to="/PersonalIndex">
             <img :src="user.avatar" alt />
-          </div>
-          <div v-else>
-            <svg @click="jump" class="boyhead" aria-hidden="true">
+          </router-link>
+        </div>
+
+        <div v-else>
+          <router-link to="/login">
+            <svg class="boyhead" aria-hidden="true">
               <use xlink:href="#icontouxiangnanhai" />
             </svg>
-          </div>
+          </router-link>
         </div>
-        <span v-if="isLogin">{{user.uname}}</span>
-        <span v-else @click="jump">登录查看更多信息</span>
       </div>
-      <div class="self-content">
-        <ul>
-          <li>
-            <h1>0</h1>
-            <span>获赞与收藏</span>
-          </li>
-          <li @click="jumpfans()">
+      <span v-if="isLogin">{{user.uname}}</span>
+      <span v-else @click="jump">登录查看更多信息</span>
+    </div>
+    <div class="self-content">
+      <ul>
+        <li>
+          <h1>0</h1>
+          <span>获赞与收藏</span>
+        </li>
+        <li>
+          <router-link to="/fans">
             <h1>{{user.fansNum || 0}}</h1>
             <span>粉丝</span>
-          </li>
-          <li>
-            <h1>{{user.focusNum || 0}}</h1>
-            <span>关注</span>
-          </li>
-          <li>
-            <h1>0</h1>
-            <span>国家</span>
-          </li>
-        </ul>
-      </div>
-      <div class="user-hobby">
-        <ul>
-          <li>
-            <div>
-              <svg class="shoucangjia" aria-hidden="true">
-                <use xlink:href="#iconshoucangjia" />
-              </svg>
-            </div>
-            <span>收藏夹</span>
-          </li>
-          <li>
-            <div>
-              <svg class="youhuiquan" aria-hidden="true">
-                <use xlink:href="#iconyouhuiquan2" />
-              </svg>
-            </div>
-            <span>优惠券</span>
-          </li>
-          <li>
-            <div>
-              <svg class="qianbao" aria-hidden="true">
-                <use xlink:href="#iconqianbao" />
-              </svg>
-            </div>
-            <span>钱包</span>
-          </li>
-          <li>
-            <div>
-              <svg class="ban" aria-hidden="true">
-                <use xlink:href="#iconhuoban" />
-              </svg>
-            </div>
-            <span>Biu伴</span>
-          </li>
-          <li>
-            <div>
-              <svg class="dingdan" aria-hidden="true">
-                <use xlink:href="#iconshoutibao" />
-              </svg>
-            </div>
-            <span>订单</span>
-          </li>
-          <li>
-            <div>
-              <svg class="wenda" aria-hidden="true">
-                <use xlink:href="#iconwenda" />
-              </svg>
-            </div>
-            <span>问答</span>
-          </li>
-        </ul>
-      </div>
-      <main-tab-bar></main-tab-bar>
+          </router-link>
+        </li>
+        <li>
+          <h1>{{user.focusNum || 0}}</h1>
+          <span>关注</span>
+        </li>
+        <li>
+          <h1>0</h1>
+          <span>国家</span>
+        </li>
+      </ul>
     </div>
-    <fans
-      @fans="jumppro"
-      :style="{opacity:opa.fanopa,display:opa.fandis,transition:'opacity .3s linear'}"
-    ></fans>
-    <user
-      @fh="fh"
-      :style="{opacity:opa.useropa,display:opa.userdis,transition:'opacity .3s linear'}"
-    ></user>
+    <div class="user-hobby">
+      <ul>
+        <li>
+          <div>
+            <svg class="shoucangjia" aria-hidden="true">
+              <use xlink:href="#iconshoucangjia" />
+            </svg>
+          </div>
+          <span>收藏夹</span>
+        </li>
+        <li>
+          <div>
+            <svg class="youhuiquan" aria-hidden="true">
+              <use xlink:href="#iconyouhuiquan2" />
+            </svg>
+          </div>
+          <span>优惠券</span>
+        </li>
+        <li>
+          <div>
+            <svg class="qianbao" aria-hidden="true">
+              <use xlink:href="#iconqianbao" />
+            </svg>
+          </div>
+          <span>钱包</span>
+        </li>
+        <li>
+          <div>
+            <svg class="ban" aria-hidden="true">
+              <use xlink:href="#iconhuoban" />
+            </svg>
+          </div>
+          <span>Biu伴</span>
+        </li>
+        <li>
+          <div>
+            <svg class="dingdan" aria-hidden="true">
+              <use xlink:href="#iconshoutibao" />
+            </svg>
+          </div>
+          <span>订单</span>
+        </li>
+        <li>
+          <div>
+            <svg class="wenda" aria-hidden="true">
+              <use xlink:href="#iconwenda" />
+            </svg>
+          </div>
+          <span>问答</span>
+        </li>
+      </ul>
+    </div>
+    <main-tab-bar></main-tab-bar>
   </div>
 </template>
 

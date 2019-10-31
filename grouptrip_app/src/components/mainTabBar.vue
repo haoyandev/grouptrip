@@ -34,16 +34,10 @@ export default {
   },
   data() {
     return {
-      city: ''
-    };
-  },
-  watch: {
-    cities(newC, oldC) {
-      this.city=newC;
-      console.log(oldC)
+      city:this.$store.getters.city[this.$store.getters.city.length-1]
     }
   },
-  props: ["cities"]
+
 };
 </script>
 <style scoped>

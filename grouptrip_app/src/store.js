@@ -5,6 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    city:[],
     groupInfo: {},
     cid: 0,
     searchKws: "",
@@ -15,6 +16,9 @@ export default new Vuex.Store({
   },
   // 读取状态
   getters: {
+    city:(state)=>{
+      return state.city
+    },
     isLogin:(state)=>{
       return state.isLogin;
     },
@@ -27,6 +31,9 @@ export default new Vuex.Store({
   },
   //修改状态值
   mutations: {
+    setCity(state,city){
+      state.city.push(city);
+    },
     setPage(state,page){
       state.page=page;
     },

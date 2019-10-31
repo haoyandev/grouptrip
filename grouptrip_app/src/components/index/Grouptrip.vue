@@ -1,13 +1,11 @@
 <template>
   <div>
     <main
-      :style="{opacity:qiehuan.mainopa,display:qiehuan.maindis,transition:'opacity .4s linear'}"
-      id="grouptrip-page"
-    >
+      id="grouptrip-page">
       <div class="tabbar-top">
         <div class="tabbar-title">
-          <router-link to class="grouptrip-back">
-            <svg @click="jumphome()" class="zuojiantou_small" aria-hidden="true">
+          <router-link to="/home" class="grouptrip-back">
+            <svg class="zuojiantou_small" aria-hidden="true">
               <use xlink:href="#iconzhixiangzuozuojiantou" />
             </svg>
           </router-link>
@@ -15,7 +13,7 @@
             <img src="../../assets/iconfont/logo-black.png" alt style="width" />
           </div>
           <div @click="jumpchos">
-            <router-link to class="start-group">发起</router-link>
+            <router-link to="/choseTheme" class="start-group">发起</router-link>
           </div>
         </div>
         <van-dropdown-menu>
@@ -112,11 +110,11 @@
                   </div>
                 </div>
               </div>
-              <span @click="jt" class="msg-more" to>
+              <router-link to="/PersonalIndex" class="msg-more" >
                 <svg class="iconforward" aria-hidden="true">
                   <use xlink:href="#iconforward-purple" />
                 </svg>
-              </span>
+              </router-link>
             </div>
             <div class="personal-msg-date">
               <svg class="iconshijian" aria-hidden="true">
@@ -141,10 +139,6 @@
         </div>
       </div>
     </main>
-    <user
-      @fh="fh"
-      :style="{opacity:qiehuan.useropa,display:qiehuan.userdis,transition:'opacity .4s linear'}"
-    ></user>
   </div>
 </template>
 <script>

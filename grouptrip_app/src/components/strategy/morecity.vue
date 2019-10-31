@@ -1,9 +1,11 @@
 <template>
   <main id="morecity-page">
     <div class="tabbar-top">
-      <svg @click="jumpmain" class="zuojiantou_small" aria-hidden="true">
+      <router-link to="/strategy">
+      <svg class="zuojiantou_small" aria-hidden="true">
         <use xlink:href="#iconzhixiangzuozuojiantou" />
       </svg>
+      </router-link>
       <h4>全部城市</h4>
     </div>
     <div class="morecity-wrap">
