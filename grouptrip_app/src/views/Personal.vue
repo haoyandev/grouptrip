@@ -1,4 +1,3 @@
-
 <template>
   <div
     :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}"

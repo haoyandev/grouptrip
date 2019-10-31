@@ -56,17 +56,16 @@ export default {
         // console.log(item.content)
         imgList.push(item.content);
       }
-      console.log(imgList)
       // 更新groupInfo
+      imgList = JSON.stringify(imgList)
       this.$store.commit('setGroupInfo', { imgList, intr })
-      console.log(this.$store.state.groupInfo)
+      this.$router.push('/groupdetail')
     },
     write () {
       this.flag = !this.flag
       console.log(this.flag)
       setTimeout(() => {
         document.getElementById('intr').focus()
-
       },100)
     },
     changeFlag (e) {

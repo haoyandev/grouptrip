@@ -34,7 +34,7 @@
         </div>
         <!-- 地区选择器 -->
         <div class="location-picker">
-          <van-cell is-link @click="selectLocation"><span class="time-tip">地区</span>{{beginTime}}</van-cell>
+          <van-cell is-link @click="selectLocation"><span class="area-tip">地区</span>{{location}}</van-cell>
           <van-popup v-model="showLocation">
            <van-area :area-list="areaList" :columns-num="2"
            @confirm="handleLocation"
@@ -44,7 +44,6 @@
 
       </div>
       <div class="bottom-box">
-        <van-loading size="24px" vertical v-show="loading">加载中...</van-loading>
         <!-- 阅读规范 -->
         <div class="read">我已阅读《
           <router-link to="">发布规范和风险提示</router-link>
@@ -52,6 +51,12 @@
           </div>
         <div class="publish" @click="publish">立即发布</div>   
       </div>
+      <van-overlay :show="overlay" @click="show = false" >
+        hhhh
+         <van-loading size="24px" vertical v-show="loading">
+           发布中...
+         </van-loading>
+      </van-overlay>
     </div>   
   </div>
 </template>
@@ -64,9 +69,12 @@ export default {
       currentDate: new Date(), // 当前时间
       beginTime: '',
       endTime: '',
+      area: null,
+      location: '',
       showBeginTime: false, // 是否显示benginTime选择器
       showEndTime: false, // 是否显示EndTime选择器,
       showLocation: false, // 是否显示地区选择器
+      overlay: false,
       loading: false,
       areaList: {
         province_list: {
@@ -96,13 +104,56 @@ export default {
   },
   methods: {
     handleLocation (val) {
-      console.log(val)
+      this.area = val
+      this.location = `${val[1].name}`
+      this.showLocation = false
     },
     publish () {
-      // 显示loding
+      // 判断数据
+      if (!this.beginTime) {
+        this.$toast('请选择开始时间')
+        return
+      }
+      if (!this.endTime) {
+        this.$store('请现在结束时间')
+        return
+      }
+      if (!this.location) {
+        this.$store('请选择地区')
+        return
+      }
+      // 整理数据
+      var obj = {
+        begin_time: this.beginTime,
+        end_time: this.endTime,
+        cid: this.area[1].code,
+      }
+      this.$store.commit('setGroupInfo', obj)
+      // 获得组团游信息
+      var groupInfo = this.$store.state.groupInfo
+      // 显示遮罩层 loding
+      this.overlay = true
       this.loading = true
       // 发表组队
-      console.log(this.beginTime, this.endTime)
+      var url = '/group/api/v1/publish'
+      // 发送axios
+      this.axios.post(url, groupInfo)
+      .then(res => {
+        if (res.data.code === 200) {
+          console.log(res.data)
+          this.loading = false
+          this.$toast({ message: '发布成功 即将跳转到首页', duration: 1500 })
+        } else {
+          this.loading = false
+          this.$toast({ message: `发布失败 即将跳转到首页`, duration: 1500 })
+        }
+        setTimeout(() => {
+          this.$router.push('/Home')
+        }, 1500)
+      })
+      .catch(err => {
+        console.log(err)
+      })
     },
     selectBeginTime () {
       // 判断结束时间是否已选择
@@ -142,7 +193,7 @@ export default {
       var year = date.getFullYear()
       var month = date.getMonth() + 1
       var day = date.getDate()
-      return `${year}年${month}月${day}日`
+      return `${year}-${month}-${day}`
     }
   }
 }
@@ -187,6 +238,9 @@ export default {
   .group-box .van-cell .time-tip {
     margin-right: 55px;
   }
+  .group-box .van-cell .area-tip {
+    margin-right: 88px;
+  }
   .group-box .van-cell__value--alone {
     color: #fff;
   }
@@ -209,5 +263,11 @@ export default {
   }
   .group-box .bottom-box .router-link-active {
     color: #fff;
+  }
+  .group-box .van-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
