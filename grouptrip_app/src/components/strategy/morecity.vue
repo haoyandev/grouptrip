@@ -82,13 +82,71 @@ export default {
           views: "29000",
           spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
         }
-      ]
+      ],
+      pno:1 
     };
+  },
+  mounted(){
+    this.lazy()
   },
   methods: {
     jumpmain() {
       this.$emit("come", { opa: 1, citydis: "none", go: "block", cityopa: 0 });
-    }
+    },
+    lazy() {
+      console.log('success')
+      document.addEventListener("scroll", () => {
+        function getWinHeight() {
+          return (
+            document.documentElement.clientHeight || document.body.clientHeight
+          );
+        }
+        function getScrollHeight() {
+          let bodyScrollHeight = 0;
+          let documentScrollHeight = 0;
+          if (document.body) {
+            bodyScrollHeight = document.body.scrollHeight;
+          }
+          if (document.documentElement) {
+            documentScrollHeight = document.documentElement.scrollHeight;
+          }
+          // 当页面内容超出浏览器可视窗口大小时，Html的高度包含body高度+margin+padding+border所以html高度可能会大于body高度
+          return bodyScrollHeight - documentScrollHeight > 0
+            ? bodyScrollHeight
+            : documentScrollHeight;
+        }
+        function isReachBottom() {
+          const scrollTop = getScrollTop(); // 获取滚动条的高度
+          const winHeight = getWinHeight(); // 一屏的高度
+          const scrollHeight = getScrollHeight(); // 获取文档总高度
+          return scrollTop >= parseInt(scrollHeight) - winHeight;
+        }
+        function getScrollTop() {
+          // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
+          return document.documentElement.scrollTop || document.body.scrollTop;
+        }
+        var address = this.$store.state.page;
+        console.log(this.$route.query)
+        if (isReachBottom() && this.$route.query === "/more" && this.can) {
+          this.can = false;
+          setTimeout(() => {
+            //1:创建url
+            var url = `/group/api/v1/citylist/${this.pno}`
+            //2:创建obj参数，保存多页
+            this.pno++
+            console.log(pno)
+            var obj = {pno:this.pno}
+             //3:发送axios获取城市列表
+            this.axios.get(url, { params: {obj} }).then(res => {
+              this.can = true;
+              console.log(res);
+            }).catch(err=>{
+              console.log(err)
+            })
+          }, 2000);
+        }
+      });
+    },
   }
 };
 </script>
