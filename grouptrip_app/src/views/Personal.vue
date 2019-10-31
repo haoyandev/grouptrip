@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}" v-if="canShow">
+    <div
+      :style="{opacity:opa.paropa,display:opa.pardis,transition:'opacity .3s linear'}"
+      v-if="canShow"
+    >
       <div class="icon">
         <div class="icon-left">
           <span @click="jumpSetting">
@@ -106,7 +109,8 @@
       </div>
       <main-tab-bar></main-tab-bar>
     </div>
-    <fans :style="{opacity:opa.fanopa,display:opa.fandis,transition:'opacity .3s linear'}"></fans>
+    <fans @fans="jumppro"
+      :style="{opacity:opa.fanopa,display:opa.fandis,transition:'opacity .3s linear'}"></fans>
   </div>
 </template>
 
@@ -117,11 +121,11 @@ import fans from "../components/home/fanList";
 export default {
   data() {
     return {
-      opa:{
-        paropa:1,
-        pardis:'block',
-        fanopa:0,
-        fandis:'none'
+      opa: {
+        paropa: 1,
+        pardis: "block",
+        fanopa: 0,
+        fandis: "none"
       },
       user: {},
       isLogin: false,
@@ -152,13 +156,23 @@ export default {
     // 发送ajax获取用户最新的信息
   },
   methods: {
-    jumpfans() {
-      this.opa.paropa=0;
+    jumppro(data) {
+      this.opa.fanopa=data.fanopa;
       setTimeout(() => {
-        this.opa.pardis='none';
-        this.opa.fandis='block';
+        this.opa.fandis =data.fandis;
+        this.opa.pardis=data.pardis;
         setTimeout(() => {
-          this.opa.fanopa=1;
+          this.opa.paropa = 1;
+        }, 50);
+      }, 50);
+    },
+    jumpfans() {
+      this.opa.paropa = 0;
+      setTimeout(() => {
+        this.opa.pardis = "none";
+        this.opa.fandis = "block";
+        setTimeout(() => {
+          this.opa.fanopa = 1;
         }, 50);
       }, 50);
     },

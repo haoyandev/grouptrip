@@ -281,7 +281,7 @@ router.put('/api/v1/updateintr', (req, res) => {
 // 10. 关注
 router.post('/api/v1/focus', (req, res) => {
   // 获取用户信息
-  var user = req.user
+  var user = req.user 
   // 获取被关注用户的uid
   var uid = req.body.uid
   // 检验数据是否为空

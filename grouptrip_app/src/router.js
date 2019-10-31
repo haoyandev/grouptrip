@@ -4,9 +4,9 @@ import Router from 'vue-router'
 // 首页
 import Home from '@/views/Home.vue'
 import Grouptrip from './components/index/Grouptrip.vue'
+import PersonalIndex from './components/index/PersonalIndex.vue'
 // 个人中心
 import Personal from '@/views/Personal.vue'
-import fanList from '@/components/home/fanList'
 // 攻略
 import Strategy from '@/views/Strategy.vue'
 // 游记
@@ -43,6 +43,6 @@ export default new Router({
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
     { path: '/Changeavatar', component: Changeavatar },
-    { path: '/fanList', component:fanList}
+    { path: '/PersonalIndex', component:PersonalIndex }
   ]
 })

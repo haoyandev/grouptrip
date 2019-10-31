@@ -1,24 +1,25 @@
 <template>
   <div>
     <mt-header id="title" title="粉丝">
-      <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
+      
+      <router-link to="" slot="left">
+        <mt-button @click.native="jumpper" icon="back"></mt-button>
       </router-link>
     <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
     <div id="container">
         <ul>
             <li v-for="(item,index) in list" :key="index">
-              <div ><img class="icon" :src="item.img"></div>
+              <div ><img class="icon" :src="item.avatar"></div>
               <div class="info_list">
-                  <h2 class="fanName">{{item.fanName}}</h2>
-                  <p class="fanNo"> <span>{{item.fans}}粉丝</span> | <span>{{item.amount}}条</span></p>
+                  <h2 class="fanName">{{item.uname}}</h2>
+                  <p class="fanNo"> <span>{{item.fansNum}}粉丝</span></p>
               </div>
-              <div class="res" style="display:none">
-                  回粉
-              </div>
-              <div class="res">
+              <div class="res" v-if="item.checkIsFollowed">
                   已关注
+              </div>
+              <div class="res" v-else @click="follow" :data-uid="item.uid">
+                  回粉
               </div>
             </li>
           </ul>
@@ -27,21 +28,49 @@
 </template>
 <script>
 export default {
+  inject: ['reload'],
   data(){
     return {
       list:[
-        {img:require(`@/assets/citypics/heimen.jpg`),fanName:"张三",amount:"19",biu:'5',fans:24 },
-        {img:require(`@/assets/citypics/heimen.jpg`),fanName:"李四",amount:"11",biu:'2',fans:27 },
-        {img:require(`@/assets/citypics/heimen.jpg`),fanName:"王五",amount:"16",biu:'8',fans:29 },
-        {img:require(`@/assets/citypics/heimen.jpg`),fanName:"陈六",amount:"5",biu:'4' ,fans:28 },
+        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"张三",amount:"19",biu:'5',fans:24 },
+        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"李四",amount:"11",biu:'2',fans:27 },
+        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"王五",amount:"16",biu:'8',fans:29 },
+        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"陈六",amount:"5",biu:'4' ,fans:28 },
       ]
     }
   },
   created(){
     //发送axio获取用户的粉丝列表
-    var url = ''
+    var url = '/user/api/v1/fanslist'
+    this.axios.get(url).then(res=>{
+      if (res.data.code===200){
+        this.list = res.data.data
+        console.log(this.list)
+      }
+    }).catch(err=>{
+      console.log(err)
+    })
+  },
+  methods: {
+    follow(e){
+      var url = '/user/api/v1/focus'
+      var uid = e.target.dataset.uid
+      var obj = {
+        uid
+      }
+      this.axios.post(url, obj)
+      .then(res=>{
+        if(res.data.code===200){
+          this.reload() 
+        }
+      })
+    },
+    jumpper(){
+      this.$emit('fans',{paropa:1,pardis:'block',fanopa:0,fandis:'none'})
+    }
+  },
   }
-}
+
 </script>
 <style scoped>
 #title{
