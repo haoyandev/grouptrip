@@ -96,7 +96,9 @@
             <van-divider />
           </div>
           <div style="text-align:center">
-            <van-loading v-show="!can" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+            <van-loading v-if="able==='加载中'" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+            <p v-else-if="able==='可加载'"></p>
+            <p v-else style="padding-bottom:30px">已经到底了</p>
           </div>
         </van-tab>
         <van-tab title="宝藏游记">
@@ -158,7 +160,9 @@
               <van-divider />
             </div>
             <div style="text-align:center">
-              <van-loading v-show="!can" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+              <van-loading v-if="able==='加载中'" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+              <p v-else-if="able==='可加载'"></p>
+              <p v-else style="padding-bottom:30px">已经到底了</p>
             </div>
           </div>
         </van-tab>
@@ -237,7 +241,9 @@
             <van-divider />
           </div>
           <div style="text-align:center">
-            <van-loading v-show="!can" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+            <van-loading v-if="able==='加载中'" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
+            <p v-else-if="able==='可加载'"></p>
+            <p v-else style="padding-bottom:30px">已经到底了</p>
           </div>
         </van-tab>
       </van-tabs>
@@ -270,6 +276,7 @@ export default {
   },
   data() {
     return {
+      able: "",
       page: 1,
       can: true,
       times: new Date(),
@@ -445,12 +452,20 @@ export default {
         var address = this.$store.state.page;
         if (isReachBottom() && address === "/Note" && this.can) {
           this.can = false;
+          this.able = "加载中";
           setTimeout(() => {
             this.axios
               .get(`/group/api/v1/notelist/${++this.page}`, { params: {} })
               .then(res => {
+                if (res.data.code === 4001) {
+                  this.able = "无";
+                  return;
+                }
                 this.newnotes = this.newnotes.concat(res.data.data);
-                this.can = true;
+                setTimeout(() => {
+                  this.can = true;
+                  this.able = "可加载";
+                }, 1000);
               });
           }, 2000);
         }

@@ -2,9 +2,9 @@
   <main id="morecity-page">
     <div class="tabbar-top">
       <router-link to="/strategy">
-      <svg class="zuojiantou_small" aria-hidden="true">
-        <use xlink:href="#iconzhixiangzuozuojiantou" />
-      </svg>
+        <svg class="zuojiantou_small" aria-hidden="true">
+          <use xlink:href="#iconzhixiangzuozuojiantou" />
+        </svg>
       </router-link>
       <h4>全部城市</h4>
     </div>
@@ -31,7 +31,6 @@
 export default {
   data() {
     return {
-
       cities: [
         {
           cbg: require("../../assets/citypics/beijin1.jpg"),
@@ -83,18 +82,19 @@ export default {
           spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
         }
       ],
-      pno:1 
+      pno: 1,
+      can: true
     };
   },
-  mounted(){
-    this.lazy()
+  mounted() {
+    this.lazy();
   },
   methods: {
     jumpmain() {
       this.$emit("come", { opa: 1, citydis: "none", go: "block", cityopa: 0 });
     },
     lazy() {
-      console.log('success')
+      console.log("success");
       document.addEventListener("scroll", () => {
         function getWinHeight() {
           return (
@@ -125,28 +125,27 @@ export default {
           // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
           return document.documentElement.scrollTop || document.body.scrollTop;
         }
-        var address = this.$store.state.page;
-        console.log(this.$route.query)
-        if (isReachBottom() && this.$route.query === "/more" && this.can) {
+        if (isReachBottom() && this.$route.path === "/more" && this.can) {
           this.can = false;
           setTimeout(() => {
             //1:创建url
-            var url = `/group/api/v1/citylist/${this.pno}`
+            var url = `/group/api/v1/citylist/${this.pno}`;
             //2:创建obj参数，保存多页
-            this.pno++
-            console.log(pno)
-            var obj = {pno:this.pno}
-             //3:发送axios获取城市列表
-            this.axios.get(url, { params: {obj} }).then(res => {
-              this.can = true;
-              console.log(res);
-            }).catch(err=>{
-              console.log(err)
-            })
+            var obj = { pno: this.pno };
+            //3:发送axios获取城市列表
+            this.axios
+              .get(url, { params: { obj } })
+              .then(res => {
+                this.can = true;
+                console.log(res);
+              })
+              .catch(err => {
+                console.log(err);
+              });
           }, 2000);
         }
       });
-    },
+    }
   }
 };
 </script>
@@ -156,7 +155,8 @@ export default {
   position: relative;
   background-color: #f2f4f6;
 }
-#morecity-page .tabbar-top, #personalindex-page .tabbar-top{
+#morecity-page .tabbar-top,
+#personalindex-page .tabbar-top {
   width: 100%;
   height: 46px;
   position: fixed;
@@ -167,7 +167,8 @@ export default {
   box-shadow: 0px 1px 2px #acacacb9;
   background-color: #ffffff;
 }
-#morecity-page .tabbar-top .zuojiantou_small,#personalindex-page .tabbar-top .zuojiantou_small {
+#morecity-page .tabbar-top .zuojiantou_small,
+#personalindex-page .tabbar-top .zuojiantou_small {
   position: fixed;
   top: 5px;
   left: 0px;
