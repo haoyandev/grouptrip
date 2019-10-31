@@ -25,7 +25,7 @@
       <div class="user-head">
         <div>
           <div v-if="isLogin" class="header">
-            <img src="@/assets/iconfont/boy.png" alt />
+            <img :src="user.avatar" alt />
           </div>
           <div v-else>
             <svg @click="jump" class="boyhead" aria-hidden="true">
@@ -140,21 +140,18 @@ export default {
     if (token !== "undefined") {
       // 如果有登录 展现有用户信息的页面
       // 发送ajax获取最新的信息
-      console.log("token", token);
-      var url = "/api/v1/user/detail";
-      this.axios
-        .get(url)
-        .then(res => {
-          if (res.data.code === 200) {
-            // token正常
-            this.user = res.data.data;
-            this.isLogin = true;
-            // 设置vuex
-            this.$store.commit("setUser", this.user);
-            this.$store.commit("setIsLogin", this.isLogin);
-          }
-        })
-        .catch(err => console.log(err));
+      console.log('token', token)
+      var url = '/user/api/v1/detail'
+      this.axios.get(url).then(res => {
+        if (res.data.code === 200) {
+          // token正常
+          this.user = res.data.data
+          this.isLogin = true
+          // 设置vuex
+          this.$store.commit('setUser', this.user)
+          this.$store.commit('setIsLogin', this.isLogin)
+        } 
+      }).catch(err => console.log(err))
     }
     this.canShow = true;
     // 发送ajax获取用户最新的信息

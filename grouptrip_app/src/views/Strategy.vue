@@ -208,70 +208,30 @@
           </van-tab>
           <van-tab title="推荐玩法">
             <div class="bottom2_wrap">
-              <div class="tips-wrap-item">
+              <div class="tips-wrap-item" v-for="(t,i) of tips" :key="i">
                 <div class="wrap-item-content">
                   <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
+                    <img :src=t.timg alt />
                   </div>
                   <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
+                    <p>{{t.details}}</p>
                   </div>
                   <div class="tips-personal">
                     <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
+                      <img :src=t.head alt />
                     </div>
-                    <span>维多利亚</span>
+                    <span>{{t.uname}}</span>
                     <div class="favorite">
                       <like></like>
-                      <p>115</p>
+                      <p>{{t.likes}}</p>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div class="tips-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
-                  </div>
-                  <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                  <div class="tips-personal">
-                    <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
-                    </div>
-                    <span>维多利亚</span>
-                    <div class="favorite">
-                      <like></like>
-                      <p>115</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="tips-wrap-item">
-                <div class="wrap-item-content">
-                  <div class="tips-notes-img">
-                    <img src="../assets/citypics/img1998.jpg" alt />
-                  </div>
-                  <div class="item-details">
-                    <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-                  </div>
-                  <div class="tips-personal">
-                    <div class="personal-head">
-                      <img src="../assets/iconfont/girl.png" alt />
-                    </div>
-                    <span>维多利亚</span>
-                    <div class="favorite">
-                      <like></like>
-                      <p>115</p>
-                    </div>
-                  </div>
-                </div>
-                <div class="blank"></div>
-                <div class="blank"></div>
               </div>
             </div>
           </van-tab>
+          <div class="blank"></div>
+          <div class="blank"></div>
         </van-tabs>
       </div>
       <main-tab-bar></main-tab-bar>
@@ -300,7 +260,7 @@ export default {
       //这四个数据是做切换页面透明度渐变效果
 
       width: 0,
-      active: 1, //保存底部推荐面板当前显示的子面板id
+      active: 0, //保存底部推荐面板当前显示的子面板id
       trip_city: [
         {
           name: "大阪",
@@ -397,6 +357,16 @@ export default {
           headpath: require("../assets/iconfont/girl.png"),
           bgpath: require("../assets/citypics/img1996.jpg")
         }
+      ],
+      tips:[
+        {details:'90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！',uname:'维多利亚',likes:'100',
+        timg:require('../assets/citypics/img1998.jpg'),
+        head:require('../assets/citypics/img1998.jpg')
+        },
+        {details:'90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！',uname:'维多利亚',likes:'100',
+        timg:require('../assets/citypics/img1998.jpg'),
+        head:require('../assets/citypics/img1998.jpg')
+        },
       ],
       imgs: {},
       move: {
@@ -849,6 +819,18 @@ li {
   display: flex;
   align-items: center;
 }
+.personal-head{
+  width: 20px;
+  height: 20px;
+  border-radius: 50px;
+  overflow: hidden;
+}
+.personal-head img{
+  max-width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 #strategypage {
   transition: opacity 0.6s linear;
   transition: marginLeft 0.6s linear;

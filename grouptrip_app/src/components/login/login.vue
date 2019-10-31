@@ -191,7 +191,7 @@ export default {
       // 验证成功后执行的axios
       var phone = this.user;
       var upwd = this.pwd;
-      this.axios.post("/api/v1/user/login", { phone, upwd }).then(result => {
+      this.axios.post("/user/api/v1/login", { phone, upwd }).then(result => {
         // 登陆失败
         if (result.data.code !== 200) {
           this.$toast({ message: result.data.msg, duration: 1500, iconClass: 'icon icon-success' })
@@ -202,7 +202,7 @@ export default {
         } else {
           this.$toast({message: result.data.msg, duration: 1500, iconClass: 'icon icon-success'})
           // 获取该用户的信息并且保存在store里和本地localStore里
-          this.axios.get("/api/v1/user/detail").then(result => {
+          this.axios.get("/user/api/v1/detail").then(result => {
             if (result.data.code === 200) {
               // 显示欢迎语
               this.active = "success";
@@ -289,7 +289,7 @@ export default {
         return;
       }
       var data = { phone: this.phone, upwd: this.regpwd };
-      this.axios.post("api/v1/user/register", data).then(result => {
+      this.axios.post("/user/api/v1/register", data).then(result => {
         console.log(result.data)
         if (result.data.code === 200) {
           this.$messagebox("注册成功").then(() => {

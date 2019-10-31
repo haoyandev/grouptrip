@@ -1,15 +1,15 @@
 const express = require('express')
 const pool = require('../pool')
 // 引入jwt
-const { generateToken, verifyToken } = require('../jwt')
-const { getBaseInfo, getFunsNum, getFocusNum } = require('../fun')
+const { generateToken } = require('../jwt')
+const { getBaseInfo, getFunsNum, getFocusNum, uploadImg, checkIsFollowed } = require('../fun')
 
 // 创建路由器
 var router = express.Router()
 
 // 添加路由
 // 1. 用户注册
-router.post('/register', (req, res) => {
+router.post('/api/v1/register', (req, res) => {
   // 获取数据
   var obj = req.body
   // 检验数据
@@ -62,7 +62,7 @@ router.post('/register', (req, res) => {
 })
 
 // 2. 登陆
-router.post('/login', (req, res) => {
+router.post('/api/v1/login', (req, res) => {
   // 获取用户信息
   var obj = req.body
   var phone = obj.phone
@@ -96,12 +96,12 @@ router.post('/login', (req, res) => {
 })
 
 // 3. 注销
-router.get('/logout', (req, res) => {
+router.get('/api/v1/logout', (req, res) => {
   res.send({ code: 200, msg: `注销成功` })
 })
  
 // 4. 个人信息
-router.get('/detail', (req, res) => {
+router.get('/api/v1/detail', (req, res) => {
   // 获取用户信息
   var uid = req.user.uid
   console.log(uid)
@@ -115,7 +115,7 @@ router.get('/detail', (req, res) => {
 })
 
 // 5. 更新昵称
-router.put('/updatename', (req, res) => {
+router.put('/api/v1/updatename', (req, res) => {
   // 获取数据
   var uname = req.body.uname
   // 检验名字是否为空
@@ -191,7 +191,7 @@ router.put('/updatename', (req, res) => {
 })
 
 // 6. 更新性别
-router.put('/updatesex', (req, res) => {
+router.put('/api/v1/updatesex', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -213,7 +213,7 @@ router.put('/updatesex', (req, res) => {
 })
 
 // 7. 更新生日
-router.put('/updatebirth', (req, res) => {
+router.put('/api/v1/updatebirth', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -235,7 +235,7 @@ router.put('/updatebirth', (req, res) => {
 })
 
 // 8. 更新城市
-router.put('/updatecity', (req, res) => {
+router.put('/api/v1/updatecity', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -257,7 +257,7 @@ router.put('/updatecity', (req, res) => {
 })
 
 // 9. 更新简介
-router.put('/updateintr', (req, res) => {
+router.put('/api/v1/updateintr', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
   // 获取数据
@@ -277,10 +277,11 @@ router.put('/updateintr', (req, res) => {
     }
   })
 })
+
 // 10. 关注
-router.post('/focus', (req, res) => {
+router.post('/api/v1/focus', (req, res) => {
   // 获取用户信息
-  var user = req.user
+  var user = req.user 
   // 获取被关注用户的uid
   var uid = req.body.uid
   // 检验数据是否为空
@@ -300,7 +301,7 @@ router.post('/focus', (req, res) => {
       res.send({code: 4003, msg: `该用户不存在` })
     } else {
       // 查看是否已关注
-      var sql = `select id from trip_focus where uid=? and from_uid=?`
+      var sql = `select uid from trip_focus where uid=? and from_uid=?`
       pool.query(sql, [uid, user.uid], (err, result) => {
         if (err) throw err
         if (result.length > 0) {
@@ -308,7 +309,7 @@ router.post('/focus', (req, res) => {
           res.send({ code: 4004, msg: `已关注` })
         } else {
           // 未关注
-          var sql = `insert into trip_focus values (null, ?, ?)`
+          var sql = `insert into trip_focus(uid, from_uid) values (?, ?)`
           pool.query(sql, [uid, user.uid], (err, result) => {
             if (err) throw err
             if (result.affectedRows > 0) { 
@@ -323,31 +324,111 @@ router.post('/focus', (req, res) => {
   })
 })
 
-// 11 . 关注列表
-router.get('/focuslist', (req, res) => {
+// 11 . 粉丝列表
+router.get('/api/v1/fanslist', (req, res) => {
   // 获取用户uid
   var uid = req.user.uid
+  console.log(uid)
   // 创建一个变量保存所有粉丝的信息
   var fanslist = []
   // 执行sql 查询粉丝的uid
   var sql = `select from_uid from trip_focus where uid=?`
   pool.query(sql, [uid], (err, result) => {
     if (err) throw err
-    var fansUid = result
-    var tasks = []
-    for (var item of fansUid) {
-      var p = Promise.all([
-        getBaseInfo(item.from_uid),
-        getFunsNum(item.from_uid)]
-      ).then(result => {
-        fanslist.push(Object.assign({}, ...result))
+    if (result.length > 0) {
+      // 所有粉丝的uid
+      var fansUid = result
+      var tasks = []
+      for (var item of fansUid) {
+        var p = Promise.all([
+          getBaseInfo(item.from_uid),
+          getFunsNum(item.from_uid),
+          checkIsFollowed(item.from_uid, uid)
+        ]
+        ).then(result => {
+          fanslist.push(Object.assign({}, ...result))
+        })
+        tasks.push(p)
+      }
+      Promise.all(tasks).then(result => {
+        res.send({ code: 200, data: fanslist })
+      }).catch(err => {
+        throw err
       })
-      tasks.push(p)
+    } else {
+      res.send({ code: 4001, msg: '该用户尚未被关注', data: null })
     }
-    Promise.all(tasks).then(result => {
-      res.send({ code: 200, data: fanslist })
-    }).catch(err => console.log(err))
   })
 })
 
+// 12. 关注列表
+router.get('/api/v1/focuslist', (req, res) => {
+  // 获取用户id
+  var uid = req.user.uid
+  // 创建一个变量保存该用户关注的所有用户信息
+  var focusList = []
+  // 执行sql
+  // 查询所有关注用户的uid
+  var sql = `select uid from trip_focus where from_uid=? `
+  pool.query(sql, [uid], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      // 保存所有关注人的uid
+      var focusUid = result
+      // 创建一个变量保存所有任务
+      var tasks = []
+      for (var item of focusUid) {
+        var p = Promise.all([getBaseInfo(item.uid), getFunsNum(item.uid), checkIsFollowed(item.uid, uid)]).then(result => {
+          focusList.push(Object.assign({}, ...result))
+        }).catch(err => {
+          throw err
+        })
+        tasks.push(p)
+      }
+      // 查询每个用户的uid 头像 粉丝数 且判断是否互粉
+      Promise.all(tasks).then(result => {
+        res.send({ code: 200, data: focusList })
+      }).catch(err => { throw err })
+    } else {
+      res.send({ code: 200, msg: `该用户尚未关注人`, data: null })
+    }
+  })
+})
+
+// 13. 更换头像
+router.put('/changeavatar', (req, res) => {
+  // 获取用户信息
+  var uid = req.user.uid
+  // 获取数据
+  var { dataUrl, fileID } = req.body.data
+  console.log(req.body.data)
+  // 检验数据
+  if (!dataUrl) {
+    return res.send({ code: 4001, msg: `base图片为空` })
+  }
+  if (!fileID) {
+    return res.send({ code: 4002, msg: `图片ID为空` })
+  }
+  // 拼接图片的本地绝对路径
+  var localFileID = __dirname + '/../public/avatar/' + fileID
+  console.log(fileID)
+  // 执行上传功能
+
+  // 调用上传图片函数
+  uploadImg(dataUrl, localFileID).then(() => {
+    // 更新用户的头像信息
+    // 拼接图片的网络地址
+    var imgUrl = 'http://localhost:3000/avatar/' + fileID
+    console.log(imgUrl)
+    var sql = `update trip_user set avatar=? where uid=?`
+    pool.query(sql, [imgUrl, uid], (err, result) => {
+      if (err) throw err
+      if (result.affectedRows > 0) {
+        res.send({ code: 200, msg: `更新成功` })
+      } else {
+        res.send({ code: 4003, msg: `更新失败` })
+      }
+    })
+  }).catch(err => { throw err })
+})
 module.exports = router

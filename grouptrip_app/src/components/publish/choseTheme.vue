@@ -58,7 +58,7 @@ export default {
   },
   created() {
     // 发送请求获取所有主题信息
-    var url = "api/v1/group/themelist";
+    var url = 'group/api/v1/themelist'
     this.axios.get(url).then(res => {
       if (res.data.code === 200) {
         console.log(res.data.data);
@@ -71,8 +71,11 @@ export default {
 
 <style>
 .theme-box {
-  background-color: #000;
+  background-color: #1f1f1f;
   margin-bottom: 30px;
+  position: fixed;
+  width: 100%;
+  height: 100%;
 }
 /* 标题 底部进度提醒 */
 .theme-box .title,

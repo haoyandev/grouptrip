@@ -243,6 +243,13 @@
   fill: currentColor;
   overflow: hidden;
 }
+.iconsend-small{
+  width: 10px;
+  height: 10px;
+  vertical-align: -0.15em;
+  fill: currentColor;
+  overflow: hidden;
+}
 .iconcomment{
   width: 15px;
   height: 15px;

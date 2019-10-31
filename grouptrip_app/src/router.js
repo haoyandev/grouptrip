@@ -4,9 +4,9 @@ import Router from 'vue-router'
 // 首页
 import Home from '@/views/Home.vue'
 import Grouptrip from './components/index/Grouptrip.vue'
+import PersonalIndex from './components/index/PersonalIndex.vue'
 // 个人中心
 import Personal from '@/views/Personal.vue'
-import fanList from '@/components/home/fanList'
 // 攻略
 import Strategy from '@/views/Strategy.vue'
 // 游记
@@ -22,6 +22,7 @@ import uploadImg from '@/components/publish/uploadImg'
 import groupDetail from '@/components/publish/groupDetail'
 import choseTheme from '@/components/publish/choseTheme'
 import Guan from '@/components/common/guanzhu.vue'
+import Changeavatar from '@/components/settings/changeAvatar/changeAvatar'
 Vue.use(Router)
 
 export default new Router({
@@ -41,6 +42,7 @@ export default new Router({
     { path: '/Chosetheme', component: choseTheme },
     { path: '/groupdetail', component: groupDetail },
     { path: '/go', component: go},
-    { path: '/fanList', component:fanList}
+    { path: '/Changeavatar', component: Changeavatar },
+    { path: '/PersonalIndex', component:PersonalIndex }
   ]
 })

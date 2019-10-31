@@ -9,11 +9,11 @@ const { generateToken } = require('../jwt')
 var router = express.Router()
 
 // 1. 组队游列表
-router.get('/grouplist', (req, res) => {
+router.get('/api/v1/grouplist', (req, res) => {
   // 执行sql 查询组团信息
 })
 // 2. 获取主题列表
-router.get('/themelist', (req, res) => {
+router.get('/api/v1/themelist', (req, res) => {
   // 执行sql
   var sql = `select tid, tname, timg from trip_theme`
   pool.query(sql, (err, result) => {
@@ -22,7 +22,7 @@ router.get('/themelist', (req, res) => {
   })
 })
 // 3. 发布组团游
-router.post('/publish', (req, res) => {
+router.post('/api/v1/publish', (req, res) => {
   // 获取用户id
   var uid = req.user.uid
   // 获取数据
@@ -34,7 +34,7 @@ router.post('/publish', (req, res) => {
   
 })
 // 4. 上传组团游图片
-router.post('/upload', (req, res) => {
+router.post('/api/v1/upload', (req, res) => {
   // 获取用户信息
   var user = { uid: 2 }
   // 获取当前时间
@@ -60,10 +60,47 @@ router.post('/upload', (req, res) => {
 
   res.send('ddd')
 })
-// 5. 获取国家城市
-router.get('/getlocation', (req, res) => {
+// 5. 城市列表
+router.get('/api/v1/citylist/:pno', (req, res) => {
   // 获取数据
-  
+  var pno = req.params.pno
+  pno = parseInt(pno)
+  var start = (pno - 1) * count
+  if (start) {
+    start = 1
+  }
+  // 执行sql
+  var sql = `select cid, cname, elname, views, hot_spots from trip_city limit ?, 6`
+  pool.query(sql, [start], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, data: result })
+    } else {
+      res.send({ code: 4001, msg: `没有更多数据` })
+    }
+  })
+})
+
+// 6. 获取景点列表
+router.get('/api/v1/spotslist/:pno', (req, res) => {
+  // 获取数据
+  var pno = req.params.pno
+  // 每次返回6条数据
+  var count = 6
+  // 计算start
+  pno = parseInt(pno)
+  var start = (pno - 1) * count
+  if (!start) {
+    start = 1
+  }
+  // 执行sql 
+  var sql = `select sid, cid from trip_spots limit ?, 6`
+  pool.query(sql, [start], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, data: result })
+    }
+  })
 })
 
 module.exports = router
