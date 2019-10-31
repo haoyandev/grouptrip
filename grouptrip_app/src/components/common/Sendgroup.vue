@@ -1,6 +1,6 @@
 <template>
   <div>
-    <router-link to class="send">
+    <router-link to="/choseTheme" class="send">
       <svg @click="jumpchos()" class="iconsend-purple-copy" aria-hidden="true">
         <use xlink:href="#iconsend-purple-copy" />
       </svg>
