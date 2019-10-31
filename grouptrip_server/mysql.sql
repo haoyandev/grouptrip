@@ -121,7 +121,7 @@ CREATE TABLE trip_group (
 	tid INT, # 主题id
 	cid INT, # 城市id
 	intr VARCHAR(200),
-	bengin_time VARCHAR(128),
+	begin_time VARCHAR(128),
 	end_time VARCHAR(128),
 	create_time VARCHAR(128),
   update_time VARCHAR(128),
