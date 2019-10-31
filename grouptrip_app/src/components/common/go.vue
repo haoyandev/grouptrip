@@ -30,7 +30,7 @@
       <div class="active" :style="active===i&&'opacity:1;'" v-for="(ele,i) of gos_zt" :key="i">
         <mt-tab-container-item @click.native="city" :id="i">
           <router-link
-            to
+            to='/Strategy'
             @click="add_trip(trip)"
             class="trip-a"
             href="javascript:;"
@@ -738,7 +738,6 @@ export default {
     city(e) {
       var city = e.target.dataset.city || e.target.dataset.citys;
       this.$store.commit("setCity", city);
-      this.$emit("city", city);
     },
     add_trip(trip) {
       this.late.push(trip);

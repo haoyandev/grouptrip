@@ -5,12 +5,12 @@
         <mt-tab-item class="text-item">
           <div class="placebutton">
             <router-link to="/go">
-            <mt-button>
-              {{city}}
-              <svg class="icondropdown-white" aria-hidden="true">
-                <use xlink:href="#iconxiala" />
-              </svg>
-            </mt-button>
+              <mt-button>
+                {{$store.getters.city||'广州'}}
+                <svg class="icondropdown-white" aria-hidden="true">
+                  <use xlink:href="#iconxiala" />
+                </svg>
+              </mt-button>
             </router-link>
           </div>
           <div class="tabbar-search">
@@ -236,7 +236,7 @@
           <div class="blank"></div>
         </van-tabs>
       </div>
-      <main-tab-bar :cities="city"></main-tab-bar>
+      <main-tab-bar></main-tab-bar>
     </main>
   </div>
 </template>
@@ -249,11 +249,9 @@ import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
   created() {
-    this.citys();
   },
   data() {
     return {
-      city: this.$store.getters.city[this.$store.getters.city.length-1],
       cityopa: 0,
       citydis: "none",
       opa: 1,

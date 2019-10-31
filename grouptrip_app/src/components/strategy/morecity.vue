@@ -31,6 +31,7 @@
 export default {
   data() {
     return {
+
       cities: [
         {
           cbg: require("../../assets/citypics/beijin1.jpg"),
