@@ -200,7 +200,7 @@
               <h2>热门路线</h2>
               <div class="popular-item" v-for="(popular,p) of populars" :key="p">
                 <div class="popular-img">
-                  <img src="../assets/citypics/img1957.jpg" alt />
+                  <img :src="popular.img" alt />
                 </div>
                 <div class="popular-text">
                   <h3>{{popular.title}}</h3>
@@ -276,7 +276,7 @@ export default {
   },
   data() {
     return {
-      able: "",
+      able: "可加载",
       page: 1,
       can: true,
       times: new Date(),
@@ -312,19 +312,22 @@ export default {
           title: "大阪3日路线",
           tag1: "初次必玩",
           tag2: "环球影城一日游",
-          subtitle: "游玩3天/适宜9月-12月/4个景点"
+          subtitle: "游玩3天/适宜9月-12月/4个景点",
+          img:"http://localhost:3000/citypics/4-2.jpg"
         },
         {
           title: "品味老广州经典1日游",
           tag1: "老广州的建筑",
           tag2: "品味粤菜",
-          subtitle: "游玩6天/适宜10月-5月/14个景点"
+          subtitle: "游玩6天/适宜10月-5月/14个景点",
+          img:"http://localhost:3000/citypics/3-1.jpeg"
         },
         {
           title: "大阪3日路线",
           tag1: "初次必玩",
           tag2: "环球影城一日游",
-          subtitle: "游玩3天/适宜3月-11月/12个景点"
+          subtitle: "游玩3天/适宜3月-11月/12个景点",
+          img:"http://localhost:3000/citypics/3-2.jpeg"
         }
       ],
 
@@ -337,17 +340,17 @@ export default {
         {
           title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: require("../assets/citypics/beijin1.jpg")
+          imgpath: "http://localhost:3000/citypics/3-1.jpeg"
         },
         {
           title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: require("../assets/citypics/beijin1.jpg")
+          imgpath: "http://localhost:3000/citypics/3-2.jpeg"
         },
         {
           title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: require("../assets/citypics/beijin1.jpg")
+          imgpath: "http://localhost:3000/citypics/4-2.jpg"
         }
       ],
       routes: [
