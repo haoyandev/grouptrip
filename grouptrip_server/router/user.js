@@ -281,7 +281,7 @@ router.put('/api/v1/updateintr', (req, res) => {
 // 10. 关注
 router.post('/api/v1/focus', (req, res) => {
   // 获取用户信息
-  var user = req.user
+  var user = req.user 
   // 获取被关注用户的uid
   var uid = req.body.uid
   // 检验数据是否为空
@@ -301,7 +301,7 @@ router.post('/api/v1/focus', (req, res) => {
       res.send({code: 4003, msg: `该用户不存在` })
     } else {
       // 查看是否已关注
-      var sql = `select id from trip_focus where uid=? and from_uid=?`
+      var sql = `select uid from trip_focus where uid=? and from_uid=?`
       pool.query(sql, [uid, user.uid], (err, result) => {
         if (err) throw err
         if (result.length > 0) {
@@ -309,7 +309,7 @@ router.post('/api/v1/focus', (req, res) => {
           res.send({ code: 4004, msg: `已关注` })
         } else {
           // 未关注
-          var sql = `insert into trip_focus values (null, ?, ?)`
+          var sql = `insert into trip_focus(uid, from_uid) values (?, ?)`
           pool.query(sql, [uid, user.uid], (err, result) => {
             if (err) throw err
             if (result.affectedRows > 0) { 

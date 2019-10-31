@@ -95,7 +95,7 @@ export default {
   position: relative;
   background-color: #f2f4f6;
 }
-#morecity-page .tabbar-top {
+#morecity-page .tabbar-top, #personalindex-page .tabbar-top{
   width: 100%;
   height: 46px;
   position: fixed;
@@ -106,7 +106,7 @@ export default {
   box-shadow: 0px 1px 2px #acacacb9;
   background-color: #ffffff;
 }
-#morecity-page .tabbar-top .zuojiantou_small {
+#morecity-page .tabbar-top .zuojiantou_small,#personalindex-page .tabbar-top .zuojiantou_small {
   position: fixed;
   top: 5px;
   left: 0px;

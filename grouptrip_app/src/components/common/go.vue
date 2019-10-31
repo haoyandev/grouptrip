@@ -751,11 +751,19 @@ export default {
   }
 };
 </script>
-<style>
-*{transition: all .4s linear}
+<style scoped>
+.tabbar-search{
+  top:15px;
+  left:12px;
+}
+*{transition: opacity .4s linear}
 #go-page {
   width: 100%;
   position: relative;
+}
+.zuojiantou_small{
+  float:left;
+  margin-top:10px;
 }
 #go-page .mint-tabbar > .mint-tab-item.is-selected {
   background-color: #ffffff;
