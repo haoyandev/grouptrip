@@ -31,17 +31,15 @@ export default {
   inject: ['reload'],
   data(){
     return {
-      list:[
-        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"张三",amount:"19",biu:'5',fans:24 },
-        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"李四",amount:"11",biu:'2',fans:27 },
-        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"王五",amount:"16",biu:'8',fans:29 },
-        // {img:require(`@/assets/citypics/heimen.jpg`),fanName:"陈六",amount:"5",biu:'4' ,fans:28 },
-      ]
+      list:[]
     }
   },
-  created(){
+  mounted(){
     //发送axio获取用户的粉丝列表
-    var url = '/user/api/v1/fanslist'
+    var uid = this.$store.state.user.uid
+    console.log(uid)
+    var url = `/user/api/v1/fanslist/${uid}`
+    console.log(url)
     this.axios.get(url).then(res=>{
       if (res.data.code===200){
         this.list = res.data.data
