@@ -8,10 +8,6 @@ const { generateToken } = require('../jwt')
 // 创建路由器
 var router = express.Router()
 
-// 1. 组队游列表
-router.get('/api/v1/grouplist', (req, res) => {
-  // 执行sql 查询组团信息
-})
 // 2. 获取主题列表
 router.get('/api/v1/themelist', (req, res) => {
   // 执行sql
@@ -143,17 +139,27 @@ router.get('/api/v1/spotslist/:pno', (req, res) => {
 })
 
 // 7. 组团游列表
-router.get('/api/v1/grouplist/:order/:pno', (req, res) => {
-  // 获取数据
-  // 排序方式
-  var order = req.params.order
-  // 页码
-  var pno = req.params.pno
-  // 检验数据
-  if (!order) {
-    如果未提供
-    order = 'create_time'
-  }
+router.get('/api/v1/grouplist/:pno', (req, res) => {
+   // 获取数据
+   var pno = req.params.pno
+   // 每次返回6条数据
+   var count = 6
+   // 计算start
+   pno = parseInt(pno)
+   var start = (pno - 1) * count
+   if (!start) {
+     start = 1
+   }
+   // 执行sql 
+   var sql = `select g.gid, g.begin_time, g.end_time, g.intr,c.cid,c.cname, u.uid, u.avatar from trip_group g left join trip_user u on g.uid = u.uid left join trip_city c on g.cid = c.cid limit ?, ?`
+   pool.query(sql, [start, count], (err, result) => {
+     if (err) throw err
+     if (result.length > 0) {
+       res.send({ code: 200, data: result })
+     } else {
+       res.send({ code: 4001, msg: `没用更多数据了`, data: [] })
+     }
+   })
 })
 // 8. 游记列表
 router.get('/api/v1/notelist/:pno', (req, res) => {
@@ -194,9 +200,33 @@ router.get('/api/v1/notelist/:pno', (req, res) => {
   })
 })
 // 9. 组团游搜索
-router.get('/api/v1/group/:kw', (req, res) => {
-  // 获取用户的搜索关键字
-
+router.get('/api/v1/search/:kw/:pno', (req, res) => {
+  // 获取数据
+  var kw = req.params.kw
+  if (!kw) {
+    return res.send({ code: 4001, msg: `关键字为空` })
+  }
+  // 解码关键字
+  kw = decodeURI(kw)
+  var pno = req.params.pno
+  // 每次返回6条数据
+  var count = 6
+  // 计算start
+  pno = parseInt(pno)
+  var start = (pno - 1) * count
+  if (!start) {
+    start = 1
+  }
+  // 执行sql 
+  var sql = `select g.gid, g.begin_time, g.end_time, g.intr,c.cid,c.cname, u.uid, u.avatar from trip_group g left join trip_user u on g.uid = u.uid left join trip_city c on g.cid = c.cid where g.intr like ? limit ?, ?`
+  pool.query(sql, [`%${kw}%`, start, count], (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, data: result })
+    } else {
+      res.send({ code: 4001, msg: `没用更多数据了`, data: [] })
+    }
+  })
 })
 // 10. place
 router.get('/api/v1/place', (req, res) => {
@@ -208,3 +238,4 @@ router.get('/api/v1/place', (req, res) => {
   })
 })
 module.exports = router
+

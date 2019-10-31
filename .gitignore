@@ -4,7 +4,6 @@
 # test.http
 **/citypics/
 **/public/group/
-*.http
 # Logs
 logs
 *.log
