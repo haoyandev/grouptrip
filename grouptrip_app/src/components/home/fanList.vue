@@ -1,8 +1,9 @@
 <template>
   <div>
     <mt-header id="title" title="粉丝">
-      <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
+      
+      <router-link to="" slot="left">
+        <mt-button @click.native="jumpper" icon="back"></mt-button>
       </router-link>
     <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
@@ -63,9 +64,12 @@ export default {
           this.reload() 
         }
       })
+    },
+    jumpper(){
+      this.$emit('fans',{paropa:1,pardis:'block',fanopa:0,fandis:'none'})
     }
   },
-}
+  }
 
 </script>
 <style scoped>

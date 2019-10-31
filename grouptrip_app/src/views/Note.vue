@@ -241,6 +241,7 @@ export default {
     this.a = setInterval(() => {
       this.i++;
     }, 5000);
+    this.axios.get()
   },
   components: {
     MainTabBar,

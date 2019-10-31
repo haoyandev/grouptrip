@@ -12,7 +12,6 @@ var router = express.Router()
 router.get('/api/v1/grouplist', (req, res) => {
   // 执行sql 查询组团信息
 })
-
 // 2. 获取主题列表
 router.get('/api/v1/themelist', (req, res) => {
   // 执行sql
