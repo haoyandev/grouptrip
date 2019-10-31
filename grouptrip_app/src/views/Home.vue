@@ -37,7 +37,9 @@
 
         <div class="blank"></div>
       </div>
-      <Sendgroup @Chose="jumpchos"></Sendgroup>
+      <router-link to="/choseTheme">
+      <Sendgroup></Sendgroup>
+      </router-link>
       <main-tab-bar></main-tab-bar>
     </main>
 
