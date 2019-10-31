@@ -44,7 +44,6 @@
 
       </div>
       <div class="bottom-box">
-        <van-loading size="24px" vertical v-show="loading">加载中...</van-loading>
         <!-- 阅读规范 -->
         <div class="read">我已阅读《
           <router-link to="">发布规范和风险提示</router-link>
@@ -52,6 +51,12 @@
           </div>
         <div class="publish" @click="publish">立即发布</div>   
       </div>
+      <van-overlay :show="overlay" @click="show = false" >
+        hhhh
+         <van-loading size="24px" vertical v-show="loading">
+           发布中...
+         </van-loading>
+      </van-overlay>
     </div>   
   </div>
 </template>
@@ -69,6 +74,7 @@ export default {
       showBeginTime: false, // 是否显示benginTime选择器
       showEndTime: false, // 是否显示EndTime选择器,
       showLocation: false, // 是否显示地区选择器
+      overlay: false,
       loading: false,
       areaList: {
         province_list: {
@@ -98,7 +104,6 @@ export default {
   },
   methods: {
     handleLocation (val) {
-      console.log(val)
       this.area = val
       this.location = `${val[1].name}`
       this.showLocation = false
@@ -124,16 +129,27 @@ export default {
         cid: this.area[1].code,
       }
       this.$store.commit('setGroupInfo', obj)
+      // 获得组团游信息
       var groupInfo = this.$store.state.groupInfo
-      console.log(groupInfo)
-      // 显示loding
+      // 显示遮罩层 loding
+      this.overlay = true
       this.loading = true
       // 发表组队
       var url = '/group/api/v1/publish'
       // 发送axios
       this.axios.post(url, groupInfo)
       .then(res => {
-        console.log(res)
+        if (res.data.code === 200) {
+          console.log(res.data)
+          this.loading = false
+          this.$toast({ message: '发布成功 即将跳转到首页', duration: 1500 })
+        } else {
+          this.loading = false
+          this.$toast({ message: `发布失败 即将跳转到首页`, duration: 1500 })
+        }
+        setTimeout(() => {
+          this.$router.push('/Home')
+        }, 1500)
       })
       .catch(err => {
         console.log(err)
@@ -247,5 +263,11 @@ export default {
   }
   .group-box .bottom-box .router-link-active {
     color: #fff;
+  }
+  .group-box .van-loading {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>
