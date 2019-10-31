@@ -42,10 +42,12 @@ app.use((req, res, next) => {
   if (url !== '/user/api/v1/register' && 
     url !== '/user/api/v1/login' && 
     url.startsWith('/user') ||
-    url !== '/group/api/v1/notelist' &&
+    !url.startsWith('/group/api/v1/notelist') &&
     url !== '/group/api/v1/place' &&
-    url !== '/group/api/v1/citylist/:pno' &&
-    url !== '/group//api/v1themelist' &&
+    !url.startsWith('/group/api/v1/citylist') &&
+    !url .startsWith('/group/api/v1/grouplist') &&
+    !url .startsWith('/group/api/v1/search') &&
+    url !== '/group/api/v1themelist' &&
     url.startsWith('/group')) {
     // 获取用户传来的token值
     var token = req.headers.token
