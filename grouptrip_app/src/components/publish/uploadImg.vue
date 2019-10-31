@@ -1,6 +1,13 @@
 <template>
   <div class="intr-box">
-    <p class="title">介绍你的Group游</p>
+    <div class="title">
+      <router-link to="">
+        <svg @click="closeGroup" class="iconclose-white" aria-hidden="true">
+          <use xlink:href="#iconclose-white-copy" />
+        </svg>
+      </router-link>
+      <span>介绍你的Group游</span>
+    </div>
     <div class="main">
       <div class="content-box">
         <!-- 主题 -->
@@ -37,7 +44,19 @@ export default {
     }
   },
   methods: {
-    
+    closeGroup(){
+      this.$messagebox.confirm('',{
+          title:'确定不发了嘛?',
+          confirmButtonText:'继续发布',
+          cancelButtonText:'下次再说'
+        })
+      .then(res=>{
+        console.log('继续发布')
+      })
+      .catch(err=>{
+        this.$router.push('/home')
+      })
+    },
     next () {
       // 获取用户输入的内容
       var intr = this.intr
@@ -112,6 +131,8 @@ export default {
   top: 0;
   line-height: 70px;
   z-index: 1;
+  display: flex;
+
 }
 .intr-box .step {
   position: fixed;

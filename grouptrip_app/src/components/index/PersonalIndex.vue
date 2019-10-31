@@ -139,9 +139,6 @@ export default {
 #personalindex-page{
   width: 100%;
 }
-/* #personalindex-page .tabbar-top{
-  background-color: transparent !important;
-} */
 .personalindex-wrap{
   width: 100%;
 }

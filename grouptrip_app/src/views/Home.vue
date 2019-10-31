@@ -113,7 +113,7 @@ export default {
         if (isReachBottom() && address === "/Home" && this.can) {
           this.can = false;
           setTimeout(() => {
-            this.axios.get("", { params: {} }).then(res => {
+            this.axios.get("/", { params: {} }).then(res => {
               this.can = true;
               console.log(res);
             });
@@ -329,7 +329,7 @@ export default {
   color: #fff;
   font: bold 5px JianHei;
   margin-top: 0px;
-}
+} 
 .wrap-item .wrap-item-content .wrap-item-details {
   height: 50px;
   color: #ffffff;

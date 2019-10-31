@@ -3,7 +3,11 @@
     <div class="main-box">
       <div class="top-box">
         <!-- 返回按钮 -->
-        <span class="toBack">--</span>
+        <router-link to="">
+          <svg @click="closeGroup" class="iconclose-white" aria-hidden="true">
+            <use xlink:href="#iconclose-white-copy" />
+          </svg>
+        </router-link>
         <div class="tip">
           完善信息，<br>
           让更多人看到<br>  
@@ -103,6 +107,19 @@ export default {
 
   },
   methods: {
+    closeGroup(){
+      this.$messagebox.confirm('',{
+          title:'确定不发了嘛?',
+          confirmButtonText:'继续发布',
+          cancelButtonText:'下次再说'
+        })
+      .then(res=>{
+        console.log('继续发布')
+      })
+      .catch(err=>{
+        this.$router.push('/home')
+      })
+    },
     handleLocation (val) {
       this.area = val
       this.location = `${val[1].name}`
@@ -218,6 +235,7 @@ export default {
     font-size: 30px;
     line-height: 40px;
     margin-left: 30px;
+    margin-top: 20px;
     color: #fff;
     font-weight: 700;
   }

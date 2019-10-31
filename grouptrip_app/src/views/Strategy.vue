@@ -151,7 +151,7 @@
           </div>
           <div class="sale-content">
             <router-link
-              to="javascript;"
+              to=""
               class="sale-item sale-item1"
               v-for="(s,i) of sales"
               :key="i"
@@ -167,7 +167,7 @@
         <div class="essence-notes">
           <div class="essence-title">
             <h3>精华游记</h3>
-            <router-link to="javascript;" class="see-more">
+            <router-link to="" class="see-more">
               <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />

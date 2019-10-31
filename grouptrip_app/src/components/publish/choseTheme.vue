@@ -1,6 +1,13 @@
 <template>
   <div class="theme-box">
-    <p class="title">选择group游主题</p>
+    <div class="title">
+      <router-link to="" >
+        <svg class="iconclose-white" aria-hidden="true" @click="closeGroup">
+          <use xlink:href="#iconclose-white-copy" />
+        </svg>
+      </router-link>
+      <span>选择group游主题</span>
+    </div>
     <ul class="main-box">
       <li class="theme-item" v-for="(item) of themeList" :key="item.tid">
         <div class="left">
@@ -36,6 +43,19 @@ export default {
     };
   },
   methods: {
+    closeGroup(){
+      this.$messagebox.confirm('',{
+          title:'确定不发了嘛?',
+          confirmButtonText:'继续发布',
+          cancelButtonText:'下次再说'
+        })
+      .then(res=>{
+        console.log('继续发布')
+      })
+      .catch(err=>{
+        this.$router.push('/home')
+      })
+    },
     next(e) {
       if (!this.activeTid && !this.tname) {
         return;
@@ -88,19 +108,29 @@ export default {
   margin: 0;
   color: #fff;
   text-align: center;
+  display: flex;
+  align-items: center;
 }
 .theme-box .title {
   top: 0;
   line-height: 70px;
   z-index: 1;
 }
+.theme-box .title .iconclose-white,.intr-box .title .iconclose-white,.group-box .main-box .iconclose-white{
+  margin-left: 10px;
+  margin-top: 25px;
+}
+.theme-box .title span, .intr-box .title span{
+  position: relative;
+  left: 25%;
+}
 .theme-box .step {
   position: fixed;
   bottom: 0;
   height: 50px;
   font-weight: 500;
-  line-height: 50px;
   color: #909090;
+  justify-content: center;
 }
 
 /* 主题 */
