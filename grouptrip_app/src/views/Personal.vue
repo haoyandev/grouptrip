@@ -44,11 +44,9 @@
           <h1>0</h1>
           <span>获赞与收藏</span>
         </li>
-        <li>
-          <router-link to="/fans">
-            <h1>{{user.fansNum || 0}}</h1>
-            <span>粉丝</span>
-          </router-link>
+        <li @click="jumpFanlist">
+          <h1>{{user.fansNum || 0}}</h1>
+          <span>粉丝</span>
         </li>
         <li>
           <h1>{{user.focusNum || 0}}</h1>
@@ -164,6 +162,9 @@ export default {
     // 发送ajax获取用户最新的信息
   },
   methods: {
+    jumpFanlist () {
+      this.$router.push('/fans')
+    },
     fh() {
       this.opa.useropa = 0;
       setTimeout(() => {

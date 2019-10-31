@@ -8,7 +8,7 @@
     <tab-bar-item path="/Strategy" activeColor="#111111">
       <img slot="item-icon" src="../assets/iconfont/location.png" alt />
       <img slot="item-icon-active" src="../assets/iconfont/location-active.png" alt />
-      <div slot="item-text">{{city}}</div>
+      <div slot="item-text">{{$store.getters.city||'广州'}}</div>
     </tab-bar-item>
     <tab-bar-item path="/Note" activeColor="#111111">
       <img slot="item-icon" src="../assets/iconfont/note.png" alt />
@@ -34,10 +34,8 @@ export default {
   },
   data() {
     return {
-      city:this.$store.getters.city[this.$store.getters.city.length-1]
     }
-  },
-
+  }
 };
 </script>
 <style scoped>

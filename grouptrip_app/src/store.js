@@ -5,7 +5,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    city:[],
+    city:'',
     groupInfo: {},
     cid: 0,
     searchKws: "",
@@ -32,7 +32,7 @@ export default new Vuex.Store({
   //修改状态值
   mutations: {
     setCity(state,city){
-      state.city.push(city);
+      state.city=city;
     },
     setPage(state,page){
       state.page=page;
