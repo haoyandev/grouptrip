@@ -16,11 +16,15 @@
             <div class="msg-top-head">
               <img src="../../assets/citypics/city1.jpg">
             </div>
-            <div class="msg-top-follow">
+            <div class="msg-top-follow" @click="isFollow" v-if="follow">
               <svg class="iconsend-small" aria-hidden="true">
                 <use xlink:href="#iconsend" />
               </svg>
-              关注</div>
+              关注
+            </div>
+            <div class="follow-success" v-else @click="cancelFollow">
+              <span>已关注</span>
+            </div>
             <div class="msg-top-talk">和他聊聊</div>
           </div>
           <div class="msg-middle">
@@ -90,6 +94,7 @@ import like from "../common/like";
 export default {
   data(){
     return{
+      follow:true,
       active:1,
       personalmsg:{uname:'Victoria',city:'广州',fansNum:'112',likes:'12',follower:'10',gender:0},
       trips:[
@@ -105,11 +110,27 @@ export default {
     }
   },
   components:{
-    like
+    like,
+  },
+  created(){
+    var url = ''
   },
   methods:{
     jumpfh(){
       this.$emit('fh','0')
+    },
+    isFollow(){
+        this.follow=false
+    },
+    cancelFollow(){
+      this.follow=true
+      this.$messagebox.confirm("是否取消关注")
+      .then(action=>{
+        console.log('确认')
+      })
+      .catch(err=>{
+        console.log('取消')
+      });
     }
   }
 }
@@ -164,15 +185,20 @@ export default {
   height: 100%;
   object-fit: cover;
 }
-.msg-top .msg-top-follow{
+.msg-top .msg-top-follow, .msg-top .follow-success{
   width: 70px;
   height: 30px;
   line-height: 30px;
-  background-color: #51c0c7;
-  color: #ffffff;
   border-radius: 30px;
   text-align: center;
   font-size: 13px;
+}
+.msg-top .msg-top-follow{
+  background-color: #51c0c7;
+  color: #ffffff;
+}
+.msg-top .follow-success{
+  background-color: #dddddd;
 }
 .msg-top .msg-top-talk{
   width: 120px;

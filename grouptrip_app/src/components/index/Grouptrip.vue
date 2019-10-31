@@ -66,7 +66,10 @@
             <div class="theme-icon">
               <img :src="t.themepic" alt />
             </div>
-            <p>{{t.theme}}</p>
+            <span>{{t.theme}}</span>
+            <p class="theme_details">
+              {{t.details}}
+            </p>
           </div>
           <div class="item-personal-msg">
             <div class="personal-msg-header">
@@ -169,9 +172,8 @@ export default {
         { text: "约你去看音乐剧", value: 6 },
         { text: "其他活动", value: 7 }
       ],
-
       trips: [
-        {
+        { details:"12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
           theme: "一起去冒险",
           name: "维多利亚",
           age: "20",
@@ -182,28 +184,17 @@ export default {
           themepic: require("../../assets/theme/explore.png"),
           personalhead: require("../../assets/citypics/heimen.jpg")
         },
-        {
+         { details:"12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
           theme: "一起去冒险",
           name: "维多利亚",
           age: "20",
           date: "12月23日~2020年1月8日",
-          gender: 1,
+          gender: 0,
           place: "日本•大阪•京都",
           fans: "87",
           themepic: require("../../assets/theme/explore.png"),
           personalhead: require("../../assets/citypics/heimen.jpg")
         },
-        {
-          theme: "一起去冒险",
-          name: "维多利亚",
-          age: "20",
-          date: "12月23日~2020年1月8日",
-          gender: -1,
-          place: "日本•大阪•京都",
-          fans: "87",
-          themepic: require("../../assets/theme/explore.png"),
-          personalhead: require("../../assets/citypics/heimen.jpg")
-        }
       ],
       show: false, //底部弹出层
       cities: [
@@ -366,20 +357,23 @@ export default {
 }
 .grouptrip-wrap .theme-item {
   position: absolute;
-  width: 100px;
-  height: 70px;
+  width: 300px;
+  height: 200px;
   top: 10px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
 }
-.grouptrip-wrap .theme-item p {
+.grouptrip-wrap .theme-item span {
   color: #fff;
   font-size: 13px;
-  margin: 0px;
+  margin: 0px 0px 10px 0px;
+}
+.grouptrip-wrap .theme-item .theme_details{
+  color: #fff;
+  font-size: 16px;
 }
 .grouptrip-wrap .theme-item .theme-icon {
   width: 60px;

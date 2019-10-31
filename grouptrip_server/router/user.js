@@ -325,10 +325,10 @@ router.post('/api/v1/focus', (req, res) => {
 })
 
 // 11 . 粉丝列表
-router.get('/api/v1/fanslist', (req, res) => {
+router.get('/api/v1/fanslist/:uid', (req, res) => {
   // 获取用户uid
-  var uid = req.user.uid
-  console.log(uid)
+  var uid = req.params.uid
+  console.log('12312313', uid)
   // 创建一个变量保存所有粉丝的信息
   var fanslist = []
   // 执行sql 查询粉丝的uid
@@ -364,7 +364,7 @@ router.get('/api/v1/fanslist', (req, res) => {
 // 12. 关注列表
 router.get('/api/v1/focuslist', (req, res) => {
   // 获取用户id
-  var uid = req.user.uid
+  var uid = req.body.uid
   // 创建一个变量保存该用户关注的所有用户信息
   var focusList = []
   // 执行sql
