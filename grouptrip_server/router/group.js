@@ -106,7 +106,7 @@ router.get('/api/v1/citylist/:pno', (req, res) => {
     start = 1
   }
   // 执行sql
-  var sql = `select cid, cname, elname, views, hot_spots from trip_city limit ?, 6`
+  var sql = `select cid, cname, elname, views, hot_spots, img from trip_city limit ?, 6`
   pool.query(sql, [start], (err, result) => {
     if (err) throw err
     if (result.length > 0) {
@@ -151,7 +151,7 @@ router.get('/api/v1/grouplist/:pno', (req, res) => {
      start = 1
    }
    // 执行sql 
-   var sql = `select g.gid, g.begin_time, g.end_time, g.intr,c.cid,c.cname, u.uid, u.avatar from trip_group g left join trip_user u on g.uid = u.uid left join trip_city c on g.cid = c.cid limit ?, ?`
+   var sql = `select g.gid, g.begin_time, g.end_time, g.intr,c.cid,c.cname, s.sid, u.uid, u.avatar, u.age, u.uname from trip_group g left join trip_user u on g.uid = u.uid left join trip_city c on g.cid = c.cid left join trip_state s on g.sid = s.sid limit ?, ?`
    pool.query(sql, [start, count], (err, result) => {
      if (err) throw err
      if (result.length > 0) {
@@ -236,6 +236,10 @@ router.get('/api/v1/place', (req, res) => {
     if (err) throw err
     res.send({ code: 200, data: result })
   })
+})
+// 11. 热门城市
+router.get('/api/v1/hotcity', (req, res) => {
+  // 执行sql
 })
 module.exports = router
 
