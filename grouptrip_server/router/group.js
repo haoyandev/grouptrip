@@ -47,7 +47,7 @@ router.post('/api/v1/publish', (req, res) => {
   if (!imgList) {
     return res.send({ code: 4006, msg: `图片列表为空` })
   }
-  // 把uid 赋值给groupInfo
+  // 将用户id赋值给groupInfo
   groupInfo.uid = uid
   // 把图片转为对象
   imgList = JSON.parse(imgList)
@@ -63,19 +63,38 @@ router.post('/api/v1/publish', (req, res) => {
     }
     // 创建图片fileId
     var fileID = Date.now() + Math.floor(Math.random() * 999)+ '.' + su
+    // 拼接图片的本地绝对路径
+    var localFileID = __dirname + '/../public/group/' + fileID
     // 拼接图片的本地路径
-    var imgUrl = 'http://localhost:3000/group/' + fileID
-    files.push({dataUrl: item, localFileID: imgUrl})
+    // var imgUrl = 'http://localhost:3000/group/' + fileID
+    files.push({ dataUrl: item, localFileID, fileID })
   }
-  console.log(files)
-  // 创建变量保存上传图片任务
-  var tasks = []
-  for (var file of files) {
-    uploadImg(file.dataUrl, file.localFileID).then(() => {
-      // 插入组团游图片表数据
-      var sql = `insert into `
+  // console.log(files)
+  // 插入新的组团游信息
+  publishGroup(groupInfo).then(result => {
+    var gid = result
+    // 创建变量保存上传图片任务
+    var tasks = []
+    for (var file of files) {
+      var p = new Promise((resolve, reject) => {
+        uploadImg(file.dataUrl, file.localFileID, file.fileID).then((result) => {
+          // 拼接图片的网络地址
+          var imgUrl = 'http://localhost:3000/group/' + result
+          var sql = `insert into trip_group_img (gid, img) values (?, ?)`
+          pool.query(sql, [gid, imgUrl], (err, result) => {
+            if (err) reject(err) 
+            resolve()
+          })
+        }).then(() => resolve()).catch(err => reject(err))
+      })
+      tasks.push(p)
+    }
+    Promise.all(tasks).then(result => {
+      res.send({ code: 200, msg: '发布成功' })
+    }).catch(err => {
+      res.send({ code: 4001, msg: `发布失败` })
     })
-  }
+  })
 
   
 })
@@ -101,7 +120,6 @@ router.get('/api/v1/citylist/:pno', (req, res) => {
     }
   })
 })
-
 // 6. 获取景点列表
 router.get('/api/v1/spotslist/:pno', (req, res) => {
   // 获取数据
@@ -179,5 +197,14 @@ router.get('/api/v1/notelist/:pno', (req, res) => {
 router.get('/api/v1/group/:kw', (req, res) => {
   // 获取用户的搜索关键字
 
+})
+// 10. place
+router.get('/api/v1/place', (req, res) => {
+  // 执行sql
+  var sql = `select cid, cname, img from trip_city`
+  pool.query(sql, (err, result) => {
+    if (err) throw err
+    res.send({ code: 200, data: result })
+  })
 })
 module.exports = router

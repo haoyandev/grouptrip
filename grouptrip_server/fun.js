@@ -58,18 +58,19 @@ function checkIsFollowed (uid, from_uid) {
   })
 }
 // 上传图片
-function uploadImg (dataUrl, localFileID) {
+function uploadImg (dataUrl, localFileID, fileID) {
   return new Promise((resolve, reject) => {
     //  过滤data:URL
     var base64Data = dataUrl.replace(/^data:image\/\w+;base64,/, "")
     // 解码图片
-    var dataBuffer = new Buffer(base64Data, 'base64')
+    var dataBuffer = new Buffer.from(base64Data, 'base64')
     // 写入图片
+    // console.log(dataUrl,localFileID)
     fs.writeFile(localFileID, dataBuffer, (err) => {
       if (err) reject(err)
       // 成功
       // 执行回调函数
-      resolve('ok')
+      resolve(fileID)
     })
   })
 }
@@ -124,13 +125,14 @@ function getNoteTagNames (item) {
 // 发布组团游
 function publishGroup (groupInfo) {
   return new Promise((resolve, reject) => {
-    var { tid, cid, intr, begin_time, end_time } = groupInfo
+    var { uid, tid, cid, intr, begin_time, end_time } = groupInfo
     // 执行sql
-    var sql = `insert into trip_group (uid, tid, cid, intr, begin_time, end_time)`
+    var sql = `insert into trip_group (uid, tid, cid, intr, begin_time, end_time, create_time, update_time) values(?, ?, ?, ?, ?, ?, now(), now())`
     pool.query(sql, [uid, tid, cid, intr, begin_time, end_time], (err, result) => {
+      console.log(result)
       if (err) reject(err)
       if (result.affectedRows > 0) {
-        resolve()
+        resolve(result.insertId)
       } else {
         reject({ code: 4006, msg: `发布失败` })
       }

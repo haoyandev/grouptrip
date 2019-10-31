@@ -30,7 +30,7 @@ app.use(session({
 // 绑定静态服务
 app.use(express.static('./public'))
 // 使用body-parser
-app.use(bodyParser.urlencoded({ extended: false } ))
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: false } ))
 app.use(bodyParser.json())
 
 // 添加token验证中间件
@@ -43,6 +43,8 @@ app.use((req, res, next) => {
     url !== '/user/api/v1/login' && 
     url.startsWith('/user') ||
     url !== '/group/api/v1/notelist' &&
+    url !== '/group/api/v1/place' &&
+    url !== '/group/api/v1/citylist/:pno' &&
     url !== '/group//api/v1themelist' &&
     url.startsWith('/group')) {
     // 获取用户传来的token值

@@ -133,8 +133,6 @@ CREATE TABLE trip_group_img (
 	id INT PRIMARY KEY AUTO_INCREMENT,
 	gid INT,
 	img VARCHAR(128),
-	begin_time VARCHAR(128),
-	end_time VARCHAR(128),
 	create_time VARCHAR(128),
   update_time VARCHAR(128),
   is_delete TINYINT(1) DEFAULT '0',
