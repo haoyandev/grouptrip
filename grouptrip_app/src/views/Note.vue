@@ -369,7 +369,7 @@ export default {
               });
             }, 50);
           }, 50);
-        }, 200);
+        }, 400);
       }
       var width = this.innerWidth * (this.imgs.length + 1) + "px";
       var marginLeft = -this.i * this.innerWidth + -this.leftsize / 5 + "px";
@@ -431,7 +431,7 @@ export default {
                 });
               }, 50);
             }, 50);
-          }, 200);
+          }, 400);
         }
       } else if (this.leftsize < -50 && this.i > 0) {
         this.leftsize = 0;
