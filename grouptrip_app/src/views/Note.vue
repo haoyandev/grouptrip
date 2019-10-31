@@ -453,7 +453,7 @@ export default {
           return document.documentElement.scrollTop || document.body.scrollTop;
         }
         var address = this.$store.state.page;
-        if (isReachBottom() && address === "/Note" && this.can) {
+        if (isReachBottom() && this.$route.path === "/Note" && this.can) {
           this.can = false;
           this.able = "加载中";
           setTimeout(() => {
