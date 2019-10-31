@@ -46,7 +46,7 @@ router.post('/api/v1/register', (req, res) => {
       for (var i = 0; i < 10; i++) {
         uname += str[Math.floor(Math.random() * 62)]
       }
-      var sql = `insert into trip_user(phone,upwd,uname,create_time) values(?,md5(?),?,now())`
+      var sql = `insert into trip_user(phone,upwd,uname,create_time, update_time) values(?,md5(?),?,now(), now())`
       pool.query(sql, [phone, upwd, uname], (err, result) => {
         if (err) throw err
         if (result.affectedRows > 0) {
@@ -201,7 +201,7 @@ router.put('/api/v1/updatesex', (req, res) => {
     return res.send({ code: 4001, msg: `性别为空` })
   }
   // 执行sql 修改性别
-  var sql =  `update trip_user set gender=? where uid=?`
+  var sql =  `update trip_user set gender=?, update_time=now() where uid=?`
   pool.query(sql, [gender, uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) {
@@ -223,7 +223,7 @@ router.put('/api/v1/updatebirth', (req, res) => {
     return res.send({ code: 4001, msg: `生日为空` })
   }
   // 执行sql 修改性别
-  var sql =  `update trip_user set birthday=? where uid=?`
+  var sql =  `update trip_user set birthday=?, update_time=now() where uid=?`
   pool.query(sql, [birthday, uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) {
@@ -245,7 +245,7 @@ router.put('/api/v1/updatecity', (req, res) => {
     return res.send({ code: 4001, msg: `性别为空` })
   }
   // 执行sql 修改性别
-  var sql =  `update trip_user set city=? where uid=?`
+  var sql =  `update trip_user set city=?, update_time=now() where uid=?`
   pool.query(sql, [city, uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) {
@@ -267,7 +267,7 @@ router.put('/api/v1/updateintr', (req, res) => {
     return res.send({ code: 4001, msg: `性别为空` })
   }
   // 执行sql 修改性别
-  var sql =  `update trip_user set intr=? where uid=?`
+  var sql =  `update trip_user set intr=?, update_time=now() where uid=?`
   pool.query(sql, [intr, uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) {
@@ -301,7 +301,7 @@ router.post('/api/v1/focus', (req, res) => {
       res.send({code: 4003, msg: `该用户不存在` })
     } else {
       // 查看是否已关注
-      var sql = `select id from trip_focus where uid=? and from_uid=?`
+      var sql = `select fid from trip_focus where uid=? and from_uid=?`
       pool.query(sql, [uid, user.uid], (err, result) => {
         if (err) throw err
         if (result.length > 0) {
@@ -309,7 +309,7 @@ router.post('/api/v1/focus', (req, res) => {
           res.send({ code: 4004, msg: `已关注` })
         } else {
           // 未关注
-          var sql = `insert into trip_focus values (null, ?, ?)`
+          var sql = `insert into trip_focus(fid, uid, from_uid, create_time, update_time) values (null, ?, ?, now(), now())`
           pool.query(sql, [uid, user.uid], (err, result) => {
             if (err) throw err
             if (result.affectedRows > 0) { 
@@ -401,7 +401,6 @@ router.put('/changeavatar', (req, res) => {
   var uid = req.user.uid
   // 获取数据
   var { dataUrl, fileID } = req.body.data
-  console.log(req.body.data)
   // 检验数据
   if (!dataUrl) {
     return res.send({ code: 4001, msg: `base图片为空` })
@@ -411,7 +410,6 @@ router.put('/changeavatar', (req, res) => {
   }
   // 拼接图片的本地绝对路径
   var localFileID = __dirname + '/../public/avatar/' + fileID
-  console.log(fileID)
   // 执行上传功能
 
   // 调用上传图片函数
@@ -420,7 +418,7 @@ router.put('/changeavatar', (req, res) => {
     // 拼接图片的网络地址
     var imgUrl = 'http://localhost:3000/avatar/' + fileID
     console.log(imgUrl)
-    var sql = `update trip_user set avatar=? where uid=?`
+    var sql = `update trip_user set avatar=?, update_time=now() where uid=?`
     pool.query(sql, [imgUrl, uid], (err, result) => {
       if (err) throw err
       if (result.affectedRows > 0) {
@@ -441,7 +439,7 @@ router.put('/api/v1/canclefocus', (req, res) => {
     return res.send({ code: 4001, msg: `被取消关注用户id为空` })
   }
   // 执行sql
-  var sql = `update trip_focus set is_delete = 1 where uid=? and from_uid=?`
+  var sql = `update trip_focus set is_delete=1, update_time=now() where uid=? and from_uid=?`
   pool.query(sql, [uid, from_uid], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) {

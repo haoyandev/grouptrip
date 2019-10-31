@@ -73,5 +73,68 @@ function uploadImg (dataUrl, localFileID) {
     })
   })
 }
-
-module.exports = { getBaseInfo, getFunsNum, getFocusNum, uploadImg, checkIsFollowed }
+// 获取游记标签id
+function getNoteTagIds (item) {
+  return new Promise((resolve, reject) => {
+    // 查询游记的标签id列表
+    var sql = `select tid from trip_note_tag where nid=?`
+    pool.query(sql, [item.nid], (err, result) => {
+      if (err) reject (err)
+      // 如果有标签 把结果转为数组再赋值给游记对象
+      if (result.length > 0) {
+        var tagIds = []
+        for (var data of result) {
+          tagIds.push(data.tid)
+        }
+        Object.assign(item, { tags: tagIds })
+        resolve(item)
+      } else {
+        // 没有设置标签 标签为空
+        Object.assign(item, { tags: [] })
+        resolve(item)
+      }
+    })
+  })
+}
+// 获取游记标签名
+function getNoteTagNames (item) {
+  return new Promise((resolve, reject) => {
+    var tags = item.tags
+    if (tags.length > 0) {
+      var sql = `select tid, tname from trip_tag where tid in (?)`
+      pool.query(sql, [item.tags], (err, result) => {
+        if (err) reject(err)
+        if (result.length > 0) {
+          var tags = []
+          for (var tag of result) {
+            tags.push(tag.tname)
+          }
+          item.tags = tags
+          resolve(item)
+        } else {
+          resolve(item)
+        }
+      })
+    } else {
+      // 标签为空不需要下一步操作
+      resolve(item)
+    }
+  })
+}
+// 发布组团游
+function publishGroup (groupInfo) {
+  return new Promise((resolve, reject) => {
+    var { tid, cid, intr, begin_time, end_time } = groupInfo
+    // 执行sql
+    var sql = `insert into trip_group (uid, tid, cid, intr, begin_time, end_time)`
+    pool.query(sql, [uid, tid, cid, intr, begin_time, end_time], (err, result) => {
+      if (err) reject(err)
+      if (result.affectedRows > 0) {
+        resolve()
+      } else {
+        reject({ code: 4006, msg: `发布失败` })
+      }
+    })
+  })
+}
+module.exports = { getBaseInfo, getFunsNum, getFocusNum, uploadImg, checkIsFollowed, getNoteTagIds, getNoteTagNames, publishGroup }

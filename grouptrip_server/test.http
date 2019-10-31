@@ -8,7 +8,7 @@ POST {{url}}/user/api/v1/register HTTP/1.1
 Content-Type: application/json
 
 {
-  "phone": "13790091224",
+  "phone": "13790091219",
   "upwd": "123456"
 }
 
@@ -90,7 +90,7 @@ token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1
 Content-Type: application/json
 
 {
-  "uid": 3
+  "uid": 9
 }
 
 ###
@@ -120,5 +120,10 @@ Content-Type: application/json
 
 # 城市列表
 ###
-GET  {{url}}/group/api/v1/citylist/1 HTTP/1.1
+GET  {{url}}/group/api/v1/citylist/2 HTTP/1.1
+token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
+
+# 游记列表
+###
+GET  {{url}}/group/api/v1/notelist/1 HTTP/1.1
 token: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7InVpZCI6MSwidW5hbWUiOiJ1c2VyXzhhY2QxbHphNXgifSwiaWF0IjoxNTcxNTQwNjYwLCJleHAiOjE1NzQxMzI2NjB9.GdmQXAfLWJ73Zh_gT8-4G40qgm8RpMmBUcqTvCcS9P8
