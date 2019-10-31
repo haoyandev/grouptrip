@@ -1,9 +1,11 @@
 <template>
   <main id="personalindex-page">
-    <div @click="jumpfh" class="tabbar-top">
+    <div class="tabbar-top">
+      <router-link to="/personal">
       <svg class="zuojiantou_small" aria-hidden="true">
         <use xlink:href="#iconzhixiangzuozuojiantou" />
       </svg>
+      </router-link>
     </div>
     <div class="personalindex-wrap">
       <div class="wrap-bg">

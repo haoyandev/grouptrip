@@ -1,12 +1,6 @@
 <template>
-  <div :style="{opacity:star,transition:'all .3s linear'}">
-    <group-trip
-      @Gjc="gjc"
-      @Child="showChild"
-      :style="{display:gos,opacity:copa,transition:'all .3s linear'}"
-    ></group-trip>
-    <chose :style="{opacity:chosopa,display:chosdis,transition:'opacity .3s linear'}"></chose>
-    <main id="homepage" :style="{display:go,opacity:opa,transition:'all .3s linear'}">
+ 
+    <main id="homepage">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item logo-top">
           <img src="../assets/cardpics/logo.png" alt style="width:180px;" />
@@ -19,12 +13,14 @@
             <input type="text" class="form-text" placeholder="红叶季赏枫攻略" />
           </div>
           <div class="tabbar-icon">
-            <mt-button @click="jump()" class="iconbutton">
+            <router-link to="/GroupTrip">
+            <mt-button class="iconbutton">
               <svg class="iconshaixuan" aria-hidden="true">
                 <use xlink:href="#iconshaixuan" />
               </svg>
               <span style="font-size:5px;">筛选</span>
             </mt-button>
+            </router-link>
             <mt-button class="iconbutton">
               <svg class="iconmessage" aria-hidden="true">
                 <use xlink:href="#iconmessage" />
@@ -44,7 +40,7 @@
       <Sendgroup @Chose="jumpchos"></Sendgroup>
       <main-tab-bar></main-tab-bar>
     </main>
-  </div>
+
 </template>
 <script>
 import Trips from "../components/index/Trips";
@@ -329,7 +325,7 @@ export default {
 }
 .wrap-item .wrap-item-content .date {
   color: #fff;
-  font: 5px JianHei;
+  font: 5px "VisbyCFMedium", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-top: 0px;
 }
 .wrap-item .wrap-item-content .wrap-item-details {
@@ -350,7 +346,7 @@ export default {
   -webkit-line-clamp: 2; /** 显示的行数 **/
   margin: 0;
   padding-top: 10px;
-  font: bold 14px Mqi;
+  font: bold 14px JianHei;
 }
 .wrap-left,
 .wrap-right {

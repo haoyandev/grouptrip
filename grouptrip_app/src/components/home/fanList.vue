@@ -2,7 +2,7 @@
   <div>
     <mt-header id="title" title="粉丝">
       
-      <router-link to="" slot="left">
+      <router-link to="/personal" slot="left">
         <mt-button @click.native="jumpper" icon="back"></mt-button>
       </router-link>
     <!-- <mt-button icon="more" slot="right"></mt-button> -->
