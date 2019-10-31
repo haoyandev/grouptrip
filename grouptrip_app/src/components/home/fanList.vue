@@ -1,8 +1,9 @@
 <template>
   <div>
     <mt-header id="title" title="粉丝">
-      <router-link to="/" slot="left">
-        <mt-button icon="back"></mt-button>
+      
+      <router-link to="" slot="left">
+        <mt-button @click.native="jumpper" icon="back"></mt-button>
       </router-link>
     <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
@@ -35,6 +36,11 @@ export default {
         {img:require(`@/assets/citypics/heimen.jpg`),fanName:"王五",amount:"16",biu:'8',fans:29 },
         {img:require(`@/assets/citypics/heimen.jpg`),fanName:"陈六",amount:"5",biu:'4' ,fans:28 },
       ]
+    }
+  },
+  methods:{
+    jumpper(){
+      this.$emit('fans',{paropa:1,pardis:'block',fanopa:0,fandis:'none'})
     }
   }
 }
