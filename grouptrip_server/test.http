@@ -120,7 +120,7 @@ Content-Type: application/json
 
 # 城市列表
 ###
-GET  {{url}}/group/api/v1/citylist/2 HTTP/1.1
+GET  {{url}}/group/api/v1/citylist/1 HTTP/1.1
 
 # 游记列表
 ###

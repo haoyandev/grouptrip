@@ -583,6 +583,12 @@ export default {
 h5 {
   margin: 0px;
 }
+#note-page .top-title h5{
+  font: 13px bloder BenMoYongHei;
+}
+#note-page .top-title h2{
+  font: 21px bloder BenMoYongHei;
+}
 #note-page .top-title .title-year-mon {
   margin: 0 5px;
   display: flex;

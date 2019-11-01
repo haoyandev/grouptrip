@@ -205,6 +205,10 @@ export default {
   font-family: JianHei;
   src: url("../assets/font/HanYiZhongJianHei-2.ttf");
 }
+@font-face {
+  font-family: BenMoYongHei;
+  src: url("../assets/font/BenMoYongHei.ttf");
+}
 #homepage {
   position: relative;
 }
