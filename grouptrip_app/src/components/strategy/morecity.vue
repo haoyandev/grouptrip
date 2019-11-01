@@ -13,7 +13,7 @@
         class="morecity-item"
         v-for="(c,i) of trip_city_tuozhai"
         :key="i"
-        :style="{background:'url('+c.img+')',backgroundSize:'cover'}"
+        :style="{background:'url('+c.img+')',backgroundRepeat:'no-repeat',backgroundPosition:'center -30px', backgroundSize: 'cover'}"
       >
         <div class="morecity-bg">
           <p>{{c.cname}}</p>
@@ -43,57 +43,7 @@ export default {
     return {
       page: 1,
       trip_city_tuozhai: [],
-      cities: [
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        },
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        },
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        },
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        },
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        },
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        },
-        {
-          cbg: require("../../assets/citypics/beijin1.jpg"),
-          cname: "香港",
-          elname: "HongKong",
-          views: "29000",
-          spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
-        }
-      ],
+      cities: [],
       pno: '',
       can: true
     };
@@ -172,6 +122,7 @@ export default {
   width: 100%;
   height: 46px;
   position: fixed;
+  z-index: 1;
   top: 0px;
   display: flex;
   align-items: center;

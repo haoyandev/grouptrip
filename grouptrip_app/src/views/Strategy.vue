@@ -25,7 +25,10 @@
         <div class="top-city">
           <div class="top-city-title">
             <h3>热门城市</h3>
-            <router-link :to="'/more?city='+citydd" style="display: flex;align-item:center; line-height: 15px">
+            <router-link
+              :to="'/more?city='+citydd"
+              style="display: flex;align-item:center; line-height: 15px"
+            >
               <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />
@@ -44,86 +47,6 @@
             </div>
           </div>
         </div>
-        <div class="city-tips" style="display:none">
-          <router-link to="javascript;">
-            <div class="city-tips-item">
-              <div class="tips-item-bg">
-                <h3>景点</h3>
-                <p>人气榜</p>
-                <span></span>
-              </div>
-              <div class="tips-item-text">
-                <div>
-                  <span>1</span>
-                  <p>广州塔</p>
-                </div>
-                <div>
-                  <span>2</span>
-                  <p>中山大学</p>
-                </div>
-                <div>
-                  <span>3</span>
-                  <p>沙面</p>
-                </div>
-              </div>
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
-            </div>
-          </router-link>
-          <router-link to="javascript;">
-            <div class="city-tips-item">
-              <div class="tips-item-bg">
-                <h3>景点</h3>
-                <p>人气榜</p>
-                <span></span>
-              </div>
-              <div class="tips-item-text">
-                <div>
-                  <span>1</span>
-                  <p>广州塔</p>
-                </div>
-                <div>
-                  <span>2</span>
-                  <p>中山大学</p>
-                </div>
-                <div>
-                  <span>3</span>
-                  <p>沙面</p>
-                </div>
-              </div>
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
-            </div>
-          </router-link>
-          <router-link to="javascript;">
-            <div class="city-tips-item">
-              <div class="tips-item-bg">
-                <h3>景点</h3>
-                <p>人气榜</p>
-                <span></span>
-              </div>
-              <div class="tips-item-text">
-                <div>
-                  <span>1</span>
-                  <p>广州塔</p>
-                </div>
-                <div>
-                  <span>2</span>
-                  <p>中山大学</p>
-                </div>
-                <div>
-                  <span>3</span>
-                  <p>沙面</p>
-                </div>
-              </div>
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
-            </div>
-          </router-link>
-        </div>
         <div class="city-strategy">
           <ul
             id="u1"
@@ -136,7 +59,7 @@
           >
             <li class="strategy-item" v-for="(strategy,s) of trip_city_tuozhai" :key="s">
               <div class="cityimg">
-                <img :src="strategy.img" alt />
+                <img :src="strategy.poster" alt />
               </div>
               <div class="city-details">
                 <h4 class="details-title">{{strategy.cname}}</h4>
@@ -204,7 +127,7 @@
         <van-tabs v-model="active" swipeable>
           <van-tab title="旅伴">
             <div class="bottom1_wrap">
-              <trips></trips>
+             <trips :group="maintrips"></trips>
               <div class="blank"></div>
             </div>
           </van-tab>
@@ -213,14 +136,14 @@
               <div class="tips-wrap-item" v-for="(t,i) of tips" :key="i">
                 <div class="wrap-item-content">
                   <div class="tips-notes-img">
-                    <img :src="t.timg" alt />
+                    <img :src="t.img1" alt />
                   </div>
                   <div class="item-details">
-                    <p>{{t.details}}</p>
+                    <p>{{t.content}}</p>
                   </div>
                   <div class="tips-personal">
                     <div class="personal-head">
-                      <img :src="t.head" alt />
+                      <img :src="t.avatar" alt />
                     </div>
                     <span>{{t.uname}}</span>
                     <div class="favorite">
@@ -232,8 +155,6 @@
               </div>
             </div>
           </van-tab>
-          <div class="blank"></div>
-          <div class="blank"></div>
         </van-tabs>
       </div>
       <main-tab-bar></main-tab-bar>
@@ -249,10 +170,16 @@ import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
   created() {
-    if(this.$route.query.city){
-      this.citydd=this.$route.query.city;
+    this.axios.get("/group/api/v1/grouplist").then(res => {
+      this.tips = res.data.data;
+    });
+  this.axios.get("/group/api/v1/idxgrouplist").then(res => {
+      this.maintrips = res.data.data;
+    });
+    if (this.$route.query.city) {
+      this.citydd = this.$route.query.city;
     }
-    if (this.citydd=== "日本") {
+    if (this.citydd === "日本") {
       this.page = 2;
     } else {
       this.page = 1;
@@ -264,7 +191,8 @@ export default {
   },
   data() {
     return {
-      citydd:this.$store.getters.city,
+      maintrips: [],
+      citydd: this.$store.getters.city,
       page: "",
       cityopa: 0,
       citydis: "none",
@@ -277,39 +205,8 @@ export default {
       width: 0,
       active: 0, //保存底部推荐面板当前显示的子面板id
       trip_city_tuozhai: [],
-      trip_city: [
-        {
-          name: "大阪",
-          elname: "Osaka",
-          cityimg: require("../assets/citypics/img1998.jpg")
-        }
-      ],
-      strategies: [
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "大阪",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        },
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "东京",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        },
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "京都",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        },
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "北海道",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        }
-      ],
+      trip_city: [],
+      strategies: [],
       sales: [
         {
           title: "特价酒店",
@@ -352,46 +249,29 @@ export default {
         {
           title: "日本环球影城 | 圣诞",
           name: "维多利亚",
-          headpath: require("../assets/iconfont/girl.png"),
+          headpath: require("../assets/citypics/LA.jpg"),
           bgpath: require("../assets/citypics/img1957.jpg")
         },
         {
-          title: "大阪京都美食集 | 关西",
-          name: "维多利亚",
+          title: "迎着夏日和风，我们一起闯关西吧",
+          name: "Dison",
           headpath: require("../assets/iconfont/girl.png"),
+          bgpath: require("../assets/citypics/LA.jpg")
+        },
+        {
+          title: "举起关西酿的甜，和你再干一杯",
+          name: "Joey",
+          headpath: require("../assets/citypics/city11.jpg"),
           bgpath: require("../assets/citypics/img1998.jpg")
         },
         {
           title: "大阪京都美食集 | 关西",
-          name: "维多利亚",
-          headpath: require("../assets/iconfont/girl.png"),
-          bgpath: require("../assets/citypics/img1998.jpg")
-        },
-        {
-          title: "大阪京都美食集 | 关西",
-          name: "维多利亚",
+          name: "AC",
           headpath: require("../assets/iconfont/girl.png"),
           bgpath: require("../assets/citypics/img1996.jpg")
         }
       ],
-      tips: [
-        {
-          details:
-            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！",
-          uname: "维多利亚",
-          likes: "100",
-          timg: require("../assets/citypics/img1998.jpg"),
-          head: require("../assets/citypics/img1998.jpg")
-        },
-        {
-          details:
-            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！",
-          uname: "维多利亚",
-          likes: "100",
-          timg: require("../assets/citypics/img1998.jpg"),
-          head: require("../assets/citypics/img1998.jpg")
-        }
-      ],
+      tips: [],
       imgs: {},
       move: {
         start: 0,
@@ -818,8 +698,11 @@ li {
   height: 100%;
 }
 .tips-wrap-item .item-details {
+  width: 100%;
   height: 55px;
+  padding: 0px 5px;
   background-color: #fff;
+  box-sizing: border-box;
 }
 .tips-wrap-item .item-details p {
   text-overflow: -o-ellipsis-lastline;

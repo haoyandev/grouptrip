@@ -1,8 +1,11 @@
 <template>
   <main class="trips-wrap">
     <div class="wrap-left">
-          <div class="wrap-item top-item">
+      <!-- <div class="wrap-item top-item">
             <div class="wrap-item-content">
+              <div class="personal-theme">
+                <p>一起去冒险</p>
+              </div>
               <div class="personal-pic">
                 <img src="../../assets/citypics/img1957.jpg" alt="">
               </div>
@@ -12,86 +15,91 @@
                 <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
               </div>
             </div>
+      </div>-->
+      <div
+        class="wrap-item wrap-item-left"
+        v-for="(t,i) of grouptrip[1]"
+        :key="
+          i"
+        :style="{background:'url('+t.bg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}"
+      >
+        <div class="wrap-item-content">
+          <div class="personal-theme">
+            <p>{{t.tname}}</p>
           </div>
-          <div class="wrap-item" v-for="(t,i) of trips2" :key="
-          i" :style="{background:'url('+t.tripbg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img :src="t.headpic" alt="">
-              </div>
-              <span class="place">{{t.place}}</span>
-              <span class="date">{{t.date}}</span>
-              <div class="wrap-item-details">
-                <p>{{t.details}}</p>
-              </div>
-            </div>
+          <div class="personal-pic">
+            <img :src="t.avatar" alt />
           </div>
-        </div>
-        <div class="wrap-right home-wrap-item">
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
-          i" :style="{background:'url('+t.tripbg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}">
-            <div class="wrap-item-content">
-              <div class="personal-pic">
-                <img :src="t.headpic" alt="">
-              </div>
-              <span class="place">{{t.place}}</span>
-              <span class="date">{{t.date}}</span>
-              <div class="wrap-item-details">
-                <p>{{t.details}}</p>
-              </div>
-            </div>
+          <span class="place">{{t.area}}</span>
+          <span class="date">{{t.date.split('-')[0].slice(5)+'~'+t.date.split('-')[1].slice(5)}}</span>
+          <div class="wrap-item-details">
+            <p>{{t.content}}</p>
           </div>
         </div>
+      </div>
+    </div>
+    <div class="wrap-right home-wrap-item">
+      <div
+        class="wrap-item wrap-item-right"
+        v-for="(t,i) of grouptrip[0]"
+        :key="
+          i"
+        :style="{background:'url('+t.bg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}"
+      >
+        <div class="wrap-item-content">
+          <div class="personal-theme">
+            <p>{{t.tname}}</p>
+          </div>
+          <div class="personal-pic">
+            <img :src="t.avatar" alt />
+          </div>
+          <span class="place">{{t.area}}</span>
+          <span class="date">{{t.date.split('-')[0].slice(5)+'~'+t.date.split('-')[1].slice(5)}}</span>
+          <div class="wrap-item-details">
+            <p>{{t.content}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
 </template>
 <script>
 export default {
-  data(){
-    return{
-      trips:[
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/gkGaO_2656.jpg'),
-        place:"泰国,芭提雅",date:"10月16日-10月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/bg2.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/mDOZ2_7086.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/MJdjR_0158.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"}
-      ],
-      trips2:[
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics//ZpGM5_2033.jpg'),
-        place:"泰国,芭提雅",date:"10月16日-10月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/12345.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/bg5.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        {headpic:require('../../assets/citypics/heimen.jpg'),
-        tripbg:require('../../assets/cardpics/9876.jpg'),
-        place:"日本，大阪",date:"11月16日-11月30日",
-        details:"90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！"},
-        
-      ],
+  created() {},
+  data() {
+    return {
+      trips1: [],
+      trips2: []
+    };
+  },
+  props: {
+    group: Array
+  },
+  computed: {
+    grouptrip() {
+      if (this.group) {
+        var trips1 = this.group.splice(0, Math.floor(this.group.length / 2));
+      }
+      var trips2 = this.group;
+      console.log(trips1, trips2);
+      return [trips1, trips2];
     }
   }
-}
+};
 </script>
 <style>
-.trips-wrap{
+.trips-wrap {
   width: 100%;
   display: flex;
+}
+.wrap-item .wrap-item-content .personal-theme {
+  background-color: #ffffff;
+  padding: 3px 12px;
+  border-radius: 30px;
+  margin-bottom: 10px;
+}
+.wrap-item .wrap-item-content .personal-theme p {
+  margin: 0px 0px;
+  font: bold 12px Mqi;
 }
 </style>

@@ -1,47 +1,46 @@
 <template>
-    <main id="homepage">
-      <mt-tabbar fixed class="tabbar-top">
-        <mt-tab-item class="text-item logo-top">
-          <img src="../assets/cardpics/logo.png" alt style="width:180px;" />
-        </mt-tab-item>
-        <mt-tab-item class="text-item search-top">
-          <div class="tabbar-search">
-            <svg class="search" aria-hidden="true">
-              <use xlink:href="#iconsearch-copy" />
-            </svg>
-            <input type="text" class="form-text" placeholder="红叶季赏枫攻略" />
-          </div>
-          <div class="tabbar-icon">
-            <router-link to="/GroupTrip">
+  <main id="homepage">
+    <mt-tabbar fixed class="tabbar-top">
+      <mt-tab-item class="text-item logo-top">
+        <img src="../assets/cardpics/logo.png" alt style="width:180px;" />
+      </mt-tab-item>
+      <mt-tab-item class="text-item search-top">
+        <div class="tabbar-search">
+          <svg @click="search" class="search" aria-hidden="true">
+            <use xlink:href="#iconsearch-copy" />
+          </svg>
+          <input type="text" @keyup="message" @change="message" v-model="msg" class="form-text" placeholder="红叶季赏枫攻略" />
+        </div>
+        <div class="tabbar-icon">
+          <router-link to="/GroupTrip">
             <mt-button class="iconbutton">
               <svg class="iconshaixuan" aria-hidden="true">
                 <use xlink:href="#iconshaixuan" />
               </svg>
               <span style="font-size:5px;">筛选</span>
             </mt-button>
-            </router-link>
-            <mt-button class="iconbutton">
-              <svg class="iconmessage" aria-hidden="true">
-                <use xlink:href="#iconmessage" />
-              </svg>
-            </mt-button>
-          </div>
-        </mt-tab-item>
-      </mt-tabbar>
-      <div class="homewrap">
-        <trips></trips>
-        <div style="text-align:center">
-          <van-loading size="24px" v-show="!can">加载中...</van-loading>
+          </router-link>
+          <mt-button class="iconbutton">
+            <svg class="iconmessage" aria-hidden="true">
+              <use xlink:href="#iconmessage" />
+            </svg>
+          </mt-button>
         </div>
+      </mt-tab-item>
+    </mt-tabbar>
+    <div class="homewrap">
+      <trips :group="maintrips"></trips>
+      <!-- <div style="text-align:center">
+          <van-loading size="24px" v-show="!can">加载中...</van-loading>
+      </div>-->
 
-        <div class="blank"></div>
-      </div>
-      <router-link to="/choseTheme">
+      <div class="blank"></div>
+    </div>
+    <router-link to="/choseTheme">
       <Sendgroup></Sendgroup>
-      </router-link>
-      <main-tab-bar></main-tab-bar>
-    </main>
-
+    </router-link>
+    <main-tab-bar></main-tab-bar>
+  </main>
 </template>
 <script>
 import Trips from "../components/index/Trips";
@@ -58,13 +57,19 @@ export default {
     chose
   },
   created() {
-    this.lazy();
+    // this.lazy();
+    this.axios.get("/group/api/v1/idxgrouplist").then(res => {
+      this.maintrips = res.data.data;
+    });
     setTimeout(() => {
       this.star = 1;
     }, 300);
   },
   data() {
     return {
+      msg: "",
+      maintrips: [],
+      msgcan: true,
       can: true,
       chosopa: 0,
       chosdis: "none",
@@ -77,49 +82,74 @@ export default {
     };
   },
   methods: {
-    lazy() {
-      document.addEventListener("scroll", () => {
-        function getWinHeight() {
-          return (
-            document.documentElement.clientHeight || document.body.clientHeight
-          );
-        }
-        function getScrollHeight() {
-          let bodyScrollHeight = 0;
-          let documentScrollHeight = 0;
-          if (document.body) {
-            bodyScrollHeight = document.body.scrollHeight;
-          }
-          if (document.documentElement) {
-            documentScrollHeight = document.documentElement.scrollHeight;
-          }
-          // 当页面内容超出浏览器可视窗口大小时，Html的高度包含body高度+margin+padding+border所以html高度可能会大于body高度
-          return bodyScrollHeight - documentScrollHeight > 0
-            ? bodyScrollHeight
-            : documentScrollHeight;
-        }
-        function isReachBottom() {
-          const scrollTop = getScrollTop(); // 获取滚动条的高度
-          const winHeight = getWinHeight(); // 一屏的高度
-          const scrollHeight = getScrollHeight(); // 获取文档总高度
-          return scrollTop >= parseInt(scrollHeight) - winHeight;
-        }
-        function getScrollTop() {
-          // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
-          return document.documentElement.scrollTop || document.body.scrollTop;
-        }
-        var address = this.$store.state.page;
-        if (isReachBottom() && address === "/Home" && this.can) {
-          this.can = false;
-          setTimeout(() => {
-            this.axios.get("/", { params: {} }).then(res => {
-              this.can = true;
-              console.log(res);
-            });
-          }, 2000);
-        }
-      });
+    message() {
+      if (this.can && this.msg) {
+        this.can = false;
+        this.axios
+          .get(`/group/api/v1/search/${encodeURI(this.msg)}/1`)
+          .then(res => {
+            if (res.data.data) {
+              this.maintrips = res.data.data;
+            }else{
+            this.$toast({message:'该关键词暂无数据',duration:1000})
+
+            }
+            setTimeout(() => {
+            this.can = true;              
+            }, 1000);
+          });
+      }
     },
+    search() {
+      // this.axios
+      //   .get(`/group/api/v1/search/${encodeURI(this.msg)}/1`)
+      //   .then(res => {
+      //     console.log(res.data.data);
+      //   });
+    },
+    // lazy() {
+    //   document.addEventListener("scroll", () => {
+    //     function getWinHeight() {
+    //       return (
+    //         document.documentElement.clientHeight || document.body.clientHeight
+    //       );
+    //     }
+    //     function getScrollHeight() {
+    //       let bodyScrollHeight = 0;
+    //       let documentScrollHeight = 0;
+    //       if (document.body) {
+    //         bodyScrollHeight = document.body.scrollHeight;
+    //       }
+    //       if (document.documentElement) {
+    //         documentScrollHeight = document.documentElement.scrollHeight;
+    //       }
+    //       // 当页面内容超出浏览器可视窗口大小时，Html的高度包含body高度+margin+padding+border所以html高度可能会大于body高度
+    //       return bodyScrollHeight - documentScrollHeight > 0
+    //         ? bodyScrollHeight
+    //         : documentScrollHeight;
+    //     }
+    //     function isReachBottom() {
+    //       const scrollTop = getScrollTop(); // 获取滚动条的高度
+    //       const winHeight = getWinHeight(); // 一屏的高度
+    //       const scrollHeight = getScrollHeight(); // 获取文档总高度
+    //       return scrollTop >= parseInt(scrollHeight) - winHeight;
+    //     }
+    //     function getScrollTop() {
+    //       // 考虑到浏览器版本兼容性问题，解析方式可能会不一样
+    //       return document.documentElement.scrollTop || document.body.scrollTop;
+    //     }
+    //     var address = this.$store.state.page;
+    //     if (isReachBottom() && address === "/Home" && this.can) {
+    //       this.can = false;
+    //       setTimeout(() => {
+    //         this.axios.get("/", { params: {} }).then(res => {
+    //           this.can = true;
+    //           console.log(res);
+    //         });
+    //       }, 2000);
+    //     }
+    //   });
+    // },
     gjc(data) {
       this.chosdis = data.chosdis;
       this.copa = data.opa;
@@ -177,6 +207,10 @@ export default {
 @font-face {
   font-family: JianHei;
   src: url("../assets/font/HanYiZhongJianHei-2.ttf");
+}
+@font-face {
+  font-family: BenMoYongHei;
+  src: url("../assets/font/BenMoYongHei.ttf");
 }
 #homepage {
   position: relative;
@@ -276,17 +310,23 @@ export default {
 }
 
 .wrap-item {
-  height: 175px;
   border-radius: 10px;
   position: relative;
-  padding-top: 50px;
+  padding-top: 30px;
   margin-bottom: 15px;
+}
+.wrap-left .wrap-item-left:first-child {
+  height: 215px;
+}
+.wrap-right .wrap-item-right,
+.wrap-left .wrap-item-left {
+  height: 190px;
 }
 .home-wrap-item {
   width: 100%;
 }
 .top-item {
-  height: 205px;
+  height: 215px;
   width: 100%;
   background-image: url("../assets/cardpics/bg1.jpg");
   background-size: cover;
@@ -328,7 +368,7 @@ export default {
   color: #fff;
   font: bold 5px JianHei;
   margin-top: 0px;
-} 
+}
 .wrap-item .wrap-item-content .wrap-item-details {
   height: 50px;
   color: #ffffff;
@@ -345,7 +385,7 @@ export default {
   display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
   -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
   -webkit-line-clamp: 2; /** 显示的行数 **/
-  margin: 0;
+  margin: 10px 0px;
   padding-top: 10px;
   font: bold 14px JianHei;
 }

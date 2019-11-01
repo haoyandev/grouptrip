@@ -165,8 +165,9 @@ export default {
 .personalindex-wrap .wrap-bg{
   width: 100%;
   height: 200px;
-  background: url('../../assets/citypics/beijin1.jpg');
+  background: url('../../assets/citypics/map.jpg');
   background-size: cover;
+  background-position: center 20px;
 }
 .personalindex-wrap .personalindex-msg{
   width: 100%;

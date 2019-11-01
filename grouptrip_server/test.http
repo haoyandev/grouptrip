@@ -120,7 +120,7 @@ Content-Type: application/json
 
 # 城市列表
 ###
-GET  {{url}}/group/api/v1/citylist/2 HTTP/1.1
+GET  {{url}}/group/api/v1/citylist/1 HTTP/1.1
 
 # 游记列表
 ###
@@ -137,7 +137,7 @@ GET  {{url}}/group/api/v1/grouplist/1 HTTP/1.1
 
 ###
 # 组团游搜索
-GET  {{url}}/group/api/v1/search// HTTP/1.1
+GET  {{url}}/group/api/v1/search/去哪/1 HTTP/1.1
 
 ###
 # 组团游筛选
@@ -155,3 +155,9 @@ GET  {{url}}/group/api/v1/pgroup?uid=1 HTTP/1.1
 ###
 # 用户详情
 GET  {{url}}/user/api/v1/userinfo?uid=1 HTTP/1.1
+
+
+
+###
+# 用户详情
+GET  {{url}}/group/api/v1/allcity HTTP/1.1

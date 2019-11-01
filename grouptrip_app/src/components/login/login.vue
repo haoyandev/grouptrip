@@ -1,5 +1,5 @@
 <template>
-  <div class="parent">
+  <div class="parent" :style="{height:inheight+250+'px'}">
     <div :style="active==='success'&&'display:none;'">
       <svg @click="jiantou" class="zuojiantou" aria-hidden="true">
         <use xlink:href="#iconzhixiangzuozuojiantou" />
@@ -10,7 +10,7 @@
       </h1>
     </div>
     <mt-tab-container :style="all?'opacity:0':'opacity:1'" v-model="active">
-      <div class="login" :style="active!='login'&&'opacity:0;'">
+      <div class="login" :style="{opacity:active!='login'?'0':'1',height:inheight+'px'}">
         <mt-tab-container-item class="width" id="login">
           <div class="user-input">
             <div class="user-input-uname" style="position:relative">
@@ -19,7 +19,14 @@
                   <use xlink:href="#iconpersonal" />
                 </svg>
               </span>
-              <input v-model="user" type="text" maxlength="20" placeholder="手机号/邮箱/用户名" id="uname" v-focus/>
+              <input
+                v-model="user"
+                type="text"
+                maxlength="20"
+                placeholder="手机号/邮箱/用户名"
+                id="uname"
+                v-focus
+              />
             </div>
             <div class="user-input-pwd">
               <span>
@@ -61,7 +68,7 @@
           </div>
         </mt-tab-container-item>
       </div>
-      <div class="success" >
+      <div class="success">
         <mt-tab-container-item class="width" id="success">
           <h1>{{msg}}</h1>
           <div :style="tisc?'opacity:1;margin-top:20px; transition:opacity 3s linear;':'opacity:0'">
@@ -78,7 +85,7 @@
                   <use xlink:href="#iconpersonal" />
                 </svg>
               </span>
-              <input maxlength="11" v-model="phone" type="text" placeholder="请输入合法的手机号" id="phone"/>
+              <input maxlength="11" v-model="phone" type="text" placeholder="请输入合法的手机号" id="phone" />
             </div>
             <div class="user-input-pwd">
               <span>
@@ -139,9 +146,11 @@
 <script>
 import touchCode from "vue-slide-verification";
 export default {
-  inject: ['reload'],
+  inject: ["reload"],
+  created() {},
   data() {
     return {
+      inheight: innerHeight - 250,
       all: false,
       tisc: false,
       msg: "", //登录成功后出现的页面字段
@@ -158,7 +167,7 @@ export default {
       pwd: "", //保存用户密码
       active: "login", //默认初始化显示的面板
       phone: "", //用户注册的手机号
-      now: ["login", "register"],
+      now: ["login", "register"]
     };
   },
   components: {
@@ -194,23 +203,31 @@ export default {
       this.axios.post("/user/api/v1/login", { phone, upwd }).then(result => {
         // 登陆失败
         if (result.data.code !== 200) {
-          this.$toast({ message: result.data.msg, duration: 1500, iconClass: 'icon icon-success' })
+          this.$toast({
+            message: result.data.msg,
+            duration: 1500,
+            iconClass: "icon icon-success"
+          });
           setTimeout(() => {
             // 重新加载本页
-            this.handleReload()
-          }, 1500)
+            this.handleReload();
+          }, 1500);
         } else {
-          this.$toast({message: result.data.msg, duration: 1500, iconClass: 'icon icon-success'})
+          this.$toast({
+            message: result.data.msg,
+            duration: 1500,
+            iconClass: "icon icon-success"
+          });
           // 获取该用户的信息并且保存在store里和本地localStore里
           this.axios.get("/user/api/v1/detail").then(result => {
             if (result.data.code === 200) {
               // 显示欢迎语
               this.active = "success";
               var message = "Hi," + result.data.data.uname;
-              var i = 0 
+              var i = 0;
               var time = setInterval(() => {
-                this.msg += message[i]
-                i++
+                this.msg += message[i];
+                i++;
                 if (i > message.length - 1) {
                   clearInterval(time);
                   this.tisc = true;
@@ -258,7 +275,10 @@ export default {
       }
     }, //mousemove事件
     moseUpFn(e) {
-      if (e.target.nodeName === 'DIV' && e.target.className.indexOf('handler') !== -1) {
+      if (
+        e.target.nodeName === "DIV" &&
+        e.target.className.indexOf("handler") !== -1
+      ) {
         this.mouseMoveStata = false;
         var width = e.changedTouches[0].clientX - this.beginClientX;
         if (width < this.maxwidth) {
@@ -276,7 +296,7 @@ export default {
       }
     },
     register() {
-      console.log(1)
+      console.log(1);
       var phoneReg = /^1[3456789]\d{9}$/;
       if (!phoneReg.test(this.phone)) {
         this.$messagebox("请输入合法的手机号");
@@ -290,25 +310,31 @@ export default {
       }
       var data = { phone: this.phone, upwd: this.regpwd };
       this.axios.post("/user/api/v1/register", data).then(result => {
-        console.log(result.data)
+        console.log(result.data);
         if (result.data.code === 200) {
           this.$messagebox("注册成功").then(() => {
-            this.$router.push("/Home");
+            this.axios.post("/user/api/v1/login", data).then(res => {
+              this.$router.push("/Home");
+            });
           });
         } else {
           // 注册失败
-          this.$toast({ message: result.data.msg, duration: 1500, iconClass: 'iconfont iconhome' })
-          this.phone = ''
-          this.regpwd = ''
-          document.getElementById('phone').focus()
+          this.$toast({
+            message: result.data.msg,
+            duration: 1500,
+            iconClass: "iconfont iconhome"
+          });
+          this.phone = "";
+          this.regpwd = "";
+          document.getElementById("phone").focus();
         }
       });
     }
   },
   directives: {
     focus: {
-      inserted (e) {
-        e.focus()
+      inserted(e) {
+        e.focus();
       }
     }
   }
@@ -420,7 +446,6 @@ h1 {
   position: relative;
   margin: 0 16px 0 16px;
   opacity: 1;
-  height: 736px;
 }
 .user-input {
   margin-top: 30px;
