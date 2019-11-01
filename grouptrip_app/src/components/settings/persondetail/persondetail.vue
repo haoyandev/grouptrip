@@ -5,9 +5,21 @@
       <mt-cell class="mt-cell" title="头像" is-link @click.native="toChangeAvatar">
         <span class="avatar"><img :src="user.avatar"></span>
       </mt-cell>
-      <mt-cell title="用户昵称" is-link>
+      <mt-cell title="用户昵称" is-link @click.native='changeName'>
         <span style="font-size:12px">{{user.uname}}</span>
       </mt-cell>
+      <van-popup v-model="showName">
+        <div class="update-name">
+          <div class="name-bar">
+            <span @click="cancleUpdName"><img src="@/assets/iconfont/arrow.png" alt="" class="arrow"></span>
+            <span>编写用户昵称</span>
+            <span><img src="@/assets/iconfont/right.png" alt="" class="right" @click="updName"></span>
+          </div>
+          <input type="text" v-model="uname" placeholder="请输入用户名" id="uname" class="ipt-name" @click="input">
+          <div class="tip">每月可修改一次用户名，请慎重修改</div>
+          <div class="err-msg">{{errMsg}}</div>
+        </div>
+      </van-popup>
       <mt-cell title="性别" is-link>
         <span style="font-size:12px">{{user.gender|sex}}</span>
       </mt-cell>
@@ -72,11 +84,51 @@ export default {
       minDate: new Date('1900-1-1'),
       maxDate: new Date(),
       currentDate: new Date(),
+      showName: false,
+      uname: '',
+      errMsg: '',
+      showerr: true
     }
   },
   methods: {
-    created() {
-      console.log(this.$store.state.user)
+    input () {
+      this.errMsg = ''
+      this.showerr = false
+    },
+    updName () {
+      var url =  `user/api/v1/updatename`
+      var data = {
+        uname: this.uname
+      }
+      // console.log(1)
+      this.axios.put(url, data).then(res => {
+        if (res.data.code === 200) {
+          this.axios.get('/user/api/v1/detail')
+          .then(res => {
+            if (res.data.code === 200) {
+              this.user = res.data.data
+              this.showName = false
+            } else {
+              this.errMsg = res.data.msg
+            }
+          })
+        } else {
+          this.errMsg = res.data.msg
+          this.showerr = true
+        }
+      }).catch(err => {
+        throw err
+      })
+    },
+    cancleUpdName () {
+      this.showName = false
+    },
+    changeName () {
+      this.showName = true
+      this.uname = this.user.uname
+      setTimeout(() => {
+        document.getElementById('uname').focus()
+      }, 100)
     },
     getUserInfo () {
       var url = `user/api/v1/detail`
@@ -88,11 +140,10 @@ export default {
       this.reload(); // 在想要刷新页面的时候调用reload方法
     },
     logout () {
-      console.log(11)
       // 询问用户是否真的退出
       this.$messagebox.confirm('确定登出账号?').then(res => {
         // 退出
-        var url =  `/user/api/v1/logout`
+        var url = `/user/api/v1/logout`
         this.axios.get(url).then(res => {
           if (res.data.code === 200) {
             // 清除token
@@ -185,6 +236,47 @@ export default {
   /* 时间选择器 */
   .van-popup--center {
     width: 100%;
+  }
+  .detail-box .van-popup {
+    display: fixed;
+    width: 100%;
+    height: 100%;
+  }
+  .detail-box .van-overlay {
+    background-color: #fff;
+  }
+  .detail-box .update-name {
+
+  }
+  .detail-box .van-cell {
+    border: 1px solid #eee;
+    margin: 10px;
+  }
+  .detail-box .ipt-name {
+    width: 100%;
+    height: 45px;
+    line-height: 45px;
+    border: 1px solid #eee;
+    padding: 0 20px;
+    margin-bottom: 20px;
+  }
+  .update-name .name-bar {
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .name-bar .right, .name-bar .arrow {
+    width: 30px;
+  }
+  .update-name .tip {
+    margin-left: 20px;
+  }
+  .update-name .err-msg {
+    color: red;
+    margin-left: 20px;
+    margin-top: 10px;
+    font-size: 14px;
   }
 </style>
 

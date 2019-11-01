@@ -10,7 +10,7 @@
     <div id="container">
         <ul>
             <li v-for="(item,index) in list" :key="index">
-              <div ><img class="icon" :src="item.avatar"></div>
+              <div @click="jumpdetail" data-id=item.uid><img class="icon" :src="item.avatar"></div>
               <div class="info_list">
                   <h2 class="fanName">{{item.uname}}</h2>
                   <p class="fanNo"> <span>{{item.fansNum}}粉丝</span></p>
@@ -34,8 +34,8 @@ export default {
       list:[]
     }
   },
-  mounted(){
-    //发送axio获取用户的粉丝列表
+  created () {
+    //发送axios获取用户的粉丝列表
     var uid = this.$store.state.user.uid
     console.log(uid)
     var url = `/user/api/v1/fanslist/${uid}`
@@ -62,6 +62,10 @@ export default {
           this.reload() 
         }
       })
+    },
+    jumpdetail (e) {
+      var uid = e.target.uid
+      this.$router.push(`/personalindex?uid=${uid}`)
     },
     jumpper(){
       this.$emit('fans',{paropa:1,pardis:'block',fanopa:0,fandis:'none'})

@@ -48,7 +48,7 @@
           <h1>{{user.fansNum || 0}}</h1>
           <span>粉丝</span>
         </li>
-        <li>
+        <li @click="jumpFocus">
           <h1>{{user.focusNum || 0}}</h1>
           <span>关注</span>
         </li>
@@ -90,7 +90,7 @@
               <use xlink:href="#iconhuoban" />
             </svg>
           </div>
-          <span>Biu伴</span>
+          <span>旅伴</span>
         </li>
         <li>
           <div>
@@ -162,6 +162,9 @@ export default {
     // 发送ajax获取用户最新的信息
   },
   methods: {
+    jumpFocus () {
+      this.$router.push('/guan')
+    },
     jumpFanlist () {
       this.$router.push('/fans')
     },

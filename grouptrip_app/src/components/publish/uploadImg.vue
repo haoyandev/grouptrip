@@ -24,7 +24,7 @@
       </div>  
      <!-- 上传图片 -->
       <div class="upload-box">
-        <van-uploader v-model="fileList" multiple :max-count="4"></van-uploader>
+        <van-uploader v-model="fileList" multiple :max-count="2"></van-uploader>
       </div>
     </div>
     <p class="step" @click.prevent='next'>下一步 (2/3)</p>
@@ -74,6 +74,10 @@ export default {
       for (var item of this.fileList) {
         // console.log(item.content)
         imgList.push(item.content);
+      }
+      if (imgList.length < 2) {
+        this.$toast({ message: `图片不能少于两张哟～`, duration: 1500 })
+        return
       }
       // 更新groupInfo
       imgList = JSON.stringify(imgList)

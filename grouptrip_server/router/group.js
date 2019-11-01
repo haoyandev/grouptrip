@@ -21,6 +21,7 @@ router.get('/api/v1/themelist', (req, res) => {
 router.post('/api/v1/publish', (req, res) => {
   // 获取数据
   var groupInfo = req.body
+  console.log(groupInfo)
   var { tid, tname, timg, sid, cid, area, date, content, likes, imgList, uname, avatar, gender, age, uid } = groupInfo
   // 检验数据
   if (!tid && !tname && !timg && !sid && !cid &&
@@ -33,7 +34,7 @@ router.post('/api/v1/publish', (req, res) => {
   var { tid, tname, timg, sid, cid, area, date, content, likes, uname, avatar, gender, age, uid } = groupInfo
   var sql = `insert into trip_groups (tid, tname, timg, sid, cid, area, date, content, likes, uid, uname, avatar, gender, age) values(?, ?, ?, ?, ?, ?, ?,
     ?, ?, ?, ?, ?, ?, ?)`
-  pool.query(sql, [tid, tname, timg, sid, cid, area, date, content, likes, uid, uname, avatar, gender, age], (err, result) => {
+  pool.query(sql, [tid, tname, timg, sid, cid, area, date, content, likes, uid, uname, avatar, gender, age||0], (err, result) => {
     if (err) throw err
     if (result.affectedRows > 0) {
       var gid = result.insertId
@@ -244,9 +245,10 @@ router.get('/api/v1/place', (req, res) => {
     res.send({ code: 200, data: result })
   })
 })
-// 11. 热门城市
-router.get('/api/v1/hotcity', (req, res) => {
+// 11. 游记首页轮播图
+router.get('/api/v1/banner', (req, res) => {
   // 执行sql
+
 })
 // 12. 筛选
 router.get('/api/v1/grouplist', (req, res) => {
@@ -353,21 +355,13 @@ router.get('/api/v1/idxgrouplist', (req, res) => {
 // 14. 个人组团游列表
 router.get('/api/v1/pgroup', (req, res) => {
   // 获取信息
-  var { uid, pno } = req.query
+  var { uid } = req.query
   if (!uid) {
     res.send({ code: 4001, msg: `用户id为空` })
   }
-  pno = parseInt(pno)
-  if (!pno) {
-    pno = 1
-  }
-  // 每次返回2条数据
-  var count = 2
-  // 计算start
-  var start = (pno - 1) * count
   // 执行sql
-  var sql = `select * from trip_groups where uid=? limit ?, ?`
-  pool.query(sql, [uid, start, count], (err, result) => {
+  var sql = `select * from trip_groups where uid=?`
+  pool.query(sql, [uid], (err, result) => {
     if (err) throw err
     if (result.length > 0) {
       res.send({ code: 200, data: result })

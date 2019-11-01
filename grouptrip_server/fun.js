@@ -4,7 +4,7 @@ const fs = require('fs')
 // 获取基本用户信息
 function getBaseInfo (uid) {
   return new Promise ((resolve, reject) => {
-      var sql = `select uid, avatar, uname, gender, birthday, age, intr from trip_user where uid=?`
+      var sql = `select uid, avatar, uname, gender, birthday, age, intr, city from trip_user where uid=?`
       pool.query(sql, [uid], (err, result) => {
       if (err) {
         reject(err)
