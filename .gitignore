@@ -4,6 +4,11 @@
 # test.http
 **/citypics/
 **/public/group/
+<<<<<<< HEAD
+**/public/poster/
+*.http
+=======
+>>>>>>> 8c8bf50aa1203ebc0394f6ed282af19594f7fde6
 # Logs
 logs
 *.log
