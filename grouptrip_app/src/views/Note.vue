@@ -18,7 +18,7 @@
         <h5>2019</h5>
       </div>
       <div class="main-title">
-        <h1>游记</h1>
+        <h1>GroupTrip游记</h1>
       </div>
     </div>
     <div>
@@ -98,7 +98,7 @@
           <div style="text-align:center">
             <van-loading v-if="able==='加载中'" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
             <p v-else-if="able==='可加载'"></p>
-            <p v-else style="padding-bottom:30px">已经到底了</p>
+            <p v-else style="padding-bottom:30px">已经到底啦！</p>
           </div>
         </van-tab>
         <van-tab title="宝藏游记">
@@ -162,7 +162,7 @@
             <div style="text-align:center">
               <van-loading v-if="able==='加载中'" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
               <p v-else-if="able==='可加载'"></p>
-              <p v-else style="padding-bottom:30px">已经到底了</p>
+              <p v-else style="padding-bottom:30px">已经到底啦😜!</p>
             </div>
           </div>
         </van-tab>
@@ -243,7 +243,7 @@
           <div style="text-align:center">
             <van-loading v-if="able==='加载中'" size="24px" style="padding-bottom:30px;">加载中...</van-loading>
             <p v-else-if="able==='可加载'"></p>
-            <p v-else style="padding-bottom:30px">已经到底了</p>
+            <p v-else style="padding-bottom:30px">已经到底啦！</p>
           </div>
         </van-tab>
       </van-tabs>
