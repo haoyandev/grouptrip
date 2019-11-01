@@ -322,23 +322,23 @@ router.get('/api/v1/idxgrouplist', (req, res) => {
   var start = (pno - 1) * count
   // 执行sql
   var sql = `select 
-  any_value(id) as id, 
-  any_value(tid) as tid, 
-  any_value(tname) as tname, 
-  any_value(sid) as sid, 
-  any_value(cid) as cid, 
-  any_value(area) as area, 
-  any_value(date) as date, 
-  any_value(content) as content, 
-  any_value(likes) as likes, 
-  any_value(bg) as bg, 
-  any_value(img1) as img1, 
-  any_value(img2) as img2, 
-  any_value(uid) as uid, 
-  any_value(uname) as uname, 
-  any_value(avatar) as avatar, 
-  any_value(gender) as gender, 
-  any_value(age) as age
+id, 
+tid, 
+tname, 
+sid, 
+ cid, 
+area, 
+date, 
+content, 
+likes, 
+bg, 
+img1, 
+img2, 
+uid, 
+uname, 
+avatar, 
+gender, 
+age
   from trip_groups group by tid,sid,cid limit ?, ?`
   pool.query(sql, [start, count], (err, result) => {
     if (err) throw err
