@@ -139,7 +139,7 @@
           >
             <li class="strategy-item" v-for="(strategy,s) of trip_city_tuozhai" :key="s">
               <div class="cityimg">
-                <img :src="strategy.img" alt />
+                <img :src="strategy.poster" alt />
               </div>
               <div class="city-details">
                 <h4 class="details-title">{{strategy.cname}}</h4>
