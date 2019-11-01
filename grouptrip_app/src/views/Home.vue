@@ -9,7 +9,7 @@
           <svg @click="search" class="search" aria-hidden="true">
             <use xlink:href="#iconsearch-copy" />
           </svg>
-          <input type="text" @keyup="message" v-model="msg" class="form-text" placeholder="红叶季赏枫攻略" />
+          <input type="text" @keyup="message" @change="message" v-model="msg" class="form-text" placeholder="红叶季赏枫攻略" />
         </div>
         <div class="tabbar-icon">
           <router-link to="/GroupTrip">
@@ -90,10 +90,13 @@ export default {
           .then(res => {
             if (res.data.data) {
               this.maintrips = res.data.data;
-              setTimeout(() => {
-                this.can = true;
-              }, 300);
+            }else{
+            this.$toast({message:'该关键词暂无数据',duration:1000})
+
             }
+            setTimeout(() => {
+            this.can = true;              
+            }, 1000);
           });
       }
     },

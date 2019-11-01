@@ -49,8 +49,7 @@
 export default {
   data() {
     return {
-      active: "热门城市",
-
+      active: "国家",
       late: [],
       gos_zt: {
         //主要的目的地；

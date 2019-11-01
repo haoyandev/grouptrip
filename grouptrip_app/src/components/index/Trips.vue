@@ -81,7 +81,6 @@ export default {
         var trips1 = this.group.splice(0, Math.floor(this.group.length / 2));
       }
       var trips2 = this.group;
-      console.log(trips1, trips2);
       return [trips1, trips2];
     }
   }
