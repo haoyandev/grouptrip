@@ -155,3 +155,9 @@ GET  {{url}}/group/api/v1/pgroup?uid=1 HTTP/1.1
 ###
 # 用户详情
 GET  {{url}}/user/api/v1/userinfo?uid=1 HTTP/1.1
+
+
+
+###
+# 用户详情
+GET  {{url}}/group/api/v1/allcity HTTP/1.1
