@@ -112,67 +112,67 @@ export default {
           },
           {
             cname: "北京",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/beijin1.jpg'
           },
           {
             cname: "巴黎",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/paris.jpg'
           },
           {
             cname: "广州",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/oldgz.jpg'
           },
           {
             cname: "巴厘岛",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/bali.jpg'
           },
           {
             cname: "成都",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/chengdu.jpg'
           },
           {
             cname: "洛杉矶",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg:'http://localhost:3000/citypics/LA.jpg'
           },
           {
             cname: "纽约",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/newyork.jpg'
           },
           {
             cname: "上海",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/shanghai.jpg'
           },
           {
             cname: "首尔",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/seoul.jpg'
           },
           {
             cname: "重庆",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/chongqing.jpg'
           },
           {
             cname: "台北",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/taiwan2.jpg'
           },
           {
-            cname: "曼谷",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cname: "清迈",
+            cityimg: 'http://localhost:3000/citypics/chiang_mai.jpg'
           },
           {
             cname: "巴塞罗那",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/barcelona.jpg'
           },
           {
             cname: "杭州",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/hangzhou.jpg'
           },
           {
             cname: "新加坡",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/singapore.jpg'
           },
           {
             cname: "北海道",
-            cityimg: require("../../assets/citypics/beijin1.jpg")
+            cityimg: 'http://localhost:3000/citypics/hokkaido.jpg.jpg'
           }
         ],
         中国内地: [

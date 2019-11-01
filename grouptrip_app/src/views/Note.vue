@@ -11,14 +11,14 @@
     </div>
     <div class="top-title">
       <div class="title-date">
-        <h1>{{times.getDate()}}</h1>
+        <h2>{{times.getDate()}}</h2>
       </div>
       <div class="title-year-mon">
         <h5>{{times.toString().slice(3,7)}}</h5>
         <h5>2019</h5>
       </div>
       <div class="main-title">
-        <h1>GroupTrip游记</h1>
+        <h2>GroupTrip游记</h2>
       </div>
     </div>
     <div>
@@ -105,12 +105,12 @@
           <div class="note-top">
             <h2>宝藏游记</h2>
             <div class="notetop-img">
-              <img src="../assets/citypics/osaka.jpg" alt />
+              <img src="../assets/citypics/food01.jpg" alt />
             </div>
             <div class="item-text">
-              <h3>100种玩大阪的方法，这种是最套路的</h3>
+              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
               <div class="item-head">
-                <img src="../assets/citypics/LA.jpg" alt />
+                <img src="../assets/citypics/heimen.jpg" alt />
               </div>
               <span class="text-personal">
                 <b>维多利亚</b>
@@ -172,7 +172,7 @@
             <div class="new-route">
               <div class="new-item" v-for="(find,f) of finds" :key="f">
                 <div class="new-itemimg">
-                  <img :src="find.imgpath"/>
+                  <img :src="find.imgpath" alt />
                 </div>
                 <h4>{{find.title}}</h4>
                 <p>{{find.count}}次浏览</p>
@@ -321,13 +321,13 @@ export default {
           tag1: "老广州的建筑",
           tag2: "品味粤菜",
           subtitle: "游玩6天/适宜10月-5月/14个景点",
-          img:"http://localhost:3000/citypics/oldgz.jpg"
+          img:"http://localhost:3000/citypics/3-1.jpeg"
         },
         {
-          title: "京都4日日路线",
+          title: "大阪3日路线",
           tag1: "初次必玩",
-          tag2: "日式建筑",
-          subtitle: "游玩4天/适宜3月-11月/12个景点",
+          tag2: "环球影城一日游",
+          subtitle: "游玩3天/适宜3月-11月/12个景点",
           img:"http://localhost:3000/citypics/3-2.jpeg"
         }
       ],
@@ -336,22 +336,22 @@ export default {
         {
           title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/bright.jpg"
+          imgpath: require("../assets/citypics/beijin1.jpg")
         },
         {
-          title: "苏格兰天空岛 | 隐秘景点 | 懒人徒步攻略",
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/england.jpg"
+          imgpath: "http://localhost:3000/citypics/3-1.jpeg"
         },
         {
-          title: "东京的大阪| 寻找柯南足迹",
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/train.jpg"
+          imgpath: "http://localhost:3000/citypics/3-2.jpeg"
         },
         {
-          title: "初秋的剑桥",
+          title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/dempo.jpg"
+          imgpath: "http://localhost:3000/citypics/4-2.jpg"
         }
       ],
       routes: [
@@ -579,7 +579,7 @@ export default {
   align-items: center;
   margin: 0px 0px 15px 15px;
 }
-#note-page .top-title h1,
+#note-page .top-title h2,
 h5 {
   margin: 0px;
 }
