@@ -99,14 +99,15 @@ router.get('/api/v1/citylist/:pno', (req, res) => {
   // 获取数据
   var pno = req.params.pno
   pno = parseInt(pno)
-  // 每次返回6条数据
-  var count = 6
-  var start = (pno - 1) * count
-  if (start) {
-    start = 1
+  if (!pno) {
+    pno = 1
   }
+  // 每次返回6条数据
+  var count = 8
+  var start = (pno - 1) * count
+ 
   // 执行sql
-  var sql = `select cid, cname, elname, views, hot_spots, img from trip_city limit ?, 6`
+  var sql = `select cid, cname, elname, views, detail,hot_spots, img from trip_city limit ?, 8`
   pool.query(sql, [start], (err, result) => {
     if (err) throw err
     if (result.length > 0) {

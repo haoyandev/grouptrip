@@ -30,7 +30,7 @@
       <div class="active" :style="active===i&&'opacity:1;'" v-for="(ele,i) of gos_zt" :key="i">
         <mt-tab-container-item @click.native="city" :id="i">
           <router-link
-            to='/Strategy'
+            :to="'/Strategy?city='+trip.cname"
             @click="add_trip(trip)"
             class="trip-a"
             href="javascript:;"
@@ -543,7 +543,7 @@ export default {
         ],
         热门城市: [
           {
-            cname: "京都",
+            cname: "日本",
             cityimg: require("../../assets/citypics/img1998.jpg")
           },
           {
