@@ -605,7 +605,7 @@ INSERT INTO trip_city(cid, sid, cname, elname, views, detail, hot_spots, img, po
 (130200, 130000, '马六甲', 'Melaka', 1000, null, null, 'http://localhost:3000/citypics/buket.jpg',null),
 (130300, 130000, '亚庇', 'Kota Kinabalu', 1000, null, null, 'http://localhost:3000/citypics/07.jpg',null),
 (130400, 130000, '沙巴', 'Sabah', 1000, null, null, 'http://localhost:3000/citypics/06.jpg',null),
-(130500, 130000, '槟城', 'Penang', 1000, null, 'http://localhost:3000/citypics/9-1.jpg', null),null,
+(130500, 130000, '槟城', 'Penang', 1000, null, 'http://localhost:3000/citypics/9-1.jpg', null,null),
 (140100, 140000, '巴黎', 'Paris', 1000, null, null, 'http://localhost:3000/citypics/paris.jpg',null),
 (150100, 150000, '马德里', 'Madrid', 1000, null, null, 'http://localhost:3000/citypics/new_zealand.jpg',null),
 (150200, 150000, '巴塞罗那', 'Barcelona', 1000, null, null, 'http://localhost:3000/citypics/barcelona.jpg',null),

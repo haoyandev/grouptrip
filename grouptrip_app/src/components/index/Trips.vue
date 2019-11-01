@@ -105,10 +105,12 @@ export default {
 }
 .wrap-item .wrap-item-content .personal-theme{
   background-color: #ffffff;
-  padding: 5px 10px;
+  padding: 5px 15px;
+  border-radius: 30px;
 }
 .wrap-item .wrap-item-content .personal-theme p{
   margin: 0px 0px;
   font-size: 13px;
+  
 }
 </style>
