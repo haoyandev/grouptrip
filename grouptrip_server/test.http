@@ -137,7 +137,7 @@ GET  {{url}}/group/api/v1/grouplist/1 HTTP/1.1
 
 ###
 # 组团游搜索
-GET  {{url}}/group/api/v1/search// HTTP/1.1
+GET  {{url}}/group/api/v1/search/去哪/1 HTTP/1.1
 
 ###
 # 组团游筛选

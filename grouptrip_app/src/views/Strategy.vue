@@ -25,7 +25,10 @@
         <div class="top-city">
           <div class="top-city-title">
             <h3>热门城市</h3>
-            <router-link :to="'/more?city='+citydd" style="display: flex;align-item:center; line-height: 15px">
+            <router-link
+              :to="'/more?city='+citydd"
+              style="display: flex;align-item:center; line-height: 15px"
+            >
               <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />
@@ -213,14 +216,14 @@
               <div class="tips-wrap-item" v-for="(t,i) of tips" :key="i">
                 <div class="wrap-item-content">
                   <div class="tips-notes-img">
-                    <img :src="t.timg" alt />
+                    <img :src="t.img1" alt />
                   </div>
                   <div class="item-details">
-                    <p>{{t.details}}</p>
+                    <p>{{t.content}}</p>
                   </div>
                   <div class="tips-personal">
                     <div class="personal-head">
-                      <img :src="t.head" alt />
+                      <img :src="t.avatar" alt />
                     </div>
                     <span>{{t.uname}}</span>
                     <div class="favorite">
@@ -249,10 +252,14 @@ import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
   created() {
-    if(this.$route.query.city){
-      this.citydd=this.$route.query.city;
+    this.axios.get("/group/api/v1/grouplist").then(res => {
+      this.tips = res.data.data;
+    });
+
+    if (this.$route.query.city) {
+      this.citydd = this.$route.query.city;
     }
-    if (this.citydd=== "日本") {
+    if (this.citydd === "日本") {
       this.page = 2;
     } else {
       this.page = 1;
@@ -264,7 +271,7 @@ export default {
   },
   data() {
     return {
-      citydd:this.$store.getters.city,
+      citydd: this.$store.getters.city,
       page: "",
       cityopa: 0,
       citydis: "none",
@@ -374,24 +381,7 @@ export default {
           bgpath: require("../assets/citypics/img1996.jpg")
         }
       ],
-      tips: [
-        {
-          details:
-            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！",
-          uname: "维多利亚",
-          likes: "100",
-          timg: require("../assets/citypics/img1998.jpg"),
-          head: require("../assets/citypics/img1998.jpg")
-        },
-        {
-          details:
-            "90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！",
-          uname: "维多利亚",
-          likes: "100",
-          timg: require("../assets/citypics/img1998.jpg"),
-          head: require("../assets/citypics/img1998.jpg")
-        }
-      ],
+      tips: [],
       imgs: {},
       move: {
         start: 0,

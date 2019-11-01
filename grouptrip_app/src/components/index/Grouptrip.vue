@@ -20,7 +20,7 @@
           <van-dropdown-item v-model="value2" :options="option2" class="dropdown-theme" />
           <div role="button" class="van-dropdown-menu__item" @click="showPop">
             <span class="van-dropdown-menu__title">
-              <div class="van-ellipsis">地点</div>
+              <div class="van-ellipsis">{{cityname||'地点'}}</div>
             </span>
           </div>
         </van-dropdown-menu>
@@ -38,7 +38,7 @@
             <span>热门地点</span>
           </div>
           <div class="pop-panel-wrap">
-            <div @click="bk(city.cid)" class="pop-item" v-for="(city,c) of cities" :key="c">
+            <div @click="bk(city.cid,city.cname)" class="pop-item" v-for="(city,c) of cities" :key="c">
               <div class="pop-item-img">
                 <img :src="city.img" alt />
               </div>
@@ -52,21 +52,21 @@
         <div class="grouptrip-wrap-item" v-for="(t,i) of tripsgo" :key="i">
           <mt-swipe :auto="0">
             <mt-swipe-item>
-              <img src="../../assets/citypics/city6.jpg" alt />
+              <img :style="{width:'100%'}" :src="t.bg" alt />
             </mt-swipe-item>
             <mt-swipe-item>
-              <img src="../../assets/citypics/img1957.jpg" alt />
+              <img :src="t.img1" alt />
             </mt-swipe-item>
             <mt-swipe-item>
-              <img src="../../assets/citypics/img1996.jpg" alt />
+              <img :src="t.img2" alt />
             </mt-swipe-item>
           </mt-swipe>
           <div class="theme-item">
             <div class="theme-icon">
-              <img :src="trips[0].themepic" alt />
+              <img :src="t.timg" alt />
             </div>
-            <span>一起去冒险</span>
-            <p class="theme_details">{{t.intr}}</p>
+            <span>{{t.tname}}</span>
+            <p class="theme_details">{{t.content}}</p>
           </div>
           <div class="item-personal-msg">
             <div class="personal-msg-header">
@@ -74,7 +74,7 @@
                 <img :src="t.avatar" style=" max-width: 100%;height: auto;" alt />
               </div>
               <div class="msg-header-text">
-                <h4 class="msg-header-name">维多利亚</h4>
+                <h4 class="msg-header-name">{{t.uname}}</h4>
                 <div class="msg-header-person-text">
                   <div
                     class="msg-sex-age"
@@ -121,17 +121,17 @@
                 <use xlink:href="#iconshijian" />
               </svg>
               <span class="msg-date">日期</span>
-              <p>{{t.begin_time+'~'+t.end_time}}</p>
+              <p>{{t.date}}</p>
             </div>
             <div class="personal-msg-place">
               <svg class="icondidian" aria-hidden="true">
                 <use xlink:href="#icondidian" />
               </svg>
               <span class="msg-place">地点</span>
-              <p>{{t.cname}}</p>
+              <p>{{t.area}}</p>
             </div>
             <div class="interest">
-              <p>{{t.fans}}</p>
+              <p>{{t.likes}}</p>
               <span>人感兴趣</span>
               <router-link to>和他聊聊</router-link>
             </div>
@@ -146,9 +146,15 @@ import like from "../common/like.vue";
 import user from "../index/PersonalIndex";
 export default {
   created() {
-    this.axios.get('/group/api/v1/allcity').then(res=>{
-      this.cities=res.data.data;
-    })
+    this.axios.get("/group/api/v1/grouplist").then(res => {
+      this.tripsgo=res.data.data;
+      console.log(res.data.data)
+    });
+  },
+  mounted() {
+    this.axios.get("/group/api/v1/allcity").then(res => {
+      this.cities = res.data.data;
+    });
     // this.axios.get(`/group/api/v1/grouplist/${this.page}`).then(res => {
     //   this.tripsgo = this.tripsgo.concat(res.data.data);
     // });
@@ -156,7 +162,9 @@ export default {
   data() {
     return {
       //下拉菜单
+      cityname:'',
       page: 1,
+      cid: "",
       tripsgo: [],
       qiehuan: {
         useropa: 0,
@@ -239,8 +247,9 @@ export default {
     user
   },
   methods: {
-    bk(city) {
-      console.log(city)
+    bk(city,cityname) {
+      this.cid = city;
+      this.cityname=cityname;
       for (var i = 0; i < 800; i++) {
         setTimeout(() => {
           this.top = i;
@@ -249,6 +258,19 @@ export default {
       setTimeout(() => {
         this.pop = false;
       }, 300);
+      if (this.value2) {
+        this.axios
+          .get(
+            "/group/api/v1/grouplist?cid=" + this.cid + "&tid=" + this.value2
+          )
+          .then(res => {
+             this.tripsgo=res.data.data;
+          });
+      } else {
+        this.axios.get("/group/api/v1/grouplist?cid=" + this.cid).then(res => {
+           this.tripsgo=res.data.data;
+        });
+      }
     },
     fh(data) {
       this.qiehuan.useropa = 0;
@@ -293,6 +315,29 @@ export default {
       setTimeout(() => {
         this.pop = false;
       }, 300);
+    }
+  },
+  watch: {
+    value2(newval, oldval) {
+      if (newval) {
+        if (this.cid) {
+          this.axios
+            .get("/group/api/v1/grouplist?cid=" + this.cid + "&tid=" + newval)
+            .then(res => {
+               this.tripsgo=res.data.data;
+            });
+        } else {
+          this.axios
+            .get("/group/api/v1/grouplist?" + "&tid=" + newval)
+            .then(res => {
+               this.tripsgo=res.data.data;
+            });
+        }
+      } else {
+        this.axios.get("/group/api/v1/grouplist").then(res => {
+           this.tripsgo=res.data.data;
+        });
+      }
     }
   }
 };
