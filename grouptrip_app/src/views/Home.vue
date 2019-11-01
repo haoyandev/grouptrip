@@ -1,5 +1,4 @@
 <template>
- 
     <main id="homepage">
       <mt-tabbar fixed class="tabbar-top">
         <mt-tab-item class="text-item logo-top">

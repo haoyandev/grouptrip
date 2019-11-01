@@ -6,7 +6,7 @@
           <div class="placebutton">
             <router-link to="/go">
               <mt-button>
-                {{$store.getters.city||'广州'}}
+                {{$store.getters.city||'中国'}}
                 <svg class="icondropdown-white" aria-hidden="true">
                   <use xlink:href="#iconxiala" />
                 </svg>
@@ -25,7 +25,7 @@
         <div class="top-city">
           <div class="top-city-title">
             <h3>热门城市</h3>
-            <router-link to="/more" style="display: flex;align-item:center; line-height: 15px">
+            <router-link :to="'/more?city='+citydd" style="display: flex;align-item:center; line-height: 15px">
               <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />
@@ -35,11 +35,11 @@
           <div class="top-city-content">
             <div
               class="top-city-item"
-              v-for="(t,i) of trip_city"
+              v-for="(t,i) of trip_city_tuozhai"
               :key="i"
-              :style="{background:'url('+t.cityimg+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}"
+              :style="{background:'url('+t.img+')',backgroundRepeat:'no-repeat',backgroundSize: 'cover'}"
             >
-              <span>{{t.name}}</span>
+              <span>{{t.cname}}</span>
               <p>{{t.elname}}</p>
             </div>
           </div>
@@ -134,13 +134,13 @@
             data-width="300"
             :style="{marginLeft:move.left+'px',width:strategies.length*300+'px'}"
           >
-            <li class="strategy-item" v-for="(strategy,s) of strategies" :key="s">
+            <li class="strategy-item" v-for="(strategy,s) of trip_city_tuozhai" :key="s">
               <div class="cityimg">
-                <img :src="strategy.imgpath" alt />
+                <img :src="strategy.img" alt />
               </div>
               <div class="city-details">
-                <h4 class="details-title">{{strategy.title}}</h4>
-                <p class="details">{{strategy.details}}</p>
+                <h4 class="details-title">{{strategy.cname}}</h4>
+                <p class="details">{{strategy.detail}}</p>
               </div>
             </li>
           </ul>
@@ -151,7 +151,7 @@
           </div>
           <div class="sale-content">
             <router-link
-              to=""
+              to
               class="sale-item sale-item1"
               v-for="(s,i) of sales"
               :key="i"
@@ -167,7 +167,7 @@
         <div class="essence-notes">
           <div class="essence-title">
             <h3>精华游记</h3>
-            <router-link to="" class="see-more">
+            <router-link to class="see-more">
               <span>查看更多</span>
               <svg class="iconforward-small" aria-hidden="true">
                 <use xlink:href="#iconforward-purple" />
@@ -249,9 +249,23 @@ import like from "../components/common/like";
 import City from "../components/strategy/morecity";
 export default {
   created() {
+    if(this.$route.query.city){
+      this.citydd=this.$route.query.city;
+    }
+    if (this.citydd=== "日本") {
+      this.page = 2;
+    } else {
+      this.page = 1;
+    }
+    this.axios.get(`/group/api/v1/citylist/${this.page}`).then(res => {
+      res.data.data.splice(-2, 2);
+      this.trip_city_tuozhai = res.data.data;
+    });
   },
   data() {
     return {
+      citydd:this.$store.getters.city,
+      page: "",
       cityopa: 0,
       citydis: "none",
       opa: 1,
@@ -259,9 +273,10 @@ export default {
       go: "block",
       gos: "none",
       //这四个数据是做切换页面透明度渐变效果
-
+      strategies_tuozhuai: [],
       width: 0,
       active: 0, //保存底部推荐面板当前显示的子面板id
+      trip_city_tuozhai: [],
       trip_city: [
         {
           name: "大阪",

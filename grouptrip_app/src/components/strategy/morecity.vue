@@ -11,9 +11,9 @@
     <div class="morecity-wrap">
       <div
         class="morecity-item"
-        v-for="(c,i) of cities"
+        v-for="(c,i) of trip_city_tuozhai"
         :key="i"
-        :style="{background:'url('+c.cbg+')',backgroundSize:'cover'}"
+        :style="{background:'url('+c.img+')',backgroundSize:'cover'}"
       >
         <div class="morecity-bg">
           <p>{{c.cname}}</p>
@@ -21,7 +21,7 @@
         </div>
         <div class="morecity-text">
           <p>{{c.views}}人去过</p>
-          <span>代表景点：{{c.spots}}</span>
+          <span>代表景点：{{c.hot_spots}}</span>
         </div>
       </div>
     </div>
@@ -29,8 +29,20 @@
 </template>
 <script>
 export default {
+  created() {
+    if (this.$route.query.city === "日本") {
+      this.page = 2;
+    } else {
+      this.page = 1;
+    }
+    this.axios.get(`/group/api/v1/citylist/${this.page}`).then(res => {
+      this.trip_city_tuozhai = this.trip_city_tuozhai.concat(res.data.data);
+    });
+  },
   data() {
     return {
+      page: 1,
+      trip_city_tuozhai: [],
       cities: [
         {
           cbg: require("../../assets/citypics/beijin1.jpg"),
@@ -82,7 +94,7 @@ export default {
           spots: "星光大道、太平山、香港海洋公园、香港迪士尼乐园"
         }
       ],
-      pno: 1,
+      pno: '',
       can: true
     };
   },
