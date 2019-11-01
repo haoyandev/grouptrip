@@ -276,17 +276,22 @@ export default {
 }
 
 .wrap-item {
-  height: 175px;
   border-radius: 10px;
   position: relative;
-  padding-top: 50px;
+  padding-top: 30px;
   margin-bottom: 15px;
+}
+.wrap-left .wrap-item-left:first-child{
+  height: 215px;
+}
+.wrap-right .wrap-item-right, .wrap-left .wrap-item-left{
+  height: 190px;
 }
 .home-wrap-item {
   width: 100%;
 }
 .top-item {
-  height: 205px;
+  height: 215px;
   width: 100%;
   background-image: url("../assets/cardpics/bg1.jpg");
   background-size: cover;
@@ -345,7 +350,7 @@ export default {
   display: -webkit-box; /** 对象作为伸缩盒子模型显示 **/
   -webkit-box-orient: vertical; /** 设置或检索伸缩盒对象的子元素的排列方式 **/
   -webkit-line-clamp: 2; /** 显示的行数 **/
-  margin: 0;
+  margin: 10px 0px;
   padding-top: 10px;
   font: bold 14px JianHei;
 }
