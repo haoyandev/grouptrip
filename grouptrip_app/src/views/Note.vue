@@ -85,8 +85,8 @@
               <span>{{n.tags[1]}}</span>
             </div>
             <div class="item-icon">
-              <like></like>
-              <span>{{n.likes}}</span>
+              <like @num="num" @click.native="nums(i)"></like>
+              <span>{{newnotes[i].likes}}</span>
               <svg class="iconcomment" aria-hidden="true">
                 <use xlink:href="#iconcomment" />
               </svg>
@@ -276,6 +276,7 @@ export default {
   },
   data() {
     return {
+      count:'',
       able: "可加载",
       page: 1,
       can: true,
@@ -421,6 +422,12 @@ export default {
     }
   },
   methods: {
+    nums(i){
+      this.newnotes[i].likes+=this.count;
+    },
+    num(data){
+      this.count=data;
+    },
     lazy() {
       document.addEventListener("scroll", () => {
         function getWinHeight() {
