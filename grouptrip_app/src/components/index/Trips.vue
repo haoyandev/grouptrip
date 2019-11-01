@@ -31,7 +31,7 @@
             <img :src="t.avatar" alt />
           </div>
           <span class="place">{{t.area}}</span>
-          <span class="date">{{t.date}}</span>
+          <span class="date">{{t.date.split('-')[0].slice(5)+'~'+t.date.split('-')[1].slice(5)}}</span>
           <div class="wrap-item-details">
             <p>{{t.content}}</p>
           </div>
@@ -54,7 +54,7 @@
             <img :src="t.avatar" alt />
           </div>
           <span class="place">{{t.area}}</span>
-          <span class="date">{{t.date}}</span>
+          <span class="date">{{t.date.split('-')[0].slice(5)+'~'+t.date.split('-')[1].slice(5)}}</span>
           <div class="wrap-item-details">
             <p>{{t.content}}</p>
           </div>
@@ -81,6 +81,7 @@ export default {
         var trips1 = this.group.splice(0, Math.floor(this.group.length / 2));
       }
       var trips2 = this.group;
+      console.log(trips1, trips2);
       return [trips1, trips2];
     }
   }

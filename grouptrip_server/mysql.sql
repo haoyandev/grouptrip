@@ -143,7 +143,7 @@ CREATE TABLE trip_groups (
 
 INSERT INTO trip_groups(tid, tname, timg, sid, cid, area, date, content, likes, bg, img1, img2, uid, uname, avatar, gender, age) VALUES
 (1, '一起去冒险', 'http://127.0.0.1:3000/theme/explore.png',
-13000, 130100, '马来西亚', '2019年12月23日-12月31日',
+13000, 130100, '马来西亚', '2019年12月23日-2019年12月31日',
 '马来西亚仙本那旅游,想找个愿意陪我晒太阳的人,一起去到一年四季只有一个季节的国家玩个八天,有意者私聊与留言', 
 17,
 'http://localhost:3000/group/bg10.jpg',

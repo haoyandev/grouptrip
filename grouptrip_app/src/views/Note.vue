@@ -105,12 +105,12 @@
           <div class="note-top">
             <h2>宝藏游记</h2>
             <div class="notetop-img">
-              <img src="../assets/citypics/food01.jpg" alt />
+              <img src="../assets/citypics/LA.jpg"  alt />
             </div>
             <div class="item-text">
-              <h3>从平价小吃到米其林——大阪京都神户美食集(10日20店详记）</h3>
+              <h3>100种玩大阪的方法，这种是最套路的</h3>
               <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg" alt />
+                <img src="../assets/citypics/heimen.jpg"alt />
               </div>
               <span class="text-personal">
                 <b>维多利亚</b>
@@ -321,13 +321,13 @@ export default {
           tag1: "老广州的建筑",
           tag2: "品味粤菜",
           subtitle: "游玩6天/适宜10月-5月/14个景点",
-          img:"http://localhost:3000/citypics/3-1.jpeg"
+          img:"http://localhost:3000/citypics/oldgz.jpg"
         },
         {
-          title: "大阪3日路线",
+          title: "京都4日路线",
           tag1: "初次必玩",
-          tag2: "环球影城一日游",
-          subtitle: "游玩3天/适宜3月-11月/12个景点",
+          tag2: "日式建筑",
+          subtitle: "游玩4天/适宜3月-11月/12个景点",
           img:"http://localhost:3000/citypics/3-2.jpeg"
         }
       ],
@@ -336,22 +336,22 @@ export default {
         {
           title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: require("../assets/citypics/beijin1.jpg")
+          imgpath: "http://localhost:3000/citypics/bright.jpg"
         },
         {
-          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          title: "苏格兰天空岛 | 隐秘景点 | 懒人徒步攻略",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/3-1.jpeg"
+          imgpath: "http://localhost:3000/citypics/england.jpg"
         },
         {
-          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          title: "东京的大阪| 寻找柯南足迹",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/3-2.jpeg"
+          imgpath: "http://localhost:3000/citypics/train.jpg"
         },
         {
-          title: "不止布达佩斯 | 走进不一样的匈牙利",
+          title: "初秋的剑桥",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/4-2.jpg"
+          imgpath: "http://localhost:3000/citypics/dempo.jpg"
         }
       ],
       routes: [
