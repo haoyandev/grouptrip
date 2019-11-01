@@ -47,86 +47,6 @@
             </div>
           </div>
         </div>
-        <div class="city-tips" style="display:none">
-          <router-link to="javascript;">
-            <div class="city-tips-item">
-              <div class="tips-item-bg">
-                <h3>景点</h3>
-                <p>人气榜</p>
-                <span></span>
-              </div>
-              <div class="tips-item-text">
-                <div>
-                  <span>1</span>
-                  <p>广州塔</p>
-                </div>
-                <div>
-                  <span>2</span>
-                  <p>中山大学</p>
-                </div>
-                <div>
-                  <span>3</span>
-                  <p>沙面</p>
-                </div>
-              </div>
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
-            </div>
-          </router-link>
-          <router-link to="javascript;">
-            <div class="city-tips-item">
-              <div class="tips-item-bg">
-                <h3>景点</h3>
-                <p>人气榜</p>
-                <span></span>
-              </div>
-              <div class="tips-item-text">
-                <div>
-                  <span>1</span>
-                  <p>广州塔</p>
-                </div>
-                <div>
-                  <span>2</span>
-                  <p>中山大学</p>
-                </div>
-                <div>
-                  <span>3</span>
-                  <p>沙面</p>
-                </div>
-              </div>
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
-            </div>
-          </router-link>
-          <router-link to="javascript;">
-            <div class="city-tips-item">
-              <div class="tips-item-bg">
-                <h3>景点</h3>
-                <p>人气榜</p>
-                <span></span>
-              </div>
-              <div class="tips-item-text">
-                <div>
-                  <span>1</span>
-                  <p>广州塔</p>
-                </div>
-                <div>
-                  <span>2</span>
-                  <p>中山大学</p>
-                </div>
-                <div>
-                  <span>3</span>
-                  <p>沙面</p>
-                </div>
-              </div>
-              <svg class="iconforward" aria-hidden="true">
-                <use xlink:href="#iconforward" />
-              </svg>
-            </div>
-          </router-link>
-        </div>
         <div class="city-strategy">
           <ul
             id="u1"
@@ -284,39 +204,8 @@ export default {
       width: 0,
       active: 0, //保存底部推荐面板当前显示的子面板id
       trip_city_tuozhai: [],
-      trip_city: [
-        {
-          name: "大阪",
-          elname: "Osaka",
-          cityimg: require("../assets/citypics/img1998.jpg")
-        }
-      ],
-      strategies: [
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "大阪",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        },
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "东京",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        },
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "京都",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        },
-        {
-          imgpath: require("../assets/citypics/save.jpg"),
-          title: "北海道",
-          details:
-            "有着悠久文化历史的大阪是日本第二大城市，全国经济、政治和文化的中心，交通便利、贸易发达，是深受国内外旅行者喜爱的人气城市。大阪位于日本本州中西部，面积是全国都道府县中最小的，但人口却仅次于首都东京。"
-        }
-      ],
+      trip_city: [],
+      strategies: [],
       sales: [
         {
           title: "特价酒店",
@@ -359,24 +248,24 @@ export default {
         {
           title: "日本环球影城 | 圣诞",
           name: "维多利亚",
-          headpath: require("../assets/iconfont/girl.png"),
+          headpath: require("../assets/citypics/LA.jpg"),
           bgpath: require("../assets/citypics/img1957.jpg")
         },
         {
-          title: "大阪京都美食集 | 关西",
-          name: "维多利亚",
+          title: "迎着夏日和风，我们一起闯关西吧",
+          name: "Dison",
           headpath: require("../assets/iconfont/girl.png"),
+          bgpath: require("../assets/citypics/LA.jpg")
+        },
+        {
+          title: "举起关西酿的甜，和你再干一杯",
+          name: "Joey",
+          headpath: require("../assets/citypics/city11.jpg"),
           bgpath: require("../assets/citypics/img1998.jpg")
         },
         {
           title: "大阪京都美食集 | 关西",
-          name: "维多利亚",
-          headpath: require("../assets/iconfont/girl.png"),
-          bgpath: require("../assets/citypics/img1998.jpg")
-        },
-        {
-          title: "大阪京都美食集 | 关西",
-          name: "维多利亚",
+          name: "AC",
           headpath: require("../assets/iconfont/girl.png"),
           bgpath: require("../assets/citypics/img1996.jpg")
         }
