@@ -376,7 +376,18 @@ router.get('/api/v1/pgroup', (req, res) => {
     }
   })
 })
-// 15. 用户游记
-router.get('/api/v1/')
+// 15. 全部城市列表
+router.get('/api/v1/allcity', (req, res) => {
+  // 执行sql
+  var sql = `select cid, cname, img from trip_city`
+  pool.query(sql, (err, result) => {
+    if (err) throw err
+    if (result.length > 0) {
+      res.send({ code: 200, data: result })
+    } else {
+      res.send({ code: 4001, msg: `没有数据` })
+    }
+  })
+})
 module.exports = router
 
