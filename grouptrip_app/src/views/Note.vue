@@ -365,7 +365,7 @@ export default {
           title: "#香港购物指南",
           subtitle: "购物",
           imgpath: require("../assets/citypics/city12.jpg"),
-          color: "#e59572"
+          color: "#a696c8"
         },
         {
           title: "#首尔小众秘境推荐",
@@ -395,7 +395,7 @@ export default {
           title: "#新加坡网红打卡地",
           subtitle: "拍照",
           imgpath: require("../assets/citypics/city6.jpg"),
-          color: "#a696c8"
+          color: "#e59572"
         }
       ]
     };
@@ -843,12 +843,14 @@ h5 {
   margin: 0px 5px;
 }
 .new-route .new-item .new-itemimg {
-  width: 100%;
-  height: auto;
+  width: 168px;
+  height: 105px;
   border-radius: 10px;
 }
 .new-route .new-item .new-itemimg img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
   border-radius: 10px;
 }
 .new-route .new-item h4,

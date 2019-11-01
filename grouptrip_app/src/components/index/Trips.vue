@@ -1,7 +1,7 @@
 <template>
   <main class="trips-wrap">
     <div class="wrap-left">
-          <div class="wrap-item top-item">
+          <!-- <div class="wrap-item top-item">
             <div class="wrap-item-content">
               <div class="personal-theme">
                 <p>一起去冒险</p>
@@ -15,8 +15,8 @@
                 <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
               </div>
             </div>
-          </div>
-          <div class="wrap-item" v-for="(t,i) of trips2" :key="
+          </div> -->
+          <div class="wrap-item wrap-item-left" v-for="(t,i) of trips2" :key="
           i" :style="{background:'url('+t.tripbg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}">
             <div class="wrap-item-content">
               <div class="personal-theme">
@@ -34,7 +34,7 @@
           </div>
         </div>
         <div class="wrap-right home-wrap-item">
-          <div class="wrap-item" v-for="(t,i) of trips" :key="
+          <div class="wrap-item wrap-item-right" v-for="(t,i) of trips" :key="
           i" :style="{background:'url('+t.tripbg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}">
             <div class="wrap-item-content">
               <div class="personal-theme">
@@ -105,12 +105,13 @@ export default {
 }
 .wrap-item .wrap-item-content .personal-theme{
   background-color: #ffffff;
-  padding: 5px 15px;
+  padding: 3px 12px;
   border-radius: 30px;
+  margin-bottom: 10px;
 }
 .wrap-item .wrap-item-content .personal-theme p{
   margin: 0px 0px;
-  font-size: 13px;
+  font: bold 12px Mqi;
   
 }
 </style>
