@@ -22,7 +22,7 @@
     <div class="user-head">
       <div>
         <div @click="jump" v-if="isLogin" class="header">
-          <router-link to="/PersonalIndex">
+          <router-link :to="`/PersonalIndex?uid=${user.uid}`">
             <img :src="user.avatar" alt />
           </router-link>
         </div>

@@ -113,7 +113,19 @@ export default {
     like,
   },
   created(){
+    console.log(this.$route.query.uid)
+    var uid = this.$store.state.user.uid
+
     var url = ''
+      // 发送axios
+    var url = `user/api/v1/detail`
+    this.axios.get(url).then(res => {
+      console.log(res.data)
+    })
+    url = `group/api/v1/pgroup`
+    this.axios.get(url, { params: { uid }}).then(res => {
+      console.log(res.data)
+    })
   },
   methods:{
     jumpfh(){

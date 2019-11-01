@@ -122,7 +122,7 @@ export default {
     },
     handleLocation (val) {
       this.area = val
-      this.location = `${val[1].name}`
+      this.location = `${val[0].name}.${val[1].name}`
       this.showLocation = false
     },
     publish () {
@@ -141,13 +141,18 @@ export default {
       }
       // 整理数据
       var obj = {
-        begin_time: this.beginTime,
-        end_time: this.endTime,
+        date: `${this.beginTime}-${this.endTime}`,
         cid: this.area[1].code,
+        cname: this.area[1].name,
+        sid: this.area[0].code,
+        area: `${this.area[0].name}.${this.area[1].name}`
       }
+      var user = this.$store.state.user
+      Object.assign(obj, user)
       this.$store.commit('setGroupInfo', obj)
       // 获得组团游信息
       var groupInfo = this.$store.state.groupInfo
+      console.log(groupInfo)
       // 显示遮罩层 loding
       this.overlay = true
       this.loading = true
@@ -169,7 +174,10 @@ export default {
         }, 1500)
       })
       .catch(err => {
-        console.log(err)
+        this.$toast({ message: '出错啦！ 即将跳转到首页', duration: 1500 })
+        setTimeout(() => {
+          this.$router.push('/Home')
+        }, 1500)
       })
     },
     selectBeginTime () {

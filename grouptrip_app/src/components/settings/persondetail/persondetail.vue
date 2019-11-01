@@ -78,6 +78,12 @@ export default {
     created() {
       console.log(this.$store.state.user)
     },
+    getUserInfo () {
+      var url = `user/api/v1/detail`
+      this.axios.get(url).then(res => {
+        this.user = res.data.data
+      })
+    },
     handleReload() {
       this.reload(); // 在想要刷新页面的时候调用reload方法
     },

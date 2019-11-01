@@ -41,14 +41,10 @@ app.use((req, res, next) => {
   // 发表group除了主题游记都要验证
   if (url !== '/user/api/v1/register' && 
     url !== '/user/api/v1/login' && 
+    !url.startsWith('/user/api/v1/userinfo') &&
     url.startsWith('/user') ||
-    !url.startsWith('/group/api/v1/notelist') &&
-    url !== '/group/api/v1/place' &&
-    !url.startsWith('/group/api/v1/citylist') &&
-    !url .startsWith('/group/api/v1/grouplist') &&
-    !url .startsWith('/group/api/v1/search') &&
-    url !== '/group/api/v1themelist' &&
-    url.startsWith('/group')) {
+    url === '/group/api/v1/publish'
+    ) {
     // 获取用户传来的token值
     var token = req.headers.token
     if (!token) {

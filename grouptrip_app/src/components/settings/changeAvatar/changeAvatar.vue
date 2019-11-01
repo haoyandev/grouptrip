@@ -17,19 +17,22 @@
     <div class="avatar">
       <img :src="user.avatar||''" alt="" id="avatar">
     </div>
+    <van-overlay :show="show" @click="show = false">
+      <van-loading size="24px" vertical>更换中...</van-loading>
+    </van-overlay>
   </div>
   
 </template>
 
 <script>
 export default {
-  inject: ['reload'],
   data () {
     return {
       user: this.$store.state.user,
       upload: true,
       fileID: '',
-      dataUrl: ''
+      dataUrl: '',
+      show: false
     }
   },
   mounted () {
@@ -37,7 +40,6 @@ export default {
   },
   methods: {
     uploadAvatar (e) {
-      console.log(this.avatarEl)
       // 获取文件对象
       var file = e.target.files[0]
       // 获取图片的后缀
@@ -68,23 +70,28 @@ export default {
       this.avatarEl.setAttribute('src', this.user.avatar)
     },
     makeSure () {
-      console.log('make')
+      this.show = true
       // 确认更换头像
       // 整理数据
       var data = {
         fileID: this.fileID,
         dataUrl: this.dataUrl
       }
-      console.log(data)
       // 发送axios
-      var url = 'api/v1/user/changeavatar'
+      var url = 'user/api/v1/changeavatar'
       this.axios.put(url, { data })
       .then(res => {
         // 更新成功
-        console.log(res)
         if (res.data.code === 200) {
-          this.$router.push('/Detail')
-          this.reload()
+           var url = `user/api/v1/detail`
+          this.axios.get(url).then(res => {
+          this.$store.commit('setUser', res.data.data)
+          this.show = false
+          this.$toast({ message: `更新成功`, duration: 1500 })
+          })
+          setTimeout(() => {
+            this.$router.push('/Detail')
+          }, 1500)
         }
       })
       .catch(err => {
@@ -139,5 +146,10 @@ export default {
     width: 100%;
     height: 100%;
     object-fit: contain;
+  }
+  .avatar-box .van-loading {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 </style>

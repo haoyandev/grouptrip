@@ -104,7 +104,6 @@ router.get('/api/v1/logout', (req, res) => {
 router.get('/api/v1/detail', (req, res) => {
   // 获取用户信息
   var uid = req.user.uid
-  console.log(uid)
   // 查询用户相关信息
   var userInfo = {}
   Promise.all([getBaseInfo(uid), getFunsNum(uid), getFocusNum(uid)]).then(result => {
@@ -396,7 +395,7 @@ router.get('/api/v1/focuslist', (req, res) => {
 })
 
 // 13. 更换头像
-router.put('/changeavatar', (req, res) => {
+router.put('/api/v1/changeavatar', (req, res) => {
   // 获取用户信息
   var uid = req.user.uid
   // 获取数据
@@ -449,4 +448,19 @@ router.put('/api/v1/canclefocus', (req, res) => {
     }
   })
 })
+// 15. 用户详情
+router.get('/api/v1/userinfo', (req, res) => {
+  // 获取uid
+  var uid = req.query.uid
+  if (isNaN(uid)) {
+    return res.send({ code: 4001, msg: `用户id出错` })
+  }
+   // 查询用户相关信息
+   var userInfo = {}
+   Promise.all([getBaseInfo(uid), getFunsNum(uid), getFocusNum(uid)]).then(result => {
+     Object.assign(userInfo, ...result)
+     console.log(userInfo)
+     res.send({ code: 200, data: userInfo })
+   })
+} )
 module.exports = router

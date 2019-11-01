@@ -16,8 +16,8 @@
           <span>{{this.$store.state.groupInfo.tname}}</span>
         </div>
         <!-- 输入框 -->
-        <textarea name="" id="intr" v-show="!flag" @input="check" @blur="changeFlag"
-         spellcheck="false" maxlength="200" rows="5" v-model="intr"
+        <textarea name="" id="content" v-show="!flag" @input="check" @blur="changeFlag"
+         spellcheck="false" maxlength="200" rows="5" v-model="content"
         ></textarea>
         <!-- tip -->
         <div class="tip" v-show="flag" @click="write">点这里讲讲你的group游计划</div>
@@ -39,7 +39,7 @@ export default {
       fileList: [],
       show: false,
       imgList: [],
-      intr: '',
+      content: '',
       flag: true
     }
   },
@@ -59,12 +59,12 @@ export default {
     },
     next () {
       // 获取用户输入的内容
-      var intr = this.intr
-      if (intr.length < 5) {
+      var content = this.content
+      if (content.length < 5) {
         this.$toast('最少五个字哟')
         this.flag = false
         setTimeout(() => {
-        document.getElementById('intr').focus()
+        document.getElementById('content').focus()
       },100)
       return
       }
@@ -77,14 +77,14 @@ export default {
       }
       // 更新groupInfo
       imgList = JSON.stringify(imgList)
-      this.$store.commit('setGroupInfo', { imgList, intr })
+      this.$store.commit('setGroupInfo', { imgList, content })
       this.$router.push('/groupdetail')
     },
     write () {
       this.flag = !this.flag
       console.log(this.flag)
       setTimeout(() => {
-        document.getElementById('intr').focus()
+        document.getElementById('content').focus()
       },100)
     },
     changeFlag (e) {

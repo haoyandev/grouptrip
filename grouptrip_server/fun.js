@@ -125,11 +125,12 @@ function getNoteTagNames (item) {
 // 发布组团游
 function publishGroup (groupInfo) {
   return new Promise((resolve, reject) => {
-    var { uid, tid, cid, intr, begin_time, end_time } = groupInfo
+    var { tid, tname, timg, sid, cid, area, date, content, likes, uname, avatar, gender, age, uid } = groupInfo
     // 执行sql
-    var sql = `insert into trip_group (uid, tid, cid, intr, begin_time, end_time, create_time, update_time) values(?, ?, ?, ?, ?, ?, now(), now())`
-    pool.query(sql, [uid, tid, cid, intr, begin_time, end_time], (err, result) => {
-      console.log(result)
+    var sql = `insert into trip_group (tid, tname, timg, sid, cid, area, date, content, likes, uid, uname, avatar, gender, age) values(?, ?, ?, ?, ?, ?, ?,
+      ?, ?, ?, ?, ?, ?, ?)`
+    pool.query(sql, [tid, tname, timg, sid, cid, area, date, content, likes, uid, uname, avatar, gender, age], (err, result) => {
+      console.log('11', result)
       if (err) reject(err)
       if (result.affectedRows > 0) {
         resolve(result.insertId)
@@ -138,5 +139,12 @@ function publishGroup (groupInfo) {
       }
     })
   })
+}
+
+// 组团游列表
+function getGroupList () {
+  return new Promise((resolve, reject) => [
+    
+  ])
 }
 module.exports = { getBaseInfo, getFunsNum, getFocusNum, uploadImg, checkIsFollowed, getNoteTagIds, getNoteTagNames, publishGroup }
