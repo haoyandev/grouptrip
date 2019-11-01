@@ -1,7 +1,6 @@
 <template>
   <div>
-    <main
-      id="grouptrip-page">
+    <main id="grouptrip-page">
       <div class="tabbar-top">
         <div class="tabbar-title">
           <router-link to="/home" class="grouptrip-back">
@@ -39,11 +38,11 @@
             <span>热门地点</span>
           </div>
           <div class="pop-panel-wrap">
-            <div class="pop-item" v-for="(city,c) of cities" :key="c">
+            <div @click="bk(city.cid)" class="pop-item" v-for="(city,c) of cities" :key="c">
               <div class="pop-item-img">
-                <img :src="city.cityimg" alt />
+                <img :src="city.img" alt />
               </div>
-              <h5>{{city.name}}</h5>
+              <h5>{{city.cname}}</h5>
             </div>
           </div>
         </div>
@@ -67,9 +66,7 @@
               <img :src="trips[0].themepic" alt />
             </div>
             <span>一起去冒险</span>
-            <p class="theme_details">
-              {{t.intr}}
-            </p>
+            <p class="theme_details">{{t.intr}}</p>
           </div>
           <div class="item-personal-msg">
             <div class="personal-msg-header">
@@ -113,7 +110,7 @@
                   </div>
                 </div>
               </div>
-              <router-link to="/PersonalIndex" class="msg-more" >
+              <router-link to="/PersonalIndex" class="msg-more">
                 <svg class="iconforward" aria-hidden="true">
                   <use xlink:href="#iconforward-purple" />
                 </svg>
@@ -148,16 +145,19 @@
 import like from "../common/like.vue";
 import user from "../index/PersonalIndex";
 export default {
-  created(){
-    this.axios.get(`/group/api/v1/grouplist/${this.page}`).then(res=>{
-      this.tripsgo=this.tripsgo.concat(res.data.data)
+  created() {
+    this.axios.get('/group/api/v1/allcity').then(res=>{
+      this.cities=res.data.data;
     })
+    // this.axios.get(`/group/api/v1/grouplist/${this.page}`).then(res => {
+    //   this.tripsgo = this.tripsgo.concat(res.data.data);
+    // });
   },
   data() {
     return {
       //下拉菜单
-      page:1,
-      tripsgo:[],
+      page: 1,
+      tripsgo: [],
       qiehuan: {
         useropa: 0,
         userdis: "none",
@@ -180,7 +180,9 @@ export default {
         { text: "其他活动", value: 7 }
       ],
       trips: [
-        { details:"12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
+        {
+          details:
+            "12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
           theme: "一起去冒险",
           name: "维多利亚",
           age: "20",
@@ -191,7 +193,9 @@ export default {
           themepic: require("../../assets/theme/explore.png"),
           personalhead: require("../../assets/citypics/heimen.jpg")
         },
-         { details:"12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
+        {
+          details:
+            "12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
           theme: "一起去冒险",
           name: "维多利亚",
           age: "20",
@@ -201,32 +205,32 @@ export default {
           fans: "87",
           themepic: require("../../assets/theme/explore.png"),
           personalhead: require("../../assets/citypics/heimen.jpg")
-        },
+        }
       ],
       show: false, //底部弹出层
       cities: [
-        { cityimg: require("../../assets/citypics/city11.jpg"), name: "台湾" },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "香港" },
-        { cityimg: require("../../assets/citypics/city11.jpg"), name: "东京" },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "京都" },
-        { cityimg: require("../../assets/citypics/city11.jpg"), name: "大阪" },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "普吉岛" },
-        {
-          cityimg: require("../../assets/citypics/city11.jpg"),
-          name: "巴厘岛"
-        },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "新西兰" },
-        { cityimg: require("../../assets/citypics/city11.jpg"), name: "美国" },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "法国" },
-        {
-          cityimg: require("../../assets/citypics/city11.jpg"),
-          name: "西班牙"
-        },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "北京" },
-        { cityimg: require("../../assets/citypics/city11.jpg"), name: "上海" },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "广州" },
-        { cityimg: require("../../assets/citypics/city11.jpg"), name: "成都" },
-        { cityimg: require("../../assets/citypics/city6.jpg"), name: "南极" }
+        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "台湾" },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "香港" },
+        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "东京" },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "京都" },
+        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "大阪" },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "普吉岛" },
+        // {
+        //   cityimg: require("../../assets/citypics/city11.jpg"),
+        //   name: "巴厘岛"
+        // },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "新西兰" },
+        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "美国" },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "法国" },
+        // {
+        //   cityimg: require("../../assets/citypics/city11.jpg"),
+        //   name: "西班牙"
+        // },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "北京" },
+        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "上海" },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "广州" },
+        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "成都" },
+        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "南极" }
       ]
     };
   },
@@ -235,6 +239,17 @@ export default {
     user
   },
   methods: {
+    bk(city) {
+      console.log(city)
+      for (var i = 0; i < 800; i++) {
+        setTimeout(() => {
+          this.top = i;
+        }, 10);
+      }
+      setTimeout(() => {
+        this.pop = false;
+      }, 300);
+    },
     fh(data) {
       this.qiehuan.useropa = 0;
       setTimeout(() => {
@@ -378,7 +393,7 @@ export default {
   font-size: 13px;
   margin: 0px 0px 10px 0px;
 }
-.grouptrip-wrap .theme-item .theme_details{
+.grouptrip-wrap .theme-item .theme_details {
   color: #fff;
   font-size: 16px;
 }

@@ -603,18 +603,18 @@ INSERT INTO trip_city(cid, sid, cname, elname, views, detail, hot_spots, img, po
 '札幌是个典型的北国城市，具有浓厚的北国风味。札幌每年都有以冰雪为主题的户外活动，这就是札幌雪祭的由来。雪祭的主会场设在大通公园，郊区的真驹被开辟为第二会场，专供儿童玩耍。', '白色恋人巧克力工厂，札幌电视台，北海道神宫，札幌钟楼','http://localhost:3000/citypics/3-1.jpg','http://localhost:3000/poster/p16.jpg'),
 (130100, 130000, '吉隆坡', 'Kuala Lumpur', 1000, null, null, 'http://localhost:3000/citypics/kula.jpg',null),
 (130200, 130000, '马六甲', 'Melaka', 1000, null, null, 'http://localhost:3000/citypics/buket.jpg',null),
-(130300, 130000, '亚庇', 'Kota Kinabalu', 1000, null, null, 'http://localhost:3000/citypics/07.jpg',null),
-(130400, 130000, '沙巴', 'Sabah', 1000, null, null, 'http://localhost:3000/citypics/06.jpg',null),
-(130500, 130000, '槟城', 'Penang', 1000, null, 'http://localhost:3000/citypics/9-1.jpg', null),null,
+(130300, 130000, '亚庇', 'Kota Kinabalu', 1000, null, null, 'http://localhost:3000/citypics/city12.jpg',null),
+(130400, 130000, '沙巴', 'Sabah', 1000, null, null, 'http://localhost:3000/citypics/city7.jpg',null),
+(130500, 130000, '槟城', 'Penang', 1000, null, null, 'http://localhost:3000/citypics/9-1.jpg',null),
 (140100, 140000, '巴黎', 'Paris', 1000, null, null, 'http://localhost:3000/citypics/paris.jpg',null),
 (150100, 150000, '马德里', 'Madrid', 1000, null, null, 'http://localhost:3000/citypics/new_zealand.jpg',null),
 (150200, 150000, '巴塞罗那', 'Barcelona', 1000, null, null, 'http://localhost:3000/citypics/barcelona.jpg',null),
 (160100, 160000, '纽约', 'NewYork', 1000, null, null, 'http://localhost:3000/citypics/newyork.jpg',null),
 (160200, 160000, '洛杉矶', 'Los Angeles', 1000, null, null, 'http://localhost:3000/citypics/LA.jpg',null),
 (170100, 170000, '曼谷', 'Bangkok', 1000, null, null, 'http://localhost:3000/citypics/8-1.jpg',null),
-(170200, 170000, '清迈', 'Chiang Mai', 1000, null, null, 'http://localhost:3000/citypics/03.jpg',null),
+(170200, 170000, '清迈', 'Chiang Mai', 1000, null, null, 'http://localhost:3000/citypics/chiang_mai.jpg',null),
 (170300, 170000, '普吉岛', 'Phuket', 1000, null, null, 'http://localhost:3000/citypics/buket.jpg',null),
-(180100, 180000, '首尔', 'Seoul', 1000, null, null, 'http://localhost:3000/citypics/seouljpg',null);
+(180100, 180000, '首尔', 'Seoul', 1000, null, null, 'http://localhost:3000/citypics/seoul.jpg',null);
 
 /** 插入景点表数据 **/
 INSERT INTO trip_spots(sid, cid, views, sname) VALUES
