@@ -14,15 +14,19 @@ export default {
     return{
       //点赞
       like:true,
+      num:''
     }
   },
   methods:{
     isLike(){
       if(this.like){
-        this.like=false
+        this.like=false;
+        this.num=1;
       }else{
-        this.like=true
+        this.like=true;
+        this.num=-1;
       }
+      this.$emit('num',this.num);
     },
   }
 }
