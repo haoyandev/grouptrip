@@ -127,7 +127,7 @@
         <van-tabs v-model="active" swipeable>
           <van-tab title="旅伴">
             <div class="bottom1_wrap">
-              <trips></trips>
+             <trips :group="maintrips"></trips>
               <div class="blank"></div>
             </div>
           </van-tab>
@@ -155,8 +155,6 @@
               </div>
             </div>
           </van-tab>
-          <div class="blank"></div>
-          <div class="blank"></div>
         </van-tabs>
       </div>
       <main-tab-bar></main-tab-bar>
@@ -175,7 +173,9 @@ export default {
     this.axios.get("/group/api/v1/grouplist").then(res => {
       this.tips = res.data.data;
     });
-
+  this.axios.get("/group/api/v1/idxgrouplist").then(res => {
+      this.maintrips = res.data.data;
+    });
     if (this.$route.query.city) {
       this.citydd = this.$route.query.city;
     }
@@ -191,6 +191,7 @@ export default {
   },
   data() {
     return {
+      maintrips: [],
       citydd: this.$store.getters.city,
       page: "",
       cityopa: 0,

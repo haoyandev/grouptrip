@@ -40,7 +40,7 @@
           <div class="pop-panel-wrap">
             <div @click="bk(city.cid,city.cname)" class="pop-item" v-for="(city,c) of cities" :key="c">
               <div class="pop-item-img">
-                <img :src="city.img" alt />
+                <img ref="img" :data-img="city.img" src="" alt />
               </div>
               <h5>{{city.cname}}</h5>
             </div>
@@ -305,6 +305,14 @@ export default {
           this.top = i;
         }, 10);
       }
+      setTimeout(() => {
+           for(let item of this.$refs.img){
+        setTimeout(() => {
+          item.src=item.dataset.img;
+        }, 80);
+      }
+      }, 600);
+   
     },
     closePop() {
       for (var i = 0; i < 800; i++) {
