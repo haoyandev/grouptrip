@@ -2,7 +2,7 @@ import axios from "axios";
 import qs from "qs";
 import store from './store'
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.baseURL = 'http://grouptrip.applinzi.com'
+axios.defaults.baseURL = 'http://localhost:3000'
 const Axios = axios.create({
   withCredentials: true
 })

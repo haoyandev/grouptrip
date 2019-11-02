@@ -1,10 +1,10 @@
 const mysql = require('mysql')
 var pool = mysql.createPool({
-  host: 'w.rdc.sae.sina.com.cn',
+  host: 'localhost',
   port: 3306,
-  user: 'kwlk51lm3m',
-  password: '4j1lwjyz1hh5w0x51xl11jl00m0wxkxhhhxxkllk',
-  database: 'app_grouptrip',
+  user: 'root',
+  password: '',
+  database: 'trip',
   connectionLimit: 15
 })
 
