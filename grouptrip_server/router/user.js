@@ -116,6 +116,7 @@ router.get('/api/v1/detail', (req, res) => {
 // 5. 更新昵称
 router.put('/api/v1/updatename', (req, res) => {
   // 获取数据
+  var uid = req.user.uid
   var uname = req.body.uname
   // 检验名字是否为空
   if (!uname) {
