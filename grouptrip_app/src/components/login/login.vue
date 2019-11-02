@@ -93,7 +93,7 @@
                   <use xlink:href="#iconpd" />
                 </svg>
               </span>
-              <input maxlength="11" v-model="regpwd" type="text" placeholder="请输入6-12位的密码" />
+              <input maxlength="11" v-model="regpwd" type="password" placeholder="请输入6-12位的密码" />
             </div>
           </div>
           <div class="user-input-btn">
