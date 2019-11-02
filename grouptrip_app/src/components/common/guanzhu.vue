@@ -55,7 +55,12 @@ export default {
         }
       ]
     };
-  }
+  },
+  methods: {
+    jiantou () {
+      this.$router.push('/personal')
+    }
+  },
 };
 </script>
 <style scoped>

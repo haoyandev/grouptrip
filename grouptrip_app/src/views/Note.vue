@@ -314,21 +314,21 @@ export default {
           tag1: "初次必玩",
           tag2: "环球影城一日游",
           subtitle: "游玩3天/适宜9月-12月/4个景点",
-          img:"http://localhost:3000/citypics/4-2.jpg"
+          img:"http://grouptrip.applinzi.com/citypics/4-2.jpg"
         },
         {
           title: "品味老广州经典1日游",
           tag1: "老广州的建筑",
           tag2: "品味粤菜",
           subtitle: "游玩6天/适宜10月-5月/14个景点",
-          img:"http://localhost:3000/citypics/oldgz.jpg"
+          img:"http://grouptrip.applinzi.com/citypics/oldgz.jpg"
         },
         {
           title: "京都4日路线",
           tag1: "初次必玩",
           tag2: "日式建筑",
           subtitle: "游玩4天/适宜3月-11月/12个景点",
-          img:"http://localhost:3000/citypics/3-2.jpeg"
+          img:"http://grouptrip.applinzi.com/citypics/3-2.jpeg"
         }
       ],
 
@@ -336,22 +336,22 @@ export default {
         {
           title: "不止布达佩斯 | 走进不一样的匈牙利",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/bright.jpg"
+          imgpath: "http://grouptrip.applinzi.com/citypics/bright.jpg"
         },
         {
           title: "苏格兰天空岛 | 隐秘景点 | 懒人徒步攻略",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/england.jpg"
+          imgpath: "http://grouptrip.applinzi.com/citypics/england.jpg"
         },
         {
           title: "东京的大阪| 寻找柯南足迹",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/train.jpg"
+          imgpath: "http://grouptrip.applinzi.com/citypics/train.jpg"
         },
         {
           title: "初秋的剑桥",
           count: "133456",
-          imgpath: "http://localhost:3000/citypics/dempo.jpg"
+          imgpath: "http://grouptrip.applinzi.com/citypics/dempo.jpg"
         }
       ],
       routes: [

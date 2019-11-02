@@ -122,6 +122,7 @@ export default {
   width: 100%;
   height: 46px;
   position: fixed;
+  z-index: 1;
   top: 0px;
   display: flex;
   align-items: center;

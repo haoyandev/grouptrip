@@ -671,15 +671,16 @@ li {
   background-color: #fff;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  padding-top: 15px;
+  justify-content: space-between;
+  padding: 15px;
+  box-sizing: border-box;
 }
 .tips-wrap-item {
   height: 280px;
   border-radius: 10px;
   position: relative;
   margin-bottom: 15px;
-  width: 46%;
+  width: 48%;
 }
 .tips-wrap-item .wrap-item-content {
   display: flex;
@@ -697,8 +698,11 @@ li {
   height: 100%;
 }
 .tips-wrap-item .item-details {
+  width: 100%;
   height: 55px;
+  padding: 0px 5px;
   background-color: #fff;
+  box-sizing: border-box;
 }
 .tips-wrap-item .item-details p {
   text-overflow: -o-ellipsis-lastline;
