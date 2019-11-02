@@ -1,28 +1,27 @@
 <template>
   <div>
     <mt-header id="title" title="粉丝">
-      
       <router-link to="/personal" slot="left">
         <mt-button @click.native="jumpper" icon="back"></mt-button>
       </router-link>
     <!-- <mt-button icon="more" slot="right"></mt-button> -->
     </mt-header>
     <div id="container">
-        <ul>
-            <li v-for="(item,index) in list" :key="index">
-              <div @click="jumpdetail" data-id=item.uid><img class="icon" :src="item.avatar"></div>
-              <div class="info_list">
-                  <h2 class="fanName">{{item.uname}}</h2>
-                  <p class="fanNo"> <span>{{item.fansNum}}粉丝</span></p>
-              </div>
-              <div class="res" v-if="item.checkIsFollowed">
-                  已关注
-              </div>
-              <div class="res" v-else @click="follow" :data-uid="item.uid">
-                  回粉
-              </div>
-            </li>
-          </ul>
+      <ul>
+        <li class="fan-item" v-for="(item,index) in list" :key="index"  :data-uid="item.uid">
+          <div ><img class="icon" :src="item.avatar" :data-uid=item.uid @click="jumpdetail"></div>
+          <div class="info_list">
+              <h2 class="fanName">{{item.uname}}</h2>
+              <p class="fanNo"> <span>{{item.fansNum}}粉丝</span></p>
+          </div>
+          <div class="res" v-if="item.checkIsFollowed" @click="cancleFocus">
+              已关注
+          </div>
+          <div class="res" v-else @click="follow">
+              回粉
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
@@ -31,40 +30,48 @@ export default {
   inject: ['reload'],
   data(){
     return {
-      list:[]
+      list:[],
     }
   },
   created () {
     //发送axios获取用户的粉丝列表
     var uid = this.$store.state.user.uid
-    console.log(uid)
     var url = `/user/api/v1/fanslist/${uid}`
-    console.log(url)
     this.axios.get(url).then(res=>{
       if (res.data.code===200){
         this.list = res.data.data
-        console.log(this.list)
       }
     }).catch(err=>{
       console.log(err)
     })
   },
   methods: {
+    cancleFocus (e) {
+      this.$messagebox.confirm('确定取消该用户吗？').then(() => {
+        var uid = e.target.parentNode.dataset.uid
+        var url = `/user/api/v1/cancleFocus`
+        var data = { uid }
+        this.axios.put(url, data).then(res => {
+          if (res.data.code === 200) {
+            this.reload()
+          }
+        })
+      }).catch(() => { })
+    },
     follow(e){
       var url = '/user/api/v1/focus'
-      var uid = e.target.dataset.uid
-      var obj = {
-        uid
-      }
-      this.axios.post(url, obj)
-      .then(res=>{
-        if(res.data.code===200){
+      var uid = e.target.parentNode.dataset.uid
+      var data = { uid }
+      this.axios.post(url, data)
+      .then(res => {
+        if(res.data.code === 200){
           this.reload() 
         }
+        this.$toast(res.data.msg)
       })
     },
     jumpdetail (e) {
-      var uid = e.target.uid
+      var uid = e.target.dataset.uid
       this.$router.push(`/personalindex?uid=${uid}`)
     },
     jumpper(){
@@ -106,6 +113,7 @@ margin-left: 10px;
 }
 .fanName{
 font-size: 16px;
+color: #333;
 }
 .fanName{
 margin-bottom: 10px;
@@ -130,6 +138,7 @@ border: 1px solid rgb(10, 10, 10);
 font-weight: bold;
 
 }
+
 </style>
 
 

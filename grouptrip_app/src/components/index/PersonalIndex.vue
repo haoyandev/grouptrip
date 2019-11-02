@@ -112,6 +112,7 @@ export default {
   },
   created(){
     this.quid = this.$route.query.uid
+    console.log(this.quid)
     if (this.user.uid == this.quid) {
       // 当前登录用户查看自己的详情
       this.isCurrent = false
@@ -119,21 +120,35 @@ export default {
       this.isCurrent = true
     }
     
-    // 发送axios
+    // 发送axios获取该用户的信息
     var url = `user/api/v1/userinfo`
     this.axios.get(url, { params: { uid: this.quid }}).then(res => {
       if (res.data.code === 200) {
         this.user = res.data.data
       }
     })
+    // 获取该用户的组团游列表
     url = `group/api/v1/pgroup`
     this.axios.get(url, { params: { uid: this.quid }}).then(res => {
       if (res.data.code === 200) {
+        console.log(11,res.data.data)
         this.groups = res.data.data
         console.log(this.groups.length)
       }
       console.log(res)
     })
+    // 检查是否已关注
+    url = `user/api/v1/isfollowed`
+    var data = { uid: this.quid }
+    this.axios.get(url, { params: data }).then(res => {
+      console.log(res.data)
+      if (res.data.code === 200) {
+        console.log(12323)
+        this.follow = false
+      } else {
+        this.follow = true
+      }
+    }).catch(err => console.log)
   },
   methods:{
     jumpfh(){

@@ -273,8 +273,8 @@ router.get('/api/v1/search/:kw/:pno', (req, res) => {
     start = 1
   }
   // 执行sql 
-  var sql = `select * from trip_groups where tid like ? or content like ?`
-  pool.query(sql, [`%${kw}%`, `%${kw}%`], (err, result) => {
+  var sql = `select * from trip_groups where tname like ? or content like ? or area like ?`
+  pool.query(sql, [`%${kw}%`, `%${kw}%`, `%${kw}%`], (err, result) => {
     if (err) throw err
     if (result.length > 0) {
       res.send({
@@ -429,7 +429,8 @@ id, tid, tname, sid, cid, area, date, content, likes, bg,img1, img2, uid, uname,
 // 14. 个人组团游列表
 router.get('/api/v1/pgroup', (req, res) => {
   // 获取信息
-  var { uid } = req.query
+  var uid = req.query.uid
+  console.log(uid)
   if (!uid) {
     res.send({
       code: 4001,
@@ -446,7 +447,7 @@ router.get('/api/v1/pgroup', (req, res) => {
         data: result
       })
     } else {
-      res.end({
+      res.send({
         code: 4002,
         msg: `没有更多数据了`
       })

@@ -43,7 +43,7 @@ function getFocusNum (uid) {
 // 判断是否被关注
 function checkIsFollowed (uid, from_uid) {
   return new Promise ((resolve, reject) => {
-    var sql = `select fid from trip_focus where uid=? and from_uid=?`
+    var sql = `select fid from trip_focus where uid=? and from_uid=? and is_delete = 0`
     pool.query(sql, [uid, from_uid], (err, result) => {
       if (err) {
         reject(err)

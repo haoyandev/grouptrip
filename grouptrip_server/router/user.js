@@ -300,7 +300,7 @@ router.post('/api/v1/focus', (req, res) => {
       res.send({code: 4003, msg: `该用户不存在` })
     } else {
       // 查看是否已关注
-      var sql = `select fid from trip_focus where uid=? and from_uid=?`
+      var sql = `select fid from trip_focus where uid=? and from_uid=? and is_delete = 0`
       pool.query(sql, [uid, user.uid], (err, result) => {
         if (err) throw err
         if (result.length > 0) {
@@ -327,7 +327,6 @@ router.post('/api/v1/focus', (req, res) => {
 router.get('/api/v1/fanslist/:uid', (req, res) => {
   // 获取用户uid
   var uid = req.params.uid
-  console.log('12312313', uid)
   // 创建一个变量保存所有粉丝的信息
   var fanslist = []
   // 执行sql 查询粉丝的uid
@@ -464,4 +463,23 @@ router.get('/api/v1/userinfo', (req, res) => {
    })
 } )
 
+// 16. 查看是否已关注
+router.get('/api/v1/isfollowed', (req, res) => {
+// 获取数据
+var uid = req.query.uid
+var from_uid = req.user.uid
+if (!uid) {
+  return res.send({ code: 4001, msg: `被检查用户id为空` })
+}
+// 执行sql
+var sql = `select fid from trip_focus where uid=? and from_uid=? and is_delete=0`
+pool.query(sql, [uid, from_uid], (err, result) => {
+  if (err) throw err
+  if (result.length > 0) {
+    res.send({ code: 200, msg: `已关注`, data: { isfollowed: true }})
+  } else {
+    res.send({ code: 4002, msg: '未关注', data: { isfollowed: false }})
+  }
+})
+})
 module.exports = router

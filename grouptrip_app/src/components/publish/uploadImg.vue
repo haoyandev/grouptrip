@@ -21,6 +21,19 @@
         ></textarea>
         <!-- tip -->
         <div class="tip" v-show="flag" @click="write">点这里讲讲你的group游计划</div>
+        <!-- 控制选择背景 -->
+      <!-- <div class="select-bg" @click="showbg"></div> -->
+
+      <van-popup
+      v-model="bgShow"
+      position="bottom"
+      :style="{ height: '40%' }"
+      @click="selectbg"
+      >
+      <div id="bg-box">
+        <img class="bg-item" src="@/assets/iconfont/boy.png" alt="" v-for="(item, index) of bgList" :key="index">
+      </div>
+      </van-popup>
       </div>  
      <!-- 上传图片 -->
       <div class="upload-box">
@@ -40,10 +53,15 @@ export default {
       show: false,
       imgList: [],
       content: '',
-      flag: true
+      flag: true,
+      bgShow: true,
+      bgList: '11111'
     }
   },
   methods: {
+    showbg () {
+      this.bgShow = true
+    },
     closeGroup(){
       this.$messagebox.confirm('',{
           title:'确定不发了嘛?',
@@ -103,12 +121,24 @@ export default {
         return
       }
     },
-    onSelect(item) {
-      // 默认情况下，点击选项时不会自动关闭菜单
-      // 可以通过 close-on-click-action 属性开启自动关闭
-      this.show = false;
-      Toast(item.name);
+    selectbg (e) {
+      if (e.target.nodeName === 'IMG'){}
     }
+  },
+  updated () {
+    console.log(document.getElementById('bg-box'))
+    document.getElementById('bg-box').addEventListener('click', (e) => {
+      if (e.target.nodeName === "IMG") {
+        console.log(1)
+        var node = e.target
+        node.style.border = '1px solid #fff'
+        for (var item of node.parentNode.children) {
+          if (item.dataset.uid != 1) {
+
+          }
+        }
+      }
+    })
   },
   directives: {
     focus: {
@@ -173,6 +203,14 @@ export default {
 .content-box .theme span {
   margin-top: -14px;
 }
+.content-box .select-bg {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  background-color: #000;
+  bottom: 0;
+  right: 0;
+}
 /* 输入框 */
 .intr-box .content-box textarea {
   background-color: transparent;
@@ -187,6 +225,16 @@ export default {
   margin: 0 auto;
   left: 0;
   right: 0;
+}
+.content-box #bg-box {
+  background-color: #000;
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.content-box .van-popup--bottom .bg-item {
+  width: 50px;
+  height: 50px;
 }
 /* 上传图片按钮 */
 .upload-box .van-uploader__upload {
