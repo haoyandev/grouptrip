@@ -155,9 +155,6 @@ export default {
     this.axios.get("/group/api/v1/allcity").then(res => {
       this.cities = res.data.data;
     });
-    // this.axios.get(`/group/api/v1/grouplist/${this.page}`).then(res => {
-    //   this.tripsgo = this.tripsgo.concat(res.data.data);
-    // });
   },
   data() {
     return {
@@ -187,59 +184,9 @@ export default {
         { text: "约你去看音乐剧", value: 6 },
         { text: "其他活动", value: 7 }
       ],
-      trips: [
-        {
-          details:
-            "12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
-          theme: "一起去冒险",
-          name: "维多利亚",
-          age: "20",
-          date: "12月23日~2020年1月8日",
-          gender: 0,
-          place: "日本•大阪•京都",
-          fans: "87",
-          themepic: require("../../assets/theme/explore.png"),
-          personalhead: require("../../assets/citypics/heimen.jpg")
-        },
-        {
-          details:
-            "12月25日－1月2日，东京自由行，上海出发，主要去富士山，还会去镰仓和迪士尼海洋，可拼房或者单独住，合适直接出票，有兴趣的伙伴联系我。",
-          theme: "一起去冒险",
-          name: "维多利亚",
-          age: "20",
-          date: "12月23日~2020年1月8日",
-          gender: 0,
-          place: "日本•大阪•京都",
-          fans: "87",
-          themepic: require("../../assets/theme/explore.png"),
-          personalhead: require("../../assets/citypics/heimen.jpg")
-        }
-      ],
+      trips: [],
       show: false, //底部弹出层
-      cities: [
-        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "台湾" },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "香港" },
-        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "东京" },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "京都" },
-        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "大阪" },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "普吉岛" },
-        // {
-        //   cityimg: require("../../assets/citypics/city11.jpg"),
-        //   name: "巴厘岛"
-        // },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "新西兰" },
-        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "美国" },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "法国" },
-        // {
-        //   cityimg: require("../../assets/citypics/city11.jpg"),
-        //   name: "西班牙"
-        // },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "北京" },
-        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "上海" },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "广州" },
-        // { cityimg: require("../../assets/citypics/city11.jpg"), name: "成都" },
-        // { cityimg: require("../../assets/citypics/city6.jpg"), name: "南极" }
-      ]
+      cities: []
     };
   },
   components: {

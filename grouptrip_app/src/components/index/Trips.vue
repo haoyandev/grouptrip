@@ -1,21 +1,6 @@
 <template>
   <main class="trips-wrap">
     <div class="wrap-left">
-      <!-- <div class="wrap-item top-item">
-            <div class="wrap-item-content">
-              <div class="personal-theme">
-                <p>一起去冒险</p>
-              </div>
-              <div class="personal-pic">
-                <img src="../../assets/citypics/img1957.jpg" alt="">
-              </div>
-              <span class="place">马来西亚,沙巴</span>
-              <span class="date">11月16日-11月30日</span>
-              <div class="wrap-item-details">
-                <p>90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！</p>
-              </div>
-            </div>
-      </div>-->
       <div
         class="wrap-item wrap-item-left"
         v-for="(t,i) of grouptrip[1]"

@@ -105,12 +105,12 @@
           <div class="note-top">
             <h2>宝藏游记</h2>
             <div class="notetop-img">
-              <img src="../assets/citypics/LA.jpg"  alt />
+              <img src="../assets/citypics/osaka.jpg"  alt />
             </div>
             <div class="item-text">
               <h3>100种玩大阪的方法，这种是最套路的</h3>
               <div class="item-head">
-                <img src="../assets/citypics/heimen.jpg"alt />
+                <img src="../assets/citypics/heimen.jpg" />
               </div>
               <span class="text-personal">
                 <b>维多利亚</b>

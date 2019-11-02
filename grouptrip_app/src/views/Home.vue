@@ -187,14 +187,7 @@ export default {
           this.opa = data.opa;
         }, 50);
       }, 300);
-      // this.opa = data.opa;
-      // setTimeout(() => {
-      //   this.gos = data.gos;
-      //   this.go = data.go;
-      //   setTimeout(() => {
-      //     this.copa =data.copa;
-      //   }, 50);
-      // }, 300);
+     
     }
   }
 };
