@@ -23,6 +23,7 @@
           i"
         :style="{background:'url('+t.bg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}"
       >
+      <router-link to="/grouptrip">
         <div class="wrap-item-content">
           <div class="personal-theme">
             <p>{{t.tname}}</p>
@@ -36,6 +37,7 @@
             <p>{{t.content}}</p>
           </div>
         </div>
+        </router-link>
       </div>
     </div>
     <div class="wrap-right home-wrap-item">
@@ -46,6 +48,7 @@
           i"
         :style="{background:'url('+t.bg+')',backgroundSize:'cover',backgroundRepeat:'no-repeat'}"
       >
+      <router-link to='/grouptrip'>
         <div class="wrap-item-content">
           <div class="personal-theme">
             <p>{{t.tname}}</p>
@@ -59,6 +62,7 @@
             <p>{{t.content}}</p>
           </div>
         </div>
+        </router-link>
       </div>
     </div>
   </main>
@@ -87,10 +91,13 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .trips-wrap {
   width: 100%;
   display: flex;
+}
+a{
+  color:pink;
 }
 .wrap-item .wrap-item-content .personal-theme {
   background-color: #ffffff;
