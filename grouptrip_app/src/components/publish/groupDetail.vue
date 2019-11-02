@@ -164,14 +164,14 @@ export default {
         if (res.data.code === 200) {
           console.log(res.data)
           this.loading = false
-          this.$toast({ message: '发布成功 即将跳转到首页', duration: 1500 })
+          this.$toast({ message: '发布成功 即将跳转到首页', duration: 2500 })
         } else {
           this.loading = false
-          this.$toast({ message: `发布失败 即将跳转到首页`, duration: 1500 })
+          this.$toast({ message: `发布失败 即将跳转到首页`, duration: 2500 })
         }
         setTimeout(() => {
           this.$router.push('/Home')
-        }, 1500)
+        }, 2500)
       })
       .catch(err => {
         this.$toast({ message: '出错啦！ 即将跳转到首页', duration: 1500 })

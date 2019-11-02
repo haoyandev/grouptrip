@@ -14,29 +14,31 @@
         <div class="msg-wrap">
           <div class="msg-top">
             <div class="msg-top-head">
-              <img src="../../assets/citypics/city1.jpg">
+              <img :src="user.avatar">
             </div>
-            <div class="msg-top-follow" @click="isFollow" v-if="follow">
-              <svg class="iconsend-small" aria-hidden="true">
-                <use xlink:href="#iconsend" />
-              </svg>
-              关注
+            <div class="com-box" v-show='isCurrent'>
+              <div class="msg-top-follow" @click="isFollow" v-if="follow">
+                <svg class="iconsend-small" aria-hidden="true">
+                  <use xlink:href="#iconsend" />
+                </svg>
+                关注
+              </div>
+              <div class="follow-success" v-else @click="cancelFollow">
+                <span>已关注</span>
+              </div>
+              <div class="msg-top-talk">和他聊聊</div>
             </div>
-            <div class="follow-success" v-else @click="cancelFollow">
-              <span>已关注</span>
-            </div>
-            <div class="msg-top-talk">和他聊聊</div>
           </div>
           <div class="msg-middle">
-            <h2 class="msg-middle-name">{{personalmsg.uname}}</h2>
+            <h2 class="msg-middle-name">{{user.uname}}</h2>
             <div class="msg-middle-tag">
               <div class="tag-sex" :class="{
-                'tag-sex-screct':personalmsg.gender===-1,
-                'tag-sex-female':personalmsg.gender===0,
-                'tag-sex-male':personalmsg.gender===1,
+                'tag-sex-screct':user.gender==-1,
+                'tag-sex-female':user.gender==0,
+                'tag-sex-male':user.gender==1,
                 }">
-                <span v-if="personalmsg.gender==-1"></span>
-                <span class="msg-sex" v-else-if="personalmsg.gender==1">
+                <span v-if="user.gender==-1"></span>
+                <span class="msg-sex" v-else-if="user.gender==1">
                   <svg class="icon_male" aria-hidden="true">
                     <use xlink:href="#iconicon28" />
                   </svg>
@@ -46,38 +48,41 @@
                     <use xlink:href="#iconnv" />
                   </svg>
                 </span>
-                <span v-if="personalmsg.gender==-1">保密</span>
-                <span v-else-if="personalmsg.gender==1">男</span>
+                <span v-if="user.gender==-1">保密</span>
+                <span v-else-if="user.gender==1">男</span>
                 <span v-else>女</span>
               </div>
-              <div class="msg-place">{{personalmsg.city}}</div>
+              <div class="msg-place" v-if="user.city">{{user.city}}</div>
             </div>
           </div>
           <div class="msg-bottom">
-            <span class="msg-bottom-count">{{personalmsg.likes}}</span>
+            <span class="msg-bottom-count">{{user.likes || 0}}</span>
             <p>获赞</p>
-            <span class="msg-bottom-count">{{personalmsg.fansNum}}</span>
+            <span class="msg-bottom-count">{{user.fansNum}}</span>
             <p>粉丝</p>
-            <span class="msg-bottom-count">{{personalmsg.follower}}</span>
+            <span class="msg-bottom-count">{{user.focusNum}}</span>
             <p>关注</p>
           </div>
         </div>
       </div>
       <div class="divider"></div>
-        <div class="bottom2_wrap">
-          <div class="tips-wrap-item" v-for="(t,i) of trips" :key="i">
+        <div v-if="groups.length === 0">
+            尚未发布
+        </div>
+        <div class="bottom2_wrap " v-else>
+          <div class="tips-wrap-item" v-for="(t,i) of groups" :key="i">
             <div class="wrap-item-content">
               <div class="tips-notes-img">
-                <img :src=t.timg alt />
+                <img :src=t.bg alt />
               </div>
               <div class="item-details">
-                <p>{{t.details}}</p>
+                <p>{{t.content}}</p>
               </div>
               <div class="tips-personal">
                 <div class="personal-head">
-                  <img :src=t.head alt />
+                  <img :src=user.avatar alt />
                 </div>
-                <span>{{t.uname}}</span>
+                <span>{{user.uname}}</span>
                 <div class="favorite">
                   <like></like>
                   <p>{{t.likes}}</p>
@@ -96,36 +101,54 @@ export default {
     return{
       follow:true,
       active:1,
-      personalmsg:{uname:'Victoria',city:'广州',fansNum:'112',likes:'12',follower:'10',gender:0},
-      trips:[
-        {details:'90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！',uname:'维多利亚',likes:'100',
-        timg:require('../../assets/citypics/img1998.jpg'),
-        head:require('../../assets/citypics/img1998.jpg')
-        },
-        {details:'90后女生，计划近期去泰国，已捡3人，有意向的可以一起玩，人多热闹，一起吃吃喝喝玩玩逛逛，男女都行！但不走人多景点，自由职业，时间很随意，一起拼吃拼和拼玩，有意向的可以聊聊！',uname:'维多利亚',likes:'100',
-        timg:require('../../assets/citypics/img1998.jpg'),
-        head:require('../../assets/citypics/img1998.jpg')
-        },
-      ],
+      user: this.$store.state.user,
+      groups: [],
+      isCurrent: false,
+      quid: null,
     }
   },
   components:{
     like,
   },
   created(){
-    console.log(this.$route.query.uid)
-    var uid = this.$store.state.user.uid
-
-    var url = ''
-      // 发送axios
-    var url = `user/api/v1/detail`
-    this.axios.get(url).then(res => {
-      console.log(res.data)
+    this.quid = this.$route.query.uid
+    console.log(this.quid)
+    if (this.user.uid == this.quid) {
+      // 当前登录用户查看自己的详情
+      this.isCurrent = false
+    } else {
+      this.isCurrent = true
+    }
+    
+    // 发送axios获取该用户的信息
+    var url = `user/api/v1/userinfo`
+    this.axios.get(url, { params: { uid: this.quid }}).then(res => {
+      if (res.data.code === 200) {
+        this.user = res.data.data
+      }
     })
+    // 获取该用户的组团游列表
     url = `group/api/v1/pgroup`
-    this.axios.get(url, { params: { uid }}).then(res => {
-      console.log(res.data)
+    this.axios.get(url, { params: { uid: this.quid }}).then(res => {
+      if (res.data.code === 200) {
+        console.log(11,res.data.data)
+        this.groups = res.data.data
+        console.log(this.groups.length)
+      }
+      console.log(res)
     })
+    // 检查是否已关注
+    url = `user/api/v1/isfollowed`
+    var data = { uid: this.quid }
+    this.axios.get(url, { params: data }).then(res => {
+      console.log(res.data)
+      if (res.data.code === 200) {
+        console.log(12323)
+        this.follow = false
+      } else {
+        this.follow = true
+      }
+    }).catch(err => console.log)
   },
   methods:{
     jumpfh(){
@@ -157,8 +180,9 @@ export default {
 .personalindex-wrap .wrap-bg{
   width: 100%;
   height: 200px;
-  background: url('../../assets/citypics/beijin1.jpg');
+  background: url('../../assets/citypics/map.jpg');
   background-size: cover;
+  background-position: center 20px;
 }
 .personalindex-wrap .personalindex-msg{
   width: 100%;
@@ -219,6 +243,14 @@ export default {
   text-align: center;
   font-size: 13px;
 }
+.msg-top .com-box {
+  width: 230px;
+  display: flex;
+  justify-content: space-between;
+}
+.personalindex-msg .msg-middle-tag {
+  margin-top: 8px;
+}
 .personalindex-msg .msg-middle{
   width: 100%;
   display: flex;
@@ -229,8 +261,10 @@ export default {
   margin-bottom: 5px;
 }
 .msg-middle .msg-middle-name,.msg-middle .msg-middle-tag{
+  font-size: 16px;
   width: 40%;
   display: flex;
+  margin-bottom: 15px;
 }
 .msg-middle-tag .tag-sex{
   width: 50px;
@@ -266,6 +300,7 @@ export default {
 }
 .personalindex-msg .msg-bottom{
   width: 100%;
+  margin-top: 10px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -282,5 +317,8 @@ export default {
   width: 100%;
   height: 15px;
   background: #f2f4f6;
+}
+.msg-bottom .msg-bottom-count {
+  margin: 0 5px;
 }
 </style>
