@@ -56,51 +56,51 @@ export default {
         国家: [
           {
             cname: "中国",
-            cityimg: 'http://localhost:3000/citypics/beijin2.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/beijin2.jpg'
           },
           {
             cname: "韩国",
-            cityimg: 'http://localhost:3000/citypics/seoul.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/seoul.jpg'
           },
           {
             cname: "日本",
-            cityimg: 'http://localhost:3000/citypics/tokyo.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/tokyo.jpg'
           },
           {
             cname: "泰国",
-            cityimg: 'http://localhost:3000/citypics/chiang_mai.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/chiang_mai.jpg'
           },
           {
             cname: "马来西亚",
-            cityimg: 'http://localhost:3000/citypics/09.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/09.jpg'
           },
           {
             cname: "新加坡",
-            cityimg: 'http://localhost:3000/citypics/singapore.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/singapore.jpg'
           },
           {
             cname: "法国",
-            cityimg: 'http://localhost:3000/citypics/paris.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/paris.jpg'
           },
           {
             cname: "意大利",
-            cityimg: 'http://localhost:3000/citypics/new_zealand.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/new_zealand.jpg'
           },
           {
             cname: "德国",
-            cityimg: 'http://localhost:3000/citypics/england.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/england.jpg'
           },
           {
             cname: "西班牙",
-            cityimg: 'http://localhost:3000/citypics/barcelona.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/barcelona.jpg'
           },
           {
             cname: "英国",
-            cityimg: 'http://localhost:3000/citypics/dempo.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/dempo.jpg'
           },
           {
             cname: "美国",
-            cityimg: 'http://localhost:3000/citypics/newyork.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/newyork.jpg'
           },
         
         ],
@@ -111,67 +111,67 @@ export default {
           },
           {
             cname: "北京",
-            cityimg: 'http://localhost:3000/citypics/beijin1.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/beijin1.jpg'
           },
           {
             cname: "巴黎",
-            cityimg: 'http://localhost:3000/citypics/paris.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/paris.jpg'
           },
           {
             cname: "广州",
-            cityimg: 'http://localhost:3000/citypics/oldgz.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/oldgz.jpg'
           },
           {
             cname: "巴厘岛",
-            cityimg: 'http://localhost:3000/citypics/bali.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/bali.jpg'
           },
           {
             cname: "成都",
-            cityimg: 'http://localhost:3000/citypics/chengdu.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/chengdu.jpg'
           },
           {
             cname: "洛杉矶",
-            cityimg:'http://localhost:3000/citypics/LA.jpg'
+            cityimg:'http://grouptrip.applinzi.com/citypics/LA.jpg'
           },
           {
             cname: "纽约",
-            cityimg: 'http://localhost:3000/citypics/newyork.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/newyork.jpg'
           },
           {
             cname: "上海",
-            cityimg: 'http://localhost:3000/citypics/shanghai.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/shanghai.jpg'
           },
           {
             cname: "首尔",
-            cityimg: 'http://localhost:3000/citypics/seoul.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/seoul.jpg'
           },
           {
             cname: "重庆",
-            cityimg: 'http://localhost:3000/citypics/chongqing.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/chongqing.jpg'
           },
           {
             cname: "台北",
-            cityimg: 'http://localhost:3000/citypics/taiwan2.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/taiwan2.jpg'
           },
           {
             cname: "清迈",
-            cityimg: 'http://localhost:3000/citypics/chiang_mai.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/chiang_mai.jpg'
           },
           {
             cname: "巴塞罗那",
-            cityimg: 'http://localhost:3000/citypics/barcelona.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/barcelona.jpg'
           },
           {
             cname: "杭州",
-            cityimg: 'http://localhost:3000/citypics/hangzhou.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/hangzhou.jpg'
           },
           {
             cname: "新加坡",
-            cityimg: 'http://localhost:3000/citypics/singapore.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/singapore.jpg'
           },
           {
             cname: "北海道",
-            cityimg: 'http://localhost:3000/citypics/hokkaido.jpg.jpg'
+            cityimg: 'http://grouptrip.applinzi.com/citypics/hokkaido.jpg.jpg'
           }
         ],
         中国内地: [
