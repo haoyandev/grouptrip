@@ -532,8 +532,9 @@ INSERT INTO trip_user(uid, uname, upwd, phone, birthday, city, gender, age, avat
 'http://localhost:3000/avatar/09.jpg'
 ),
 (10, '野十七', '13790091120', md5('123456'), '1998-06-16', '佛山', '0', 22,
-'http://localhost:3000/avatar/10.jpg'
-);
+'http://localhost:3000/avatar/10.jpg'),
+(40, '王玉', '13790091121', md5('123456'), '1998-06-16', '佛山', '0', 22,
+'http://localhost:3000/avatar/11.jpg');
 
 /** 插入关注表数据 **/
 INSERT INTO trip_focus (fid, uid, from_uid)VALUES

@@ -128,67 +128,17 @@ router.put('/api/v1/updatename', (req, res) => {
   }
   // 获取用户信息
   var user = req.user
-  // 获取用户的更新时间
-  var sql = `select update_time from trip_user where uid=?`
-  pool.query(sql, [user.uid], (err, result) => {
+  var sql = `update trip_user set uname=? where uid=?`
+  pool.query(sql, [uname, uid], (err, result) => {
     if (err) throw err
-    if (result.length > 0) {
-      // 设置一个变量 控制是否可以进行修改
-      var canUpdate = false
-      var update_time = result[0].update_time
-      if (!update_time) {
-        // 更新时间为null 表示用户名为初始值可以修改
-        canUpdate = true
-      } else {
-        // 用户已修改初始名字 判断是否可修改
-        // 可以修改的时间为一个月一次
-        var time = 60 * 60 * 24 * 30
-        // 获取当前时间 转为秒
-        var now = new Date().getTime()
-        now = Math.floor(now / 1000)
-        // 将上次更新的时间转为时间戳 并转为秒
-        update_time = new Date(update_time).getTime()
-        update_time = Math.floor(update_time / 1000)
-    
-        if (now - update_time > time) {
-          canUpdate = true
-        } else {
-          canUpdate = false
-        }
-      }
-      // 根据canUpdate判断是否可以修改
-      if (canUpdate) {
-        // 可以修改
-        // 检测该名字是否已存在
-        var sql = `select uid from trip_user where uname=?`
-        pool.query(sql, [uname], (err, result) => {
-          if (err) throw err
-          if (result.length > 0) {
-            // 该用户名已存在
-            res.send({ code: 4003, msg: `该用户名已存在` })
-          } else {
-            // 该用户名不存在 可以修改
-            // 执行sql
-            // 返回应答
-            var sql = `update trip_user set uname=?,update_time=now() where uid=?`
-            pool.query(sql, [uname, user.uid], (err, result) => {
-              if (err) throw err
-              if (result.affectedRows > 0) {
-                res.send({ code: 200, msg: `修改成功` })
-              } else {
-                res.send({ code: 4004, msg: `修改失败` })
-              }
-            })
-          } 
-        }) 
-      } else {
-        // 不可以修改
-        res.send({ code: 4005, msg: `一个月内只可修改一次`})
-      }
+    if (result.affectedRows > 0) {
+      res.send({ code: 200, msg: `修改成功` })
+    } else {
+      res.send({ code: 4001, msg: `修改失败` })
     }
   })
 })
-
+ 
 // 6. 更新性别
 router.put('/api/v1/updatesex', (req, res) => {
   // 获取用户uid
