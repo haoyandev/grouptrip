@@ -21,19 +21,7 @@
         ></textarea>
         <!-- tip -->
         <div class="tip" v-show="flag" @click="write">点这里讲讲你的group游计划</div>
-        <!-- 控制选择背景 -->
-      <!-- <div class="select-bg" @click="showbg"></div> -->
 
-      <van-popup
-      v-model="bgShow"
-      position="bottom"
-      :style="{ height: '40%' }"
-      @click="selectbg"
-      >
-      <div id="bg-box">
-        <img class="bg-item" src="@/assets/iconfont/boy.png" alt="" v-for="(item, index) of bgList" :key="index">
-      </div>
-      </van-popup>
       </div>  
      <!-- 上传图片 -->
       <div class="upload-box">
@@ -124,21 +112,6 @@ export default {
     selectbg (e) {
       if (e.target.nodeName === 'IMG'){}
     }
-  },
-  updated () {
-    console.log(document.getElementById('bg-box'))
-    document.getElementById('bg-box').addEventListener('click', (e) => {
-      if (e.target.nodeName === "IMG") {
-        console.log(1)
-        var node = e.target
-        node.style.border = '1px solid #fff'
-        for (var item of node.parentNode.children) {
-          if (item.dataset.uid != 1) {
-
-          }
-        }
-      }
-    })
   },
   directives: {
     focus: {

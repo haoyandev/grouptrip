@@ -147,6 +147,7 @@ export default {
         sid: this.area[0].code,
         area: `${this.area[0].name}.${this.area[1].name}`
       }
+      console.log(obj)
       var user = this.$store.state.user
       Object.assign(obj, user)
       this.$store.commit('setGroupInfo', obj)
@@ -218,7 +219,7 @@ export default {
       var year = date.getFullYear()
       var month = date.getMonth() + 1
       var day = date.getDate()
-      return `${year}-${month}-${day}`
+      return `${year}年${month}月${day}日`
     }
   }
 }
