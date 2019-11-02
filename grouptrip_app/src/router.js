@@ -31,7 +31,7 @@ export default new Router({
     {path:'/more',component:more},
     {path:'/fans',component:fans},
     {path:'/guan',component:Guan},
-    { path: '/', component: Home },
+    { path: '/', redirect: '/home',component: Home },
     { path: '/Home', component: Home },
     { path:'/Grouptrip',component:Grouptrip },
     { path: '/Personal', component: Personal },
