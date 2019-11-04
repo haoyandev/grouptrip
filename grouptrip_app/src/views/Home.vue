@@ -2,7 +2,9 @@
   <main id="homepage">
     <mt-tabbar fixed class="tabbar-top">
       <mt-tab-item class="text-item logo-top">
-        <img src="../assets/cardpics/logo.png" alt style="width:180px;" />
+        <div class="top-logoimg">
+          <img src="../assets/cardpics/logo.png"/>
+        </div>
       </mt-tab-item>
       <mt-tab-item class="text-item search-top">
         <div class="tabbar-search">
@@ -218,6 +220,15 @@ export default {
 #homepage .tabbar-top .logo-top {
   width: 100%;
   height: 60px;
+  object-fit: cover;
+}
+#homepage .tabbar-top .logo-top .top-logoimg{
+  width: 180px;
+  height: 60px;
+}
+#homepage .tabbar-top .logo-top .top-logoimg img{
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 #homepage .tabbar-top .logo-top.text-item .mint-tab-item-label {
