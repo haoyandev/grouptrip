@@ -15,7 +15,7 @@
             <span>编写用户昵称</span>
             <span><img src="@/assets/iconfont/right.png" alt="" class="right" @click="updName"></span>
           </div>
-          <input type="text" v-model="uname" placeholder="请输入用户名" id="uname" class="ipt-name" @click="input">
+          <input type="text" v-model="uname" :placeholder="user.uname" id="uname" class="ipt-name" @click="input">
           <div class="tip">每月可修改一次用户名，请慎重修改</div>
           <div class="err-msg">{{errMsg}}</div>
         </div>
@@ -40,28 +40,7 @@
       <mt-cell id="d4" title="隐藏年龄" to="Settings" is-link value="所有人可见"></mt-cell>
       <mt-cell title="常居城市" is-link :value="user.city||'设置'" @click.native="selectCity">
       </mt-cell>
-      <!-- 城市选择器 -->
-      <van-popup
-      v-model="showCity"
-      position="top"
-      :style="{ height: '100%' }"
-      >
-      <van-index-bar :index-list="indexList" @click.native="handleSelectCity">
-      <van-index-anchor index="A">标题1</van-index-anchor>
-      <van-cell title="hhh"/>
-      <van-cell title="文本" />
-      <van-cell title="文本" />
 
-      <van-index-anchor index="B">标题2</van-index-anchor>
-      <van-cell title="文本" />
-      <van-cell title="文本" />
-      <van-cell title="文本" />
-      <van-index-anchor index="C">标题3</van-index-anchor>
-      <van-cell title="文本" />
-      <van-cell title="文本" />
-      <van-cell title="文本" />
-    </van-index-bar>
-      </van-popup>
       <mt-cell title="个人简介" is-link value="设置">
       </mt-cell>
       <mt-button size="large" @click.native="logout">退出当前账号</mt-button>
@@ -79,8 +58,6 @@ export default {
       user: this.$store.state.user,
       showBirth: false,
       showCity: false,
-      indexList: ['A', 'B', 'C', 'D', 'E', 'F', 'G',
-       'H', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z'],
       minDate: new Date('1900-1-1'),
       maxDate: new Date(),
       currentDate: new Date(),
@@ -108,6 +85,7 @@ export default {
             if (res.data.code === 200) {
               this.user = res.data.data
               this.showName = false
+              this.$store.commit('setUser', res.data.data)
             } else {
               this.errMsg = res.data.msg
             }
@@ -125,7 +103,6 @@ export default {
     },
     changeName () {
       this.showName = true
-      this.uname = this.user.uname
       setTimeout(() => {
         document.getElementById('uname').focus()
       }, 100)

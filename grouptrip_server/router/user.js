@@ -117,6 +117,7 @@ router.get('/api/v1/detail', (req, res) => {
 router.put('/api/v1/updatename', (req, res) => {
   // 获取数据
   var uname = req.body.uname
+  var uid = req.user.uid
   // 检验名字是否为空
   if (!uname) {
     return res.send({ code: 4001, msg: `用户名为空` })
